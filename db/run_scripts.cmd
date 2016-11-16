@@ -1,0 +1,1 @@
+sqlplus /nolog @run_scripts.sql
