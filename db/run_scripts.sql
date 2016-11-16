@@ -9,5 +9,6 @@ connect TRAVEL_PORTAL/TRAVEL_PORTAL
 @add_data_constraints.sql
 @insert_countries.sql
 @insert_states.sql
+COMMIT;
 exit;
 /
