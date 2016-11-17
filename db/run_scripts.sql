@@ -12,6 +12,7 @@ connect TRAVEL_PORTAL/TRAVEL_PORTAL
 @insert_cities.sql
 @insert_soc_net.sql
 @insert_categories.sql
+@insert_tags.sql
 COMMIT;
 exit;
 /
