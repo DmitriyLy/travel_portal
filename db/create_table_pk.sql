@@ -89,7 +89,7 @@ CREATE TABLE CATEGORIES_LABELS (
 
 CREATE TABLE TAGS_LABELS (
   label_id NUMBER(10),
-  tag_id NUMBER(4),
+  tag_id NUMBER(9),
   CONSTRAINT pk_tags_labels PRIMARY KEY (label_id, tag_id)
 );
 
