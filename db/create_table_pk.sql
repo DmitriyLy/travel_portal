@@ -47,7 +47,7 @@ CREATE TABLE LABELS (
   user_id NUMBER(9),
   location_id NUMBER(8),
   owner_comment NVARCHAR2(500),
-  rating NUMBER(1),
+  rating NUMBER(1) DEFAULT 0,
   coordinate_lat NUMBER(10, 6),
   coordinate_long NUMBER(10, 6),
   set_date DATE,
