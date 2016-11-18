@@ -1,6 +1,5 @@
 DECLARE
   soc_net_id USERS.SOC_NET_ID%TYPE;
-  f_user_count number(9);
 BEGIN
 
   SELECT

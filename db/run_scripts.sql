@@ -16,6 +16,7 @@ connect TRAVEL_PORTAL/TRAVEL_PORTAL
 @insert_users.sql
 @insert_users2.sql
 @insert_locations_labels_cat_tags.sql
+@bookmarks_comments_attachments.sql
 COMMIT;
 exit;
 /
