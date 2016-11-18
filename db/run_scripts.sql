@@ -13,6 +13,7 @@ connect TRAVEL_PORTAL/TRAVEL_PORTAL
 @insert_soc_net.sql
 @insert_categories.sql
 @insert_tags.sql
+@insert_users.sql
 @insert_users2.sql
 @insert_locations_labels_cat_tags.sql
 COMMIT;
