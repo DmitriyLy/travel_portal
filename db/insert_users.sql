@@ -26,7 +26,7 @@ BEGIN
   WHERE
     NAME = 'g+';
     
-  FOR i IN 1..10 LOOP
+  FOR i IN 1..200 LOOP
     INSERT INTO USERS VALUES(USERS_SEQ.NEXTVAL, 'User_g_plus' || i, 'User_g_plus' || i, 'uuGplus123' || ((i + 1) * 12), soc_net_id, NULL);
   END LOOP;   
     
