@@ -15,7 +15,7 @@ public class BasicDAO {
     @Autowired
     private JdbcTemplate template;
 
-    String sql = "SELECT JOB_TITLE FROM JOBS WHERE MIN_SALARY = 20000";
+    String sql = "SELECT JOB_TITLE FROM JOBS WHERE MIN_SALARY = 10000";
 
     public String getSome() throws DataAccessException {
         return this.template.queryForObject(sql,null,String.class);
