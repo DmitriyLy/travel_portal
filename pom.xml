@@ -21,11 +21,12 @@
         <java-version>1.8</java-version>
         <springframework.Core-version>4.3.4.RELEASE</springframework.Core-version>
         <springframework.Security-version>4.2.0.RELEASE</springframework.Security-version>
-        <thymeleaf-version>3.0.2.RELEASE</thymeleaf-version>
         <mavencompiler-version>3.3</mavencompiler-version>
         <slf4j.log4j-version>1.7.21</slf4j.log4j-version>
         <slf4j-version>1.7.5</slf4j-version>
         <junit-version>4.12</junit-version>
+        <servlet-version>3.1.0</servlet-version>
+        <jsp-version>2.2</jsp-version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

@@ -1,6 +1,8 @@
 package com.netcracker.entities;
 
 /**
+ * Simple JavaBeans domain object with only one String field.
+ *
  * @author Oveian Egor
  */
 
@@ -9,10 +11,6 @@ public class BasicEntity {
     private String basicField;
 
     public BasicEntity() {
-    }
-
-    public BasicEntity(String basicField) {
-        this.basicField = basicField;
     }
 
     public String getBasicField() {
@@ -44,6 +42,4 @@ public class BasicEntity {
                 "basicField='" + basicField + '\'' +
                 '}';
     }
-
-
 }
