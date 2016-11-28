@@ -10,6 +10,6 @@ public class AllCountriesSpecification implements SqlSpecification {
 
     @Override
     public String toSqlQuery() {
-        return IQueriesSpecification.ALLCOUNTRIES;
+        return IQueriesSpecification.ALL_COUNTRIES;
     }
 }

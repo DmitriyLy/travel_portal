@@ -19,7 +19,7 @@ public class StatesInCountrySpecification implements SqlSpecification {
     @Override
     public String toSqlQuery() {
         return String.format(
-                IQueriesSpecification.STATESBYCOUNTRYID,
+                IQueriesSpecification.STATES_BY_COUNTRYID,
                 country.getId()
         );
     }

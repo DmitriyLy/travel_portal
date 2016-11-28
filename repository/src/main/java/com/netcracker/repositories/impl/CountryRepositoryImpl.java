@@ -28,7 +28,7 @@ public class CountryRepositoryImpl implements IRepository<Country> {
 
     @Override
     public void add(Country item) {
-        String query = IQueriesRepository.INSERTCOUNTRY;
+        String query = IQueriesRepository.INSERT_COUNTRY;
         int out = template.update(query, new Object[]{item.getId(), item.getName()});
         if(out == 0) {
             LOGGER.warn("Could not update Country with name = " + item.getName());
@@ -37,7 +37,7 @@ public class CountryRepositoryImpl implements IRepository<Country> {
 
     @Override
     public void update(Country item) {
-        String query = IQueriesRepository.UPDATECOUNTRY;
+        String query = IQueriesRepository.UPDATE_COUNTRY;
         int out = template.update(query, new Object[]{item.getName(), item.getId()});
         if(out == 0) {
             LOGGER.warn("Could not update Country with name = " + item.getName());
@@ -46,7 +46,7 @@ public class CountryRepositoryImpl implements IRepository<Country> {
 
     @Override
     public void remove(Country item) {
-        String query = IQueriesRepository.DELETECOUNTRY;
+        String query = IQueriesRepository.DELETE_COUNTRY;
         int out = template.update(query, item.getId());
         if(out == 0) {
             LOGGER.warn("Could not remove Country with name = " + item.getName());
