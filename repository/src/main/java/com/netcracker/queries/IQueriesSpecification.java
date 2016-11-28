@@ -5,5 +5,5 @@ package com.netcracker.queries;
  */
 public interface IQueriesSpecification {
     String ALL_COUNTRIES = "SELECT * FROM COUNTRIES";
-    String STATES_BY_COUNTRYID = "SELECT * FROM STATES WHERE COUNTRY_ID = %1$d";
+    String STATES_BY_COUNTRY_ID = "SELECT * FROM STATES WHERE COUNTRY_ID = %1$d";
 }
