@@ -11,5 +11,10 @@ public interface IRepository<T> {
     void add(T item);
     void update(T item);
     void remove(T item);
+
+    /**
+     * @param specification - for generating specific String query
+     * @return List of searching entities
+     */
     List<T> query(Specification specification);
 }

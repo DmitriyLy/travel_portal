@@ -6,9 +6,11 @@ import com.netcracker.specifications.SqlSpecification;
 
 /**
  * Created by Yuksi on 27.11.2016.
+ *
+ * class for generating String query for searching states by country_id
  */
 public class StatesInCountrySpecification implements SqlSpecification {
-    Country country;
+    private Country country;
 
     public StatesInCountrySpecification(Country country) {
         this.country = country;
