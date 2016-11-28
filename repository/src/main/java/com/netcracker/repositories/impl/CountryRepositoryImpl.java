@@ -26,6 +26,9 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     @Autowired
     private JdbcTemplate template;
 
+    @Autowired
+    private CountryRowMapper countryRowMapper;
+
     @Override
     public void add(Country item) {
         String query = IQueriesRepository.INSERT_COUNTRY;
@@ -54,9 +57,15 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     }
 
     @Override
+    public Country getById(int id) {
+        String query = IQueriesRepository.GET_COUNTRY_BY_ID;
+        return template.queryForObject(query,new Object[] {id}, countryRowMapper);
+    }
+
+    @Override
     public List<Country> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), new CountryRowMapper());
+        return template.query(sqlSpecification.toSqlQuery(), countryRowMapper);
     }
 
     class CountryRowMapper implements RowMapper<Country>

@@ -15,4 +15,7 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
+    <bean id="countryRowMapper" class="com.netcracker.repositories.impl.CountryRepositoryImpl.CountryRowMapper">
+    </bean>
+
 </beans>
