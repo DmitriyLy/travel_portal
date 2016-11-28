@@ -6,6 +6,7 @@ import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -57,6 +58,7 @@ public class CountryRepositoryImpl implements com.netcracker.repositories.Reposi
         return template.query(sqlSpecification.toSqlQuery(), new CountryRowMapper());
     }
 
+    @Bean
     class CountryRowMapper implements RowMapper<Country>
     {
         @Override
