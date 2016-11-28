@@ -1,12 +1,12 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Country;
+import com.netcracker.repositories.IRepository;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by Yuksi on 25.11.2016.
  */
 @Repository
-public class CountryRepositoryImpl implements com.netcracker.repositories.Repository<Country> {
+public class CountryRepositoryImpl implements IRepository<Country> {
 
     private final static Logger LOGGER = LogManager.getLogger(CountryRepositoryImpl.class.getName());
 
@@ -58,7 +58,6 @@ public class CountryRepositoryImpl implements com.netcracker.repositories.Reposi
         return template.query(sqlSpecification.toSqlQuery(), new CountryRowMapper());
     }
 
-    @Bean
     class CountryRowMapper implements RowMapper<Country>
     {
         @Override

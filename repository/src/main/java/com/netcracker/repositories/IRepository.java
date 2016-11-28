@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Yuksi on 25.11.2016.
  */
-public interface Repository<T> {
+public interface IRepository<T> {
     void add(T item);
     void update(T item);
     void remove(T item);
