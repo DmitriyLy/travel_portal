@@ -1,6 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Country;
+import com.netcracker.queries.IQueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
@@ -27,7 +28,7 @@ public class CountryRepositoryImpl implements IRepository<Country> {
 
     @Override
     public void add(Country item) {
-        String query = "INSERT INTO COUNTRIES(id,name) values(?,?)";
+        String query = IQueriesRepository.INSERTCOUNTRY;
         int out = template.update(query, new Object[]{item.getId(), item.getName()});
         if(out == 0) {
             LOGGER.warn("Could not update Country with name = " + item.getName());
@@ -36,7 +37,7 @@ public class CountryRepositoryImpl implements IRepository<Country> {
 
     @Override
     public void update(Country item) {
-        String query = "UPDATE COUNTRIES SET name=? WHERE id=?";
+        String query = IQueriesRepository.UPDATECOUNTRY;
         int out = template.update(query, new Object[]{item.getName(), item.getId()});
         if(out == 0) {
             LOGGER.warn("Could not update Country with name = " + item.getName());
@@ -45,7 +46,7 @@ public class CountryRepositoryImpl implements IRepository<Country> {
 
     @Override
     public void remove(Country item) {
-        String query = "DELETE FROM COUNTRIES WHERE id=?";
+        String query = IQueriesRepository.DELETECOUNTRY;
         int out = template.update(query, item.getId());
         if(out == 0) {
             LOGGER.warn("Could not remove Country with name = " + item.getName());

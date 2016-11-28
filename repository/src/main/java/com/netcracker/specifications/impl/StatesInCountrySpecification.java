@@ -1,6 +1,8 @@
-package com.netcracker.specifications;
+package com.netcracker.specifications.impl;
 
 import com.netcracker.entities.Country;
+import com.netcracker.queries.IQueriesSpecification;
+import com.netcracker.specifications.SqlSpecification;
 
 /**
  * Created by Yuksi on 27.11.2016.
@@ -15,7 +17,7 @@ public class StatesInCountrySpecification implements SqlSpecification {
     @Override
     public String toSqlQuery() {
         return String.format(
-                "SELECT * FROM STATES WHERE COUNTRY_ID = %1$d",
+                IQueriesSpecification.STATESBYCOUNTRYID,
                 country.getId()
         );
     }
