@@ -67,6 +67,11 @@
             <artifactId>spring-beans</artifactId>
             <version>${springframework.Core-version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${springframework.Core-version}</version>
+        </dependency>
 
         <!-- Spring Security -->
         <dependency>

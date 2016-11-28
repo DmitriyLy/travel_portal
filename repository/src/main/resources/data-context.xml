@@ -4,6 +4,8 @@
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
+    <context:component-scan base-package="com.netcracker.repositories.impl"/>
+
     <bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
         <property name="dataSourceName" value="Root Connection"/>
         <property name="URL" value="jdbc:oracle:thin:@localhost:1521:xe"/>
@@ -15,7 +17,6 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="countryRowMapper" class="com.netcracker.repositories.impl.CountryRepositoryImpl.CountryRowMapper">
-    </bean>
+    <context:property-placeholder location="classpath:database.properties"/>
 
 </beans>
