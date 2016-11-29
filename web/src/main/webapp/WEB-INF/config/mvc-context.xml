@@ -7,6 +7,10 @@
 
     <mvc:annotation-driven/>
 
+    <context:component-scan base-package="com.netcracker.controllers"/>
+
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
