@@ -27,12 +27,12 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     private JdbcTemplate template;
 
     @Autowired
-    private CountryRowMapper countryRowMapper;
+    private CountryRowMapper rowMapper;
 
     @Override
     public void add(Country item) {
         String query = IQueriesRepository.INSERT_COUNTRY;
-        int out = template.update(query, new Object[]{item.getId(), item.getName()});
+        int out = template.update(query, new Object[]{item.getName()});
         if(out == 0) {
             LOGGER.warn("Could not update Country with name = " + item.getName());
         }
@@ -59,13 +59,13 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     @Override
     public Country getById(int id) {
         String query = IQueriesRepository.GET_COUNTRY_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, countryRowMapper);
+        return template.queryForObject(query,new Object[] {id}, rowMapper);
     }
 
     @Override
     public List<Country> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), countryRowMapper);
+        return template.query(sqlSpecification.toSqlQuery(), rowMapper);
     }
 
     class CountryRowMapper implements RowMapper<Country>
