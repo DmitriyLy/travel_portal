@@ -19,5 +19,12 @@ connect TRAVEL_PORTAL/TRAVEL_PORTAL
 @insert_locations_labels_cat_tags.sql
 @bookmarks_comments_attachments.sql
 COMMIT;
+disconnect
+connect / as sysdba;
+GRANT CREATE ANY TRIGGER TO TRAVEL_PORTAL;
+disconnect
+connect TRAVEL_PORTAL/TRAVEL_PORTAL
+@create_get_pk_trigger_procedure.sql
+@create_pk_triggers.sql
 exit;
 /
