@@ -1,24 +1,27 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/jquery.mmenu.all.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-material-design.css">
-    <link rel="stylesheet" type="text/css" href="/css/ripples.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/jquery.mmenu.all.css"/>
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/ripples.min.css">
+    <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css"/>
 </head>
 <body>
 <div id="header-menu" class="navbar navbar-fixed-top navbar-default"> <!-- navbar-inverse -->
     <div class="container">
         <a id="open-sidebar-menu" href="#menu" class="pull-left" style="display:none;"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></a>
-        <img src="/img/logo.png" alt="logo image" class="pull-left">
+        <img src="${contextPath}/resources/img/logo.png" alt="logo image" class="pull-left">
     </div>
 </div>
 <div class="container-fluid fill container-navbar-padding">
@@ -58,13 +61,13 @@
     var GOOGLE_MAP_API_KEY = "AIzaSyAB7I9khA0R1g7Ug_lOq4-AD1zkvIdFHQI";
 </script>
 <!-- GLOBAL VARS MUST BE BEFORE THAT LINE -->
-<script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/material.min.js"></script>
-<script type="text/javascript" src="/js/ripples.min.js"></script>
-<script type="text/javascript" src="/js/jquery.mmenu.all.min.js"></script>
-<script type="text/javascript" src="/js/Controllers/MapController.js"></script>
-<script type="text/javascript" src="/js/Controllers/MapController.Windows.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/material.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/ripples.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/jquery.mmenu.all.min.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/Controllers/MapController.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/Controllers/MapController.Windows.js"></script>
 <script type="text/javascript">
     document.write("<script type=\"text/javascript\" src=\"https://maps.googleapis.com/maps/api/js?key="+GOOGLE_MAP_API_KEY+"\"><\/script>");
 
@@ -87,6 +90,6 @@
         });
     })(jQuery);
 </script>
-<script type="text/javascript" src="/js/custom.js"></script>
+<script type="text/javascript" src="${contextPath}/resources/js/custom.js"></script>
 </body>
 </html>
