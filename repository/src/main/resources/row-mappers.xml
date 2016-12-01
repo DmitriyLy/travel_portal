@@ -4,11 +4,35 @@
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.netcracker.repositories.impl"/>
+    <context:component-scan base-package="com.netcracker.repositories.rowmappers"/>
 
-    <bean id="countryRowMapper" class="com.netcracker.repositories.impl.CountryRepositoryImpl.CountryRowMapper">
+    <bean id="attachmentRowMapper" class="com.netcracker.repositories.rowmappers.AttachmentRowMapper">
+    </bean>
+    <bean id="bookmarkRowMapper" class="com.netcracker.repositories.rowmappers.BookmarkRowMapper">
+    </bean>
+    <bean id="categoryRowMapper" class="com.netcracker.repositories.rowmappers.CategoryRowMapper">
     </bean>
     <bean id="cityRowMapper" class="com.netcracker.repositories.rowmappers.CityRowMapper">
+    </bean>
+    <bean id="commentRowMapper" class="com.netcracker.repositories.rowmappers.CommentRowMapper">
+    </bean>
+    <bean id="configurationRowMapper" class="com.netcracker.repositories.rowmappers.ConfigurationRowMapper">
+    </bean>
+    <bean id="countryRowMapper" class="com.netcracker.repositories.rowmappers.CountryRowMapper">
+    </bean>
+    <bean id="labelRowMapper" class="com.netcracker.repositories.rowmappers.LabelRowMapper">
+    </bean>
+    <bean id="locationRowMapper" class="com.netcracker.repositories.rowmappers.LocationRowMapper">
+    </bean>
+    <bean id="mapProviderRowMapper" class="com.netcracker.repositories.rowmappers.MapProviderRowMapper">
+    </bean>
+    <bean id="socialNetworkRowMapper" class="com.netcracker.repositories.rowmappers.SocialNetworkRowMapper">
+    </bean>
+    <bean id="stateRowMapper" class="com.netcracker.repositories.rowmappers.StateRowMapper">
+    </bean>
+    <bean id="tagRowMapper" class="com.netcracker.repositories.rowmappers.TagRowMapper">
+    </bean>
+    <bean id="userRowMapper" class="com.netcracker.repositories.rowmappers.UserRowMapper">
     </bean>
 
 </beans>

@@ -3,16 +3,15 @@ package com.netcracker.repositories.impl;
 import com.netcracker.entities.Country;
 import com.netcracker.queries.IQueriesRepository;
 import com.netcracker.repositories.IRepository;
+import com.netcracker.repositories.rowmappers.CountryRowMapper;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
 import java.util.List;
 
 /**
@@ -66,16 +65,5 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     public List<Country> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
         return template.query(sqlSpecification.toSqlQuery(), rowMapper);
-    }
-
-    class CountryRowMapper implements RowMapper<Country>
-    {
-        @Override
-        public Country mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Country country = new Country();
-            country.setId(rs.getInt("id"));
-            country.setName(rs.getString("name"));
-            return country;
-        }
     }
 }
