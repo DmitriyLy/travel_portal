@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * Created by dima_2 on 01.12.2016.
  */
-class CityRowMapper implements RowMapper<City> {
+public class CityRowMapper implements RowMapper<City> {
 
 
 

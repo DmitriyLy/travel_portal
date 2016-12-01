@@ -8,5 +8,7 @@
 
     <bean id="countryRowMapper" class="com.netcracker.repositories.impl.CountryRepositoryImpl.CountryRowMapper">
     </bean>
+    <bean id="cityRowMapper" class="com.netcracker.repositories.rowmappers.CityRowMapper">
+    </bean>
 
 </beans>
