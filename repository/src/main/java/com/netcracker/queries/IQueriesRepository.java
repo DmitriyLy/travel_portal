@@ -10,7 +10,7 @@ public interface IQueriesRepository {
     String GET_COUNTRY_BY_ID = "SELECT * FROM COUNTRIES WHERE id=?";
 
     String INSERT_STATE = "INSERT INTO STATES(country_id,name) values(?,?)";
-    String UPDATE_STATE = "UPDATE COUNTRIES SET country_id=?, name=? WHERE id=?";
+    String UPDATE_STATE = "UPDATE STATES SET country_id=?, name=? WHERE id=?";
     String DELETE_STATE = "DELETE FROM STATES WHERE id=?";
     String GET_STATE_BY_ID = "SELECT * FROM STATES WHERE id=?";
 
