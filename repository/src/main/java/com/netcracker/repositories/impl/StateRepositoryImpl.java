@@ -3,16 +3,14 @@ package com.netcracker.repositories.impl;
 import com.netcracker.entities.State;
 import com.netcracker.queries.IQueriesRepository;
 import com.netcracker.repositories.IRepository;
+import com.netcracker.repositories.rowmappers.StateRowMapper;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -68,19 +66,5 @@ public class StateRepositoryImpl implements IRepository<State> {
     public List<State> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
         return template.query(sqlSpecification.toSqlQuery(), new StateRowMapper());
-    }
-
-    private class StateRowMapper implements RowMapper<State> {
-        @Autowired
-        private CountryRepositoryImpl countryRepository;
-
-        @Override
-        public State mapRow(ResultSet resultSet, int i) throws SQLException {
-            State state = new State();
-            state.setId(resultSet.getInt("id"));
-            state.setCountry(countryRepository.getById(resultSet.getInt("country_id")));
-            state.setName(resultSet.getString("name"));
-            return state;
-        }
     }
 }
