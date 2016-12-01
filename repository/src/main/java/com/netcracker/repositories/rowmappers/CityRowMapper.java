@@ -1,8 +1,8 @@
 package com.netcracker.repositories.rowmappers;
 
 import com.netcracker.entities.City;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -11,6 +11,7 @@ import java.sql.SQLException;
  */
 public class CityRowMapper implements RowMapper<City> {
 
+    //@Autowired
 
 
     @Override
@@ -20,6 +21,7 @@ public class CityRowMapper implements RowMapper<City> {
         city.setId(resultSet.getInt("id"));
         city.setName(resultSet.getString("name"));
 
+        //State state =
 
         return city;
     }
