@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class CityRepositoryImpl implements IRepository<City> {
 
-    private final static Logger LOGGER = LogManager.getLogger(CountryRepositoryImpl.class.getName());
+    private final static Logger LOGGER = LogManager.getLogger(CityRepositoryImpl.class.getName());
 
     @Autowired
     private JdbcTemplate template;
