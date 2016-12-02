@@ -1,6 +1,7 @@
 package com.netcracker.repositories.rowmappers;
 
 import com.netcracker.entities.City;
+import com.netcracker.entities.State;
 import com.netcracker.repositories.impl.StateRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,9 +21,11 @@ public class CityRowMapper implements RowMapper<City> {
 
         City city = new City();
         city.setId(resultSet.getInt("id"));
+        int stateId = resultSet.getInt("state_id");
         city.setName(resultSet.getString("name"));
 
-        //State state =
+        State state = stateRepository.getById(stateId);
+        city.setState(state);
 
         return city;
     }
