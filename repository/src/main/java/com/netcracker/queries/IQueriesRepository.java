@@ -22,7 +22,7 @@ public interface IQueriesRepository {
     String INSERT_LOCATION = "INSERT INTO LOCATIONS(city_id,street,building) values(?,?,?)";
     String UPDATE_LOCATION = "UPDATE LOCATIONS SET city_id=?, street=?, building=? WHERE id=?";
     String DELETE_LOCATION = "DELETE FROM LOCATIONS WHERE id=?";
-    String GET_LOCATIONS_BY_ID = "SELECT * FROM LOCATIONS WHERE id=?";
+    String GET_LOCATION_BY_ID = "SELECT * FROM LOCATIONS WHERE id=?";
 
     String INSERT_TAG = "INSERT INTO SOCIAL_NETWORKS(name) values(?)";
     String UPDATE_TAG = "UPDATE SOCIAL_NETWORKS SET name=? WHERE id=?";
@@ -37,7 +37,7 @@ public interface IQueriesRepository {
     String INSERT_SOCIAL_NETWORK = "INSERT INTO SOCIAL_NETWORKS(name) values(?)";
     String UPDATE_SOCIAL_NETWORK = "UPDATE SOCIAL_NETWORKS SET name=? WHERE id=?";
     String DELETE_SOCIAL_NETWORK = "DELETE FROM SOCIAL_NETWORKS WHERE id=?";
-    String GET_SOCIAL_NETWORKS_BY_ID = "SELECT * FROM SOCIAL_NETWORKS WHERE id=?";
+    String GET_SOCIAL_NETWORK_BY_ID = "SELECT * FROM SOCIAL_NETWORKS WHERE id=?";
 
     String INSERT_USER = "INSERT INTO USERS(first_name,last_name,soc_net_user_id,soc_net_id,status) values(?,?,?,?,?)";
     String UPDATE_USER = "UPDATE USERS SET first_name=?, last_name=?, soc_net_user_id=?, soc_net_id=?, status=? WHERE id=?";
@@ -45,17 +45,17 @@ public interface IQueriesRepository {
     String GET_USER_BY_ID = "SELECT * FROM USERS WHERE id=?";
 
     String INSERT_MAP_PROVIDER = "INSERT INTO MAP_PROVIDERS(name,coord_sys_name) values(?,?)";
-    String UPDATE_MAP_PROVIDER = "UPDATE MAP_PROVIDERS SET id=?, name=?, coord_sys_name=? WHERE id=?";
+    String UPDATE_MAP_PROVIDER = "UPDATE MAP_PROVIDERS SET name=?, coord_sys_name=? WHERE id=?";
     String DELETE_MAP_PROVIDER = "DELETE FROM MAP_PROVIDERS WHERE id=?";
     String GET_MAP_PROVIDER_BY_ID = "SELECT * FROM MAP_PROVIDERS WHERE id=?";
 
     String INSERT_COMMENT = "INSERT INTO COMMENTS(user_id,label_id,comment_date,comment_text) values(?,?,?,?)";
-    String UPDATE_COMMENT = "UPDATE COMMENTS SET id=?, user_id=?, label_id=?, comment_date=?, comment_text=? WHERE id=?";
+    String UPDATE_COMMENT = "UPDATE COMMENTS SET user_id=?, label_id=?, comment_date=?, comment_text=? WHERE id=?";
     String DELETE_COMMENT = "DELETE FROM COMMENTS WHERE id=?";
     String GET_COMMENT_BY_ID = "SELECT * FROM COMMENTS WHERE id=?";
 
     String INSERT_ATTACHMENT = "INSERT INTO ATTACHMENTS(user_id,label_id,file_path,name,extension) values(?,?,?,?,?)";
-    String UPDATE_ATTACHMENT = "UPDATE ATTACHMENTS SET id=?, user_id=?, label_id=?, file_path=?, name=?, extension=? WHERE id=?";
+    String UPDATE_ATTACHMENT = "UPDATE ATTACHMENTS SET user_id=?, label_id=?, file_path=?, name=?, extension=? WHERE id=?";
     String DELETE_ATTACHMENT = "DELETE FROM ATTACHMENTS WHERE id=?";
     String GET_ATTACHMENT_BY_ID = "SELECT * FROM ATTACHMENTS WHERE id=?";
 
@@ -63,7 +63,7 @@ public interface IQueriesRepository {
             "(user_id,location_id,owner_comment,rating,coordinate_lat,coordinate_long,set_date,map_provider_id) " +
             "values(?,?,?,?,?,?,?,?)";
     String UPDATE_LABEL = "UPDATE LABELS SET " +
-            "id=?, user_id=?, location_id=?, owner_comment=?, rating=?, coordinate_lat=?, coordinate_long=?, " +
+            "user_id=?, location_id=?, owner_comment=?, rating=?, coordinate_lat=?, coordinate_long=?, " +
             "set_date=?, map_provider_id=? WHERE id=?";
     String DELETE_LABEL = "DELETE FROM LABELS WHERE id=?";
     String GET_LABEL_BY_ID = "SELECT * FROM LABELS WHERE id=?";

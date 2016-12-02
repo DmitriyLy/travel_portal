@@ -40,7 +40,7 @@ public class CityRepositoryImpl implements IRepository<City> {
     }
 
     @Override
-    public City getById(int id) {
+    public City getById(long id) {
         return null;
     }
 

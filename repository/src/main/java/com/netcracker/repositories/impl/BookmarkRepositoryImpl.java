@@ -40,7 +40,7 @@ public class BookmarkRepositoryImpl implements IRepository<Bookmark> {
     }
 
     @Override
-    public Bookmark getById(int id) {
+    public Bookmark getById(long id) {
         return null;
     }
 

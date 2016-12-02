@@ -26,7 +26,7 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
     }
 
     @Override
-    public Attachment getById(int id) {
+    public Attachment getById(long id) {
         return null;
     }
 

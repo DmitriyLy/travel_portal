@@ -26,7 +26,7 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     }
 
     @Override
-    public SocialNetwork getById(int id) {
+    public SocialNetwork getById(long id) {
         return null;
     }
 

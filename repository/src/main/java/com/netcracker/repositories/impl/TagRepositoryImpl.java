@@ -26,7 +26,7 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     }
 
     @Override
-    public Tag getById(int id) {
+    public Tag getById(long id) {
         return null;
     }
 

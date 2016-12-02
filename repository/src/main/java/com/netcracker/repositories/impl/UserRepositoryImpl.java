@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements IRepository<User> {
     }
 
     @Override
-    public User getById(int id) {
+    public User getById(long id) {
         return null;
     }
 

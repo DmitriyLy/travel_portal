@@ -26,7 +26,7 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
     }
 
     @Override
-    public MapProvider getById(int id) {
+    public MapProvider getById(long id) {
         return null;
     }
 

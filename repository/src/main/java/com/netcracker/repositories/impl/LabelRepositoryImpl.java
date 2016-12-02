@@ -26,7 +26,7 @@ public class LabelRepositoryImpl implements IRepository<Label> {
     }
 
     @Override
-    public Label getById(int id) {
+    public Label getById(long id) {
         return null;
     }
 

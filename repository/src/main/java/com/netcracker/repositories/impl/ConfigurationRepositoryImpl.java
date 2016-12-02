@@ -26,7 +26,7 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
     }
 
     @Override
-    public Configuration getById(int id) {
+    public Configuration getById(long id) {
         return null;
     }
 

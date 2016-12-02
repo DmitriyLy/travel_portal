@@ -10,12 +10,14 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by logariett on 28.11.2016.
  */
+@Repository
 public class StateRepositoryImpl implements IRepository<State> {
     private final static Logger LOGGER = LogManager.getLogger(CountryRepositoryImpl.class.getName());
 
@@ -39,7 +41,7 @@ public class StateRepositoryImpl implements IRepository<State> {
     @Override
     public void update(State item) {
         String query = IQueriesRepository.UPDATE_STATE;
-        int out = template.update(query, item.getCountry().getId(), item.getId());
+        int out = template.update(query, item.getCountry().getId(), item.getName(), item.getId());
         if (out == 0) {
             LOGGER.warn("Could not update State with name = " + item.getName()
                     + " , country = " + item.getCountry());
@@ -57,7 +59,7 @@ public class StateRepositoryImpl implements IRepository<State> {
     }
 
     @Override
-    public State getById(int id) {
+    public State getById(long id) {
         String query = IQueriesRepository.GET_STATE_BY_ID;
         return template.queryForObject(query,new Object[] {id}, stateRowMapper);
     }

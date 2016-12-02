@@ -26,7 +26,7 @@ public class CategoryRepositoryImpl implements IRepository<Category> {
     }
 
     @Override
-    public Category getById(int id) {
+    public Category getById(long id) {
         return null;
     }
 

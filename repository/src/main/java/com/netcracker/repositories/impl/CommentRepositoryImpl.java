@@ -26,7 +26,7 @@ public class CommentRepositoryImpl implements IRepository<Comment> {
     }
 
     @Override
-    public Comment getById(int id) {
+    public Comment getById(long id) {
         return null;
     }
 

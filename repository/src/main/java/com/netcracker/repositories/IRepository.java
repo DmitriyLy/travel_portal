@@ -14,7 +14,7 @@ public interface IRepository<T> {
     void add(T item);
     void update(T item);
     void remove(T item);
-    T getById(int id);
+    T getById(long id);
 
     /**
      * @param specification - for generating specific String query
