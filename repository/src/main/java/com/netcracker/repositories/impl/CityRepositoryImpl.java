@@ -28,7 +28,6 @@ public class CityRepositoryImpl implements IRepository<City> {
     private CityRowMapper cityRowMapper;
 
     public void add(City item) {
-
         String query = IQueriesRepository.INSERT_CITY;
         int out = template.update(query, new Object[]{item.getState().getId(), item.getName()});
         if(out == 0) {
@@ -38,17 +37,15 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     @Override
     public void update(City item) {
-
         String query = IQueriesRepository.UPDATE_CITY;
         int out = template.update(query, new Object[]{item.getState().getId(), item.getName(), item.getId()});
         if(out == 0) {
-            LOGGER.warn("Cannot insert " + item.toString());
+            LOGGER.warn("Cannot update " + item.toString());
         }
     }
 
     @Override
     public void remove(City item) {
-
         String query = IQueriesRepository.DELETE_CITY;
         int out = template.update(query, new Object[]{item.getId()});
         if (out == 0) {
