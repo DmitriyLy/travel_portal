@@ -27,7 +27,6 @@ public class CityRepositoryImpl implements IRepository<City> {
     @Autowired
     private CityRowMapper cityRowMapper;
 
-    @Override
     public void add(City item) {
 
         String query = IQueriesRepository.INSERT_CITY;
@@ -59,7 +58,7 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     @Override
     public City getById(long id) {
-        String query = IQueriesRepository.GET_COMMENT_BY_ID;
+        String query = IQueriesRepository.GET_CITY_BY_ID;
         return template.queryForObject(query,new Object[] {id}, cityRowMapper);
     }
 
