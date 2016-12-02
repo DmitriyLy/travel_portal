@@ -3,7 +3,6 @@ package com.netcracker.repositories.impl;
 import com.netcracker.entities.Location;
 import com.netcracker.queries.IQueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.CountryRowMapper;
 import com.netcracker.repositories.rowmappers.LocationRowMapper;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
@@ -18,7 +17,7 @@ import java.util.List;
 @Repository
 public class LocationRepositoryImpl implements IRepository<Location> {
 
-    private final static Logger LOGGER = LogManager.getLogger(CountryRepositoryImpl.class.getName());
+    private final static Logger LOGGER = LogManager.getLogger(LocationRepositoryImpl.class.getName());
 
     @Autowired
     private JdbcTemplate template;
