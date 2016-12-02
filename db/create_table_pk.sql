@@ -50,7 +50,7 @@ CREATE TABLE LABELS (
   rating NUMBER(1) DEFAULT 0,
   coordinate_lat NUMBER(12, 7),
   coordinate_long NUMBER(12, 7),
-  set_date DATE,
+  creation_date DATE,
   map_provider_id NUMBER(5) NOT NULL,
   CONSTRAINT pk_labels PRIMARY KEY (id)
 );

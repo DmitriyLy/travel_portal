@@ -5,8 +5,8 @@ package com.netcracker.entities;
  */
 public class City {
     private int id;
-    private String name;
     private State state;
+    private String name;
 
     public City() {
 
