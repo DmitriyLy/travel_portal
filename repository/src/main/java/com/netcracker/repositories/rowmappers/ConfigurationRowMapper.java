@@ -12,6 +12,9 @@ import java.sql.SQLException;
 public class ConfigurationRowMapper implements RowMapper<Configuration> {
     @Override
     public Configuration mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return null;
+        Configuration configuration = new Configuration();
+        configuration.setConfigKey(rs.getString("configKey"));
+        configuration.setConfigValue(rs.getString("configValue"));
+        return configuration;
     }
 }

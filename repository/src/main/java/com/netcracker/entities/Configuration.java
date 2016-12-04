@@ -39,13 +39,13 @@ public class Configuration {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {
+            return true;
+        }
         if (!(o instanceof Configuration)) {
             return false;
         }
-
         Configuration configuration = (Configuration) o;
-
         return Objects.equals(configKey, configuration.configKey) && Objects.equals(configValue, configuration.configValue);
     }
 
