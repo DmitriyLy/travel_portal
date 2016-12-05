@@ -1,0 +1,17 @@
+{
+  "EC": 0,
+  "markers": [
+    {
+      "markerId": 100500,
+      "itemName": "Temp1"
+    },
+    {
+      "markerId": 100600,
+      "itemName": "Temp2"
+    },
+    {
+      "markerId": 100700,
+      "itemName": "Temp3"
+    }
+  ]
+}
