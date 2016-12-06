@@ -20,6 +20,5 @@
     <context:property-placeholder location="classpath:database.properties"/>
 
     <import resource="row-mappers.xml"/>
-    <import resource="repositories-impl.xml"/>
 
 </beans>

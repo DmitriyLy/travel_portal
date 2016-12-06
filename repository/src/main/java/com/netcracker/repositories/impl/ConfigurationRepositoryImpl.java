@@ -10,12 +10,14 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by dima_2 on 30.11.2016.
  */
+@Repository
 public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
     private final static Logger LOGGER = LogManager.getLogger(ConfigurationRepositoryImpl.class.getName());
     @Autowired

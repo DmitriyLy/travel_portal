@@ -4,6 +4,7 @@ import com.netcracker.entities.Country;
 import com.netcracker.queries.IQueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.CountryRowMapper;
+import com.netcracker.repositories.rowmappers.RowMapperGenerator;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -26,7 +27,7 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     private JdbcTemplate template;
 
     @Autowired
-    private CountryRowMapper countryRowMapper;
+    private RowMapperGenerator rowMapperGenerator;
 
     @Override
     public void add(Country item) {
@@ -58,12 +59,12 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     @Override
     public Country getById(long id) {
         String query = IQueriesRepository.GET_COUNTRY_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, countryRowMapper);
+        return template.queryForObject(query,new Object[] {id}, rowMapperGenerator.getCountryRowMapper());
     }
 
     @Override
     public List<Country> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), countryRowMapper);
+        return template.query(sqlSpecification.toSqlQuery(), rowMapperGenerator.getCountryRowMapper());
     }
 }
