@@ -39,7 +39,7 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     @Override
     public void update(SocialNetwork item) {
         String query = IQueriesRepository.UPDATE_SOCIAL_NETWORK;
-        int out = template.update(query, item.getName());
+        int out = template.update(query, item.getName(), item.getId());
         if (out == 0) {
             LOGGER.warn("Could not update social network");
         }

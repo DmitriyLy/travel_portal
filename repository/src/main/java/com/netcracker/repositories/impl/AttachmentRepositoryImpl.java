@@ -31,7 +31,7 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
         String query = IQueriesRepository.INSERT_ATTACHMENT;
 
         int out = template.update(query,
-                item.getUser().getId(), item.getLabel().getId(),
+                item.getUserId(), item.getLabelId(),
                 item.getFilePath(), item.getName(), item.getExtension());
         if (out == 0)
             LOGGER.warn("Could not insert attachment");
@@ -42,7 +42,7 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
         String query = IQueriesRepository.UPDATE_ATTACHMENT;
 
         int out = template.update(query,
-                item.getUser().getId(), item.getLabel().getId(),
+                item.getUserId(), item.getLabelId(),
                 item.getFilePath(), item.getName(), item.getExtension(),
                 item.getId());
         if (out == 0)

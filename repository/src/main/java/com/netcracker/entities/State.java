@@ -5,15 +5,15 @@ package com.netcracker.entities;
  */
 public class State {
     private int id;
-    private Country country;
+    private int countryId;
     private String name;
 
     public State() {
     }
 
-    public State(int id, Country country, String name) {
+    public State(int id, int countryId, String name) {
         this.id = id;
-        this.country = country;
+        this.countryId = countryId;
         this.name = name;
     }
 
@@ -25,12 +25,12 @@ public class State {
         this.id = id;
     }
 
-    public Country getCountry() {
-        return country;
+    public int getCountryId() {
+        return countryId;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setCountryId(int countryId) {
+        this.countryId = countryId;
     }
 
     public String getName() {
@@ -49,7 +49,7 @@ public class State {
         State state = (State) o;
 
         if (id != state.id) return false;
-        if (country != null ? !country.equals(state.country) : state.country != null) return false;
+        if (countryId != state.countryId) return false;
         return name != null ? name.equals(state.name) : state.name == null;
 
     }
@@ -57,7 +57,7 @@ public class State {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + countryId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
@@ -66,7 +66,7 @@ public class State {
     public String toString() {
         return "State{" +
                 "id=" + id +
-                ", country=" + country +
+                ", countryId=" + countryId +
                 ", name='" + name + '\'' +
                 '}';
     }

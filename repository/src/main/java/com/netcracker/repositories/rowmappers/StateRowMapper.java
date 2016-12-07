@@ -19,7 +19,7 @@ public class StateRowMapper implements RowMapper<State> {
     public State mapRow(ResultSet resultSet, int i) throws SQLException {
         State state = new State();
         state.setId(resultSet.getInt("id"));
-        state.setCountry(countryRepository.getById(resultSet.getInt("country_id")));
+        state.setCountryId(resultSet.getInt("country_id"));
         state.setName(resultSet.getString("name"));
         return state;
     }

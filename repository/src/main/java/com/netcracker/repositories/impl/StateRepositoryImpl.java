@@ -31,20 +31,20 @@ public class StateRepositoryImpl implements IRepository<State> {
     public void add(State item) {
         String query = IQueriesRepository.INSERT_STATE;
 
-        int out = template.update(query, item.getCountry().getId(), item.getName());
+        int out = template.update(query, item.getCountryId(), item.getName());
         if (out == 0) {
             LOGGER.warn("Could not insert State with name = " + item.getName()
-                    + " , country = " + item.getCountry());
+                    + " , country = " + item.getCountryId());
         }
     }
 
     @Override
     public void update(State item) {
         String query = IQueriesRepository.UPDATE_STATE;
-        int out = template.update(query, item.getCountry().getId(), item.getName(), item.getId());
+        int out = template.update(query, item.getCountryId(), item.getName(), item.getId());
         if (out == 0) {
             LOGGER.warn("Could not update State with name = " + item.getName()
-                    + " , country = " + item.getCountry());
+                    + " , country = " + item.getCountryId());
         }
     }
 
@@ -54,7 +54,7 @@ public class StateRepositoryImpl implements IRepository<State> {
         int out = template.update(query, item.getId());
         if (out == 0) {
             LOGGER.warn("Could not delete State with name = " + item.getName()
-                    + " , country = " + item.getCountry());
+                    + " , country = " + item.getCountryId());
         }
     }
 

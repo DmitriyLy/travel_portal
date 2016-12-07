@@ -10,17 +10,17 @@ import com.netcracker.specifications.SqlSpecification;
  * class for generating String query for searching states by country_id
  */
 public class StatesInCountrySpecification implements SqlSpecification {
-    private Country country;
+    private int countryId;
 
-    public StatesInCountrySpecification(Country country) {
-        this.country = country;
+    public StatesInCountrySpecification(int countryId) {
+        this.countryId = countryId;
     }
 
     @Override
     public String toSqlQuery() {
         return String.format(
                 IQueriesSpecification.STATES_BY_COUNTRY_ID,
-                country.getId()
+                countryId
         );
     }
 }

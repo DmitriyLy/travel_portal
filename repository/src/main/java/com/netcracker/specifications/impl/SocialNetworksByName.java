@@ -15,6 +15,8 @@ public class SocialNetworksByName implements SqlSpecification {
 
     @Override
     public String toSqlQuery() {
-        return String.format(IQueriesSpecification.SOCIAL_NETWORKS_BY_NAME, socialNetworkName);
+        return String.format(
+                IQueriesSpecification.SOCIAL_NETWORKS_BY_NAME,
+                socialNetworkName);
     }
 }
