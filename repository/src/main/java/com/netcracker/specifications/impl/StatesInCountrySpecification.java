@@ -1,6 +1,5 @@
 package com.netcracker.specifications.impl;
 
-import com.netcracker.entities.Country;
 import com.netcracker.queries.IQueriesSpecification;
 import com.netcracker.specifications.SqlSpecification;
 

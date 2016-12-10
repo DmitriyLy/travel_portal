@@ -5,16 +5,16 @@ import java.util.Date;
 
 public class Comment {
     private long id;
-    private User user;
-    private Label label;
+    private long userId;
+    private long labelId;
     private Date commentDate;
     private String commentText;
 
     public Comment() {}
-    public Comment(long id, User user, Label label, Date commentDate, String commentText) {
+    public Comment(long id, long userId, long labelId, Date commentDate, String commentText) {
         this.id = id;
-        this.user = user;
-        this.label = label;
+        this.userId = userId;
+        this.labelId = labelId;
         this.commentDate = commentDate;
         this.commentText = commentText;
     }
@@ -27,20 +27,20 @@ public class Comment {
         this.id = id;
     }
 
-    public Label getLabel() {
-        return label;
+    public long getLabelId() {
+        return labelId;
     }
 
-    public void setLabel(Label label) {
-        this.label = label;
+    public void setLabelId(long labelId) {
+        this.labelId = labelId;
     }
 
-    public User getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public Date getCommentDate() {
@@ -67,8 +67,8 @@ public class Comment {
         Comment comment = (Comment) o;
 
         if (id != comment.id) return false;
-        if (user != null ? !user.equals(comment.user) : comment.user != null) return false;
-        if (label != null ? !label.equals(comment.label) : comment.label != null) return false;
+        if (userId != comment.userId) return false;
+        if (labelId != comment.labelId) return false;
         if (commentDate != null ? !commentDate.equals(comment.commentDate) : comment.commentDate != null) return false;
         return commentText != null ? commentText.equals(comment.commentText) : comment.commentText == null;
 
@@ -77,8 +77,8 @@ public class Comment {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (label != null ? label.hashCode() : 0);
+        result = 31 * result + (int) (userId ^ (userId >>> 32));
+        result = 31 * result + (int) (labelId ^ (labelId >>> 32));
         result = 31 * result + (commentDate != null ? commentDate.hashCode() : 0);
         result = 31 * result + (commentText != null ? commentText.hashCode() : 0);
         return result;
@@ -88,8 +88,8 @@ public class Comment {
     public String toString() {
         return "Comment{" +
                 "id=" + id +
-                ", user=" + user +
-                ", label=" + label +
+                ", userId=" + userId +
+                ", labelId=" + labelId +
                 ", commentDate=" + commentDate +
                 ", commentText='" + commentText + '\'' +
                 '}';

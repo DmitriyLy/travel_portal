@@ -5,15 +5,15 @@ package com.netcracker.entities;
  */
 public class Location {
     private long id;
-    private City city;
+    private long cityId;
     private String street;
     private String building;
 
     public Location() {}
 
-    public Location(long id, City city, String street, String building) {
+    public Location(long id, long cityId, String street, String building) {
         this.id = id;
-        this.city = city;
+        this.cityId = cityId;
         this.street = street;
         this.building = building;
     }
@@ -26,12 +26,12 @@ public class Location {
         this.id = id;
     }
 
-    public City getCity() {
-        return city;
+    public long getCityId() {
+        return cityId;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setCityId(long cityId) {
+        this.cityId = cityId;
     }
 
     public String getStreet() {
@@ -58,7 +58,7 @@ public class Location {
         Location location = (Location) o;
 
         if (id != location.id) return false;
-        if (city != null ? !city.equals(location.city) : location.city != null) return false;
+        if (cityId != location.cityId) return false;
         if (street != null ? !street.equals(location.street) : location.street != null) return false;
         return building != null ? building.equals(location.building) : location.building == null;
 
@@ -67,7 +67,7 @@ public class Location {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (int) (cityId ^ (cityId >>> 32));
         result = 31 * result + (street != null ? street.hashCode() : 0);
         result = 31 * result + (building != null ? building.hashCode() : 0);
         return result;
@@ -77,7 +77,7 @@ public class Location {
     public String toString() {
         return "Location{" +
                 "id=" + id +
-                ", city=" + city +
+                ", cityId=" + cityId +
                 ", street='" + street + '\'' +
                 ", building='" + building + '\'' +
                 '}';
