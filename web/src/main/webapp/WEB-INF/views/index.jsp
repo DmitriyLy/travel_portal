@@ -25,7 +25,7 @@
             <div class="container">
                 <a id="open-sidebar-menu" href="#menu" class="pull-left" style="display:none;"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></a>
                 <div class="pull-left title">
-                    <img src="${contextPath}/images/logo.png" alt="logo image" class="logo-image">
+                    <img src="${contextPath}/resources/images/logo.png" alt="logo image" class="logo-image">
                     <span>Travel Portal</span>
                 </div>
             </div>
