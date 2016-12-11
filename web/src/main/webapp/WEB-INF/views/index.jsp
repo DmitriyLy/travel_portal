@@ -76,6 +76,6 @@
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/heredoc/heredoc.js"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/Helpers/ReplaceTemplateVars.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=${googleMapsAPIKey}"></script>
-        <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/requirejs/require.js" data-main="/js/init.js"></script>
+        <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/requirejs/require.js" data-main="${contextPath}/resources/js/init.js"></script>
     </body>
 </html>
