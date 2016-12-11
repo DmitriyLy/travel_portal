@@ -3,7 +3,7 @@ package com.netcracker.repositories.impl;
 import com.netcracker.entities.MapProvider;
 import com.netcracker.queries.IQueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.MapProviderRowMapper;
+import com.netcracker.repositories.rowmappers.RowMapperGenerator;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -26,7 +26,7 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
     private JdbcTemplate template;
 
     @Autowired
-    private MapProviderRowMapper providerRowMapper;
+    private RowMapperGenerator rowMapperGenerator;
 
     @Override
     public void add(MapProvider item) {
@@ -58,12 +58,12 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
     @Override
     public MapProvider getById(long id) {
         String query = IQueriesRepository.GET_MAP_PROVIDER_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, providerRowMapper);
+        return template.queryForObject(query,new Object[] {id}, rowMapperGenerator.getMapProviderRowMapper());
     }
 
     @Override
     public List<MapProvider> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), providerRowMapper);
+        return template.query(sqlSpecification.toSqlQuery(), rowMapperGenerator.getMapProviderRowMapper());
     }
 }

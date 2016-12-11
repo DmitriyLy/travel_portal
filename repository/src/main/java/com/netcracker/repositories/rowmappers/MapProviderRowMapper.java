@@ -12,6 +12,11 @@ import java.sql.SQLException;
 public class MapProviderRowMapper implements RowMapper<MapProvider> {
     @Override
     public MapProvider mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return null;
+        MapProvider mapProvider = new MapProvider();
+        mapProvider.setId(rs.getInt("id"));
+        mapProvider.setName(rs.getString("name"));
+        mapProvider.setCoordSysName(rs.getString("coord_sys_name"));
+
+        return mapProvider;
     }
 }
