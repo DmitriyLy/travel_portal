@@ -13,19 +13,13 @@ import java.sql.SQLException;
  */
 public class CityRowMapper implements RowMapper<City> {
 
-    @Autowired
-    StateRepositoryImpl stateRepository;
-
     @Override
     public City mapRow(ResultSet resultSet, int i) throws SQLException {
 
         City city = new City();
         city.setId(resultSet.getInt("id"));
-        int stateId = resultSet.getInt("state_id");
+        city.setStateId(resultSet.getInt("state_id"));
         city.setName(resultSet.getString("name"));
-
-        State state = stateRepository.getById(stateId);
-        city.setState(state);
 
         return city;
     }

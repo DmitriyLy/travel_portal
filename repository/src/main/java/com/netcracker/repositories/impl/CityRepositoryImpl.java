@@ -4,6 +4,7 @@ import com.netcracker.entities.City;
 import com.netcracker.queries.IQueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.CityRowMapper;
+import com.netcracker.repositories.rowmappers.RowMapperGenerator;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import oracle.net.aso.q;
@@ -27,11 +28,11 @@ public class CityRepositoryImpl implements IRepository<City> {
     private JdbcTemplate template;
 
     @Autowired
-    private CityRowMapper cityRowMapper;
+    private RowMapperGenerator rowMapperGenerator;
 
     public void add(City item) {
         String query = IQueriesRepository.INSERT_CITY;
-        int out = template.update(query, new Object[]{item.getState().getId(), item.getName()});
+        int out = template.update(query, new Object[]{item.getStateId(), item.getName()});
         if(out == 0) {
             LOGGER.warn("Cannot insert " + item.toString());
         }
@@ -40,7 +41,7 @@ public class CityRepositoryImpl implements IRepository<City> {
     @Override
     public void update(City item) {
         String query = IQueriesRepository.UPDATE_CITY;
-        int out = template.update(query, new Object[]{item.getState().getId(), item.getName(), item.getId()});
+        int out = template.update(query, new Object[]{item.getStateId(), item.getName(), item.getId()});
         if(out == 0) {
             LOGGER.warn("Cannot update " + item.toString());
         }
@@ -58,13 +59,13 @@ public class CityRepositoryImpl implements IRepository<City> {
     @Override
     public City getById(long id) {
         String query = IQueriesRepository.GET_CITY_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, cityRowMapper);
+        return template.queryForObject(query,new Object[] {id}, rowMapperGenerator.getCityRowMapper());
     }
 
     @Override
     public List<City> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), cityRowMapper);
+        return template.query(sqlSpecification.toSqlQuery(), rowMapperGenerator.getCityRowMapper());
     }
 
 }

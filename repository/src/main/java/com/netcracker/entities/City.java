@@ -5,17 +5,17 @@ package com.netcracker.entities;
  */
 public class City {
     private int id;
-    private State state;
+    private int stateId;
     private String name;
 
     public City() {
 
     }
 
-    public City(int id, String name, State state) {
+    public City(int id, String name, int stateId) {
         this.id = id;
         this.name = name;
-        this.state = state;
+        this.stateId = stateId;
     }
 
     public int getId() {
@@ -26,20 +26,20 @@ public class City {
         this.id = id;
     }
 
+    public int getStateId() {
+        return stateId;
+    }
+
+    public void setStateId(int stateId) {
+        this.stateId = stateId;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
     }
 
     @Override
@@ -50,25 +50,16 @@ public class City {
         City city = (City) o;
 
         if (id != city.id) return false;
-        if (name != null ? !name.equals(city.name) : city.name != null) return false;
-        return state != null ? state.equals(city.state) : city.state == null;
+        if (stateId != city.stateId) return false;
+        return name != null ? name.equals(city.name) : city.name == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = id;
+        result = 31 * result + stateId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "City{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", state=" + state +
-                '}';
     }
 }

@@ -24,20 +24,17 @@ public class CityRepositoryImplTest {
 
     @Autowired
     private CityRepositoryImpl cityRepository;
-    @Autowired
-    private  StateRepositoryImpl stateRepository;
-    private State state;
 
     @Before
     public void setUp() throws Exception {
-        state = stateRepository.getById(1);
+
     }
 
     @Test
     public void addOneCity() throws Exception {
         City city = new City();
         city.setName("Test city");
-        city.setState(state);
+        city.setStateId(1);
         cityRepository.add(city);
 
         List<City> list = cityRepository.query(new CitiesByName("Test city"));
@@ -49,7 +46,7 @@ public class CityRepositoryImplTest {
     public void updateTestCity() throws Exception {
         City city = new City();
         city.setName("Test");
-        city.setState(state);
+        city.setStateId(1);
         cityRepository.add(city);
 
         List<City> listBeforeUpdate = cityRepository.query(new CitiesByName("Test"));
@@ -71,7 +68,7 @@ public class CityRepositoryImplTest {
     public void removeTestCities() throws Exception {
         City city = new City();
         city.setName("Test city");
-        city.setState(state);
+        city.setStateId(1);
         cityRepository.add(city);
 
         List<City> listBeforeRemove = cityRepository.query(new CitiesByName("Test city"));
@@ -88,7 +85,7 @@ public class CityRepositoryImplTest {
 
     @Test
     public void getByIdCityOdessa() throws Exception {
-        City expectedCity = new City(1, "Odessa", state);
+        City expectedCity = new City(1, "Odessa", 1);
         City actualCity = cityRepository.getById(1);
         assertEquals(expectedCity, actualCity);
     }
