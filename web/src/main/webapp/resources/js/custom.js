@@ -148,14 +148,12 @@ if(jQuery==="undefined"){
                         setTimeout(function () {
                             MapSingletone.closeWindow(wnd1);
                         },1600);
-
                     },4000);
                 },200);
             };
 
             $('#addMarkerButton').click(function () {
                 testMap();
-
                 MapSingletone.reloadMarkers();
             });
 
@@ -170,7 +168,9 @@ if(jQuery==="undefined"){
                 if(zoom<2)
                     zoom = 2;
                 MapSingletone.map.setZoom(zoom);
-            })
+            });
+
+            //<i class="fa fa-moon-o" aria-hidden="true"></i>
         });
     })(jQuery);
 }
