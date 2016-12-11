@@ -3,15 +3,19 @@
   "markers": [
     {
       "markerId": 100500,
-      "itemName": "Temp1"
-    },
-    {
+      "name": "Temp1",
+      "latitude":0,
+      "longtitude":0
+    }, {
       "markerId": 100600,
-      "itemName": "Temp2"
-    },
-    {
+      "name": "Temp2",
+      "latitude":0,
+      "longtitude":0
+    }, {
       "markerId": 100700,
-      "itemName": "Temp3"
+      "name": "Temp3",
+      "latitude":0,
+      "longtitude":0
     }
   ]
 }
