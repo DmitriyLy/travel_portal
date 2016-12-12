@@ -1,0 +1,1 @@
+{"version":3,"file":"ReplaceTemplateVars.js","sourceRoot":"","sources":["ReplaceTemplateVars.ts"],"names":[],"mappings":"AAAA,6BAA6B,OAAO,EAAE,IAAI;IACtC,MAAM,CAAC,OAAO,CAAC,OAAO,CAAC,aAAa,EAAE,UAAC,EAAE,EAAE,EAAE;QACzC,MAAM,CAAC,CAAC,EAAE,IAAI,IAAI,GAAG,IAAI,CAAC,EAAE,CAAC,GAAG,EAAE,CAAC,CAAC;IACxC,CAAC,CAAC,CAAC;AACP,CAAC"}
