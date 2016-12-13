@@ -60,4 +60,8 @@ public class RowMapperGenerator {
     public UserRowMapper getUserRowMapper() {
         return new UserRowMapper();
     }
+
+    public FullLabelInfoRowMapper getFullLabelInfoRowMapper() {
+        return new FullLabelInfoRowMapper();
+    }
 }

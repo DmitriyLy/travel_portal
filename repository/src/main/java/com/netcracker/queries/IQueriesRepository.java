@@ -77,4 +77,24 @@ public interface IQueriesRepository {
     String UPDATE_CONFIGURATION = "UPDATE CONFIGURATION SET conf_value=? WHERE conf_key=?";
     String DELETE_CONFIGURATION = "DELETE FROM CONFIGURATION WHERE conf_key=?";
     String GET_CONFIGURATION_BY_ID = "SELECT * FROM CONFIGURATION WHERE conf_key=?";
+
+    String GET_FULL_LABEL_INFO_BY_ID = "SELECT\n" +
+            "  LABELS.ID,\n" +
+            "  USERS.FIRST_NAME || ' ' || USERS.LAST_NAME AS OWNER_NAME,\n" +
+            "  TO_CHAR(LABELS.CREATION_DATE, 'DD.MM.YYYY HH24:MI:SS') AS CREATION_DATE,\n" +
+            "  TO_CHAR(LABELS.COORDINATE_LAT) AS COORDINATE_LAT,\n" +
+            "  TO_CHAR(LABELS.COORDINATE_LONG) AS COORDINATE_LONG,\n" +
+            "  MAP_PROVIDERS.NAME AS MAP_PROVIDER,\n" +
+            "  LOCATIONS.BUILDING,\n" +
+            "  LABELS.STREET,\n" +
+            "  CITIES.NAME AS CITY,\n" +
+            "  STATES.NAME AS STATE,\n" +
+            "  COUNTRIES.NAME AS COUNTRY\n" +
+            "FROM\n" +
+            "  LABELS, USERS, MAP_PROVIDERS, LOCATIONS, CITIES, STATES, COUNTRIES\n" +
+            "WHERE\n" +
+            "  LABELS.ID = ? AND LABELS.USER_ID = USERS.ID AND\n" +
+            "  LABELS.MAP_PROVIDER_ID = MAP_PROVIDERS.ID AND LABELS.LOCATION_ID = LOCATIONS.ID AND\n" +
+            "  LOCATIONS.CITY_ID = CITIES.ID AND CITIES.STATE_ID = STATES.ID AND\n" +
+            "  STATES.COUNTRY_ID = COUNTRIES.ID;";
 }

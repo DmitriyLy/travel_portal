@@ -16,6 +16,8 @@ public class FullLabelInfo {
     private String state;
     private String country;
 
+    public FullLabelInfo() {}
+
     public long getId() {
         return id;
     }

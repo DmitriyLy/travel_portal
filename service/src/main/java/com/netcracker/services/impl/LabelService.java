@@ -1,9 +1,11 @@
 package com.netcracker.services.impl;
 
 import com.netcracker.entities.Category;
+import com.netcracker.entities.FullLabelInfo;
 import com.netcracker.entities.Label;
 import com.netcracker.entities.Tag;
 import com.netcracker.repositories.impl.CategoryRepositoryImpl;
+import com.netcracker.repositories.impl.FullLabelInfoRepositoryImpl;
 import com.netcracker.repositories.impl.LabelRepositoryImpl;
 import com.netcracker.repositories.impl.TagRepositoryImpl;
 import com.netcracker.services.IService;
@@ -31,6 +33,8 @@ public class LabelService implements IService<Label> {
     private CategoryRepositoryImpl categoryRepository;
     @Autowired
     private TagRepositoryImpl tagRepository;
+    @Autowired
+    private FullLabelInfoRepositoryImpl fullLabelInfoRepository;
 
     @Override
     public void save(Label item) {
@@ -70,6 +74,10 @@ public class LabelService implements IService<Label> {
 
         Specification specification = new LabelTagsSpecification(labelId);
         return tagRepository.query(specification);
+    }
+
+    public FullLabelInfo getFullLabelInfo(long labelId) {
+        return fullLabelInfoRepository.getById(labelId);
     }
 
 }

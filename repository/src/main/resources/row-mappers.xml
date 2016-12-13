@@ -36,5 +36,7 @@
     </bean>
     <bean id="userRowMapper" class="com.netcracker.repositories.rowmappers.UserRowMapper">
     </bean>
+    <bean id="fullLabelInfoRowMapper" class="com.netcracker.repositories.rowmappers.FullLabelInfoRowMapper">
+    </bean>
 
 </beans>
