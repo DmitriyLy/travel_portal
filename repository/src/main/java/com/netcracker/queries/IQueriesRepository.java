@@ -86,7 +86,7 @@ public interface IQueriesRepository {
             "  TO_CHAR(LABELS.COORDINATE_LONG) AS COORDINATE_LONG,\n" +
             "  MAP_PROVIDERS.NAME AS MAP_PROVIDER,\n" +
             "  LOCATIONS.BUILDING,\n" +
-            "  LABELS.STREET,\n" +
+            "  LOCATIONS.STREET,\n" +
             "  CITIES.NAME AS CITY,\n" +
             "  STATES.NAME AS STATE,\n" +
             "  COUNTRIES.NAME AS COUNTRY\n" +
@@ -96,5 +96,5 @@ public interface IQueriesRepository {
             "  LABELS.ID = ? AND LABELS.USER_ID = USERS.ID AND\n" +
             "  LABELS.MAP_PROVIDER_ID = MAP_PROVIDERS.ID AND LABELS.LOCATION_ID = LOCATIONS.ID AND\n" +
             "  LOCATIONS.CITY_ID = CITIES.ID AND CITIES.STATE_ID = STATES.ID AND\n" +
-            "  STATES.COUNTRY_ID = COUNTRIES.ID;";
+            "  STATES.COUNTRY_ID = COUNTRIES.ID";
 }

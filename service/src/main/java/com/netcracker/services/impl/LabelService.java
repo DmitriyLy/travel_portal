@@ -27,7 +27,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
  * Created by dima_2 on 11.12.2016.
  */
 @Service
-@Transactional
 public class LabelService implements IService<Label> {
 
     private final static Logger LOGGER = LogManager.getLogger(LabelService.class.getName());
