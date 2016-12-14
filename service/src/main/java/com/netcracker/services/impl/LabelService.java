@@ -93,6 +93,9 @@ public class LabelService implements IService<Label> {
 
         FullLabelInfo fullLabelInfo = getFullLabelInfo(labelId);
 
+        //TODO
+        //interfaces Entity, EntityWithName
+
         List<String> list = new ArrayList<>();
         List<Category> categories = getLabelCategories(labelId);
 
