@@ -14,4 +14,6 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper" />
+
 </beans>
