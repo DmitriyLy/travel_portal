@@ -4,7 +4,7 @@
        xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="com.netcracker.repositories.impl"/>
+    <tx:annotation-driven/>
 
     <bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
         <property name="dataSourceName" value="Root Connection"/>
@@ -16,6 +16,8 @@
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg ref="dataSource"/>
     </bean>
+
+    <context:component-scan base-package="com.netcracker.repositories.impl"/>
 
     <context:property-placeholder location="classpath:database.properties"/>
 

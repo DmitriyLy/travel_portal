@@ -1,29 +1,23 @@
 package com.netcracker.entities;
 
-/**
- * Mapping class for USER table.
- *
- * Created by dima_2 on 30.11.2016.
- */
 public class User {
 
-    long id;
-    String firstName;
-    String secondName;
-    //ID from Social Networks, used for authorization.
-    String socNetUserId;
-    SocialNetwork socialNetwork;
-    int status;
+    private long id;
+    private String firstName;
+    private String lastName;
+    private String socNetUserId;
+    private long socialNetworkId;
+    private int status;
 
     public User() {
     }
 
-    public User(long id, String firstName, String secondName, String socNetUserId, SocialNetwork socialNetwork, int status) {
+    public User(long id, String firstName, String lastName, String socNetUserId, long socialNetworkId, int status) {
         this.id = id;
         this.firstName = firstName;
-        this.secondName = secondName;
+        this.lastName = lastName;
         this.socNetUserId = socNetUserId;
-        this.socialNetwork = socialNetwork;
+        this.socialNetworkId = socialNetworkId;
         this.status = status;
     }
 
@@ -43,12 +37,12 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String secondName) {
+        this.lastName = secondName;
     }
 
     public String getSocNetUserId() {
@@ -59,12 +53,12 @@ public class User {
         this.socNetUserId = socNetUserId;
     }
 
-    public SocialNetwork getSocialNetwork() {
-        return socialNetwork;
+    public long getSocialNetworkId() {
+        return socialNetworkId;
     }
 
-    public void setSocialNetwork(SocialNetwork socialNetwork) {
-        this.socialNetwork = socialNetwork;
+    public void setSocialNetworkId(long socialNetworkId) {
+        this.socialNetworkId = socialNetworkId;
     }
 
     public int getStatus() {
@@ -82,17 +76,12 @@ public class User {
 
         User user = (User) o;
 
-        if (id != user.id) return false;
-        if (!firstName.equals(user.firstName)) return false;
-        return secondName.equals(user.secondName);
+        return id == user.id;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + firstName.hashCode();
-        result = 31 * result + secondName.hashCode();
-        return result;
+        return (int) (id ^ (id >>> 32));
     }
 
     @Override
@@ -100,7 +89,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
+                ", secondName='" + lastName + '\'' +
                 '}';
     }
 }

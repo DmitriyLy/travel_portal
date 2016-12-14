@@ -10,8 +10,6 @@
     </bean>
     <bean id="attachmentRowMapper" class="com.netcracker.repositories.rowmappers.AttachmentRowMapper">
     </bean>
-    <bean id="bookmarkRowMapper" class="com.netcracker.repositories.rowmappers.BookmarkRowMapper">
-    </bean>
     <bean id="categoryRowMapper" class="com.netcracker.repositories.rowmappers.CategoryRowMapper">
     </bean>
     <bean id="cityRowMapper" class="com.netcracker.repositories.rowmappers.CityRowMapper">

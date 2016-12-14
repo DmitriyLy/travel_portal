@@ -68,11 +68,6 @@ public interface IQueriesRepository {
     String DELETE_LABEL = "DELETE FROM LABELS WHERE id=?";
     String GET_LABEL_BY_ID = "SELECT * FROM LABELS WHERE id=?";
 
-    String INSERT_BOOKMARK = "INSERT INTO BOOKMARKS(name) values(?)";
-    String UPDATE_BOOKMARK = "UPDATE BOOKMARKS SET name=? WHERE id=?";
-    String DELETE_BOOKMARK = "DELETE FROM BOOKMARKS WHERE id=?";
-    String GET_BOOKMARK_BY_ID = "SELECT * FROM BOOKMARKS WHERE id=?";
-
     String INSERT_CONFIGURATION = "INSERT INTO CONFIGURATION(conf_key,conf_value) values(?,?)";
     String UPDATE_CONFIGURATION = "UPDATE CONFIGURATION SET conf_value=? WHERE conf_key=?";
     String DELETE_CONFIGURATION = "DELETE FROM CONFIGURATION WHERE conf_key=?";

@@ -9,10 +9,6 @@ public class RowMapperGenerator {
         return new AttachmentRowMapper();
     }
 
-    public BookmarkRowMapper getBookmarkRowMapper() {
-        return new BookmarkRowMapper();
-    }
-
     public CategoryRowMapper getCategoryRowMapper() {
         return new CategoryRowMapper();
     }

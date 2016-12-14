@@ -2,39 +2,31 @@ package com.netcracker.entities;
 
 import java.util.Date;
 
-/**
- * Mapping class for LABELS table.
- *
- * Created by dima_2 on 30.11.2016.
- */
 public class Label {
 
-    long id;
-    User user;
-    Location location;
-    //Comment from user who created LABEL.
-    String ownerComment;
-    int rating;
-    double coordLat;
-    double coordLong;
-    //LABEL creation date.
-    //TODO this field needs more expressive name!
-    Date setDate;
-    MapProvider mapProvider;
+    private long id;
+    private long userId;
+    private long locationId;
+    private String ownerComment;
+    private int rating;
+    private double coordLat;
+    private double coordLong;
+    private Date creationDate;
+    private long mapProviderId;
 
     public Label() {
     }
 
-    public Label(long id, User user, Location location, String ownerComment, int rating, double coordLat, double coordLong, Date setDate, MapProvider mapProvider) {
+    public Label(long id, long userId, long locationId, String ownerComment, int rating, double coordLat, double coordLong, Date creationDate, long mapProviderId) {
         this.id = id;
-        this.user = user;
-        this.location = location;
+        this.userId = userId;
+        this.locationId = locationId;
         this.ownerComment = ownerComment;
         this.rating = rating;
         this.coordLat = coordLat;
         this.coordLong = coordLong;
-        this.setDate = setDate;
-        this.mapProvider = mapProvider;
+        this.creationDate = creationDate;
+        this.mapProviderId = mapProviderId;
     }
 
     public long getId() {
@@ -45,20 +37,20 @@ public class Label {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public Location getLocation() {
-        return location;
+    public long getLocationId() {
+        return locationId;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocationId(long locationId) {
+        this.locationId = locationId;
     }
 
     public String getOwnerComment() {
@@ -93,20 +85,20 @@ public class Label {
         this.coordLong = coordLong;
     }
 
-    public Date getDate() {
-        return setDate;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setDate(Date date) {
-        this.setDate = date;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public MapProvider getMapProvider() {
-        return mapProvider;
+    public long getMapProviderId() {
+        return mapProviderId;
     }
 
-    public void setMapProvider(MapProvider mapProvider) {
-        this.mapProvider = mapProvider;
+    public void setMapProviderId(long mapProviderId) {
+        this.mapProviderId = mapProviderId;
     }
 
     @Override
@@ -116,23 +108,20 @@ public class Label {
 
         Label label = (Label) o;
 
-        if (id != label.id) return false;
-        return user.equals(label.user);
+        return id == label.id;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + user.hashCode();
-        return result;
+        return (int) (id ^ (id >>> 32));
     }
 
     @Override
     public String toString() {
         return "Label{" +
                 "id=" + id +
-                ", user=" + user +
-                ", location=" + location +
+                ", coordLat=" + coordLat +
+                ", coordLong=" + coordLong +
                 '}';
     }
 }

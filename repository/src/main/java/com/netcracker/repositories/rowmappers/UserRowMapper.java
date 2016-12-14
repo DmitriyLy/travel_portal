@@ -6,12 +6,17 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/**
- * Created by Yuksi on 01.12.2016.
- */
 public class UserRowMapper implements RowMapper<User> {
+
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return null;
+        User user = new User();
+        user.setId(rs.getLong("id"));
+        user.setFirstName(rs.getString("first_name"));
+        user.setLastName(rs.getString("last_name"));
+        user.setSocNetUserId(rs.getString("soc_net_user_id"));
+        user.setSocialNetworkId(rs.getLong("soc_net_id"));
+        user.setStatus(rs.getInt("status"));
+        return user;
     }
 }
