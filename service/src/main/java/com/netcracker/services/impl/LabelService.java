@@ -14,11 +14,14 @@ import com.netcracker.specifications.impl.LabelCategoriesSpecification;
 import com.netcracker.specifications.impl.LabelTagsSpecification;
 import com.netcracker.specifications.impl.LabelsOnAreaSpecification;
 import com.netcracker.specifications.impl.UserBookmarksSpecification;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
  * Created by dima_2 on 11.12.2016.
@@ -26,6 +29,8 @@ import java.util.List;
 @Service
 @Transactional
 public class LabelService implements IService<Label> {
+
+    private final static Logger LOGGER = LogManager.getLogger(LabelService.class.getName());
 
     @Autowired
     private LabelRepositoryImpl labelRepository;
@@ -78,6 +83,24 @@ public class LabelService implements IService<Label> {
 
     public FullLabelInfo getFullLabelInfo(long labelId) {
         return fullLabelInfoRepository.getById(labelId);
+    }
+
+    public String getFullLabelInfoJson(long labelId) {
+
+        String resultJson = "";
+
+        FullLabelInfo fullLabelInfo = getFullLabelInfo(labelId);
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        try {
+            resultJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(fullLabelInfo);
+        } catch (JsonProcessingException e) {
+            LOGGER.warn("Cannot create json for fullLabelInfo " + fullLabelInfo.toString() );
+        }
+
+        return resultJson;
+
     }
 
 }
