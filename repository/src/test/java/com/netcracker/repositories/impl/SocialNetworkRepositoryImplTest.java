@@ -14,8 +14,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by logariett on 03.12.2016.
+ * Add a VM Options before start test:
+ * -Duser.language=en
+ * -Duser.region=us
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class SocialNetworkRepositoryImplTest {

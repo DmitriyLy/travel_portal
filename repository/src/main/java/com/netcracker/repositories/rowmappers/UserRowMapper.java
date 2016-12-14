@@ -10,6 +10,7 @@ public class UserRowMapper implements RowMapper<User> {
 
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+
         User user = new User();
         user.setId(rs.getLong("id"));
         user.setFirstName(rs.getString("first_name"));
@@ -18,5 +19,6 @@ public class UserRowMapper implements RowMapper<User> {
         user.setSocialNetworkId(rs.getLong("soc_net_id"));
         user.setStatus(rs.getInt("status"));
         return user;
+
     }
 }

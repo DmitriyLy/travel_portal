@@ -15,7 +15,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.junit.Assert.*;
 
 /**
- * Created by dima_2 on 28.11.2016.
+ * Add a VM Options before start test:
+ * -Duser.language=en
+ * -Duser.region=us
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -11,10 +11,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.junit.Assert.*;
 
 /**
- * Created by dima_2 on 14.12.2016.
+ * Add a VM Options before start test:
+ * -Duser.language=en
+ * -Duser.region=us
  */
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/app-context.xml"})
+@ContextConfiguration(locations = {"classpath*:/service-context.xml"})
 public class LabelServiceTest {
 
     @Autowired
