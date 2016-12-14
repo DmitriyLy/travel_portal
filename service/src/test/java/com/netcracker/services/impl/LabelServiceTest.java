@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * Created by dima_2 on 14.12.2016.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:/app-context.xml"})
+@ContextConfiguration(locations = {"classpath:/app-context.xml"})
 public class LabelServiceTest {
 
     @Autowired

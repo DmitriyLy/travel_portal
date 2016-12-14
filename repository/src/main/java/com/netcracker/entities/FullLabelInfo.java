@@ -1,5 +1,8 @@
 package com.netcracker.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by dima_2 on 12.12.2016.
  */
@@ -15,6 +18,8 @@ public class FullLabelInfo {
     private String city;
     private String state;
     private String country;
+    private List<String> categories = new ArrayList<>();
+    private List<String> tags = new ArrayList<>();
 
     public FullLabelInfo() {}
 
@@ -104,6 +109,28 @@ public class FullLabelInfo {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<String> getCategories() {
+        List<String> list = new ArrayList<>();
+        list.addAll(categories);
+        return list;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories.clear();
+        this.categories.addAll(categories);
+    }
+
+    public List<String> getTags() {
+        List<String> list = new ArrayList<>();
+        list.addAll(tags);
+        return list;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags.clear();
+        this.tags.addAll(tags);
     }
 
     @Override

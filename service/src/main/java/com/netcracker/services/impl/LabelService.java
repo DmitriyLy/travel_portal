@@ -18,7 +18,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -39,6 +40,8 @@ public class LabelService implements IService<Label> {
     private TagRepositoryImpl tagRepository;
     @Autowired
     private FullLabelInfoRepositoryImpl fullLabelInfoRepository;
+    @Autowired
+    private ObjectMapper jacksonObjectMapper;
 
     @Override
     public void save(Label item) {
@@ -90,12 +93,30 @@ public class LabelService implements IService<Label> {
 
         FullLabelInfo fullLabelInfo = getFullLabelInfo(labelId);
 
-        ObjectMapper mapper = new ObjectMapper();
+        List<String> list = new ArrayList<>();
+        List<Category> categories = getLabelCategories(labelId);
+
+        for (Category item : categories) {
+            list.add(item.getName());
+        }
+
+        fullLabelInfo.setCategories(list);
+
+        list.clear();
+
+        List<Tag> tags = getLabelTags(labelId);
+
+        for (Tag item : tags) {
+            list.add(item.getName());
+        }
+
+        fullLabelInfo.setTags(list);
 
         try {
-            resultJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(fullLabelInfo);
+            resultJson = jacksonObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(fullLabelInfo);
         } catch (JsonProcessingException e) {
             LOGGER.warn("Cannot create json for fullLabelInfo " + fullLabelInfo.toString() );
+            e.printStackTrace();
         }
 
         return resultJson;

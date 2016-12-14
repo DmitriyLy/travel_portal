@@ -10,4 +10,6 @@
 
     <import resource="data-context.xml"/>
 
+    <bean id="jacksonObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+
 </beans>
