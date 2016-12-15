@@ -19,37 +19,48 @@ import java.util.List;
  */
 @Repository
 public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
+
     private final static Logger LOGGER = LogManager.getLogger(ConfigurationRepositoryImpl.class.getName());
+
     @Autowired
     private JdbcTemplate template;
     @Autowired
     private ConfigurationRowMapper configurationRowMapper;
 
     @Override
-    public void add(Configuration item) {
+    public Configuration add(Configuration item) {
         String query = IQueriesRepository.INSERT_CONFIGURATION;
         int out = template.update(query, item.getConfigKey(), item.getConfigValue());
+
         if(out == 0) {
             LOGGER.warn("Could not insert Configuration with configKey = " + item.getConfigKey() + " and configValue = " + item.getConfigValue());
         }
+
+        return item;
     }
 
     @Override
-    public void update(Configuration item) {
+    public Configuration update(Configuration item) {
         String query = IQueriesRepository.UPDATE_CONFIGURATION;
         int out = template.update(query, item.getConfigValue(), item.getConfigKey());
+
         if(out == 0) {
             LOGGER.warn("Could not update Configuration with configValue = " + item.getConfigValue() + " where configKey = " + item.getConfigKey());
         }
+
+        return item;
     }
 
     @Override
-    public void remove(Configuration item) {
+    public Configuration remove(Configuration item) {
         String query = IQueriesRepository.DELETE_CONFIGURATION;
         int out = template.update(query, item.getConfigKey());
+
         if(out == 0) {
             LOGGER.warn("Could not remove Configuration with configKey = " + item.getConfigKey());
         }
+
+        return item;
     }
 
     @Override

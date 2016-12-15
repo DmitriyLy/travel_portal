@@ -19,43 +19,51 @@ import java.util.List;
  */
 @Repository
 public class StateRepositoryImpl implements IRepository<State> {
+
     private final static Logger LOGGER = LogManager.getLogger(CountryRepositoryImpl.class.getName());
 
     @Autowired
     private JdbcTemplate template;
-
     @Autowired
     private StateRowMapper stateRowMapper;
 
     @Override
-    public void add(State item) {
+    public State add(State item) {
         String query = IQueriesRepository.INSERT_STATE;
-
         int out = template.update(query, item.getCountryId(), item.getName());
+
         if (out == 0) {
             LOGGER.warn("Could not insert State with name = " + item.getName()
                     + " , country = " + item.getCountryId());
         }
+
+        return item;
     }
 
     @Override
-    public void update(State item) {
+    public State update(State item) {
         String query = IQueriesRepository.UPDATE_STATE;
         int out = template.update(query, item.getCountryId(), item.getName(), item.getId());
+
         if (out == 0) {
             LOGGER.warn("Could not update State with name = " + item.getName()
                     + " , country = " + item.getCountryId());
         }
+
+        return item;
     }
 
     @Override
-    public void remove(State item) {
+    public State remove(State item) {
         String query = IQueriesRepository.DELETE_STATE;
         int out = template.update(query, item.getId());
+
         if (out == 0) {
             LOGGER.warn("Could not delete State with name = " + item.getName()
                     + " , country = " + item.getCountryId());
         }
+
+        return item;
     }
 
     @Override

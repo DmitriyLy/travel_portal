@@ -24,23 +24,22 @@ public class FullLabelInfoRepositoryImpl implements IRepository<FullLabelInfo> {
 
     @Autowired
     private JdbcTemplate template;
-
     @Autowired
     private RowMapperGenerator rowMapperGenerator;
 
     @Override
-    public void add(FullLabelInfo item) {
-
+    public FullLabelInfo add(FullLabelInfo item) {
+        return item;
     }
 
     @Override
-    public void update(FullLabelInfo item) {
-
+    public FullLabelInfo update(FullLabelInfo item) {
+        return item;
     }
 
     @Override
-    public void remove(FullLabelInfo item) {
-
+    public FullLabelInfo remove(FullLabelInfo item) {
+        return item;
     }
 
     @Override

@@ -19,6 +19,7 @@ import java.util.List;
  */
 @Repository
 public class AttachmentRepositoryImpl implements IRepository<Attachment> {
+
     private final static Logger LOGGER = LogManager.getLogger(CountryRepositoryImpl.class.getName());
 
     @Autowired
@@ -27,41 +28,50 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
     private AttachmentRowMapper attachmentRowMapper;
 
     @Override
-    public void add(Attachment item) {
+    public Attachment add(Attachment item) {
         String query = IQueriesRepository.INSERT_ATTACHMENT;
-
         int out = template.update(query,
                 item.getUserId(), item.getLabelId(),
                 item.getFilePath(), item.getName(), item.getExtension());
-        if (out == 0)
+
+        if (out == 0) {
             LOGGER.warn("Could not insert attachment");
+        }
+
+        return item;
     }
 
     @Override
-    public void update(Attachment item) {
+    public Attachment update(Attachment item) {
         String query = IQueriesRepository.UPDATE_ATTACHMENT;
-
         int out = template.update(query,
                 item.getUserId(), item.getLabelId(),
                 item.getFilePath(), item.getName(), item.getExtension(),
                 item.getId());
-        if (out == 0)
+
+        if (out == 0) {
             LOGGER.warn("Could not update attachment");
+        }
+
+        return item;
     }
 
     @Override
-    public void remove(Attachment item) {
+    public Attachment remove(Attachment item) {
         String query = IQueriesRepository.DELETE_ATTACHMENT;
-
         int out = template.update(query, item.getId());
-        if (out == 0)
+
+        if (out == 0) {
             LOGGER.warn("Could not delete attachment");
+        }
+
+        return item;
     }
 
     @Override
     public Attachment getById(long id) {
         String query = IQueriesRepository.GET_ATTACHMENT_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, attachmentRowMapper);
+        return template.queryForObject(query, new Object[]{id}, attachmentRowMapper);
     }
 
     @Override

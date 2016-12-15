@@ -25,35 +25,43 @@ public class CountryRepositoryImpl implements IRepository<Country> {
 
     @Autowired
     private JdbcTemplate template;
-
     @Autowired
     private RowMapperGenerator rowMapperGenerator;
 
     @Override
-    public void add(Country item) {
+    public Country add(Country item) {
         String query = IQueriesRepository.INSERT_COUNTRY;
         int out = template.update(query, new Object[]{item.getName()});
+
         if(out == 0) {
             LOGGER.warn("Could not insert Country with name = " + item.getName());
         }
+
+        return item;
     }
 
     @Override
-    public void update(Country item) {
+    public Country update(Country item) {
         String query = IQueriesRepository.UPDATE_COUNTRY;
         int out = template.update(query, new Object[]{item.getName(), item.getId()});
+
         if(out == 0) {
             LOGGER.warn("Could not update Country with name = " + item.getName());
         }
+
+        return item;
     }
 
     @Override
-    public void remove(Country item) {
+    public Country remove(Country item) {
         String query = IQueriesRepository.DELETE_COUNTRY;
         int out = template.update(query, item.getId());
+
         if(out == 0) {
             LOGGER.warn("Could not remove Country with name = " + item.getName());
         }
+
+        return item;
     }
 
     @Override
