@@ -8,4 +8,6 @@
 
     <import resource="mvc-context.xml"/>
 
+    <import resource="service-context.xml"/>
+
 </beans>
