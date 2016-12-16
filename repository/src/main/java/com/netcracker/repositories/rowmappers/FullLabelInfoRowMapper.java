@@ -16,8 +16,8 @@ public class FullLabelInfoRowMapper implements RowMapper<FullLabelInfo> {
         fullLabelInfo.setId(rs.getLong("id"));
         fullLabelInfo.setOwnerName(rs.getString("owner_name"));
         fullLabelInfo.setCreationDate(rs.getString("creation_date"));
-        fullLabelInfo.setCoordLat(rs.getString("coordinate_lat"));
-        fullLabelInfo.setCoordLong(rs.getString("coordinate_long"));
+        fullLabelInfo.setCoordLat(rs.getDouble("coordinate_lat"));
+        fullLabelInfo.setCoordLong(rs.getDouble("coordinate_long"));
         fullLabelInfo.setMapProvider(rs.getString("map_provider"));
         fullLabelInfo.setBuilding(rs.getString("building"));
         fullLabelInfo.setStreet(rs.getString("street"));

@@ -4,8 +4,7 @@
 		<title>Json for label with id = 1</title>
 	</head>
 	<body>
-		<h1>Json for label with id = 1</h1>
-		<p></p>
-   		<h2>${json_text}</h2>
+		<h2>Json for label with id = 1</h2>
+   		<p>${json_text}</p>
 	</body>
 </html>
