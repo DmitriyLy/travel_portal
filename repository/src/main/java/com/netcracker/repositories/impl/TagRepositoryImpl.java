@@ -21,35 +21,43 @@ public class TagRepositoryImpl implements IRepository<Tag> {
 
     @Autowired
     private JdbcTemplate template;
-
     @Autowired
     private TagRowMapper tagRowMapper;
 
     @Override
-    public void add(Tag item) {
+    public Tag add(Tag item) {
         String query = IQueriesRepository.INSERT_TAG;
         int out = template.update(query, new Object[]{item.getName()});
+
         if(out == 0) {
             LOGGER.warn("Could not insert Tag with name = " + item.getName());
         }
+
+        return item;
     }
 
     @Override
-    public void update(Tag item) {
+    public Tag update(Tag item) {
         String query = IQueriesRepository.UPDATE_TAG;
         int out = template.update(query, new Object[]{item.getName(), item.getId()});
+
         if(out == 0) {
             LOGGER.warn("Could not update Tag with name = " + item.getName());
         }
+
+        return item;
     }
 
     @Override
-    public void remove(Tag item) {
+    public Tag remove(Tag item) {
         String query = IQueriesRepository.DELETE_TAG;
         int out = template.update(query, item.getId());
+
         if(out == 0) {
             LOGGER.warn("Could not remove Tag with name = " + item.getName());
         }
+
+        return item;
     }
 
     @Override

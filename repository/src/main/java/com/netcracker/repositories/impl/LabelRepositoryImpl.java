@@ -21,12 +21,11 @@ public class LabelRepositoryImpl implements IRepository<Label> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
     @Autowired
     private LabelRowMapper labelRowMapper;
 
     @Override
-    public void add(Label item) {
+    public Label add(Label item) {
         String query = IQueriesRepository.INSERT_LABEL;
         int out = jdbcTemplate.update(query, new Object[]{
                 item.getUserId(), item.getLocationId(), item.getOwnerComment(),
@@ -36,10 +35,12 @@ public class LabelRepositoryImpl implements IRepository<Label> {
         if (out == 0) {
             LOGGER.warn("Cannot insert " + item.toString());
         }
+
+        return item;
     }
 
     @Override
-    public void update(Label item) {
+    public Label update(Label item) {
         String query = IQueriesRepository.UPDATE_LABEL;
         int out = jdbcTemplate.update(query, new Object[]{
                 item.getUserId(), item.getLocationId(), item.getOwnerComment(),
@@ -49,16 +50,20 @@ public class LabelRepositoryImpl implements IRepository<Label> {
         if (out == 0) {
             LOGGER.warn("Cannot delete " + item.toString());
         }
+
+        return item;
     }
 
     @Override
-    public void remove(Label item) {
+    public Label remove(Label item) {
         String query = IQueriesRepository.DELETE_LABEL;
         int out = jdbcTemplate.update(query, new Object[]{item.getId()});
 
         if (out == 0) {
             LOGGER.warn("Cannot delete " + item.toString());
         }
+
+        return item;
     }
 
     @Override

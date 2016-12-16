@@ -21,36 +21,43 @@ public class LocationRepositoryImpl implements IRepository<Location> {
 
     @Autowired
     private JdbcTemplate template;
-
     @Autowired
     private LocationRowMapper locationRowMapper;
 
     @Override
-    public void add(Location item) {
+    public Location add(Location item) {
         String query = IQueriesRepository.INSERT_LOCATION;
         int out = template.update(query, new Object[]{item.getCityId(), item.getStreet(), item.getBuilding()});
+
         if(out == 0) {
             LOGGER.warn("Could not insert Location = " + item.toString());
         }
+
+        return item;
     }
 
     @Override
-    public void update(Location item) {
+    public Location update(Location item) {
         String query = IQueriesRepository.UPDATE_LOCATION;
         int out = template.update(query, new Object[]{item.getCityId(), item.getStreet(), item.getBuilding(),
                                                         item.getId()});
         if(out == 0) {
             LOGGER.warn("Could not update Location = " + item.toString());
         }
+
+        return item;
     }
 
     @Override
-    public void remove(Location item) {
+    public Location remove(Location item) {
         String query = IQueriesRepository.DELETE_LOCATION;
         int out = template.update(query, item.getId());
+
         if(out == 0) {
             LOGGER.warn("Could not remove Location = " + item.toString());
         }
+
+        return item;
     }
 
     @Override

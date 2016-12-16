@@ -25,32 +25,43 @@ public class CategoryRepositoryImpl implements IRepository<Category> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
     @Autowired
     private CategoryRowMapper categoryRowMapper;
 
     @Override
-    public void add(Category item) {
+    public Category add(Category item) {
         String query = IQueriesRepository.INSERT_CATEGORY;
         int out = jdbcTemplate.update(query, new Object[]{item.getName()});
-        if (out == 0)
+
+        if (out == 0) {
             LOGGER.warn("Could not insert category " + item.getName());
+        }
+
+        return item;
     }
 
     @Override
-    public void update(Category item) {
+    public Category update(Category item) {
         String query = IQueriesRepository.UPDATE_CATEGORY;
         int out = jdbcTemplate.update(query, new Object[]{item.getId(), item.getName()});
-        if (out == 0)
+
+        if (out == 0) {
             LOGGER.warn("Could not update category " + item.getName());
+        }
+
+        return item;
     }
 
     @Override
-    public void remove(Category item) {
+    public Category remove(Category item) {
         String query = IQueriesRepository.DELETE_CATEGORY;
         int out = jdbcTemplate.update(query, new Object[]{item.getId()});
-        if (out == 0)
+
+        if (out == 0) {
             LOGGER.warn("Could not delete category " + item.getName());
+        }
+
+        return item;
     }
 
     @Override

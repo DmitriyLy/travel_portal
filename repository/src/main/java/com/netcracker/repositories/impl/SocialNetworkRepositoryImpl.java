@@ -27,31 +27,39 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     private SocialNetworkRowMapper socialNetworkRowMapper;
 
     @Override
-    public void add(SocialNetwork item) {
+    public SocialNetwork add(SocialNetwork item) {
         String query = IQueriesRepository.INSERT_SOCIAL_NETWORK;
-
         int out = template.update(query, item.getName());
+
         if (out == 0) {
             LOGGER.warn("Could not insert social network");
         }
+
+        return item;
     }
 
     @Override
-    public void update(SocialNetwork item) {
+    public SocialNetwork update(SocialNetwork item) {
         String query = IQueriesRepository.UPDATE_SOCIAL_NETWORK;
         int out = template.update(query, item.getName(), item.getId());
+
         if (out == 0) {
             LOGGER.warn("Could not update social network");
         }
+
+        return item;
     }
 
     @Override
-    public void remove(SocialNetwork item) {
+    public SocialNetwork remove(SocialNetwork item) {
         String query = IQueriesRepository.DELETE_SOCIAL_NETWORK;
         int out = template.update(query, item.getId());
+
         if (out == 0) {
             LOGGER.warn("Could not delete social network");
         }
+
+        return item;
     }
 
     @Override

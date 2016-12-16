@@ -24,34 +24,42 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     @Autowired
     private JdbcTemplate template;
-
     @Autowired
     private RowMapperGenerator rowMapperGenerator;
 
-    public void add(City item) {
+    public City add(City item) {
         String query = IQueriesRepository.INSERT_CITY;
         int out = template.update(query, new Object[]{item.getStateId(), item.getName()});
+
         if(out == 0) {
             LOGGER.warn("Cannot insert " + item.toString());
         }
+
+        return item;
     }
 
     @Override
-    public void update(City item) {
+    public City update(City item) {
         String query = IQueriesRepository.UPDATE_CITY;
         int out = template.update(query, new Object[]{item.getStateId(), item.getName(), item.getId()});
+
         if(out == 0) {
             LOGGER.warn("Cannot update " + item.toString());
         }
+
+        return item;
     }
 
     @Override
-    public void remove(City item) {
+    public City remove(City item) {
         String query = IQueriesRepository.DELETE_CITY;
         int out = template.update(query, new Object[]{item.getId()});
+
         if (out == 0) {
             LOGGER.warn("Cannot delete " + item.toString());
         }
+
+        return item;
     }
 
     @Override

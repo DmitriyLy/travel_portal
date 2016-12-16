@@ -24,35 +24,43 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
 
     @Autowired
     private JdbcTemplate template;
-
     @Autowired
     private RowMapperGenerator rowMapperGenerator;
 
     @Override
-    public void add(MapProvider item) {
+    public MapProvider add(MapProvider item) {
         String query = IQueriesRepository.INSERT_MAP_PROVIDER;
         int out = template.update(query, new Object[]{item.getName(), item.getCoordSysName()});
+
         if(out == 0) {
             LOGGER.warn("Cannot insert " + item.toString());
         }
+
+        return item;
     }
 
     @Override
-    public void update(MapProvider item) {
+    public MapProvider update(MapProvider item) {
         String query = IQueriesRepository.UPDATE_MAP_PROVIDER;
         int out = template.update(query, new Object[]{item.getName(), item.getCoordSysName(), item.getId()});
+
         if(out == 0) {
             LOGGER.warn("Cannot update " + item.toString());
         }
+
+        return item;
     }
 
     @Override
-    public void remove(MapProvider item) {
+    public MapProvider remove(MapProvider item) {
         String query = IQueriesRepository.DELETE_MAP_PROVIDER;
         int out = template.update(query, new Object[]{item.getId()});
+
         if (out == 0) {
             LOGGER.warn("Cannot delete " + item.toString());
         }
+
+        return item;
     }
 
     @Override
