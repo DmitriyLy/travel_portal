@@ -1,5 +1,6 @@
 package com.netcracker.services.impl;
 
+import com.netcracker.entities.FullLabelInfo;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,8 +38,7 @@ public class LabelServiceTest {
 
     @Test
     public void getJsonForFullLabelInfoWithIdOne() throws Exception {
-        String jsonString = labelService.getFullLabelInfoJson(1);
-        assertTrue(!jsonString.isEmpty());
+        FullLabelInfo jsonString = labelService.getFullLabelInfo(1);
         System.out.println(jsonString);
     }
 

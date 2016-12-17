@@ -40,8 +40,6 @@ public class LabelService implements IService<Label> {
     private TagRepositoryImpl tagRepository;
     @Autowired
     private FullLabelInfoRepositoryImpl fullLabelInfoRepository;
-    @Autowired
-    private ObjectMapper jacksonObjectMapper;
 
     @Override
     public void save(Label item) {
@@ -84,15 +82,8 @@ public class LabelService implements IService<Label> {
     }
 
     public FullLabelInfo getFullLabelInfo(long labelId) {
-        return fullLabelInfoRepository.getById(labelId);
-    }
 
-    public String getFullLabelInfoJson(long labelId) {
-
-        String resultJson = "";
-
-        FullLabelInfo fullLabelInfo = getFullLabelInfo(labelId);
-
+        FullLabelInfo fullLabelInfo = fullLabelInfoRepository.getById(labelId);
         //TODO
         //interfaces Entity, EntityWithName
 
@@ -115,15 +106,6 @@ public class LabelService implements IService<Label> {
 
         fullLabelInfo.setTags(list);
 
-        try {
-            resultJson = jacksonObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(fullLabelInfo);
-        } catch (JsonProcessingException e) {
-            LOGGER.warn("Cannot create json for fullLabelInfo " + fullLabelInfo.toString() );
-            e.printStackTrace();
-        }
-
-        return resultJson;
-
+        return fullLabelInfo;
     }
-
 }
