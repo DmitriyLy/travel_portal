@@ -3,7 +3,6 @@ package com.netcracker.repositories.impl;
 import com.netcracker.entities.Tag;
 import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.TagRowMapper;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -21,15 +20,15 @@ public class TagRepositoryImpl implements IRepository<Tag> {
 
     @Autowired
     private JdbcTemplate template;
-    @Autowired
-    private TagRowMapper tagRowMapper;
 
     @Override
     public Tag add(Tag item) {
         String query = QueriesRepository.INSERT_TAG;
-        int out = template.update(query, new Object[]{item.getName()});
+        int out = template.update(query,
+                item.getName()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Could not insert Tag with name = " + item.getName());
         }
 
@@ -39,9 +38,12 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     @Override
     public Tag update(Tag item) {
         String query = QueriesRepository.UPDATE_TAG;
-        int out = template.update(query, new Object[]{item.getName(), item.getId()});
+        int out = template.update(query,
+                item.getName(),
+                item.getId()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Could not update Tag with name = " + item.getName());
         }
 
@@ -51,9 +53,11 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     @Override
     public Tag remove(Tag item) {
         String query = QueriesRepository.DELETE_TAG;
-        int out = template.update(query, item.getId());
+        int out = template.update(query,
+                item.getId()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Could not remove Tag with name = " + item.getName());
         }
 
@@ -63,12 +67,22 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     @Override
     public Tag getById(long id) {
         String query = QueriesRepository.GET_TAG_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, tagRowMapper);
+        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
+            Tag tag = new Tag();
+            tag.setId(rs.getLong("id"));
+            tag.setName(rs.getString("name"));
+            return tag;
+        });
     }
 
     @Override
     public List<Tag> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), tagRowMapper);
+        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
+            Tag tag = new Tag();
+            tag.setId(rs.getLong("id"));
+            tag.setName(rs.getString("name"));
+            return tag;
+        });
     }
 }

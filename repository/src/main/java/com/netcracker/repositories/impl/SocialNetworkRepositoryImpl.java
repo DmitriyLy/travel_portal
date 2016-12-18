@@ -3,7 +3,6 @@ package com.netcracker.repositories.impl;
 import com.netcracker.entities.SocialNetwork;
 import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.SocialNetworkRowMapper;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by dima_2 on 30.11.2016.
+ * @author Dmitriy Lysai
  */
 @Repository
 public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
@@ -23,13 +22,13 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
 
     @Autowired
     private JdbcTemplate template;
-    @Autowired
-    private SocialNetworkRowMapper socialNetworkRowMapper;
 
     @Override
     public SocialNetwork add(SocialNetwork item) {
         String query = QueriesRepository.INSERT_SOCIAL_NETWORK;
-        int out = template.update(query, item.getName());
+        int out = template.update(query,
+                item.getName()
+        );
 
         if (out == 0) {
             LOGGER.warn("Could not insert social network");
@@ -41,7 +40,10 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     @Override
     public SocialNetwork update(SocialNetwork item) {
         String query = QueriesRepository.UPDATE_SOCIAL_NETWORK;
-        int out = template.update(query, item.getName(), item.getId());
+        int out = template.update(query,
+                item.getName(),
+                item.getId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Could not update social network");
@@ -53,7 +55,9 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     @Override
     public SocialNetwork remove(SocialNetwork item) {
         String query = QueriesRepository.DELETE_SOCIAL_NETWORK;
-        int out = template.update(query, item.getId());
+        int out = template.update(query,
+                item.getId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Could not delete social network");
@@ -65,12 +69,22 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     @Override
     public SocialNetwork getById(long id) {
         String query = QueriesRepository.GET_SOCIAL_NETWORK_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, socialNetworkRowMapper);
+        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
+            SocialNetwork socialNetwork = new SocialNetwork();
+            socialNetwork.setId(rs.getInt("id"));
+            socialNetwork.setName(rs.getString("name"));
+            return socialNetwork;
+        });
     }
 
     @Override
     public List<SocialNetwork> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), new SocialNetworkRowMapper());
+        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
+            SocialNetwork socialNetwork = new SocialNetwork();
+            socialNetwork.setId(rs.getInt("id"));
+            socialNetwork.setName(rs.getString("name"));
+            return socialNetwork;
+        });
     }
 }

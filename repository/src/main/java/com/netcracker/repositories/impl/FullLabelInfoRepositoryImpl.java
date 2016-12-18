@@ -3,7 +3,6 @@ package com.netcracker.repositories.impl;
 import com.netcracker.entities.FullLabelInfo;
 import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.RowMapperGenerator;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by dima_2 on 13.12.2016.
+ * @author Dmitriy Lysai
  */
 @Repository
 public class FullLabelInfoRepositoryImpl implements IRepository<FullLabelInfo> {
@@ -24,8 +23,6 @@ public class FullLabelInfoRepositoryImpl implements IRepository<FullLabelInfo> {
 
     @Autowired
     private JdbcTemplate template;
-    @Autowired
-    private RowMapperGenerator rowMapperGenerator;
 
     @Override
     public FullLabelInfo add(FullLabelInfo item) {
@@ -45,12 +42,40 @@ public class FullLabelInfoRepositoryImpl implements IRepository<FullLabelInfo> {
     @Override
     public FullLabelInfo getById(long id) {
         String query = QueriesRepository.GET_FULL_LABEL_INFO_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, rowMapperGenerator.getFullLabelInfoRowMapper());
+        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
+            FullLabelInfo fullLabelInfo = new FullLabelInfo();
+            fullLabelInfo.setId(rs.getLong("id"));
+            fullLabelInfo.setOwnerName(rs.getString("owner_name"));
+            fullLabelInfo.setCreationDate(rs.getString("creation_date"));
+            fullLabelInfo.setCoordLat(rs.getDouble("coordinate_lat"));
+            fullLabelInfo.setCoordLong(rs.getDouble("coordinate_long"));
+            fullLabelInfo.setMapProvider(rs.getString("map_provider"));
+            fullLabelInfo.setBuilding(rs.getString("building"));
+            fullLabelInfo.setStreet(rs.getString("street"));
+            fullLabelInfo.setCity(rs.getString("city"));
+            fullLabelInfo.setState(rs.getString("state"));
+            fullLabelInfo.setCountry(rs.getString("country"));
+            return fullLabelInfo;
+        });
     }
 
     @Override
     public List<FullLabelInfo> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), rowMapperGenerator.getFullLabelInfoRowMapper());
+        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
+            FullLabelInfo fullLabelInfo = new FullLabelInfo();
+            fullLabelInfo.setId(rs.getLong("id"));
+            fullLabelInfo.setOwnerName(rs.getString("owner_name"));
+            fullLabelInfo.setCreationDate(rs.getString("creation_date"));
+            fullLabelInfo.setCoordLat(rs.getDouble("coordinate_lat"));
+            fullLabelInfo.setCoordLong(rs.getDouble("coordinate_long"));
+            fullLabelInfo.setMapProvider(rs.getString("map_provider"));
+            fullLabelInfo.setBuilding(rs.getString("building"));
+            fullLabelInfo.setStreet(rs.getString("street"));
+            fullLabelInfo.setCity(rs.getString("city"));
+            fullLabelInfo.setState(rs.getString("state"));
+            fullLabelInfo.setCountry(rs.getString("country"));
+            return fullLabelInfo;
+        });
     }
 }

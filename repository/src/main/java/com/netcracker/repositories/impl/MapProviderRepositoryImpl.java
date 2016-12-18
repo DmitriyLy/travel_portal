@@ -3,7 +3,6 @@ package com.netcracker.repositories.impl;
 import com.netcracker.entities.MapProvider;
 import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.RowMapperGenerator;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by dima_2 on 30.11.2016.
+ * @author Dmitriy Lysai
  */
 @Repository
 public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
@@ -24,15 +23,16 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
 
     @Autowired
     private JdbcTemplate template;
-    @Autowired
-    private RowMapperGenerator rowMapperGenerator;
 
     @Override
     public MapProvider add(MapProvider item) {
         String query = QueriesRepository.INSERT_MAP_PROVIDER;
-        int out = template.update(query, new Object[]{item.getName(), item.getCoordSysName()});
+        int out = template.update(query,
+                item.getName(),
+                item.getCoordSysName()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Cannot insert " + item.toString());
         }
 
@@ -42,9 +42,13 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
     @Override
     public MapProvider update(MapProvider item) {
         String query = QueriesRepository.UPDATE_MAP_PROVIDER;
-        int out = template.update(query, new Object[]{item.getName(), item.getCoordSysName(), item.getId()});
+        int out = template.update(query,
+                item.getName(),
+                item.getCoordSysName(),
+                item.getId()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Cannot update " + item.toString());
         }
 
@@ -54,7 +58,9 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
     @Override
     public MapProvider remove(MapProvider item) {
         String query = QueriesRepository.DELETE_MAP_PROVIDER;
-        int out = template.update(query, new Object[]{item.getId()});
+        int out = template.update(query,
+                item.getId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Cannot delete " + item.toString());
@@ -66,12 +72,24 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
     @Override
     public MapProvider getById(long id) {
         String query = QueriesRepository.GET_MAP_PROVIDER_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, rowMapperGenerator.getMapProviderRowMapper());
+        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
+            MapProvider mapProvider = new MapProvider();
+            mapProvider.setId(rs.getInt("id"));
+            mapProvider.setName(rs.getString("name"));
+            mapProvider.setCoordSysName(rs.getString("coord_sys_name"));
+            return mapProvider;
+        });
     }
 
     @Override
     public List<MapProvider> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), rowMapperGenerator.getMapProviderRowMapper());
+        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
+            MapProvider mapProvider = new MapProvider();
+            mapProvider.setId(rs.getInt("id"));
+            mapProvider.setName(rs.getString("name"));
+            mapProvider.setCoordSysName(rs.getString("coord_sys_name"));
+            return mapProvider;
+        });
     }
 }
