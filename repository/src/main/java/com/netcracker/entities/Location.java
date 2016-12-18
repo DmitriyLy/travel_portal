@@ -1,7 +1,9 @@
 package com.netcracker.entities;
 
 /**
- * Created by dima_2 on 30.11.2016.
+ * Entity represent's LOCATIONS table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.LocationRepositoryImpl
  */
 public class Location {
     private long id;
@@ -10,13 +12,6 @@ public class Location {
     private String building;
 
     public Location() {}
-
-    public Location(long id, long cityId, String street, String building) {
-        this.id = id;
-        this.cityId = cityId;
-        this.street = street;
-        this.building = building;
-    }
 
     public long getId() {
         return id;

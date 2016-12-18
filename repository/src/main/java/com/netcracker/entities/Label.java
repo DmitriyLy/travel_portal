@@ -2,6 +2,11 @@ package com.netcracker.entities;
 
 import java.util.Date;
 
+/**
+ * Entity represent's LABELS table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.LabelRepositoryImpl
+ */
 public class Label {
 
     private long id;
@@ -15,18 +20,6 @@ public class Label {
     private long mapProviderId;
 
     public Label() {
-    }
-
-    public Label(long id, long userId, long locationId, String ownerComment, int rating, double coordLat, double coordLong, Date creationDate, long mapProviderId) {
-        this.id = id;
-        this.userId = userId;
-        this.locationId = locationId;
-        this.ownerComment = ownerComment;
-        this.rating = rating;
-        this.coordLat = coordLat;
-        this.coordLong = coordLong;
-        this.creationDate = creationDate;
-        this.mapProviderId = mapProviderId;
     }
 
     public long getId() {

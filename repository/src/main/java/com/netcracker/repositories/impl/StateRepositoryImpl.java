@@ -1,9 +1,8 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.State;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.StateRowMapper;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by logariett on 28.11.2016.
+ * @author Logariett
  */
 @Repository
 public class StateRepositoryImpl implements IRepository<State> {
@@ -24,13 +23,14 @@ public class StateRepositoryImpl implements IRepository<State> {
 
     @Autowired
     private JdbcTemplate template;
-    @Autowired
-    private StateRowMapper stateRowMapper;
 
     @Override
     public State add(State item) {
-        String query = IQueriesRepository.INSERT_STATE;
-        int out = template.update(query, item.getCountryId(), item.getName());
+        String query = QueriesRepository.INSERT_STATE;
+        int out = template.update(query,
+                item.getCountryId(),
+                item.getName()
+        );
 
         if (out == 0) {
             LOGGER.warn("Could not insert State with name = " + item.getName()
@@ -42,8 +42,12 @@ public class StateRepositoryImpl implements IRepository<State> {
 
     @Override
     public State update(State item) {
-        String query = IQueriesRepository.UPDATE_STATE;
-        int out = template.update(query, item.getCountryId(), item.getName(), item.getId());
+        String query = QueriesRepository.UPDATE_STATE;
+        int out = template.update(query,
+                item.getCountryId(),
+                item.getName(),
+                item.getId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Could not update State with name = " + item.getName()
@@ -55,8 +59,10 @@ public class StateRepositoryImpl implements IRepository<State> {
 
     @Override
     public State remove(State item) {
-        String query = IQueriesRepository.DELETE_STATE;
-        int out = template.update(query, item.getId());
+        String query = QueriesRepository.DELETE_STATE;
+        int out = template.update(query,
+                item.getId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Could not delete State with name = " + item.getName()
@@ -68,13 +74,25 @@ public class StateRepositoryImpl implements IRepository<State> {
 
     @Override
     public State getById(long id) {
-        String query = IQueriesRepository.GET_STATE_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, stateRowMapper);
+        String query = QueriesRepository.GET_STATE_BY_ID;
+        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
+            State state = new State();
+            state.setId(rs.getInt("id"));
+            state.setCountryId(rs.getInt("country_id"));
+            state.setName(rs.getString("name"));
+            return state;
+        });
     }
 
     @Override
     public List<State> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), new StateRowMapper());
+        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
+            State state = new State();
+            state.setId(rs.getInt("id"));
+            state.setCountryId(rs.getInt("country_id"));
+            state.setName(rs.getString("name"));
+            return state;
+        });
     }
 }

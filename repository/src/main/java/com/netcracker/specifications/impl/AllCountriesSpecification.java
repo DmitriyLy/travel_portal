@@ -1,15 +1,15 @@
 package com.netcracker.specifications.impl;
 
-import com.netcracker.queries.IQueriesSpecification;
+import com.netcracker.queries.QueriesSpecification;
 import com.netcracker.specifications.SqlSpecification;
 
 /**
- * Created by Yuksi on 27.11.2016.
+ * @author Yuksi
  */
 public class AllCountriesSpecification implements SqlSpecification {
 
     @Override
     public String toSqlQuery() {
-        return IQueriesSpecification.ALL_COUNTRIES;
+        return QueriesSpecification.ALL_COUNTRIES;
     }
 }

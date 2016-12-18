@@ -1,10 +1,10 @@
 package com.netcracker.specifications.impl;
 
-import com.netcracker.queries.IQueriesSpecification;
+import com.netcracker.queries.QueriesSpecification;
 import com.netcracker.specifications.SqlSpecification;
 
 /**
- * Created by dima_2 on 11.12.2016.
+ * @author Dmitriy Lysai
  */
 public class UserBookmarksSpecification implements SqlSpecification {
 
@@ -16,6 +16,6 @@ public class UserBookmarksSpecification implements SqlSpecification {
 
     @Override
     public String toSqlQuery() {
-        return String.format(IQueriesSpecification.USER_BOOKMARKS, userId);
+        return String.format(QueriesSpecification.USER_BOOKMARKS, userId);
     }
 }

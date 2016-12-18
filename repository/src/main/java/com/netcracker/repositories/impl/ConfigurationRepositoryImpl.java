@@ -1,9 +1,8 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Configuration;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.ConfigurationRowMapper;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by dima_2 on 30.11.2016.
+ * @author Dmitriy Lysai
  */
 @Repository
 public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
@@ -24,15 +23,16 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     @Autowired
     private JdbcTemplate template;
-    @Autowired
-    private ConfigurationRowMapper configurationRowMapper;
 
     @Override
     public Configuration add(Configuration item) {
-        String query = IQueriesRepository.INSERT_CONFIGURATION;
-        int out = template.update(query, item.getConfigKey(), item.getConfigValue());
+        String query = QueriesRepository.INSERT_CONFIGURATION;
+        int out = template.update(query,
+                item.getConfigKey(),
+                item.getConfigValue()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Could not insert Configuration with configKey = " + item.getConfigKey() + " and configValue = " + item.getConfigValue());
         }
 
@@ -41,10 +41,13 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     @Override
     public Configuration update(Configuration item) {
-        String query = IQueriesRepository.UPDATE_CONFIGURATION;
-        int out = template.update(query, item.getConfigValue(), item.getConfigKey());
+        String query = QueriesRepository.UPDATE_CONFIGURATION;
+        int out = template.update(query,
+                item.getConfigValue(),
+                item.getConfigKey()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Could not update Configuration with configValue = " + item.getConfigValue() + " where configKey = " + item.getConfigKey());
         }
 
@@ -53,10 +56,12 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     @Override
     public Configuration remove(Configuration item) {
-        String query = IQueriesRepository.DELETE_CONFIGURATION;
-        int out = template.update(query, item.getConfigKey());
+        String query = QueriesRepository.DELETE_CONFIGURATION;
+        int out = template.update(query,
+                item.getConfigKey()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Could not remove Configuration with configKey = " + item.getConfigKey());
         }
 
@@ -65,13 +70,23 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     @Override
     public Configuration getById(long id) {
-        String query = IQueriesRepository.GET_CONFIGURATION_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, configurationRowMapper);
+        String query = QueriesRepository.GET_CONFIGURATION_BY_ID;
+        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
+            Configuration configuration = new Configuration();
+            configuration.setConfigKey(rs.getString("configKey"));
+            configuration.setConfigValue(rs.getString("configValue"));
+            return configuration;
+        });
     }
 
     @Override
     public List<Configuration> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), configurationRowMapper);
+        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
+            Configuration configuration = new Configuration();
+            configuration.setConfigKey(rs.getString("configKey"));
+            configuration.setConfigValue(rs.getString("configValue"));
+            return configuration;
+        });
     }
 }

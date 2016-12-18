@@ -1,10 +1,10 @@
 package com.netcracker.specifications.impl;
 
-import com.netcracker.queries.IQueriesSpecification;
+import com.netcracker.queries.QueriesSpecification;
 import com.netcracker.specifications.SqlSpecification;
 
 /**
- * Created by dima_2 on 11.12.2016.
+ * @author Dmitriy Lysai
  */
 public class LabelsOnAreaSpecification implements SqlSpecification {
 
@@ -22,7 +22,7 @@ public class LabelsOnAreaSpecification implements SqlSpecification {
 
     @Override
     public String toSqlQuery() {
-        return String.format(IQueriesSpecification.LABELS_ON_AREA, minLatitude, maxLatitude,
+        return String.format(QueriesSpecification.LABELS_ON_AREA, minLatitude, maxLatitude,
                 minLongitude, maxLongitude);
     }
 }

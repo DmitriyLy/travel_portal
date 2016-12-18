@@ -1,7 +1,9 @@
 package com.netcracker.entities;
 
 /**
- * Created by dima_2 on 30.11.2016.
+ * Entity represent's MAP_PROVIDERS table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.MapProviderRepositoryImpl
  */
 public class MapProvider {
     private int id;
@@ -9,13 +11,6 @@ public class MapProvider {
     private String coordSysName;
 
     public MapProvider() {
-
-    }
-
-    public MapProvider(int id, String name, String coordSysName) {
-        this.id = id;
-        this.name = name;
-        this.coordSysName = coordSysName;
     }
 
     public int getId() {

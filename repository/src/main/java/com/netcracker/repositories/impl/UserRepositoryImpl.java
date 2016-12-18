@@ -1,9 +1,8 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.User;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.UserRowMapper;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -14,6 +13,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author Egor Oveian
+ */
 @Repository
 public class UserRepositoryImpl implements IRepository<User> {
 
@@ -21,17 +23,19 @@ public class UserRepositoryImpl implements IRepository<User> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    @Autowired
-    private UserRowMapper userRowMapper;
 
     @Override
     public User add(User item) {
-        String query = IQueriesRepository.INSERT_USER;
-        int out = jdbcTemplate.update(query, new Object[]{
-                item.getFirstName(), item.getLastName(), item.getSocNetUserId(),
-                item.getSocialNetworkId(), item.getStatus()});
+        String query = QueriesRepository.INSERT_USER;
+        int out = jdbcTemplate.update(query,
+                item.getFirstName(),
+                item.getLastName(),
+                item.getSocNetUserId(),
+                item.getSocialNetworkId(),
+                item.getStatus()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Cannot insert " + item.toString());
         }
 
@@ -40,10 +44,15 @@ public class UserRepositoryImpl implements IRepository<User> {
 
     @Override
     public User update(User item) {
-        String query = IQueriesRepository.UPDATE_USER;
-        int out = jdbcTemplate.update(query, new Object[]{
-                item.getFirstName(), item.getLastName(), item.getSocNetUserId(),
-                item.getSocialNetworkId(), item.getStatus(), item.getId()});
+        String query = QueriesRepository.UPDATE_USER;
+        int out = jdbcTemplate.update(query,
+                item.getFirstName(),
+                item.getLastName(),
+                item.getSocNetUserId(),
+                item.getSocialNetworkId(),
+                item.getStatus(),
+                item.getId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Cannot delete " + item.toString());
@@ -54,8 +63,10 @@ public class UserRepositoryImpl implements IRepository<User> {
 
     @Override
     public User remove(User item) {
-        String query = IQueriesRepository.DELETE_USER;
-        int out = jdbcTemplate.update(query, new Object[]{item.getId()});
+        String query = QueriesRepository.DELETE_USER;
+        int out = jdbcTemplate.update(query,
+                item.getId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Cannot delete " + item.toString());
@@ -66,13 +77,31 @@ public class UserRepositoryImpl implements IRepository<User> {
 
     @Override
     public User getById(long id) {
-        String query = IQueriesRepository.GET_USER_BY_ID;
-        return jdbcTemplate.queryForObject(query,new Object[] {id}, userRowMapper);
+        String query = QueriesRepository.GET_USER_BY_ID;
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
+            User user = new User();
+            user.setId(rs.getLong("id"));
+            user.setFirstName(rs.getString("first_name"));
+            user.setLastName(rs.getString("last_name"));
+            user.setSocNetUserId(rs.getString("soc_net_user_id"));
+            user.setSocialNetworkId(rs.getLong("soc_net_id"));
+            user.setStatus(rs.getInt("status"));
+            return user;
+        });
     }
 
     @Override
     public List<User> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), userRowMapper);
+        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
+            User user = new User();
+            user.setId(rs.getLong("id"));
+            user.setFirstName(rs.getString("first_name"));
+            user.setLastName(rs.getString("last_name"));
+            user.setSocNetUserId(rs.getString("soc_net_user_id"));
+            user.setSocialNetworkId(rs.getLong("soc_net_id"));
+            user.setStatus(rs.getInt("status"));
+            return user;
+        });
     }
 }

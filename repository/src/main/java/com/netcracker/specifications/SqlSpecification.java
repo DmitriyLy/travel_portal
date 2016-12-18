@@ -1,9 +1,9 @@
 package com.netcracker.specifications;
 
 /**
- * Created by Yuksi on 25.11.2016.
+ * Interface generates desirable String query.
  *
- * interface generates desirable String query
+ * @author Yuksi
  */
 public interface SqlSpecification extends Specification {
     String toSqlQuery();

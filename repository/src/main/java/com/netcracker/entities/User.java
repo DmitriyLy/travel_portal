@@ -1,5 +1,10 @@
 package com.netcracker.entities;
 
+/**
+ * Entity represent's USERS table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.UserRepositoryImpl
+ */
 public class User {
 
     private long id;
@@ -10,15 +15,6 @@ public class User {
     private int status;
 
     public User() {
-    }
-
-    public User(long id, String firstName, String lastName, String socNetUserId, long socialNetworkId, int status) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.socNetUserId = socNetUserId;
-        this.socialNetworkId = socialNetworkId;
-        this.status = status;
     }
 
     public long getId() {

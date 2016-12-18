@@ -1,10 +1,10 @@
 package com.netcracker.specifications.impl;
 
-import com.netcracker.queries.IQueriesSpecification;
+import com.netcracker.queries.QueriesSpecification;
 import com.netcracker.specifications.SqlSpecification;
 
 /**
- * Created by logariett on 07.12.16.
+ * @author Logariett
  */
 public class AttachmentsInLabelSpecification implements SqlSpecification {
 
@@ -17,7 +17,7 @@ public class AttachmentsInLabelSpecification implements SqlSpecification {
     @Override
     public String toSqlQuery() {
         return String.format(
-                IQueriesSpecification.ATTACHMENTS_BY_LABEL_ID,
+                QueriesSpecification.ATTACHMENTS_BY_LABEL_ID,
                 labelId);
     }
 }

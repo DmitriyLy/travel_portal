@@ -1,10 +1,10 @@
 package com.netcracker.specifications.impl;
 
-import com.netcracker.queries.IQueriesSpecification;
+import com.netcracker.queries.QueriesSpecification;
 import com.netcracker.specifications.SqlSpecification;
 
 /**
- * Created by logariett on 03.12.2016.
+ * @author Logariett
  */
 public class SocialNetworksByName implements SqlSpecification {
     private String socialNetworkName;
@@ -16,7 +16,7 @@ public class SocialNetworksByName implements SqlSpecification {
     @Override
     public String toSqlQuery() {
         return String.format(
-                IQueriesSpecification.SOCIAL_NETWORKS_BY_NAME,
+                QueriesSpecification.SOCIAL_NETWORKS_BY_NAME,
                 socialNetworkName);
     }
 }

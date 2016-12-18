@@ -3,17 +3,15 @@ package com.netcracker.entities;
 import java.util.Objects;
 
 /**
- * Created by dima_2 on 30.11.2016.
+ * Entity represent's CONFIGURATION table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.ConfigurationRepositoryImpl
  */
 public class Configuration {
     private String configKey;
     private String configValue;
 
-    public Configuration() { }
-
-    public Configuration(String configKey, String configValue) {
-        this.configKey = configKey;
-        this.configValue = configValue;
+    public Configuration() {
     }
 
     public String getConfigKey() {

@@ -1,9 +1,8 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Label;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.LabelRowMapper;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -14,6 +13,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author Egor Oveian
+ */
 @Repository
 public class LabelRepositoryImpl implements IRepository<Label> {
 
@@ -21,16 +23,20 @@ public class LabelRepositoryImpl implements IRepository<Label> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    @Autowired
-    private LabelRowMapper labelRowMapper;
 
     @Override
     public Label add(Label item) {
-        String query = IQueriesRepository.INSERT_LABEL;
-        int out = jdbcTemplate.update(query, new Object[]{
-                item.getUserId(), item.getLocationId(), item.getOwnerComment(),
-                item.getRating(), item.getCoordLat(), item.getCoordLong(),
-                item.getCreationDate(), item.getMapProviderId()});
+        String query = QueriesRepository.INSERT_LABEL;
+        int out = jdbcTemplate.update(query,
+                item.getUserId(),
+                item.getLocationId(),
+                item.getOwnerComment(),
+                item.getRating(),
+                item.getCoordLat(),
+                item.getCoordLong(),
+                item.getCreationDate(),
+                item.getMapProviderId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Cannot insert " + item.toString());
@@ -41,11 +47,18 @@ public class LabelRepositoryImpl implements IRepository<Label> {
 
     @Override
     public Label update(Label item) {
-        String query = IQueriesRepository.UPDATE_LABEL;
-        int out = jdbcTemplate.update(query, new Object[]{
-                item.getUserId(), item.getLocationId(), item.getOwnerComment(),
-                item.getRating(), item.getCoordLat(), item.getCoordLong(),
-                item.getCreationDate(), item.getMapProviderId(), item.getId()});
+        String query = QueriesRepository.UPDATE_LABEL;
+        int out = jdbcTemplate.update(query,
+                item.getUserId(),
+                item.getLocationId(),
+                item.getOwnerComment(),
+                item.getRating(),
+                item.getCoordLat(),
+                item.getCoordLong(),
+                item.getCreationDate(),
+                item.getMapProviderId(),
+                item.getId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Cannot delete " + item.toString());
@@ -56,8 +69,10 @@ public class LabelRepositoryImpl implements IRepository<Label> {
 
     @Override
     public Label remove(Label item) {
-        String query = IQueriesRepository.DELETE_LABEL;
-        int out = jdbcTemplate.update(query, new Object[]{item.getId()});
+        String query = QueriesRepository.DELETE_LABEL;
+        int out = jdbcTemplate.update(query,
+                item.getId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Cannot delete " + item.toString());
@@ -68,13 +83,37 @@ public class LabelRepositoryImpl implements IRepository<Label> {
 
     @Override
     public Label getById(long id) {
-        String query = IQueriesRepository.GET_LABEL_BY_ID;
-        return jdbcTemplate.queryForObject(query, new Object[]{id}, labelRowMapper);
+        String query = QueriesRepository.GET_LABEL_BY_ID;
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
+            Label label = new Label();
+            label.setId(rs.getLong("id"));
+            label.setUserId(rs.getLong("user_id"));
+            label.setLocationId(rs.getLong("location_id"));
+            label.setOwnerComment(rs.getString("owner_comment"));
+            label.setRating(rs.getInt("rating"));
+            label.setCoordLat(rs.getDouble("coordinate_lat"));
+            label.setCoordLong(rs.getDouble("coordinate_long"));
+            label.setCreationDate(rs.getDate("creation_date"));
+            label.setMapProviderId(rs.getLong("map_provider_id"));
+            return label;
+        });
     }
 
     @Override
     public List<Label> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), labelRowMapper);
+        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
+            Label label = new Label();
+            label.setId(rs.getLong("id"));
+            label.setUserId(rs.getLong("user_id"));
+            label.setLocationId(rs.getLong("location_id"));
+            label.setOwnerComment(rs.getString("owner_comment"));
+            label.setRating(rs.getInt("rating"));
+            label.setCoordLat(rs.getDouble("coordinate_lat"));
+            label.setCoordLong(rs.getDouble("coordinate_long"));
+            label.setCreationDate(rs.getDate("creation_date"));
+            label.setMapProviderId(rs.getLong("map_provider_id"));
+            return label;
+        });
     }
 }

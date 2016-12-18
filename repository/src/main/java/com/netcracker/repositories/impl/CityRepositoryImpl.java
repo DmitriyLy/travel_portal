@@ -1,9 +1,8 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.City;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
-import com.netcracker.repositories.rowmappers.RowMapperGenerator;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Created by dima_2 on 30.11.2016.
+ * @author Dmitriy Lysai
  */
 @Repository
 public class CityRepositoryImpl implements IRepository<City> {
@@ -24,14 +23,15 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     @Autowired
     private JdbcTemplate template;
-    @Autowired
-    private RowMapperGenerator rowMapperGenerator;
 
     public City add(City item) {
-        String query = IQueriesRepository.INSERT_CITY;
-        int out = template.update(query, new Object[]{item.getStateId(), item.getName()});
+        String query = QueriesRepository.INSERT_CITY;
+        int out = template.update(query,
+                item.getStateId(),
+                item.getName()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Cannot insert " + item.toString());
         }
 
@@ -40,10 +40,14 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     @Override
     public City update(City item) {
-        String query = IQueriesRepository.UPDATE_CITY;
-        int out = template.update(query, new Object[]{item.getStateId(), item.getName(), item.getId()});
+        String query = QueriesRepository.UPDATE_CITY;
+        int out = template.update(query,
+                item.getStateId(),
+                item.getName(),
+                item.getId()
+        );
 
-        if(out == 0) {
+        if (out == 0) {
             LOGGER.warn("Cannot update " + item.toString());
         }
 
@@ -52,8 +56,10 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     @Override
     public City remove(City item) {
-        String query = IQueriesRepository.DELETE_CITY;
-        int out = template.update(query, new Object[]{item.getId()});
+        String query = QueriesRepository.DELETE_CITY;
+        int out = template.update(query,
+                item.getId()
+        );
 
         if (out == 0) {
             LOGGER.warn("Cannot delete " + item.toString());
@@ -64,14 +70,26 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     @Override
     public City getById(long id) {
-        String query = IQueriesRepository.GET_CITY_BY_ID;
-        return template.queryForObject(query,new Object[] {id}, rowMapperGenerator.getCityRowMapper());
+        String query = QueriesRepository.GET_CITY_BY_ID;
+        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
+            City city = new City();
+            city.setId(rs.getInt("id"));
+            city.setStateId(rs.getInt("state_id"));
+            city.setName(rs.getString("name"));
+            return city;
+        });
     }
 
     @Override
     public List<City> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), rowMapperGenerator.getCityRowMapper());
+        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
+            City city = new City();
+            city.setId(rs.getInt("id"));
+            city.setStateId(rs.getInt("state_id"));
+            city.setName(rs.getString("name"));
+            return city;
+        });
     }
 
 }

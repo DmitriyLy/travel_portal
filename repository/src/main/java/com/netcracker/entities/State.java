@@ -1,7 +1,9 @@
 package com.netcracker.entities;
 
 /**
- * Created by logariett on 28.11.2016.
+ * Entity represent's STATES table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.StateRepositoryImpl
  */
 public class State {
     private int id;
@@ -9,12 +11,6 @@ public class State {
     private String name;
 
     public State() {
-    }
-
-    public State(int id, int countryId, String name) {
-        this.id = id;
-        this.countryId = countryId;
-        this.name = name;
     }
 
     public int getId() {

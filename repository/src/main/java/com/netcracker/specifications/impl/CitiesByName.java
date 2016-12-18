@@ -1,10 +1,10 @@
 package com.netcracker.specifications.impl;
 
-import com.netcracker.queries.IQueriesSpecification;
+import com.netcracker.queries.QueriesSpecification;
 import com.netcracker.specifications.SqlSpecification;
 
 /**
- * Created by dima_2 on 02.12.2016.
+ * @author Dmitriy Lysai
  */
 public class CitiesByName implements SqlSpecification {
 
@@ -16,6 +16,6 @@ public class CitiesByName implements SqlSpecification {
 
     @Override
     public String toSqlQuery() {
-        return String.format(IQueriesSpecification.CITIES_BY_NAME, cityName);
+        return String.format(QueriesSpecification.CITIES_BY_NAME, cityName);
     }
 }

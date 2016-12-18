@@ -1,15 +1,15 @@
 package com.netcracker.entities;
 
-
+/**
+ * Entity represent's TAGS table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.TagRepositoryImpl
+ */
 public class Tag {
     private long id;
     private String name;
 
     public Tag() {}
-    public Tag(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 
     public long getId() {
         return id;
