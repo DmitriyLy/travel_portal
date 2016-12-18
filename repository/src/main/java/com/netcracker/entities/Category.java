@@ -1,18 +1,15 @@
 package com.netcracker.entities;
 
 /**
- * Created by dima_2 on 30.11.2016.
+ * Entity represent's CATEGORIES table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.CategoryRepositoryImpl
  */
 public class Category {
     private long id;
     private String name;
 
     public Category() {
-    }
-
-    public Category(long id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public long getId() {

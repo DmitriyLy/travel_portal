@@ -1,8 +1,9 @@
 package com.netcracker.entities;
 
-
 /**
- * Created by dima_2 on 30.11.2016.
+ * Entity represent's ATTACHMENTS table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.AttachmentRepositoryImpl
  */
 public class Attachment {
     private long id;
@@ -13,15 +14,6 @@ public class Attachment {
     private String extension;
 
     public Attachment() {
-    }
-
-    public Attachment(long id, long userId, long labelId, String filePath, String name, String extension) {
-        this.id = id;
-        this.userId = userId;
-        this.labelId = labelId;
-        this.filePath = filePath;
-        this.name = name;
-        this.extension = extension;
     }
 
     public long getId() {

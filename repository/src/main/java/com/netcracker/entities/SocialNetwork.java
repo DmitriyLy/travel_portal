@@ -1,18 +1,15 @@
 package com.netcracker.entities;
 
 /**
- * Created by dima_2 on 30.11.2016.
+ * Entity represent's SOCIAL_NETWORKS table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.SocialNetworkRepositoryImpl
  */
 public class SocialNetwork {
     private int id;
     private String name;
 
     public SocialNetwork() {
-    }
-
-    public SocialNetwork(int id, String name) {
-        this.id = id;
-        this.name = name;
     }
 
     public int getId() {

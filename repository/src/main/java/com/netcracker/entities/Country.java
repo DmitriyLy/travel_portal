@@ -1,16 +1,15 @@
 package com.netcracker.entities;
 
 /**
- * Created by Yuksi on 25.11.2016.
+ * Entity represent's COUNTRIES table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.CountryRepositoryImpl
  */
 public class Country {
     private int id;
     private String name;
 
-    public Country(){}
-    public  Country(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public Country() {
     }
 
     public int getId() {

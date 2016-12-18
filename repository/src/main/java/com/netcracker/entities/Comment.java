@@ -1,8 +1,12 @@
 package com.netcracker.entities;
 
-
 import java.util.Date;
 
+/**
+ * Entity represent's COMMENTS table from TRAVEL_PORTAL database.
+ *
+ * @see com.netcracker.repositories.impl.CommentRepositoryImpl
+ */
 public class Comment {
     private long id;
     private long userId;
@@ -10,13 +14,7 @@ public class Comment {
     private Date commentDate;
     private String commentText;
 
-    public Comment() {}
-    public Comment(long id, long userId, long labelId, Date commentDate, String commentText) {
-        this.id = id;
-        this.userId = userId;
-        this.labelId = labelId;
-        this.commentDate = commentDate;
-        this.commentText = commentText;
+    public Comment() {
     }
 
     public long getId() {
