@@ -19,15 +19,19 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by dima_2 on 11.12.2016.
  */
 @Service
+//TODO - causes test fall
+//@Transactional
 public class LabelService implements IService<Label> {
 
     private final static Logger LOGGER = LogManager.getLogger(LabelService.class.getName());
@@ -40,6 +44,8 @@ public class LabelService implements IService<Label> {
     private TagRepositoryImpl tagRepository;
     @Autowired
     private FullLabelInfoRepositoryImpl fullLabelInfoRepository;
+    @Autowired
+    private ObjectMapper jacksonObjectMapper;
 
     @Override
     public void save(Label item) {
@@ -105,6 +111,33 @@ public class LabelService implements IService<Label> {
         }
 
         fullLabelInfo.setTags(list);
+
+        return fullLabelInfo;
+    }
+
+    public String getFullLabelInfoJson(long labelId) {
+        String resultJson = "";
+
+        FullLabelInfo fullLabelInfo = getFullLabelInfo(labelId);
+
+        try {
+            resultJson = jacksonObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(fullLabelInfo);
+        } catch (JsonProcessingException e) {
+            LOGGER.warn("Cannot create json for fullLabelInfo " + fullLabelInfo.toString() );
+        }
+
+        return resultJson;
+    }
+
+    public FullLabelInfo getFullLabelInfoFromJson(String jsonText) {
+
+        FullLabelInfo fullLabelInfo = null;
+
+        try {
+            fullLabelInfo = jacksonObjectMapper.readValue(jsonText, FullLabelInfo.class);
+        } catch (IOException e) {
+            LOGGER.warn("Cannot deserialize FullLabelInfo from JSON.");
+        }
 
         return fullLabelInfo;
     }

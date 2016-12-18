@@ -38,7 +38,8 @@ public class LabelServiceTest {
 
     @Test
     public void getJsonForFullLabelInfoWithIdOne() throws Exception {
-        FullLabelInfo jsonString = labelService.getFullLabelInfo(1);
+        String jsonString = labelService.getFullLabelInfoJson(1);
+        assertTrue(!jsonString.isEmpty());
         System.out.println(jsonString);
     }
 
