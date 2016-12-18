@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Comment;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.CommentRowMapper;
 import com.netcracker.specifications.Specification;
@@ -26,7 +26,7 @@ public class CommentRepositoryImpl implements IRepository<Comment> {
 
     @Override
     public Comment add(Comment item) {
-        String query = IQueriesRepository.INSERT_COMMENT;
+        String query = QueriesRepository.INSERT_COMMENT;
         int out = template.update(query, new Object[]{
                     item.getUserId(), item.getLabelId(), item.getCommentDate(), item.getCommentText()});
 
@@ -39,7 +39,7 @@ public class CommentRepositoryImpl implements IRepository<Comment> {
 
     @Override
     public Comment update(Comment item) {
-        String query = IQueriesRepository.UPDATE_COMMENT;
+        String query = QueriesRepository.UPDATE_COMMENT;
         int out = template.update(query, new Object[]{
                     item.getUserId(), item.getLabelId(), item.getCommentDate(), item.getCommentText(),
                     item.getId()});
@@ -53,7 +53,7 @@ public class CommentRepositoryImpl implements IRepository<Comment> {
 
     @Override
     public Comment remove(Comment item) {
-        String query = IQueriesRepository.DELETE_COMMENT;
+        String query = QueriesRepository.DELETE_COMMENT;
         int out = template.update(query, item.getId());
 
         if(out == 0) {
@@ -65,7 +65,7 @@ public class CommentRepositoryImpl implements IRepository<Comment> {
 
     @Override
     public Comment getById(long id) {
-        String query = IQueriesRepository.GET_COMMENT_BY_ID;
+        String query = QueriesRepository.GET_COMMENT_BY_ID;
         return template.queryForObject(query,new Object[] {id}, commentRowMapper);
     }
 

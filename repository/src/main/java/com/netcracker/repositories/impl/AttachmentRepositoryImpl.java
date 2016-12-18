@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Attachment;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.AttachmentRowMapper;
 import com.netcracker.specifications.Specification;
@@ -29,7 +29,7 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
 
     @Override
     public Attachment add(Attachment item) {
-        String query = IQueriesRepository.INSERT_ATTACHMENT;
+        String query = QueriesRepository.INSERT_ATTACHMENT;
         int out = template.update(query,
                 item.getUserId(), item.getLabelId(),
                 item.getFilePath(), item.getName(), item.getExtension());
@@ -43,7 +43,7 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
 
     @Override
     public Attachment update(Attachment item) {
-        String query = IQueriesRepository.UPDATE_ATTACHMENT;
+        String query = QueriesRepository.UPDATE_ATTACHMENT;
         int out = template.update(query,
                 item.getUserId(), item.getLabelId(),
                 item.getFilePath(), item.getName(), item.getExtension(),
@@ -58,7 +58,7 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
 
     @Override
     public Attachment remove(Attachment item) {
-        String query = IQueriesRepository.DELETE_ATTACHMENT;
+        String query = QueriesRepository.DELETE_ATTACHMENT;
         int out = template.update(query, item.getId());
 
         if (out == 0) {
@@ -70,7 +70,7 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
 
     @Override
     public Attachment getById(long id) {
-        String query = IQueriesRepository.GET_ATTACHMENT_BY_ID;
+        String query = QueriesRepository.GET_ATTACHMENT_BY_ID;
         return template.queryForObject(query, new Object[]{id}, attachmentRowMapper);
     }
 

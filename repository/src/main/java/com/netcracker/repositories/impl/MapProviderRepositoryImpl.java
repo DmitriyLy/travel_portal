@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.MapProvider;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.RowMapperGenerator;
 import com.netcracker.specifications.Specification;
@@ -29,7 +29,7 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
 
     @Override
     public MapProvider add(MapProvider item) {
-        String query = IQueriesRepository.INSERT_MAP_PROVIDER;
+        String query = QueriesRepository.INSERT_MAP_PROVIDER;
         int out = template.update(query, new Object[]{item.getName(), item.getCoordSysName()});
 
         if(out == 0) {
@@ -41,7 +41,7 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
 
     @Override
     public MapProvider update(MapProvider item) {
-        String query = IQueriesRepository.UPDATE_MAP_PROVIDER;
+        String query = QueriesRepository.UPDATE_MAP_PROVIDER;
         int out = template.update(query, new Object[]{item.getName(), item.getCoordSysName(), item.getId()});
 
         if(out == 0) {
@@ -53,7 +53,7 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
 
     @Override
     public MapProvider remove(MapProvider item) {
-        String query = IQueriesRepository.DELETE_MAP_PROVIDER;
+        String query = QueriesRepository.DELETE_MAP_PROVIDER;
         int out = template.update(query, new Object[]{item.getId()});
 
         if (out == 0) {
@@ -65,7 +65,7 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
 
     @Override
     public MapProvider getById(long id) {
-        String query = IQueriesRepository.GET_MAP_PROVIDER_BY_ID;
+        String query = QueriesRepository.GET_MAP_PROVIDER_BY_ID;
         return template.queryForObject(query,new Object[] {id}, rowMapperGenerator.getMapProviderRowMapper());
     }
 

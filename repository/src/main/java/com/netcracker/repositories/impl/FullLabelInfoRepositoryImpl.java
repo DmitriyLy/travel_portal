@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.FullLabelInfo;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.RowMapperGenerator;
 import com.netcracker.specifications.Specification;
@@ -44,7 +44,7 @@ public class FullLabelInfoRepositoryImpl implements IRepository<FullLabelInfo> {
 
     @Override
     public FullLabelInfo getById(long id) {
-        String query = IQueriesRepository.GET_FULL_LABEL_INFO_BY_ID;
+        String query = QueriesRepository.GET_FULL_LABEL_INFO_BY_ID;
         return template.queryForObject(query,new Object[] {id}, rowMapperGenerator.getFullLabelInfoRowMapper());
     }
 

@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.City;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.RowMapperGenerator;
 import com.netcracker.specifications.Specification;
@@ -28,7 +28,7 @@ public class CityRepositoryImpl implements IRepository<City> {
     private RowMapperGenerator rowMapperGenerator;
 
     public City add(City item) {
-        String query = IQueriesRepository.INSERT_CITY;
+        String query = QueriesRepository.INSERT_CITY;
         int out = template.update(query, new Object[]{item.getStateId(), item.getName()});
 
         if(out == 0) {
@@ -40,7 +40,7 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     @Override
     public City update(City item) {
-        String query = IQueriesRepository.UPDATE_CITY;
+        String query = QueriesRepository.UPDATE_CITY;
         int out = template.update(query, new Object[]{item.getStateId(), item.getName(), item.getId()});
 
         if(out == 0) {
@@ -52,7 +52,7 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     @Override
     public City remove(City item) {
-        String query = IQueriesRepository.DELETE_CITY;
+        String query = QueriesRepository.DELETE_CITY;
         int out = template.update(query, new Object[]{item.getId()});
 
         if (out == 0) {
@@ -64,7 +64,7 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     @Override
     public City getById(long id) {
-        String query = IQueriesRepository.GET_CITY_BY_ID;
+        String query = QueriesRepository.GET_CITY_BY_ID;
         return template.queryForObject(query,new Object[] {id}, rowMapperGenerator.getCityRowMapper());
     }
 

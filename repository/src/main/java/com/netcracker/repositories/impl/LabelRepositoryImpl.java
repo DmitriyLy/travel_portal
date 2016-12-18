@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Label;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.LabelRowMapper;
 import com.netcracker.specifications.Specification;
@@ -26,7 +26,7 @@ public class LabelRepositoryImpl implements IRepository<Label> {
 
     @Override
     public Label add(Label item) {
-        String query = IQueriesRepository.INSERT_LABEL;
+        String query = QueriesRepository.INSERT_LABEL;
         int out = jdbcTemplate.update(query, new Object[]{
                 item.getUserId(), item.getLocationId(), item.getOwnerComment(),
                 item.getRating(), item.getCoordLat(), item.getCoordLong(),
@@ -41,7 +41,7 @@ public class LabelRepositoryImpl implements IRepository<Label> {
 
     @Override
     public Label update(Label item) {
-        String query = IQueriesRepository.UPDATE_LABEL;
+        String query = QueriesRepository.UPDATE_LABEL;
         int out = jdbcTemplate.update(query, new Object[]{
                 item.getUserId(), item.getLocationId(), item.getOwnerComment(),
                 item.getRating(), item.getCoordLat(), item.getCoordLong(),
@@ -56,7 +56,7 @@ public class LabelRepositoryImpl implements IRepository<Label> {
 
     @Override
     public Label remove(Label item) {
-        String query = IQueriesRepository.DELETE_LABEL;
+        String query = QueriesRepository.DELETE_LABEL;
         int out = jdbcTemplate.update(query, new Object[]{item.getId()});
 
         if (out == 0) {
@@ -68,7 +68,7 @@ public class LabelRepositoryImpl implements IRepository<Label> {
 
     @Override
     public Label getById(long id) {
-        String query = IQueriesRepository.GET_LABEL_BY_ID;
+        String query = QueriesRepository.GET_LABEL_BY_ID;
         return jdbcTemplate.queryForObject(query, new Object[]{id}, labelRowMapper);
     }
 

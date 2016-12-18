@@ -1,12 +1,12 @@
 package com.netcracker.specifications.impl;
 
-import com.netcracker.queries.IQueriesSpecification;
+import com.netcracker.queries.QueriesSpecification;
 import com.netcracker.specifications.SqlSpecification;
 
 /**
- * Created by Yuksi on 27.11.2016.
+ * Class for generating String query for searching states by country_id.
  *
- * class for generating String query for searching states by country_id
+ * @author Yuksi
  */
 public class StatesInCountrySpecification implements SqlSpecification {
     private int countryId;
@@ -18,7 +18,7 @@ public class StatesInCountrySpecification implements SqlSpecification {
     @Override
     public String toSqlQuery() {
         return String.format(
-                IQueriesSpecification.STATES_BY_COUNTRY_ID,
+                QueriesSpecification.STATES_BY_COUNTRY_ID,
                 countryId
         );
     }

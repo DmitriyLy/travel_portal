@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Location;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.LocationRowMapper;
 import com.netcracker.specifications.Specification;
@@ -26,7 +26,7 @@ public class LocationRepositoryImpl implements IRepository<Location> {
 
     @Override
     public Location add(Location item) {
-        String query = IQueriesRepository.INSERT_LOCATION;
+        String query = QueriesRepository.INSERT_LOCATION;
         int out = template.update(query, new Object[]{item.getCityId(), item.getStreet(), item.getBuilding()});
 
         if(out == 0) {
@@ -38,7 +38,7 @@ public class LocationRepositoryImpl implements IRepository<Location> {
 
     @Override
     public Location update(Location item) {
-        String query = IQueriesRepository.UPDATE_LOCATION;
+        String query = QueriesRepository.UPDATE_LOCATION;
         int out = template.update(query, new Object[]{item.getCityId(), item.getStreet(), item.getBuilding(),
                                                         item.getId()});
         if(out == 0) {
@@ -50,7 +50,7 @@ public class LocationRepositoryImpl implements IRepository<Location> {
 
     @Override
     public Location remove(Location item) {
-        String query = IQueriesRepository.DELETE_LOCATION;
+        String query = QueriesRepository.DELETE_LOCATION;
         int out = template.update(query, item.getId());
 
         if(out == 0) {
@@ -62,7 +62,7 @@ public class LocationRepositoryImpl implements IRepository<Location> {
 
     @Override
     public Location getById(long id) {
-        String query = IQueriesRepository.GET_LOCATION_BY_ID;
+        String query = QueriesRepository.GET_LOCATION_BY_ID;
         return template.queryForObject(query,new Object[] {id}, locationRowMapper);
     }
 

@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.State;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.StateRowMapper;
 import com.netcracker.specifications.Specification;
@@ -29,7 +29,7 @@ public class StateRepositoryImpl implements IRepository<State> {
 
     @Override
     public State add(State item) {
-        String query = IQueriesRepository.INSERT_STATE;
+        String query = QueriesRepository.INSERT_STATE;
         int out = template.update(query, item.getCountryId(), item.getName());
 
         if (out == 0) {
@@ -42,7 +42,7 @@ public class StateRepositoryImpl implements IRepository<State> {
 
     @Override
     public State update(State item) {
-        String query = IQueriesRepository.UPDATE_STATE;
+        String query = QueriesRepository.UPDATE_STATE;
         int out = template.update(query, item.getCountryId(), item.getName(), item.getId());
 
         if (out == 0) {
@@ -55,7 +55,7 @@ public class StateRepositoryImpl implements IRepository<State> {
 
     @Override
     public State remove(State item) {
-        String query = IQueriesRepository.DELETE_STATE;
+        String query = QueriesRepository.DELETE_STATE;
         int out = template.update(query, item.getId());
 
         if (out == 0) {
@@ -68,7 +68,7 @@ public class StateRepositoryImpl implements IRepository<State> {
 
     @Override
     public State getById(long id) {
-        String query = IQueriesRepository.GET_STATE_BY_ID;
+        String query = QueriesRepository.GET_STATE_BY_ID;
         return template.queryForObject(query,new Object[] {id}, stateRowMapper);
     }
 

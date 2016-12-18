@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.User;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.UserRowMapper;
 import com.netcracker.specifications.Specification;
@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements IRepository<User> {
 
     @Override
     public User add(User item) {
-        String query = IQueriesRepository.INSERT_USER;
+        String query = QueriesRepository.INSERT_USER;
         int out = jdbcTemplate.update(query, new Object[]{
                 item.getFirstName(), item.getLastName(), item.getSocNetUserId(),
                 item.getSocialNetworkId(), item.getStatus()});
@@ -40,7 +40,7 @@ public class UserRepositoryImpl implements IRepository<User> {
 
     @Override
     public User update(User item) {
-        String query = IQueriesRepository.UPDATE_USER;
+        String query = QueriesRepository.UPDATE_USER;
         int out = jdbcTemplate.update(query, new Object[]{
                 item.getFirstName(), item.getLastName(), item.getSocNetUserId(),
                 item.getSocialNetworkId(), item.getStatus(), item.getId()});
@@ -54,7 +54,7 @@ public class UserRepositoryImpl implements IRepository<User> {
 
     @Override
     public User remove(User item) {
-        String query = IQueriesRepository.DELETE_USER;
+        String query = QueriesRepository.DELETE_USER;
         int out = jdbcTemplate.update(query, new Object[]{item.getId()});
 
         if (out == 0) {
@@ -66,7 +66,7 @@ public class UserRepositoryImpl implements IRepository<User> {
 
     @Override
     public User getById(long id) {
-        String query = IQueriesRepository.GET_USER_BY_ID;
+        String query = QueriesRepository.GET_USER_BY_ID;
         return jdbcTemplate.queryForObject(query,new Object[] {id}, userRowMapper);
     }
 

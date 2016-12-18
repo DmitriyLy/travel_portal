@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Category;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.CategoryRowMapper;
 import com.netcracker.specifications.Specification;
@@ -30,7 +30,7 @@ public class CategoryRepositoryImpl implements IRepository<Category> {
 
     @Override
     public Category add(Category item) {
-        String query = IQueriesRepository.INSERT_CATEGORY;
+        String query = QueriesRepository.INSERT_CATEGORY;
         int out = jdbcTemplate.update(query, new Object[]{item.getName()});
 
         if (out == 0) {
@@ -42,7 +42,7 @@ public class CategoryRepositoryImpl implements IRepository<Category> {
 
     @Override
     public Category update(Category item) {
-        String query = IQueriesRepository.UPDATE_CATEGORY;
+        String query = QueriesRepository.UPDATE_CATEGORY;
         int out = jdbcTemplate.update(query, new Object[]{item.getId(), item.getName()});
 
         if (out == 0) {
@@ -54,7 +54,7 @@ public class CategoryRepositoryImpl implements IRepository<Category> {
 
     @Override
     public Category remove(Category item) {
-        String query = IQueriesRepository.DELETE_CATEGORY;
+        String query = QueriesRepository.DELETE_CATEGORY;
         int out = jdbcTemplate.update(query, new Object[]{item.getId()});
 
         if (out == 0) {
@@ -66,7 +66,7 @@ public class CategoryRepositoryImpl implements IRepository<Category> {
 
     @Override
     public Category getById(long id) {
-        String query = IQueriesRepository.GET_CATEGORY_BY_ID;
+        String query = QueriesRepository.GET_CATEGORY_BY_ID;
         return jdbcTemplate.queryForObject(query, new Object[]{id}, categoryRowMapper);
     }
 

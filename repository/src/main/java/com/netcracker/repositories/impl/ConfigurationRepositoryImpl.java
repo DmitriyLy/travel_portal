@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Configuration;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.ConfigurationRowMapper;
 import com.netcracker.specifications.Specification;
@@ -29,7 +29,7 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     @Override
     public Configuration add(Configuration item) {
-        String query = IQueriesRepository.INSERT_CONFIGURATION;
+        String query = QueriesRepository.INSERT_CONFIGURATION;
         int out = template.update(query, item.getConfigKey(), item.getConfigValue());
 
         if(out == 0) {
@@ -41,7 +41,7 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     @Override
     public Configuration update(Configuration item) {
-        String query = IQueriesRepository.UPDATE_CONFIGURATION;
+        String query = QueriesRepository.UPDATE_CONFIGURATION;
         int out = template.update(query, item.getConfigValue(), item.getConfigKey());
 
         if(out == 0) {
@@ -53,7 +53,7 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     @Override
     public Configuration remove(Configuration item) {
-        String query = IQueriesRepository.DELETE_CONFIGURATION;
+        String query = QueriesRepository.DELETE_CONFIGURATION;
         int out = template.update(query, item.getConfigKey());
 
         if(out == 0) {
@@ -65,7 +65,7 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     @Override
     public Configuration getById(long id) {
-        String query = IQueriesRepository.GET_CONFIGURATION_BY_ID;
+        String query = QueriesRepository.GET_CONFIGURATION_BY_ID;
         return template.queryForObject(query,new Object[] {id}, configurationRowMapper);
     }
 

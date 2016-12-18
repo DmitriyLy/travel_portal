@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Tag;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.TagRowMapper;
 import com.netcracker.specifications.Specification;
@@ -26,7 +26,7 @@ public class TagRepositoryImpl implements IRepository<Tag> {
 
     @Override
     public Tag add(Tag item) {
-        String query = IQueriesRepository.INSERT_TAG;
+        String query = QueriesRepository.INSERT_TAG;
         int out = template.update(query, new Object[]{item.getName()});
 
         if(out == 0) {
@@ -38,7 +38,7 @@ public class TagRepositoryImpl implements IRepository<Tag> {
 
     @Override
     public Tag update(Tag item) {
-        String query = IQueriesRepository.UPDATE_TAG;
+        String query = QueriesRepository.UPDATE_TAG;
         int out = template.update(query, new Object[]{item.getName(), item.getId()});
 
         if(out == 0) {
@@ -50,7 +50,7 @@ public class TagRepositoryImpl implements IRepository<Tag> {
 
     @Override
     public Tag remove(Tag item) {
-        String query = IQueriesRepository.DELETE_TAG;
+        String query = QueriesRepository.DELETE_TAG;
         int out = template.update(query, item.getId());
 
         if(out == 0) {
@@ -62,7 +62,7 @@ public class TagRepositoryImpl implements IRepository<Tag> {
 
     @Override
     public Tag getById(long id) {
-        String query = IQueriesRepository.GET_TAG_BY_ID;
+        String query = QueriesRepository.GET_TAG_BY_ID;
         return template.queryForObject(query,new Object[] {id}, tagRowMapper);
     }
 

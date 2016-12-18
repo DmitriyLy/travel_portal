@@ -1,7 +1,7 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.SocialNetwork;
-import com.netcracker.queries.IQueriesRepository;
+import com.netcracker.queries.QueriesRepository;
 import com.netcracker.repositories.IRepository;
 import com.netcracker.repositories.rowmappers.SocialNetworkRowMapper;
 import com.netcracker.specifications.Specification;
@@ -28,7 +28,7 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
 
     @Override
     public SocialNetwork add(SocialNetwork item) {
-        String query = IQueriesRepository.INSERT_SOCIAL_NETWORK;
+        String query = QueriesRepository.INSERT_SOCIAL_NETWORK;
         int out = template.update(query, item.getName());
 
         if (out == 0) {
@@ -40,7 +40,7 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
 
     @Override
     public SocialNetwork update(SocialNetwork item) {
-        String query = IQueriesRepository.UPDATE_SOCIAL_NETWORK;
+        String query = QueriesRepository.UPDATE_SOCIAL_NETWORK;
         int out = template.update(query, item.getName(), item.getId());
 
         if (out == 0) {
@@ -52,7 +52,7 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
 
     @Override
     public SocialNetwork remove(SocialNetwork item) {
-        String query = IQueriesRepository.DELETE_SOCIAL_NETWORK;
+        String query = QueriesRepository.DELETE_SOCIAL_NETWORK;
         int out = template.update(query, item.getId());
 
         if (out == 0) {
@@ -64,7 +64,7 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
 
     @Override
     public SocialNetwork getById(long id) {
-        String query = IQueriesRepository.GET_SOCIAL_NETWORK_BY_ID;
+        String query = QueriesRepository.GET_SOCIAL_NETWORK_BY_ID;
         return template.queryForObject(query,new Object[] {id}, socialNetworkRowMapper);
     }
 
