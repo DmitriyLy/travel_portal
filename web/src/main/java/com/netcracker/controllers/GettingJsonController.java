@@ -17,6 +17,15 @@ import javax.servlet.http.HttpServletRequest;
  * This controller is implemented to test Tomcat settings and to check JSON.
  * It is assumed to delete this controller in future.
  *
+ * To make Tomcat connect to Oracle DB under Windows, you need to change Tomcat JVM options.
+ * In <Tomcat Dir>\bin find catalina.bat - that file starts Tomcat.
+ * Open this file with Notepad (or other text editor) and find line:
+ *  set "JAVA_OPTS=%JAVA_OPTS% %JSSE_OPTS%"
+ * add to the end of the line these locale parameters: -Duser.language=en -Duser.region=US
+ *
+ * After all manipulations, the line should look like this:
+ *  set "JAVA_OPTS=%JAVA_OPTS% %JSSE_OPTS% -Duser.language=en -Duser.region=US"
+ *
  */
 @Controller
 public class GettingJsonController {
