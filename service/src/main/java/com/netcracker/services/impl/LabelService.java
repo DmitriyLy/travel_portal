@@ -1,9 +1,6 @@
 package com.netcracker.services.impl;
 
-import com.netcracker.entities.Category;
-import com.netcracker.entities.FullLabelInfo;
-import com.netcracker.entities.Label;
-import com.netcracker.entities.Tag;
+import com.netcracker.entities.*;
 import com.netcracker.repositories.impl.CategoryRepositoryImpl;
 import com.netcracker.repositories.impl.FullLabelInfoRepositoryImpl;
 import com.netcracker.repositories.impl.LabelRepositoryImpl;
@@ -90,27 +87,14 @@ public class LabelService implements IService<Label> {
     public FullLabelInfo getFullLabelInfo(long labelId) {
 
         FullLabelInfo fullLabelInfo = fullLabelInfoRepository.getById(labelId);
-        //TODO
-        //interfaces Entity, EntityWithName
 
-        List<String> list = new ArrayList<>();
         List<Category> categories = getLabelCategories(labelId);
 
-        for (Category item : categories) {
-            list.add(item.getName());
-        }
-
-        fullLabelInfo.setCategories(list);
-
-        list.clear();
+        fullLabelInfo.setCategories(EntityOperations.getEntityNameList(categories));
 
         List<Tag> tags = getLabelTags(labelId);
 
-        for (Tag item : tags) {
-            list.add(item.getName());
-        }
-
-        fullLabelInfo.setTags(list);
+        fullLabelInfo.setTags(EntityOperations.getEntityNameList(tags));
 
         return fullLabelInfo;
     }
@@ -123,7 +107,7 @@ public class LabelService implements IService<Label> {
         try {
             resultJson = jacksonObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(fullLabelInfo);
         } catch (JsonProcessingException e) {
-            LOGGER.warn("Cannot create json for fullLabelInfo " + fullLabelInfo.toString() );
+            LOGGER.warn("Cannot create json for fullLabelInfo " + fullLabelInfo.toString());
         }
 
         return resultJson;
