@@ -40,8 +40,10 @@ public class UserRepositoryImpl implements IRepository<User> {
     public User add(User item) {
         String query = QueriesRepository.INSERT_USER;
         //item.setId(getLastRowId() +1);
+        item.setId(getNewUserId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getFirstName(),
                 item.getLastName(),
                 item.getSocNetUserId(),
@@ -110,8 +112,8 @@ public class UserRepositoryImpl implements IRepository<User> {
     /**
      * @return long value - id of last row in USERS table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_USERS_ID;
+    private long getNewUserId(){
+        String query = QueriesRepository.GET_NEW_ID_USERS;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }
