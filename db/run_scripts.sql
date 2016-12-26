@@ -28,5 +28,6 @@ disconnect
 connect TRAVEL_PORTAL/TRAVEL_PORTAL
 @create_get_pk_trigger_procedure.sql
 @create_pk_triggers.sql
+@create_stored_functions.sql
 exit;
 /
