@@ -9,6 +9,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,9 +25,22 @@ public class UserRepositoryImpl implements IRepository<User> {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    private RowMapper<User> mapper = (rs, rowNum) -> {
+        User user = new User();
+        user.setId(rs.getLong("id"));
+        user.setFirstName(rs.getString("first_name"));
+        user.setLastName(rs.getString("last_name"));
+        user.setSocNetUserId(rs.getString("soc_net_user_id"));
+        user.setSocialNetworkId(rs.getLong("soc_net_id"));
+        user.setStatus(rs.getInt("status"));
+        return user;
+    };
+
     @Override
     public User add(User item) {
         String query = QueriesRepository.INSERT_USER;
+        //item.setId(getLastRowId() +1);
+
         int out = jdbcTemplate.update(query,
                 item.getFirstName(),
                 item.getLastName(),
@@ -78,30 +92,26 @@ public class UserRepositoryImpl implements IRepository<User> {
     @Override
     public User getById(long id) {
         String query = QueriesRepository.GET_USER_BY_ID;
-        return jdbcTemplate.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
-            User user = new User();
-            user.setId(rs.getLong("id"));
-            user.setFirstName(rs.getString("first_name"));
-            user.setLastName(rs.getString("last_name"));
-            user.setSocNetUserId(rs.getString("soc_net_user_id"));
-            user.setSocialNetworkId(rs.getLong("soc_net_id"));
-            user.setStatus(rs.getInt("status"));
-            return user;
-        });
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, mapper);
+    }
+
+    @Override
+    public long getColumnCount() {
+        String query = QueriesRepository.GET_COUNT_OF_USERS;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 
     @Override
     public List<User> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
-            User user = new User();
-            user.setId(rs.getLong("id"));
-            user.setFirstName(rs.getString("first_name"));
-            user.setLastName(rs.getString("last_name"));
-            user.setSocNetUserId(rs.getString("soc_net_user_id"));
-            user.setSocialNetworkId(rs.getLong("soc_net_id"));
-            user.setStatus(rs.getInt("status"));
-            return user;
-        });
+        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), mapper);
+    }
+
+    /**
+     * @return long value - id of last row in USERS table.
+     */
+    private long getLastRowId(){
+        String query = QueriesRepository.GET_LAST_USERS_ID;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

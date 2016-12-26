@@ -9,6 +9,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,12 +20,21 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     private final static Logger LOGGER = LogManager.getLogger(TagRepositoryImpl.class.getName());
 
     @Autowired
-    private JdbcTemplate template;
+    private JdbcTemplate jdbcTemplate;
+
+    private RowMapper<Tag> mapper = (rs, rowNum) -> {
+        Tag tag = new Tag();
+        tag.setId(rs.getLong("id"));
+        tag.setName(rs.getString("name"));
+        return tag;
+    };
 
     @Override
     public Tag add(Tag item) {
         String query = QueriesRepository.INSERT_TAG;
-        int out = template.update(query,
+        //item.setId(getLastRowId());
+
+        int out = jdbcTemplate.update(query,
                 item.getName()
         );
 
@@ -38,7 +48,7 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     @Override
     public Tag update(Tag item) {
         String query = QueriesRepository.UPDATE_TAG;
-        int out = template.update(query,
+        int out = jdbcTemplate.update(query,
                 item.getName(),
                 item.getId()
         );
@@ -53,7 +63,7 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     @Override
     public Tag remove(Tag item) {
         String query = QueriesRepository.DELETE_TAG;
-        int out = template.update(query,
+        int out = jdbcTemplate.update(query,
                 item.getId()
         );
 
@@ -67,22 +77,26 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     @Override
     public Tag getById(long id) {
         String query = QueriesRepository.GET_TAG_BY_ID;
-        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
-            Tag tag = new Tag();
-            tag.setId(rs.getLong("id"));
-            tag.setName(rs.getString("name"));
-            return tag;
-        });
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, mapper);
+    }
+
+    @Override
+    public long getColumnCount() {
+        String query = QueriesRepository.GET_COUNT_OF_TAGS;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 
     @Override
     public List<Tag> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
-            Tag tag = new Tag();
-            tag.setId(rs.getLong("id"));
-            tag.setName(rs.getString("name"));
-            return tag;
-        });
+        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), mapper);
+    }
+
+    /**
+     * @return long value - id of last row in TAGS table.
+     */
+    private long getLastRowId(){
+        String query = QueriesRepository.GET_LAST_TAGS_ID;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

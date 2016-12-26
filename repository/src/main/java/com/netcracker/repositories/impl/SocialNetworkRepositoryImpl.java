@@ -9,6 +9,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,12 +22,21 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     private final static Logger LOGGER = LogManager.getLogger(CountryRepositoryImpl.class.getName());
 
     @Autowired
-    private JdbcTemplate template;
+    private JdbcTemplate jdbcTemplate;
+
+    private RowMapper<SocialNetwork> mapper = (rs, rowNum) -> {
+        SocialNetwork socialNetwork = new SocialNetwork();
+        socialNetwork.setId(rs.getInt("id"));
+        socialNetwork.setName(rs.getString("name"));
+        return socialNetwork;
+    };
 
     @Override
     public SocialNetwork add(SocialNetwork item) {
         String query = QueriesRepository.INSERT_SOCIAL_NETWORK;
-        int out = template.update(query,
+        //item.setId(getLastRowId());
+
+        int out = jdbcTemplate.update(query,
                 item.getName()
         );
 
@@ -40,7 +50,7 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     @Override
     public SocialNetwork update(SocialNetwork item) {
         String query = QueriesRepository.UPDATE_SOCIAL_NETWORK;
-        int out = template.update(query,
+        int out = jdbcTemplate.update(query,
                 item.getName(),
                 item.getId()
         );
@@ -55,7 +65,7 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     @Override
     public SocialNetwork remove(SocialNetwork item) {
         String query = QueriesRepository.DELETE_SOCIAL_NETWORK;
-        int out = template.update(query,
+        int out = jdbcTemplate.update(query,
                 item.getId()
         );
 
@@ -69,22 +79,26 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     @Override
     public SocialNetwork getById(long id) {
         String query = QueriesRepository.GET_SOCIAL_NETWORK_BY_ID;
-        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
-            SocialNetwork socialNetwork = new SocialNetwork();
-            socialNetwork.setId(rs.getInt("id"));
-            socialNetwork.setName(rs.getString("name"));
-            return socialNetwork;
-        });
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, mapper);
+    }
+
+    @Override
+    public long getColumnCount() {
+        String query = QueriesRepository.GET_COUNT_OF_NETWORKS;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 
     @Override
     public List<SocialNetwork> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
-            SocialNetwork socialNetwork = new SocialNetwork();
-            socialNetwork.setId(rs.getInt("id"));
-            socialNetwork.setName(rs.getString("name"));
-            return socialNetwork;
-        });
+        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), mapper);
+    }
+
+    /**
+     * @return long value - id of last row in SOCIAL_NETWORKS table.
+     */
+    private long getLastRowId(){
+        String query = QueriesRepository.GET_LAST_NETWORKS_ID;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

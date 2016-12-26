@@ -9,6 +9,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,11 +23,21 @@ public class CityRepositoryImpl implements IRepository<City> {
     private final static Logger LOGGER = LogManager.getLogger(CityRepositoryImpl.class.getName());
 
     @Autowired
-    private JdbcTemplate template;
+    private JdbcTemplate jdbcTemplate;
+
+    private RowMapper<City> mapper = (rs, rowNum) -> {
+        City city = new City();
+        city.setId(rs.getInt("id"));
+        city.setStateId(rs.getInt("state_id"));
+        city.setName(rs.getString("name"));
+        return city;
+    };
 
     public City add(City item) {
         String query = QueriesRepository.INSERT_CITY;
-        int out = template.update(query,
+        //item.setId(getLastRowId());
+
+        int out = jdbcTemplate.update(query,
                 item.getStateId(),
                 item.getName()
         );
@@ -41,7 +52,7 @@ public class CityRepositoryImpl implements IRepository<City> {
     @Override
     public City update(City item) {
         String query = QueriesRepository.UPDATE_CITY;
-        int out = template.update(query,
+        int out = jdbcTemplate.update(query,
                 item.getStateId(),
                 item.getName(),
                 item.getId()
@@ -57,7 +68,7 @@ public class CityRepositoryImpl implements IRepository<City> {
     @Override
     public City remove(City item) {
         String query = QueriesRepository.DELETE_CITY;
-        int out = template.update(query,
+        int out = jdbcTemplate.update(query,
                 item.getId()
         );
 
@@ -71,25 +82,26 @@ public class CityRepositoryImpl implements IRepository<City> {
     @Override
     public City getById(long id) {
         String query = QueriesRepository.GET_CITY_BY_ID;
-        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
-            City city = new City();
-            city.setId(rs.getInt("id"));
-            city.setStateId(rs.getInt("state_id"));
-            city.setName(rs.getString("name"));
-            return city;
-        });
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, mapper);
+    }
+
+    @Override
+    public long getColumnCount() {
+        String query = QueriesRepository.GET_COUNT_OF_CITIES;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 
     @Override
     public List<City> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
-            City city = new City();
-            city.setId(rs.getInt("id"));
-            city.setStateId(rs.getInt("state_id"));
-            city.setName(rs.getString("name"));
-            return city;
-        });
+        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), mapper);
     }
 
+    /**
+     * @return long value - id of last row in CITIES table.
+     */
+    private long getLastRowId(){
+        String query = QueriesRepository.GET_LAST_CITIES_ID;
+        return jdbcTemplate.queryForObject(query, Long.class);
+    }
 }

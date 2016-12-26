@@ -9,6 +9,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,12 +20,23 @@ public class LocationRepositoryImpl implements IRepository<Location> {
     private final static Logger LOGGER = LogManager.getLogger(LocationRepositoryImpl.class.getName());
 
     @Autowired
-    private JdbcTemplate template;
+    private JdbcTemplate jdbcTemplate;
+
+    private RowMapper<Location> mapper = (rs, rowNum) -> {
+        Location location = new Location();
+        location.setId(rs.getLong("id"));
+        location.setCityId(rs.getLong("city_id"));
+        location.setStreet(rs.getString("street"));
+        location.setBuilding(rs.getString("building"));
+        return location;
+    };
 
     @Override
     public Location add(Location item) {
         String query = QueriesRepository.INSERT_LOCATION;
-        int out = template.update(query,
+        //item.setId(getLastRowId());
+
+        int out = jdbcTemplate.update(query,
                 item.getCityId(),
                 item.getStreet(),
                 item.getBuilding()
@@ -40,7 +52,7 @@ public class LocationRepositoryImpl implements IRepository<Location> {
     @Override
     public Location update(Location item) {
         String query = QueriesRepository.UPDATE_LOCATION;
-        int out = template.update(query,
+        int out = jdbcTemplate.update(query,
                 item.getCityId(),
                 item.getStreet(),
                 item.getBuilding(),
@@ -57,7 +69,7 @@ public class LocationRepositoryImpl implements IRepository<Location> {
     @Override
     public Location remove(Location item) {
         String query = QueriesRepository.DELETE_LOCATION;
-        int out = template.update(query,
+        int out = jdbcTemplate.update(query,
                 item.getId()
         );
 
@@ -71,26 +83,26 @@ public class LocationRepositoryImpl implements IRepository<Location> {
     @Override
     public Location getById(long id) {
         String query = QueriesRepository.GET_LOCATION_BY_ID;
-        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
-            Location location = new Location();
-            location.setId(rs.getLong("id"));
-            location.setCityId(rs.getLong("city_id"));
-            location.setStreet(rs.getString("street"));
-            location.setBuilding(rs.getString("building"));
-            return location;
-        });
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, mapper);
+    }
+
+    @Override
+    public long getColumnCount() {
+        String query = QueriesRepository.GET_COUNT_OF_LOCATIONS;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 
     @Override
     public List<Location> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
-            Location location = new Location();
-            location.setId(rs.getLong("id"));
-            location.setCityId(rs.getLong("city_id"));
-            location.setStreet(rs.getString("street"));
-            location.setBuilding(rs.getString("building"));
-            return location;
-        });
+        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), mapper);
+    }
+
+    /**
+     * @return long value - id of last row in LOCATIONS table.
+     */
+    private long getLastRowId(){
+        String query = QueriesRepository.GET_LAST_LOCATIONS_ID;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 }
