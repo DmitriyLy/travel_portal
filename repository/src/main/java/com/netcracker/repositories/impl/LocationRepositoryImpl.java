@@ -34,7 +34,6 @@ public class LocationRepositoryImpl implements IRepository<Location> {
     @Override
     public Location add(Location item) {
         String query = QueriesRepository.INSERT_LOCATION;
-        //item.setId(getLastRowId());
         item.setId(getNewLocationId());
 
         int out = jdbcTemplate.update(query,

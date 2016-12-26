@@ -36,7 +36,6 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
     @Override
     public MapProvider add(MapProvider item) {
         String query = QueriesRepository.INSERT_MAP_PROVIDER;
-        //item.setId(getLastRowId());
         item.setId(getNewMapProviderId());
 
         int out = jdbcTemplate.update(query,

@@ -35,9 +35,10 @@ public class CityRepositoryImpl implements IRepository<City> {
 
     public City add(City item) {
         String query = QueriesRepository.INSERT_CITY;
-        //item.setId(getLastRowId());
+        item.setId(getNewCityId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getStateId(),
                 item.getName()
         );
@@ -100,8 +101,8 @@ public class CityRepositoryImpl implements IRepository<City> {
     /**
      * @return long value - id of last row in CITIES table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_CITIES_ID;
+    private long getNewCityId(){
+        String query = QueriesRepository.GET_NEW_ID_CITY;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

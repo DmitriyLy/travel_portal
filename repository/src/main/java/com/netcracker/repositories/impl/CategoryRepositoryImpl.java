@@ -36,9 +36,10 @@ public class CategoryRepositoryImpl implements IRepository<Category> {
     @Override
     public Category add(Category item) {
         String query = QueriesRepository.INSERT_CATEGORY;
-        //item.setId(getLastRowId());
+        item.setId(getNewCategoryId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getName()
         );
 
@@ -99,8 +100,8 @@ public class CategoryRepositoryImpl implements IRepository<Category> {
     /**
      * @return long value - id of last row in CATEGORIES table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_CATEGORIES_ID;
+    private long getNewCategoryId(){
+        String query = QueriesRepository.GET_NEW_ID_CATEGORY;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

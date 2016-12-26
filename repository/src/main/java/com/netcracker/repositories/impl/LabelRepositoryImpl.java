@@ -42,7 +42,6 @@ public class LabelRepositoryImpl implements IRepository<Label> {
     @Override
     public Label add(Label item) {
         String query = QueriesRepository.INSERT_LABEL;
-        //item.setId(getLastRowId());
         item.setId(getNewLabelId());
 
         int out = jdbcTemplate.update(query,

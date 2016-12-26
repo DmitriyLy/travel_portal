@@ -39,7 +39,6 @@ public class UserRepositoryImpl implements IRepository<User> {
     @Override
     public User add(User item) {
         String query = QueriesRepository.INSERT_USER;
-        //item.setId(getLastRowId() +1);
         item.setId(getNewUserId());
 
         int out = jdbcTemplate.update(query,

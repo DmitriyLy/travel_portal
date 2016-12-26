@@ -39,9 +39,10 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
     @Override
     public Attachment add(Attachment item) {
         String query = QueriesRepository.INSERT_ATTACHMENT;
-        //item.setId(getLastRowId() + 1);
+        item.setId(getNewAttachmentId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getUserId(),
                 item.getLabelId(),
                 item.getFilePath(),
@@ -108,8 +109,8 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
     /**
      * @return long value - id of last row in ATTACHMENTS table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_ATTACHMENTS_ID;
+    private long getNewAttachmentId(){
+        String query = QueriesRepository.GET_NEW_ID_ATTACHMENT;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

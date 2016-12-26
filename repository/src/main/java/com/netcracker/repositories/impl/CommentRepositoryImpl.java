@@ -34,9 +34,10 @@ public class CommentRepositoryImpl implements IRepository<Comment> {
     @Override
     public Comment add(Comment item) {
         String query = QueriesRepository.INSERT_COMMENT;
-        //item.setId(getLastRowId());
+        item.setId(getNewCommentId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getUserId(),
                 item.getLabelId(),
                 item.getCommentDate(),
@@ -103,8 +104,8 @@ public class CommentRepositoryImpl implements IRepository<Comment> {
     /**
      * @return long value - id of last row in CITIES table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_CITIES_ID;
+    private long getNewCommentId(){
+        String query = QueriesRepository.GET_NEW_ID_COMMENT;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

@@ -36,7 +36,6 @@ public class StateRepositoryImpl implements IRepository<State> {
     @Override
     public State add(State item) {
         String query = QueriesRepository.INSERT_STATE;
-        //item.setId(getLastRowId());
         item.setId(getNewStateId());
 
         int out = jdbcTemplate.update(query,

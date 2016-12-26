@@ -32,7 +32,6 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     @Override
     public Tag add(Tag item) {
         String query = QueriesRepository.INSERT_TAG;
-        //item.setId(getLastRowId());
         item.setId(getNewTagId());
 
         int out = jdbcTemplate.update(query,

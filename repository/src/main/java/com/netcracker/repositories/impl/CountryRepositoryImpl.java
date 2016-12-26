@@ -35,9 +35,10 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     @Override
     public Country add(Country item) {
         String query = QueriesRepository.INSERT_COUNTRY;
-        //item.setId(getLastRowId());
+        item.setId(getNewCountryId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getName()
         );
 
@@ -98,8 +99,8 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     /**
      * @return long value - id of last row in COUNTRY table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_COUNTRY_ID;
+    private long getNewCountryId(){
+        String query = QueriesRepository.GET_NEW_ID_COUNTRY;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

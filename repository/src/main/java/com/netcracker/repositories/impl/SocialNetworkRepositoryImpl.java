@@ -34,7 +34,6 @@ public class SocialNetworkRepositoryImpl implements IRepository<SocialNetwork> {
     @Override
     public SocialNetwork add(SocialNetwork item) {
         String query = QueriesRepository.INSERT_SOCIAL_NETWORK;
-        //item.setId(getLastRowId());
         item.setId(getNewSocialNetworkId());
 
         int out = jdbcTemplate.update(query,

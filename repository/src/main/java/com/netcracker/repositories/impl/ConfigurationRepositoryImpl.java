@@ -35,7 +35,6 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
     @Override
     public Configuration add(Configuration item) {
         String query = QueriesRepository.INSERT_CONFIGURATION;
-        //item.setId(getLastRowId());
 
         int out = jdbcTemplate.update(query,
                 item.getConfigKey(),
@@ -99,8 +98,8 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
     /**
      * @return long value - id of last row in CONFIGURATION table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_CONFIGURATIONS_ID;
+    private long getNewConfigurationId(){
+        String query = QueriesRepository.GET_NEW_ID_CONFIGURATION;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }
