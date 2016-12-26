@@ -6,18 +6,18 @@ package com.netcracker.entities;
  * @see com.netcracker.repositories.impl.StateRepositoryImpl
  */
 public class State {
-    private int id;
+    private long id;
     private int countryId;
     private String name;
 
     public State() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -46,15 +46,14 @@ public class State {
 
         if (id != state.id) return false;
         if (countryId != state.countryId) return false;
-        return name != null ? name.equals(state.name) : state.name == null;
-
+        return name.equals(state.name);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + countryId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + name.hashCode();
         return result;
     }
 

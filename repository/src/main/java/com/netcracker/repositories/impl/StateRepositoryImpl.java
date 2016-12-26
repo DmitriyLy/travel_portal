@@ -37,8 +37,10 @@ public class StateRepositoryImpl implements IRepository<State> {
     public State add(State item) {
         String query = QueriesRepository.INSERT_STATE;
         //item.setId(getLastRowId());
+        item.setId(getNewStateId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getCountryId(),
                 item.getName()
         );
@@ -104,8 +106,8 @@ public class StateRepositoryImpl implements IRepository<State> {
     /**
      * @return long value - id of last row in STATES table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_STATE_ID;
+    private long getNewStateId(){
+        String query = QueriesRepository.GET_NEW_ID_STATES;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

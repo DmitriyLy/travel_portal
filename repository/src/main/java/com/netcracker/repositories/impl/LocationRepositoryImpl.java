@@ -35,8 +35,10 @@ public class LocationRepositoryImpl implements IRepository<Location> {
     public Location add(Location item) {
         String query = QueriesRepository.INSERT_LOCATION;
         //item.setId(getLastRowId());
+        item.setId(getNewLocationId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getCityId(),
                 item.getStreet(),
                 item.getBuilding()
@@ -101,8 +103,8 @@ public class LocationRepositoryImpl implements IRepository<Location> {
     /**
      * @return long value - id of last row in LOCATIONS table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_LOCATIONS_ID;
+    private long getNewLocationId(){
+        String query = QueriesRepository.GET_NEW_ID_LOCATIONS;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

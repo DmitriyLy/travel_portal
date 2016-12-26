@@ -13,6 +13,12 @@ public class City {
     public City() {
     }
 
+    public City(int id, String name, int stateId) {
+        this.id = id;
+        this.stateId = stateId;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

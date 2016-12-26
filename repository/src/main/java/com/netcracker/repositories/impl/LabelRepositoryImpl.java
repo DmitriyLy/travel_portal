@@ -43,8 +43,10 @@ public class LabelRepositoryImpl implements IRepository<Label> {
     public Label add(Label item) {
         String query = QueriesRepository.INSERT_LABEL;
         //item.setId(getLastRowId());
+        item.setId(getNewLabelId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getUserId(),
                 item.getLocationId(),
                 item.getOwnerComment(),
@@ -119,8 +121,8 @@ public class LabelRepositoryImpl implements IRepository<Label> {
     /**
      * @return long value - id of last row in LABELS table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_LABELS_ID;
+    private long getNewLabelId(){
+        String query = QueriesRepository.GET_NEW_ID_LABELS;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

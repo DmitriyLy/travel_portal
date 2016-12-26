@@ -6,18 +6,24 @@ package com.netcracker.entities;
  * @see com.netcracker.repositories.impl.MapProviderRepositoryImpl
  */
 public class MapProvider {
-    private int id;
+    private long id;
     private String name;
     private String coordSysName;
 
     public MapProvider() {
     }
 
-    public int getId() {
+    public MapProvider(long id, String name, String coordSysName) {
+        this.id = id;
+        this.name = name;
+        this.coordSysName = coordSysName;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -45,14 +51,13 @@ public class MapProvider {
         MapProvider that = (MapProvider) o;
 
         if (id != that.id) return false;
-        return name != null ? name.equals(that.name) : that.name == null;
-
+        return name.equals(that.name);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + name.hashCode();
         return result;
     }
 

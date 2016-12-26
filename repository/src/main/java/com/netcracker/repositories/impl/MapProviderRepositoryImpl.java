@@ -37,8 +37,10 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
     public MapProvider add(MapProvider item) {
         String query = QueriesRepository.INSERT_MAP_PROVIDER;
         //item.setId(getLastRowId());
+        item.setId(getNewMapProviderId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getName(),
                 item.getCoordSysName()
         );
@@ -101,8 +103,8 @@ public class MapProviderRepositoryImpl implements IRepository<MapProvider> {
     /**
      * @return long value - id of last row in MAP_PROVIDER table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_PROVIDERS_ID;
+    private long getNewMapProviderId(){
+        String query = QueriesRepository.GET_NEW_ID_MAP_PROVIDERS;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

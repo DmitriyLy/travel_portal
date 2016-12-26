@@ -33,8 +33,10 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     public Tag add(Tag item) {
         String query = QueriesRepository.INSERT_TAG;
         //item.setId(getLastRowId());
+        item.setId(getNewTagId());
 
         int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getName()
         );
 
@@ -95,8 +97,8 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     /**
      * @return long value - id of last row in TAGS table.
      */
-    private long getLastRowId(){
-        String query = QueriesRepository.GET_LAST_TAGS_ID;
+    private long getNewTagId(){
+        String query = QueriesRepository.GET_NEW_ID_TAGS;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
 }
