@@ -17,7 +17,4 @@ public class SearchController {
     public void searchByRating(){}
 
     public void searchByTag(){}
-
-
-
 }
