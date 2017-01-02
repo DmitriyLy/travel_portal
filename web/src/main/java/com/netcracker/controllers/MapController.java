@@ -1,68 +1,86 @@
 package com.netcracker.controllers;
 
+import com.netcracker.DTO.LabelFilterInfo;
+import com.netcracker.DTO.LabelMapInfo;
+import com.netcracker.DTO.ScaleDefinePoints;
+import com.netcracker.services.impl.LabelService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
 /**
- * Данный контроллер отвечает за позиционирование и отображение
- * меток на карте и за предоставление краткой информации о метках
- * для последующих операций фильтрации/поиска.
- * Контроллер покрывает следующие юзкейсы:
- *      UC1 - Просмотр карты.
- *      UC2 - Масштабирование карты.
- *      UC3 - Просмотр краткой информации о метке.
+ * This controller is responsible for:
+ *      UC1 - View a map.
+ *      UC2 - The map zooms.
+ *      UC3 - View brief information about the tag.
  *
  * @author Oveian Egor
  * @author Kozhuchar Alexander
  */
-
+@RestController
 public class MapController {
 
-    /**
-     * Этот метод передаёт клиенту краткую информацию о метках для отображения на карте.
-     *
-     * @param JSON содержащий в себе координаты двух точек NE и SW,
-     *             образующих линию, которая является диоганалью
-     *             прямоугольника, внутри которого будут находиться
-     *             метки, необходимые клиенту для отображения на карте.
-     * @return JSON содержащий в себе краткую информацию о метках,
-     *             координаты которых удовлетворили заданному клиентом
-     *             диапазону. Краткая информация о метке - это id,
-     *             название метки и координаты.
-     * Метод покрывает следующие функциональные требования:
-     *      FR3 - При открытии, система должна проставлять метки на карте.
-     *      FR4 - Система должна отображать несколько меток, попадающих в радиус 1 см, единым кластером.
-     *      FR5 - Система должна динамически расставлять метки при их попадании в видимую область во время
-     *      смены масштаба или отображаемого географического района.
-     *      FR6 - Система должна скрывать метки, вышедшие из видимой области при смене масштаба или
-     *      отображаемого географического района.
-     */
-    public void getLabelsByRect(){
-    };
+    @Autowired
+    LabelService labelService;
 
     /**
-     * Этот метод передаёт клиенту краткую информацию о метках для фильтрации и поиска.
+     * Method returns start page to client.
      *
-     * @param JSON содержащий в себе координаты двух точек -
-     *             координаты первой определяются пользователем, который
-     *             рандомно кликает на карту. Данная точка будет являться центром
-     *             окружности, радиус которой будет задаваться на стороне клиента, но уже
-     *             системой. Координаты центра окружности и радиуса будут переданы в
-     *             контроллер для следующих операций:
-     *                  1) По координатам будет выстроен квадрат, внутри которого будут находиться
-     *                  метки.
-     *                  2) Будет измерено расстояние от центра окружности для каждой точки, вошедшей
-     *                  в квадрат, и откинуты те, расстояние до которых больше радиуса.
-     * @return JSON содержащий в себе краткую информацию о метках,
-     *             координаты которых удовлетворили заданному клиентом
-     *             диапазону. Краткая информация о метке - это id,
-     *             название метки, дата создания, рейтинг, гиперссылку и координаты.
-     * Метод покрывает следующие функциональные требования:
-     *      FR10 - Система должна формировать список, содержащий краткую информацию и гиперссылку
-     *      на просмотр полной информации о метке.
-     *      FR11 - Система должна отображать список (FR 10) в окне поверх карты.
-     *      FR12 - Система должна позволять сортировать список (FR 10) по рейтингу/дате создания метки.
+     * @return index.jsp
      */
-    public void getLabelsByCircle(){
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String getMap() {
+        return "index";
+    }
 
+    /**
+     * Method returns short label's info
+     *
+     * @param definePoints - object contains the coordinates of two points - NE and SW.
+     *                     These points are determined by the system and form a straight line,
+     *                     which is diagonal of rectangle. The points that are inside the
+     *                     rectangle will be transmitted to the client.
+     * @return List of {@link com.netcracker.DTO.LabelMapInfo} - list with objects that contains
+     *                     short information required for setting labels on map.
+     *
+     * Method covers the following functional requirements:
+     *      FR3 - When opening, the system must affix labels on the map.
+     *      FR4 - The system should display the number of labels that fall into the range of 1 cm,
+     *          a single cluster.
+     *      FR5 - The system should dynamically set the label as they enter the visible area during
+                change the scale or display the geographical area.
+     *      FR6 - The system should hide the label coming out of the visible area or when you change
+     *          the scale of the displayed geographical area.
+     */
+    @RequestMapping(value = "/getLabelsByRect", method = RequestMethod.POST)
+    public List<LabelMapInfo> getLabelsByRect(@RequestBody ScaleDefinePoints definePoints) {
+        return null;
+    }
 
+    /**
+     * @param definePoints - object contains the coordinates of two points. The coordinates of
+     *                     the first point defined by the user, which indicates a random location
+     *                     on the map. This point will be the center of the circle. The second
+     *                     point defines the system. The distance between the first and the second
+     *                     point will be the radius of the circle. The points that will be located
+     *                     inside the circle will be transferred to the client.
+     * @return List of {@link com.netcracker.DTO.LabelFilterInfo} - list with objects that contains
+     *                     short information required for filtrating and searching labels on selected
+     *                     area.
+     *
+     * Method covers the following functional requirements:
+     *      FR10 - The system should create a list containing the summary and the hyperlink
+     *          to view the information on the label.
+     *      FR11 - The system should display the list (FR 10) in the top of the map window.
+     *      FR12 - The system should allow you to sort the list (FR 10) rated / creation date labels.
+     */
+    @RequestMapping(value = "/getLabelsByCircle", method = RequestMethod.POST)
+    public List<LabelFilterInfo> getLabelsByCircle(@RequestBody ScaleDefinePoints definePoints) {
+        return null;
     }
 
 }
