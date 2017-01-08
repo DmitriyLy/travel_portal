@@ -5,10 +5,7 @@ import com.netcracker.DTO.LabelMapInfo;
 import com.netcracker.DTO.ScaleDefinePoints;
 import com.netcracker.services.impl.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,16 +26,18 @@ public class MapController {
 
     /**
      * Method returns start page to client.
+     * Method covers the following functional requirements:
+     *      FR1 - The system must show the map.
      *
      * @return index.jsp
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping(value = "/")
     public String getMap() {
         return "index";
     }
 
     /**
-     * Method returns short label's info
+     * Method returns short label's info to client. It is required for setting labels on map.
      *
      * @param definePoints - object contains the coordinates of two points - NE and SW.
      *                     These points are determined by the system and form a straight line,
@@ -52,16 +51,22 @@ public class MapController {
      *      FR4 - The system should display the number of labels that fall into the range of 1 cm,
      *          a single cluster.
      *      FR5 - The system should dynamically set the label as they enter the visible area during
-                change the scale or display the geographical area.
+     *          change the scale or display the geographical area.
      *      FR6 - The system should hide the label coming out of the visible area or when you change
      *          the scale of the displayed geographical area.
+     *      FR7 - The system should dynamically set the label as they enter the visible area when
+     *          changing the display scale or geographical area.
+     *      FR8 - The system should hide the label coming out of the visible area or when you change
+     *      the scale of the displayed geographical area.
      */
-    @RequestMapping(value = "/getLabelsByRect", method = RequestMethod.POST)
+    @PostMapping(value = "/getLabelsByRect")
     public List<LabelMapInfo> getLabelsByRect(@RequestBody ScaleDefinePoints definePoints) {
         return null;
     }
 
     /**
+     * Method returns short label's info to client. It is required for filtering and searching.
+     *
      * @param definePoints - object contains the coordinates of two points. The coordinates of
      *                     the first point defined by the user, which indicates a random location
      *                     on the map. This point will be the center of the circle. The second
@@ -78,7 +83,7 @@ public class MapController {
      *      FR11 - The system should display the list (FR 10) in the top of the map window.
      *      FR12 - The system should allow you to sort the list (FR 10) rated / creation date labels.
      */
-    @RequestMapping(value = "/getLabelsByCircle", method = RequestMethod.POST)
+    @PostMapping(value = "/getLabelsByCircle")
     public List<LabelFilterInfo> getLabelsByCircle(@RequestBody ScaleDefinePoints definePoints) {
         return null;
     }
