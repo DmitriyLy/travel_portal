@@ -3,7 +3,6 @@ package com.netcracker.controllers;
 import com.netcracker.DTO.CommentDTO;
 import com.netcracker.DTO.FullLabelInfo;
 import com.netcracker.DTO.LabelLocation;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,8 +26,7 @@ import java.util.List;
  * @author Kozhuchar Alexander
  */
 
-@Controller
-@RequestMapping("/label")
+@RestController
 public class LabelController {
     /**
      * Method of full label info extraction
@@ -48,8 +46,7 @@ public class LabelController {
      * @param labelId
      * @return FullLableInfo object
      */
-    @RequestMapping(value = "/getFullLabelInfo", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/getFullLabelInfo")
     public FullLabelInfo getFullLabelInfo(@RequestParam("labelId") Long labelId) {
         return null;
     }
@@ -65,8 +62,7 @@ public class LabelController {
      * @param labelId
      * @return found attachments by label id
      */
-    @RequestMapping(value = "/getAttachmentByLabelId", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/getAttachmentByLabelId")
     public List<Byte[]> getAttachmentsByLabelId(@RequestParam("labelId") Long labelId) {
         return null;
     }
@@ -80,8 +76,7 @@ public class LabelController {
      * @param labelId
      * @return found text of comment by label id
      */
-    @RequestMapping(value = "/getCommentByLabelId", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/getCommentByLabelId")
     public List<CommentDTO> getCommentsByLabelId(@RequestParam("labelId") Long labelId) {
         return null;
     }
@@ -96,8 +91,7 @@ public class LabelController {
      * @param labelId
      * @return status of adding to favorites
      */
-    @RequestMapping(value = "/addLabelToFavorites", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/addLabelToFavorites")
     public Integer addLabelToFavorites(@RequestParam("labelId") Long labelId) {
         return 0;
     }
@@ -111,8 +105,7 @@ public class LabelController {
      *
      * @return status of adding to favorites
      */
-    @RequestMapping(value = "/getLabelsFromFavorites", method = RequestMethod.GET)
-    @ResponseBody
+    @GetMapping(value = "/getLabelsFromFavorites")
     public List<FullLabelInfo> getLabelsFromFavorites() {
         return null;
     }
@@ -126,8 +119,7 @@ public class LabelController {
      * @param labelId
      * @return status of deleting from favorites
      */
-    @RequestMapping(value = "/deleteLabelFromFavorites", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/deleteLabelFromFavorites")
     public Integer deleteLabelFromFavorites(@RequestParam("labelId") Long labelId) {
         return 0;
     }
@@ -144,8 +136,7 @@ public class LabelController {
      * @param location
      * @return status of adding label to database
      */
-    @RequestMapping(value = "/addMarker", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/addMarker")
     public Integer addMarker(@RequestBody LabelLocation location) {
         return 0;
     }
@@ -162,8 +153,7 @@ public class LabelController {
      * @param fullInfo
      * @return status of adding info about this.label
      */
-    @RequestMapping(value = "/addMarkerData", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/addMarkerData")
     public Integer addMarkerData(@RequestBody FullLabelInfo fullInfo) {
         return 0;
     }
@@ -177,8 +167,7 @@ public class LabelController {
      * @param idAndTags - labelId and array of tags
      * @return status of deleting tags from attachment(or from everywhere)
      */
-    @RequestMapping(value = "/deleteTagsFromLabel", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/deleteTagsFromLabel")
     public Integer deleteTagsFromLabel(@RequestBody FullLabelInfo idAndTags) {
         return 0;
     }
@@ -193,8 +182,7 @@ public class LabelController {
      * @param attachment
      * @return status of adding attachment to this.label
      */
-    @RequestMapping(value = "/addMarkerAttachment", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/addMarkerAttachment")
     public Integer addMarkerAttachment(@RequestParam("attachment") MultipartFile attachment) {
         return 0;
     }
@@ -208,8 +196,7 @@ public class LabelController {
      * @param attachmentId
      * @return status of deleting attachment from database
      */
-    @RequestMapping(value = "/deleteMarkerAttachment", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/deleteMarkerAttachment")
     public Integer deleteMarkerAttachment(@RequestParam Long attachmentId) {
         return 0;
     }
@@ -224,8 +211,7 @@ public class LabelController {
      * @param idAndReview
      * @return status of updating label review
      */
-    @RequestMapping(value = "/updateLabelReview", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/updateLabelReview")
     public Integer updateLabelReview(@RequestBody FullLabelInfo idAndReview) {
         return 0;
     }
@@ -240,8 +226,7 @@ public class LabelController {
      * @param idAndRating
      * @return status of updating label rating
      */
-    @RequestMapping(value = "/updateLabelRating", method = RequestMethod.POST)
-    @ResponseBody
+    @PostMapping(value = "/updateLabelRating")
     public Integer updateLabelRating(@RequestBody FullLabelInfo idAndRating) {
         return 0;
     }
