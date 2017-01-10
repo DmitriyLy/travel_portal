@@ -1,7 +1,6 @@
 package com.netcracker.controllers;
 
-import com.netcracker.DTO.LabelFilterInfo;
-import com.netcracker.DTO.LabelMapInfo;
+import com.netcracker.DTO.ShortLabelInfo;
 import com.netcracker.DTO.ScaleDefinePoints;
 import com.netcracker.services.impl.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +42,7 @@ public class MapController {
      *                     These points are determined by the system and form a straight line,
      *                     which is diagonal of rectangle. The points that are inside the
      *                     rectangle will be transmitted to the client.
-     * @return List of {@link com.netcracker.DTO.LabelMapInfo} - list with objects that contains
+     * @return List of {@link com.netcracker.DTO.ShortLabelInfo} - list with objects that contains
      *                     short information required for setting labels on map.
      *
      * Method covers the following functional requirements:
@@ -60,7 +59,7 @@ public class MapController {
      *      the scale of the displayed geographical area.
      */
     @PostMapping(value = "/getLabelsByRect")
-    public List<LabelMapInfo> getLabelsByRect(@RequestBody ScaleDefinePoints definePoints) {
+    public List<ShortLabelInfo> getLabelsByRect(@RequestBody ScaleDefinePoints definePoints) {
         return null;
     }
 
@@ -73,7 +72,7 @@ public class MapController {
      *                     point defines the system. The distance between the first and the second
      *                     point will be the radius of the circle. The points that will be located
      *                     inside the circle will be transferred to the client.
-     * @return List of {@link com.netcracker.DTO.LabelFilterInfo} - list with objects that contains
+     * @return List of {@link ShortLabelInfo} - list with objects that contains
      *                     short information required for filtrating and searching labels on selected
      *                     area.
      *
@@ -84,7 +83,7 @@ public class MapController {
      *      FR12 - The system should allow you to sort the list (FR 10) rated / creation date labels.
      */
     @PostMapping(value = "/getLabelsByCircle")
-    public List<LabelFilterInfo> getLabelsByCircle(@RequestBody ScaleDefinePoints definePoints) {
+    public List<ShortLabelInfo> getLabelsByCircle(@RequestBody ScaleDefinePoints definePoints) {
         return null;
     }
 

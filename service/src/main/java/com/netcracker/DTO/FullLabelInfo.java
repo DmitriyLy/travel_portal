@@ -16,12 +16,17 @@ public class FullLabelInfo {
     private String setupDate;
     private String street;
     private String building;
-    private byte rating;
+    private int rating;
     private String review;
-    private List<Tag> tags = new ArrayList<>();
-    private List<Category> categories = new ArrayList<>();
-    private byte numberOfAttachments;
-    private byte numberOfComments;
+    private List<String> tags = new ArrayList<>();
+    private List<String> categories = new ArrayList<>();
+    private List<Byte[]> attachments = new ArrayList<>();
+    private List<String> comments = new ArrayList<>();
+    private String city;
+    private String state;
+    private String country;
+    private double latitude;
+    private double longtitude;
 
     public long getId() {
         return id;
@@ -63,11 +68,11 @@ public class FullLabelInfo {
         this.building = building;
     }
 
-    public byte getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(byte rating) {
+    public void setRating(int rating) {
         this.rating = rating;
     }
 
@@ -79,35 +84,75 @@ public class FullLabelInfo {
         this.review = review;
     }
 
-    public List<Tag> getTags() {
-        return new ArrayList<>(tags);
+    public List<String> getTags() {
+        return tags;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = new ArrayList<>(tags);
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
-    public List<Category> getCategories() {
-        return new ArrayList<>(categories);
+    public List<String> getCategories() {
+        return categories;
     }
 
-    public void setCategories(List<Category> categories) {
-        this.categories = new ArrayList<>(categories);
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
     }
 
-    public byte getNumberOfAttachments() {
-        return numberOfAttachments;
+    public List<Byte[]> getAttachments() {
+        return attachments;
     }
 
-    public void setNumberOfAttachments(byte numberOfAttachments) {
-        this.numberOfAttachments = numberOfAttachments;
+    public void setAttachments(List<Byte[]> attachments) {
+        this.attachments = attachments;
     }
 
-    public byte getNumberOfComments() {
-        return numberOfComments;
+    public List<String> getComments() {
+        return comments;
     }
 
-    public void setNumberOfComments(byte numberOfComments) {
-        this.numberOfComments = numberOfComments;
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(double longtitude) {
+        this.longtitude = longtitude;
     }
 }

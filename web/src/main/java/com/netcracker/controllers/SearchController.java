@@ -1,6 +1,6 @@
 package com.netcracker.controllers;
 
-import com.netcracker.DTO.LabelFilterInfo;
+import com.netcracker.DTO.ShortLabelInfo;
 import com.netcracker.DTO.SearchRequest;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,12 +38,12 @@ public class SearchController {
      *
      * @param request {@link com.netcracker.DTO.SearchRequest} - object that contains full number
      *                     of search parameters, any of which can be omitted
-     * @return List of {@link com.netcracker.DTO.LabelFilterInfo} - list of objects that contain
+     * @return List of {@link ShortLabelInfo} - list of objects that contain
      *                     short information required for filtrating and searching labels on selected
      *                     area.
      */
     @PostMapping("/")
-    public List<LabelFilterInfo> searchByFullRequest(@RequestBody SearchRequest request) {
+    public List<ShortLabelInfo> searchByFullRequest(@RequestBody SearchRequest request) {
         return null;
     }
 
@@ -54,12 +54,12 @@ public class SearchController {
      *      FR29 - The system should provide a search by tag
      *
      * @param tagName - string that contains name of the tag to search labels by
-     * @return List of {@link com.netcracker.DTO.LabelFilterInfo} - list of objects that contain
+     * @return List of {@link ShortLabelInfo} - list of objects that contain
      *                     short information required for filtrating and searching labels on selected
      *                     area.
      */
     @GetMapping("/?tag={tagName}")
-    public List<LabelFilterInfo> searchByTag(@PathVariable String tagName) {
+    public List<ShortLabelInfo> searchByTag(@PathVariable String tagName) {
         return null;
     }
 }

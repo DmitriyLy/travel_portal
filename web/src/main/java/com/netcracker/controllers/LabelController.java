@@ -1,8 +1,6 @@
 package com.netcracker.controllers;
 
-import com.netcracker.DTO.CommentDTO;
-import com.netcracker.DTO.FullLabelInfo;
-import com.netcracker.DTO.LabelLocation;
+import com.netcracker.DTO.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +25,7 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping("/label")
 public class LabelController {
     /**
      * Method of full label info extraction
@@ -103,10 +102,11 @@ public class LabelController {
      * FR40 - The system must provide storage of selected labels.
      * FR41 - The system must provide a connection to the favorite labels by authorized user.
      *
-     * @return status of adding to favorites
+     * @return List of {@link com.netcracker.DTO.ShortLabelInfo} - list with objects that contains
+     *                     short information required for setting labels on map.
      */
     @GetMapping(value = "/getLabelsFromFavorites")
-    public List<FullLabelInfo> getLabelsFromFavorites() {
+    public List<ShortLabelInfo> getLabelsFromFavorites() {
         return null;
     }
 
@@ -125,36 +125,22 @@ public class LabelController {
     }
 
     /**
-     * Method of adding label without
-     * related data
+     * Method of adding label
      * Described in:
      * FR48 - The system should provide creating labels to authorized user.
      * FR49 - The system should carry out the positioning of the label and
      * return in form of categories an information about
      * the environment: country, region, city.
-     *
-     * @param location
-     * @return status of adding label to database
-     */
-    @PostMapping(value = "/addMarker")
-    public Integer addMarker(@RequestBody LabelLocation location) {
-        return 0;
-    }
-
-    /**
-     * Method of adding full lable info
-     * to current label
-     * Described in:
      * FR50 - The system should provide the authorized user to dynamically add tags to your label
      * FR52 - The system should provide the authorized user to select categories for your label.
      * FR54 - The system should provide the authorized user to post a review to his label.
      * FR56 - The system should provide the authorized user to specify label's rating.
      *
-     * @param fullInfo
-     * @return status of adding info about this.label
+     * @param fullLabelInfo
+     * @return status of adding label to database
      */
-    @PostMapping(value = "/addMarkerData")
-    public Integer addMarkerData(@RequestBody FullLabelInfo fullInfo) {
+    @PostMapping(value = "/addMarker")
+    public Integer addMarker(@RequestBody FullLabelInfo fullLabelInfo) {
         return 0;
     }
 
@@ -168,7 +154,7 @@ public class LabelController {
      * @return status of deleting tags from attachment(or from everywhere)
      */
     @PostMapping(value = "/deleteTagsFromLabel")
-    public Integer deleteTagsFromLabel(@RequestBody FullLabelInfo idAndTags) {
+    public Integer deleteTagsFromLabel(@RequestBody IdAndTags idAndTags) {
         return 0;
     }
 
@@ -212,7 +198,7 @@ public class LabelController {
      * @return status of updating label review
      */
     @PostMapping(value = "/updateLabelReview")
-    public Integer updateLabelReview(@RequestBody FullLabelInfo idAndReview) {
+    public Integer updateLabelReview(@RequestBody IdAndReview idAndReview) {
         return 0;
     }
 
@@ -227,7 +213,7 @@ public class LabelController {
      * @return status of updating label rating
      */
     @PostMapping(value = "/updateLabelRating")
-    public Integer updateLabelRating(@RequestBody FullLabelInfo idAndRating) {
+    public Integer updateLabelRating(@RequestBody IdAndRating idAndRating) {
         return 0;
     }
 }

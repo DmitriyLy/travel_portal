@@ -3,14 +3,9 @@ package com.netcracker.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * This object contains data required for filtrating
- * and searching labels.
- *
- * @author Oveian Egor
- */
 
-public class LabelFilterInfo {
+
+public class ShortLabelInfo {
 
     private long id;
     private String ownerName;
@@ -24,6 +19,25 @@ public class LabelFilterInfo {
 
     private List<String> categories = new ArrayList<>();
     private List<String> tags = new ArrayList<>();
+
+    private double latitude;
+    private double longtitude;
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(double longtitude) {
+        this.longtitude = longtitude;
+    }
 
     private int rating;
 
