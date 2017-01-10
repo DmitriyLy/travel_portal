@@ -1,75 +1,65 @@
 package com.netcracker.controllers;
 
-import com.netcracker.entities.FullLabelInfo;
-import com.netcracker.entities.Label;
+import com.netcracker.DTO.LabelFilterInfo;
+import com.netcracker.DTO.SearchRequest;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Controller for search by different
  * parameters
  * Described in :
  * UC5 - Search labels in search window
+ * UC7 - Search labels by tags
  *
  * @author Oveian Egor
  * @author Kozhuchar Alexander
  */
 
+@RestController
+@RequestMapping("/search")
 public class SearchController {
+
     /**
-     * Method of search by label name
-     * Described in :
-     * FR17 - The system should provide a search by labels
+     * Method of search by any of the following parameters:
+     *      category,
+     *      geographical position,
+     *      rating,
+     *      tag.
      *
-     * @param labelName
-     * @return Label object
-     */
-    public Label searchByLabelName(String labelName) {
-        return null;
-    }
-
-    /**
-     * Method of search by category
-     * Described in :
-     * FR18 - The system should provide a search by categories
+     * Method covers the following functional requirements:
+     *      FR17 - The system should provide a search by labels
+     *      FR18 - The system should provide a search by categories
+     *      FR19 - The system should provide a search by geographic
+     *          location (country, city, and so forth.)
+     *      FR20 - The system should provide a search by rating
+     *      FR21 - The system should provide a search by tag
      *
-     * @param category
-     * @return Label object
+     * @param request {@link com.netcracker.DTO.SearchRequest} - object that contains full number
+     *                     of search parameters, any of which can be omitted
+     * @return List of {@link com.netcracker.DTO.LabelFilterInfo} - list of objects that contain
+     *                     short information required for filtrating and searching labels on selected
+     *                     area.
      */
-    public Label searchByCategory(String category) {
-        return null;
-    }
-
-    /**
-     * Method of search by country, city
-     * and so on...
-     * Described in :
-     * FR19 - The system should provide a search by geographic
-     * location (country, city, and so forth.)
-     * @param fullInfo
-     * @return Label object
-     */
-    public Label searchByGeoLocation(FullLabelInfo fullInfo) {
-        return null;
-    }
-
-    /**
-     * Method of search by rating
-     * Described in :
-     * FR20 - The system should provide a search by rating
-     * @param rating
-     * @return Label object
-     */
-    public Label searchByRating(String rating) {
+    @PostMapping("/")
+    public List<LabelFilterInfo> searchByFullRequest(@RequestBody SearchRequest request) {
         return null;
     }
 
     /**
      * Method of search by tag
-     * Described in :
-     * FR21 - The system should provide a search by tag
-     * @param tag
-     * @return Label object
+     *
+     * Method covers the following functional requirements:
+     *      FR29 - The system should provide a search by tag
+     *
+     * @param tagName - string that contains name of the tag to search labels by
+     * @return List of {@link com.netcracker.DTO.LabelFilterInfo} - list of objects that contain
+     *                     short information required for filtrating and searching labels on selected
+     *                     area.
      */
-    public Label searchByTag(String tag) {
+    @GetMapping("/?tag={tagName}")
+    public List<LabelFilterInfo> searchByTag(@PathVariable String tagName) {
         return null;
     }
 }
