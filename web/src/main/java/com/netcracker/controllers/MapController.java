@@ -85,4 +85,14 @@ public class MapController {
         return null;
     }
 
+
+    /**
+     * Method returns id, reserved for new label
+     *
+     * @return id.
+     */
+    @GetMapping("/reserveLabelId")
+    public long reserveLabelId() {
+        return 0;
+    }
 }

@@ -80,7 +80,7 @@ public class LabelController {
      * @return {@link LabelDtoFullInfo} - object, containing full information about label.
      */
     @PatchMapping("/{labelId}")
-    public LabelDtoFullInfo updateLabelById(@RequestBody LabelDtoUpdate labelUpdate) {
+    public LabelDtoFullInfo updateLabel(@RequestBody LabelDtoUpdate labelUpdate) {
         return null;
     }
 

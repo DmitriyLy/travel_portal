@@ -60,7 +60,7 @@ public class UserController {
      *                     short information required for setting labels on map.
      */
     @GetMapping("/me/labels/bookmarked")
-    public List<LabelDtoShortInfo> getLabelsFromFavorites() {
+    public List<LabelDtoShortInfo> getLabelsBookmarkedByCurrentUser() {
         return null;
     }
 
@@ -75,7 +75,7 @@ public class UserController {
      * @return status of adding to favorites
      */
     @PutMapping("/me/labels/bookmarked/{labelId}")
-    public Integer addLabelToFavorites(@PathVariable(name = "labelId") Long labelId) {
+    public Integer addLabelToBookmarks(@PathVariable(name = "labelId") Long labelId) {
         return 0;
     }
 
@@ -89,7 +89,7 @@ public class UserController {
      * @return status of deleting from favorites
      */
     @DeleteMapping("/me/labels/bookmarked/{labelId}")
-    public Integer deleteLabelFromFavorites(@PathVariable(name = "labelId") Long labelId) {
+    public Integer deleteLabelFromBookmarks(@PathVariable(name = "labelId") Long labelId) {
         return 0;
     }
 }

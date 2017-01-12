@@ -68,8 +68,8 @@ public class AttachmentController {
      * @return {@link AttachmentDtoInfo} - object, that contains information about existing attachment.
      */
     @GetMapping("/{attachmentId}")
-    public List<AttachmentDtoInfo> getAttachment(@PathVariable(name = "labelId") Long labelId,
-                                                 @PathVariable(name = "attachmentId") Long attachmentId) {
+    public AttachmentDtoInfo getAttachment(@PathVariable(name = "labelId") Long labelId,
+                                           @PathVariable(name = "attachmentId") Long attachmentId) {
         return null;
     }
 
