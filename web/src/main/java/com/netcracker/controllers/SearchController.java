@@ -1,7 +1,8 @@
 package com.netcracker.controllers;
 
-import com.netcracker.DTO.ShortLabelInfo;
-import com.netcracker.DTO.SearchRequest;
+import com.netcracker.dto.LabelDtoShortInfo;
+import com.netcracker.dto.SearchDtoParameters;
+import com.netcracker.dto.SearchDtoTag;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/search")
+@RequestMapping("/search/by")
 public class SearchController {
 
     /**
@@ -36,14 +37,13 @@ public class SearchController {
      *      FR20 - The system should provide a search by rating
      *      FR21 - The system should provide a search by tag
      *
-     * @param request {@link com.netcracker.DTO.SearchRequest} - object that contains full number
-     *                     of search parameters, any of which can be omitted
-     * @return List of {@link ShortLabelInfo} - list of objects that contain
-     *                     short information required for filtrating and searching labels on selected
-     *                     area.
+     * @param request {@link SearchDtoParameters} - object that contains full number
+     *      of search parameters, any of which can be omitted.
+     * @return List of {@link LabelDtoShortInfo} - list of objects that contain
+     *      short information required for filtrating and searching labels on selected area.
      */
-    @PostMapping("/")
-    public List<ShortLabelInfo> searchByFullRequest(@RequestBody SearchRequest request) {
+    @PostMapping("/parameters")
+    public List<LabelDtoShortInfo> searchByFullRequest(@RequestBody SearchDtoParameters request) {
         return null;
     }
 
@@ -53,13 +53,12 @@ public class SearchController {
      * Method covers the following functional requirements:
      *      FR29 - The system should provide a search by tag
      *
-     * @param tagName - string that contains name of the tag to search labels by
-     * @return List of {@link ShortLabelInfo} - list of objects that contain
-     *                     short information required for filtrating and searching labels on selected
-     *                     area.
+     * @param request {@link SearchDtoTag} - object that contains information about tag.
+     * @return List of {@link LabelDtoShortInfo} - list of objects that contain
+     *      short information required for filtrating and searching labels on selected area.
      */
-    @GetMapping("/?tag={tagName}")
-    public List<ShortLabelInfo> searchByTag(@PathVariable String tagName) {
+    @GetMapping("/parameters/tag")
+    public List<LabelDtoShortInfo> searchByTag(@RequestBody SearchDtoTag request) {
         return null;
     }
 }

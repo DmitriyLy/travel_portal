@@ -1,7 +1,8 @@
 package com.netcracker.controllers;
 
-import com.netcracker.DTO.ShortLabelInfo;
-import com.netcracker.DTO.ScaleDefinePoints;
+import com.netcracker.dto.LabelDtoShortInfo;
+import com.netcracker.dto.SearchDtoEllipse;
+import com.netcracker.dto.SearchDtoRectangle;
 import com.netcracker.services.impl.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,11 +39,11 @@ public class MapController {
     /**
      * Method returns short label's info to client. It is required for setting labels on map.
      *
-     * @param definePoints - object contains the coordinates of two points - NE and SW.
+     * @param rectangle (@link SearchDtoRectangle} - object contains the coordinates of two points - NW and SE.
      *                     These points are determined by the system and form a straight line,
      *                     which is diagonal of rectangle. The points that are inside the
      *                     rectangle will be transmitted to the client.
-     * @return List of {@link com.netcracker.DTO.ShortLabelInfo} - list with objects that contains
+     * @return List of {@link LabelDtoShortInfo} - list with objects that contains
      *                     short information required for setting labels on map.
      *
      * Method covers the following functional requirements:
@@ -58,23 +59,20 @@ public class MapController {
      *      FR8 - The system should hide the label coming out of the visible area or when you change
      *      the scale of the displayed geographical area.
      */
-    @PostMapping(value = "/getLabelsByRect")
-    public List<ShortLabelInfo> getLabelsByRect(@RequestBody ScaleDefinePoints definePoints) {
+    @PostMapping("/labels/search/by/area/rectangle")
+    public List<LabelDtoShortInfo> getLabelsByRectangle(@RequestBody SearchDtoRectangle rectangle) {
         return null;
     }
 
     /**
      * Method returns short label's info to client. It is required for filtering and searching.
      *
-     * @param definePoints - object contains the coordinates of two points. The coordinates of
-     *                     the first point defined by the user, which indicates a random location
-     *                     on the map. This point will be the center of the circle. The second
-     *                     point defines the system. The distance between the first and the second
-     *                     point will be the radius of the circle. The points that will be located
-     *                     inside the circle will be transferred to the client.
-     * @return List of {@link ShortLabelInfo} - list with objects that contains
-     *                     short information required for filtrating and searching labels on selected
-     *                     area.
+     * @param ellipse {@link SearchDtoEllipse} - object contains the coordinates of a point
+     *      and lengths of two axises. The coordinates of the point are defined by the user,
+     *      which indicates a random location on the map. This point will be the center of the ellipse.
+     *      The labels that will be located inside the ellipse will be transferred to the client.
+     * @return List of {@link LabelDtoShortInfo} - list with objects that contains
+     *      short information required for filtrating and searching labels on selected area.
      *
      * Method covers the following functional requirements:
      *      FR10 - The system should create a list containing the summary and the hyperlink
@@ -82,8 +80,8 @@ public class MapController {
      *      FR11 - The system should display the list (FR 10) in the top of the map window.
      *      FR12 - The system should allow you to sort the list (FR 10) rated / creation date labels.
      */
-    @PostMapping(value = "/getLabelsByCircle")
-    public List<ShortLabelInfo> getLabelsByCircle(@RequestBody ScaleDefinePoints definePoints) {
+    @PostMapping("/labels/search/by/area/ellipse")
+    public List<LabelDtoShortInfo> getLabelsByEllipse(@RequestBody SearchDtoEllipse ellipse) {
         return null;
     }
 
