@@ -21,8 +21,8 @@ import java.util.List;
 @RestController
 public class MapController {
 
-    @Autowired
-    LabelService labelService;
+    /*@Autowired
+    LabelService labelService;*/
 
     /**
      * Method returns start page to client.
@@ -31,10 +31,10 @@ public class MapController {
      *
      * @return index.jsp
      */
-    @GetMapping(value = "/")
+   /* @GetMapping(value = "/")
     public String getMap() {
         return "index";
-    }
+    }*/
 
     /**
      * Method returns short label's info to client. It is required for setting labels on map.

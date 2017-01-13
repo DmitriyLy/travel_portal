@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:/service-context.xml"})
 public class UserServiceTest {
 
-    @Autowired
-    UserService userService;
+    /*@Autowired
+    UserService userService;*/
 
 }
