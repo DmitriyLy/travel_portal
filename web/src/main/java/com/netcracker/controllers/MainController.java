@@ -1,5 +1,6 @@
 package com.netcracker.controllers;
 
+import com.netcracker.securityConfig.MyUserAccount;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -17,13 +18,13 @@ public class MainController {
     @RequestMapping(value = { "/" }, method = RequestMethod.GET)
     public String homePage(Model model) {
         try {
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+            MyUserAccount user = (MyUserAccount)SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
-            if (userDetails != null) {
-                System.out.println(userDetails.getUsername());
-                System.out.println(userDetails.isEnabled());
+            if (user != null) {
+                System.out.println(user.getLastName());
+                System.out.println(user.isEnabled());
 
-                model.addAttribute("userDetails", userDetails);
+                model.addAttribute("userDetails", user);
             }
         } catch (Exception e) {
         }

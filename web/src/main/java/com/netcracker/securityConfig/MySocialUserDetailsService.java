@@ -18,12 +18,7 @@ public class MySocialUserDetailsService implements SocialUserDetailsService {
 
     @Override
     public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException, DataAccessException {
-
-        MyUserAccount account= myUserAccountDAO.findById(userId);
-
-        MySocialUserDetails userDetails= new MySocialUserDetails(account);
-
-        return userDetails;
+        return myUserAccountDAO.findById(userId);
     }
 
 }
