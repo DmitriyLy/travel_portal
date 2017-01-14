@@ -13,12 +13,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class MySocialUserDetailsService implements SocialUserDetailsService {
 
-
     @Autowired
     private MyUserAccountDAO myUserAccountDAO;
 
-    // Loads the UserDetails by using the userID of the user.
-    // (This method Is used by Spring Security API).
     @Override
     public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException, DataAccessException {
 

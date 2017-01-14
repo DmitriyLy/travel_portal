@@ -133,7 +133,7 @@
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-facebook</artifactId>
-            <version>2.0.3.RELEASE</version>
+            <version>3.0.0.M1</version>
             <exclusions>
                 <exclusion>
                     <artifactId>spring-social-core</artifactId>
@@ -151,21 +151,6 @@
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-google</artifactId>
             <version>1.0.0.RELEASE</version>
-        </dependency>
-
-
-        <!-- http://mvnrepository.com/artifact/org.springframework.social/spring-social-twitter -->
-        <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-twitter</artifactId>
-            <version>1.1.2.RELEASE</version>
-        </dependency>
-
-        <!-- http://mvnrepository.com/artifact/org.springframework.social/spring-social-linkedin -->
-        <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-linkedin</artifactId>
-            <version>1.0.2.RELEASE</version>
         </dependency>
 
         <!-- Logging -->
@@ -219,11 +204,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
             <version>${springframework.Core-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-validator</groupId>
-            <artifactId>commons-validator</artifactId>
-            <version>1.5.0</version>
         </dependency>
     </dependencies>
 

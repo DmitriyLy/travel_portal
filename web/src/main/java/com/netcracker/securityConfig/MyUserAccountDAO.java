@@ -1,10 +1,11 @@
 package com.netcracker.securityConfig;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionKey;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,13 +25,25 @@ public class MyUserAccountDAO extends JdbcDaoSupport {
         this.setDataSource(dataSource);
     }
 
+    private final RowMapper<MyUserAccount> mapper = (rs, rowNum) -> {
+        String id = rs.getString("id");
+
+        String email = rs.getString("email");
+        String userName = rs.getString("user_name");
+        String firstName = rs.getString("first_name");
+        String lastName = rs.getString("last_name");
+        String role = rs.getString("role");
+
+        return new MyUserAccount(id, email, userName,
+                firstName, lastName, role);
+    };
+
     public MyUserAccount findById(String id) {
-        String sql = "Select id,email,user_name, first_name,last_name,"//
-                + " password,role"//
-                + " from User_Accounts u "//
+        String sql = "Select id,email,user_name, first_name,last_name,"
+                + " role"
+                + " from User_Accounts u "
                 + " where id = ? ";
-        Object[] params = new Object[] { id };
-        MyUserAccountMapper mapper = new MyUserAccountMapper();
+        Object[] params = new Object[]{id};
         try {
             MyUserAccount userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
             return userInfo;
@@ -40,12 +53,11 @@ public class MyUserAccountDAO extends JdbcDaoSupport {
     }
 
     public MyUserAccount findByEmail(String email) {
-        String sql = "Select id, email,user_name,first_name,last_name,"//
-                + " password,role"//
-                + " from User_Accounts u "//
+        String sql = "Select id, email,user_name,first_name,last_name,"
+                + " role"
+                + " from User_Accounts u "
                 + " where email = ? ";
-        Object[] params = new Object[] { email };
-        MyUserAccountMapper mapper = new MyUserAccountMapper();
+        Object[] params = new Object[]{email};
         try {
             MyUserAccount userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
             return userInfo;
@@ -55,12 +67,11 @@ public class MyUserAccountDAO extends JdbcDaoSupport {
     }
 
     public MyUserAccount findByUserName(String userName) {
-        String sql = "Select id, email,user_name,first_name,last_name,"//
-                + " password,role"//
-                + " from User_Accounts u "//
+        String sql = "Select id, email,user_name,first_name,last_name,"
+                + " role"
+                + " from User_Accounts u "
                 + " where user_name = ? ";
-        Object[] params = new Object[] { userName };
-        MyUserAccountMapper mapper = new MyUserAccountMapper();
+        Object[] params = new Object[]{userName};
         try {
             MyUserAccount userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
             return userInfo;
@@ -69,28 +80,7 @@ public class MyUserAccountDAO extends JdbcDaoSupport {
         }
     }
 
-    public MyUserAccount registerNewUserAccount(MyUserAccountForm accountForm) {
-        String sql = "Insert into User_Accounts "//
-                + " (id, email,user_name,first_name,last_name,password,role) "//
-                + " values (?,?,?,?,?,?,?) ";
-
-        // Random string with 36 characters.
-        String id = UUID.randomUUID().toString();
-
-        this.getJdbcTemplate().update(sql, id, accountForm.getEmail(), //
-                accountForm.getUserName(), //
-                accountForm.getFirstName(), accountForm.getLastName(), //
-                accountForm.getPassword(), MyUserAccount.ROLE_USER);
-        return findById(id);
-    }
-
-    // Auto Create USER_ACCOUNTS.
     public MyUserAccount createUserAccount(Connection<?> connection) {
-
-        ConnectionKey key = connection.getKey();
-        // (facebook,12345), (google,123) ...
-
-        System.out.println("key= (" + key.getProviderId() + "," + key.getProviderUserId() + ")");
 
         UserProfile userProfile = connection.fetchUserProfile();
 
@@ -100,22 +90,20 @@ public class MyUserAccountDAO extends JdbcDaoSupport {
             return account;
         }
 
-        // Create User_Account.
-        String sql = "Insert into User_Accounts "//
-                + " (id, email,user_name,first_name,last_name,password,role) "//
-                + " values (?,?,?,?,?,?,?) ";
+        String sql = "Insert into User_Accounts "
+                + " (id, email,user_name,first_name,last_name,role) "
+                + " values (?,?,?,?,?,?) ";
 
         // Random string with 36 characters.
         String id = UUID.randomUUID().toString();
 
-        String userName_prefix = userProfile.getFirstName().trim().toLowerCase()//
-                +"_"+ userProfile.getLastName().trim().toLowerCase();
+        String userName_prefix = userProfile.getFirstName().trim().toLowerCase()
+                + "_" + userProfile.getLastName().trim().toLowerCase();
 
         String userName = this.findAvailableUserName(userName_prefix);
 
-        this.getJdbcTemplate().update(sql, id, email, userName, //
-                userProfile.getFirstName(), userProfile.getLastName(), //
-                "123", MyUserAccount.ROLE_USER);
+        this.getJdbcTemplate().update(sql, id, email, userName,
+                userProfile.getFirstName(), userProfile.getLastName(), MyUserAccount.ROLE_USER);
         return findById(id);
     }
 

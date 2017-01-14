@@ -15,7 +15,7 @@ public class MySocialUserDetails implements SocialUserDetails {
 
     private static final long serialVersionUID = -5246117266247684905L;
 
-    private List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+    private List<GrantedAuthority> list = new ArrayList<>();
     private MyUserAccount myUserAccount;
 
     public MySocialUserDetails(MyUserAccount myUserAccount) {
@@ -43,7 +43,7 @@ public class MySocialUserDetails implements SocialUserDetails {
 
     @Override
     public String getPassword() {
-        return myUserAccount.getPassword();
+        return null;
     }
 
     @Override

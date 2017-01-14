@@ -13,22 +13,19 @@ public class MyUserAccount {
 
     private String firstName;
     private String lastName;
-    private String password;
     private String role;
 
     public MyUserAccount() {
 
     }
 
-    public MyUserAccount(String id, String email,String userName, String firstName, //
-                         String lastName, String password, //
-                         String role) {
+    public MyUserAccount(String id, String email, String userName,
+                         String firstName, String lastName, String role) {
         this.id = id;
         this.email = email;
-        this.userName= userName;
+        this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.password = password;
         this.role = role;
     }
 
@@ -72,14 +69,6 @@ public class MyUserAccount {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getRole() {
         return role;
     }
@@ -87,5 +76,4 @@ public class MyUserAccount {
     public void setRole(String role) {
         this.role = role;
     }
-
 }
