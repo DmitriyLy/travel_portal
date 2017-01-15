@@ -6,18 +6,24 @@ package com.netcracker.entities;
  * @see com.netcracker.repositories.impl.CityRepositoryImpl
  */
 public class City {
-    private int id;
+    private long id;
     private int stateId;
     private String name;
 
     public City() {
     }
 
-    public int getId() {
+    public City(long id, String name, int stateId) {
+        this.id = id;
+        this.stateId = stateId;
+        this.name = name;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -44,18 +50,12 @@ public class City {
 
         City city = (City) o;
 
-        if (id != city.id) return false;
-        if (stateId != city.stateId) return false;
-        return name != null ? name.equals(city.name) : city.name == null;
-
+        return id == city.id;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + stateId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return (int) (id ^ (id >>> 32));
     }
 
     @Override

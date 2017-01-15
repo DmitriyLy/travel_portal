@@ -47,6 +47,15 @@ public interface IRepository<T> {
     T getById(long id);
 
     /**
+     * Метод который в основном используется для тестирования добавления/удаления
+     * элемента в/из базы данных. Возвращает актуальное количество записей/колонок в
+     * таблице.
+     *
+     * @exception org.springframework.dao.DataAccessException - unchecked database exception.
+     */
+    long getColumnCount();
+
+    /**
      * Method is responsible for query execution using specification injection
      * from package {@link com.netcracker.specifications}
      *

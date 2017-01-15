@@ -9,6 +9,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,12 +23,22 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     private final static Logger LOGGER = LogManager.getLogger(CountryRepositoryImpl.class.getName());
 
     @Autowired
-    private JdbcTemplate template;
+    private JdbcTemplate jdbcTemplate;
+
+    private RowMapper<Country> mapper = (rs, rowNum) -> {
+        Country country = new Country();
+        country.setId(rs.getInt("id"));
+        country.setName(rs.getString("name"));
+        return country;
+    };
 
     @Override
     public Country add(Country item) {
         String query = QueriesRepository.INSERT_COUNTRY;
-        int out = template.update(query,
+        item.setId(getNewCountryId());
+
+        int out = jdbcTemplate.update(query,
+                item.getId(),
                 item.getName()
         );
 
@@ -41,7 +52,7 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     @Override
     public Country update(Country item) {
         String query = QueriesRepository.UPDATE_COUNTRY;
-        int out = template.update(query,
+        int out = jdbcTemplate.update(query,
                 item.getName(),
                 item.getId()
         );
@@ -56,7 +67,7 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     @Override
     public Country remove(Country item) {
         String query = QueriesRepository.DELETE_COUNTRY;
-        int out = template.update(query,
+        int out = jdbcTemplate.update(query,
                 item.getId()
         );
 
@@ -70,22 +81,26 @@ public class CountryRepositoryImpl implements IRepository<Country> {
     @Override
     public Country getById(long id) {
         String query = QueriesRepository.GET_COUNTRY_BY_ID;
-        return template.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
-            Country country = new Country();
-            country.setId(rs.getInt("id"));
-            country.setName(rs.getString("name"));
-            return country;
-        });
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, mapper);
+    }
+
+    @Override
+    public long getColumnCount() {
+        String query = QueriesRepository.GET_COUNT_OF_COUNTRIES;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 
     @Override
     public List<Country> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
-        return template.query(sqlSpecification.toSqlQuery(), (rs, rowNum) -> {
-            Country country = new Country();
-            country.setId(rs.getInt("id"));
-            country.setName(rs.getString("name"));
-            return country;
-        });
+        return jdbcTemplate.query(sqlSpecification.toSqlQuery(), mapper);
+    }
+
+    /**
+     * @return long value - id of last row in COUNTRY table.
+     */
+    private long getNewCountryId(){
+        String query = QueriesRepository.GET_NEW_ID_COUNTRY;
+        return jdbcTemplate.queryForObject(query, Long.class);
     }
 }

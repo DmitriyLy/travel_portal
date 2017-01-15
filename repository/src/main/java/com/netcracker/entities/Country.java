@@ -6,17 +6,22 @@ package com.netcracker.entities;
  * @see com.netcracker.repositories.impl.CountryRepositoryImpl
  */
 public class Country {
-    private int id;
+    private long id;
     private String name;
 
     public Country() {
     }
 
-    public int getId() {
+    public Country(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -35,15 +40,12 @@ public class Country {
 
         Country country = (Country) o;
 
-        if (id != country.id) return false;
-        return name != null ? name.equals(country.name) : country.name == null;
+        return id == country.id;
     }
 
     @Override
     public int hashCode() {
-        int result = id ^ (id >>> 32);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return (int) (id ^ (id >>> 32));
     }
 
     @Override

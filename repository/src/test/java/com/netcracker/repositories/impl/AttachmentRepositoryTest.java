@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- *  Test for {@link com.netcracker.repositories.impl.UserRepositoryImpl}
+ *  Test for {@link com.netcracker.repositories.impl.AttachmentRepositoryImpl}
  *
  *  Add a VM Options before start test:
  * -Duser.language=en
@@ -18,52 +18,52 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations = {"classpath:/data-context.xml"})
-public class LabelRepositoryTest {
+public class AttachmentRepositoryTest {
 
     /*
-
     @Autowired
-    LabelRepositoryImpl labelRepository;
+    AttachmentRepositoryImpl attachmentRepository;
 
     @Test
-    public void addLabelTest(){
+    public void addAttachmentTest(){
 
     }
 
     @Test
-    public void updateLabelTest(){
+    public void updateAttachmentTest(){
 
     }
 
     @Test
-    public void getByIdLabelTest(){
+    public void getByIdAttachmentTest(){
 
     }
 
     @Test
-    public void deleteLabelTest(){
+    public void deleteAttachmentTest(){
 
     }
 
     @Test(expected = DuplicateEntityException.class)
-    public void addDuplicateLabelThrowsException(){
+    public void addDuplicateAttachmentThrowsException(){
 
     }
 
     @Test(expected = NoSuchEntityException.class)
-    public void updateNonExistingLabelThrowsException(){
+    public void updateNonExistingAttachmentThrowsException(){
 
     }
 
     @Test(expected = NoSuchEntityException.class)
-    public void getNonExistingLabelThrowsException(){
+    public void getNonExistingAttachmentThrowsException(){
 
     }
 
     @Test(expected = NoSuchEntityException.class)
-    public void deleteNonExistingLabelThrowsException(){
+    public void deleteNonExistingAttachmentThrowsException(){
 
     }
+
     */
 
 }
