@@ -1,131 +1,866 @@
 DECLARE
-  soc_net_id USERS.SOC_NET_ID%TYPE;
-BEGIN
+  c_userid USERS.ID%TYPE;
+  c_user_name USERS.user_name%TYPE;
+  c_providerid USERCONNECTION.providerid%TYPE;
+  c_provideruserid USERCONNECTION.provideruserid%TYPE;
+  c_accesstoken USERCONNECTION.accesstoken%TYPE;
+BEGIN      
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Steven', 'King');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
 
-  SELECT
-    ID
-  INTO soc_net_id
-  FROM
-    SOCIAL_NETWORKS
-  WHERE
-    NAME = 'facebook.com';
-    
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Steven', 'King', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Neena', 'Kochhar', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Lex', 'De Haan', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Alexander', 'Hunold', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Bruce', 'Ernst', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'David', 'Austin', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Valli', 'Pataballa', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Diana', 'Lorentz', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Nancy', 'Greenberg', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Daniel', 'Faviet', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'John', 'Chen', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Ismael', 'Sciarra', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Jose Manuel', 'Urman', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Luis', 'Popp', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Den', 'Raphaely', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Alexander', 'Khoo', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Shelli', 'Baida', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Sigal', 'Tobias', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Guy', 'Himuro', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Karen', 'Colmenares', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Matthew', 'Weiss', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Adam', 'Fripp', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Payam', 'Kaufling', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Shanta', 'Vollman', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Kevin', 'Mourgos', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Julia', 'Nayer', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Irene', 'Mikkilineni', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'James', 'Landry', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Steven', 'Markle', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Laura', 'Bissot', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Mozhe', 'Atkinson', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'James', 'Marlow', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'TJ', 'Olson', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Jason', 'Mallin', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Michael', 'Rogers', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Ki', 'Gee', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Hazel', 'Philtanker', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Renske', 'Ladwig', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Stephen', 'Stiles', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'John', 'Seo', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Joshua', 'Patel', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Trenna', 'Rajs', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Curtis', 'Davies', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Randall', 'Matos', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Peter', 'Vargas', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Neena', 'Kochhar');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
 
-  SELECT
-    ID
-  INTO soc_net_id
-  FROM
-    SOCIAL_NETWORKS
-  WHERE
-    NAME = 'g+';
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Lex', 'De Haan');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Alexander', 'Hunold');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Bruce', 'Ernst');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'David', 'Austin');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Valli', 'Pataballa');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Diana', 'Lorentz');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Nancy', 'Greenberg');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Daniel', 'Faviet');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'John', 'Chen');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Ismael', 'Sciarra');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Jose Manuel', 'Urman');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Luis', 'Popp');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Den', 'Raphaely');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Alexander', 'Khoo');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Shelli', 'Baida');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Sigal', 'Tobias');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Guy', 'Himuro');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Karen', 'Colmenares');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Matthew', 'Weiss');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Adam', 'Fripp');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Payam', 'Kaufling');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Shanta', 'Vollman');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Kevin', 'Mourgos');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Julia', 'Nayer');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Irene', 'Mikkilineni');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'James', 'Landry');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Steven', 'Markle');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Laura', 'Bissot');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Mozhe', 'Atkinson');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'James', 'Marlow');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'TJ', 'Olson');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Jason', 'Mallin');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Michael', 'Rogers');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Ki', 'Gee');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Hazel', 'Philtanker');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Renske', 'Ladwig');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Stephen', 'Stiles');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'John', 'Seo');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Joshua', 'Patel');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Trenna', 'Rajs');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Curtis', 'Davies');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Randall', 'Matos');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Peter', 'Vargas');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
     
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'John', 'Russell', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Karen', 'Partners', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Alberto', 'Errazuriz', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Gerald', 'Cambrault', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Eleni', 'Zlotkey', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Peter', 'Tucker', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'David', 'Bernstein', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Peter', 'Hall', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Christopher', 'Olsen', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Nanette', 'Cambrault', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Oliver', 'Tuvault', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Janette', 'King', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Patrick', 'Sully', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Allan', 'McEwen', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Lindsey', 'Smith', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Louise', 'Doran', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Sarath', 'Sewall', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Clara', 'Vishney', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Danielle', 'Greene', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Mattea', 'Marvins', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'David', 'Lee', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Sundar', 'Ande', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Amit', 'Banda', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Lisa', 'Ozer', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Harrison', 'Bloom', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Tayler', 'Fox', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'William', 'Smith', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Elizabeth', 'Bates', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Sundita', 'Kumar', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Ellen', 'Abel', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Alyssa', 'Hutton', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Jonathon', 'Taylor', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Jack', 'Livingston', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Kimberely', 'Grant', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Charles', 'Johnson', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Winston', 'Taylor', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Jean', 'Fleaur', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Martha', 'Sullivan', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Girard', 'Geoni', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Nandita', 'Sarchand', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Alexis', 'Bull', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Julia', 'Dellinger', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Anthony', 'Cabrio', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Kelly', 'Chung', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Jennifer', 'Dilly', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Timothy', 'Gates', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Randall', 'Perkins', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Sarah', 'Bell', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Britney', 'Everett', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Samuel', 'McCain', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Vance', 'Jones', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Alana', 'Walsh', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Kevin', 'Feeney', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Donald', 'OConnell', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Douglas', 'Grant', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Jennifer', 'Whalen', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Michael', 'Hartstein', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Pat', 'Fay', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Susan', 'Mavris', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Hermann', 'Baer', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'Shelley', 'Higgins', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
-  INSERT INTO USERS VALUES (USERS_SEQ.NEXTVAL, 'William', 'Gietz', 'uuF123' || ((USERS_SEQ.NEXTVAL + 1) * 12), soc_net_id, NULL);
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'John', 'Russell');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Karen', 'Partners');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Alberto', 'Errazuriz');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Gerald', 'Cambrault');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Eleni', 'Zlotkey');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Peter', 'Tucker');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'David', 'Bernstein');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Peter', 'Hall');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Christopher', 'Olsen');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Nanette', 'Cambrault');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Oliver', 'Tuvault');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Janette', 'King');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Patrick', 'Sully');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Allan', 'McEwen');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Lindsey', 'Smith');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Louise', 'Doran');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Sarath', 'Sewall');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Clara', 'Vishney');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Danielle', 'Greene');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Mattea', 'Marvins');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'David', 'Lee');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Sundar', 'Ande');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Amit', 'Banda');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Lisa', 'Ozer');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Harrison', 'Bloom');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Tayler', 'Fox');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'William', 'Smith');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Elizabeth', 'Bates');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Sundita', 'Kumar');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Ellen', 'Abel');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Alyssa', 'Hutton');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Jonathon', 'Taylor');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Jack', 'Livingston');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Kimberely', 'Grant');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Charles', 'Johnson');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Winston', 'Taylor');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Jean', 'Fleaur');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Martha', 'Sullivan');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Girard', 'Geoni');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Nandita', 'Sarchand');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Alexis', 'Bull');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Julia', 'Dellinger');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Anthony', 'Cabrio');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Kelly', 'Chung');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Jennifer', 'Dilly');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Timothy', 'Gates');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Randall', 'Perkins');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Sarah', 'Bell');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Britney', 'Everett');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Samuel', 'McCain');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Vance', 'Jones');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Alana', 'Walsh');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Kevin', 'Feeney');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Donald', 'OConnell');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Douglas', 'Grant');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Jennifer', 'Whalen');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Michael', 'Hartstein');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Pat', 'Fay');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Susan', 'Mavris');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Hermann', 'Baer');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Shelley', 'Higgins');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'William', 'Gietz');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+
   
 END;
 /

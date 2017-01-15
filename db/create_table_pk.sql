@@ -26,25 +26,37 @@ CREATE TABLE LOCATIONS (
   CONSTRAINT pk_locations PRIMARY KEY (id)
 );
 
-CREATE TABLE SOCIAL_NETWORKS (
-  id NUMBER(2),
-  name NVARCHAR2(50),
-  CONSTRAINT pk_social_networks PRIMARY KEY (id)
+CREATE TABLE USERCONNECTION
+(
+	userid         VARCHAR2(255),
+	providerid     VARCHAR2(255),
+	provideruserid VARCHAR2(255),
+	rank           INTEGER DEFAULT 0 NOT NULL,
+	displayname    VARCHAR2(255),
+	profileurl     VARCHAR2(512),
+	imageurl       VARCHAR2(512),
+	accesstoken    VARCHAR2(255) NOT NULL,
+	secret         VARCHAR2(255),
+	refreshtoken   VARCHAR2(255),
+	expiretime     NUMBER(19),
+	CONSTRAINT pk_userconn PRIMARY KEY(userid, providerid, provideruserid)
 );
 
-CREATE TABLE USERS (
-  id NUMBER(9),
-  first_name NVARCHAR2(50),
-  last_name NVARCHAR2(50),
-  soc_net_user_id NVARCHAR2(300),
-  soc_net_id NUMBER(2),
-  status NUMBER(1),
-  CONSTRAINT pk_users PRIMARY KEY (id)
-);
+create table USERS
+(
+	id         VARCHAR2(255),
+	email      VARCHAR2(100),
+	user_name  NVARCHAR2(100) NOT NULL,
+	first_name NVARCHAR2(100),
+	last_name  NVARCHAR2(100),
+	role       VARCHAR2(20) DEFAULT 'user' NOT NULL,
+	enabled    VARCHAR2(1) DEFAULT 'Y' NOT NULL,
+	CONSTRAINT pk_users PRIMARY KEY (id)
+) ;
 
 CREATE TABLE LABELS (
   id NUMBER(10),
-  user_id NUMBER(9),
+  user_id VARCHAR2(255),
   location_id NUMBER(8),
   owner_comment NVARCHAR2(500),
   rating NUMBER(1) DEFAULT 0,
@@ -68,14 +80,14 @@ CREATE TABLE TAGS (
 );
 
 CREATE TABLE BOOKMARKS (
-  user_id NUMBER(9),
+  user_id VARCHAR2(255),
   label_id NUMBER(10),
   CONSTRAINT pk_bookmarks PRIMARY KEY (user_id, label_id)
 );
 
 CREATE TABLE COMMENTS (
   id NUMBER(11),
-  user_id NUMBER(9),
+  user_id VARCHAR2(255),
   label_id NUMBER(10),
   comment_date DATE,
   comment_text NVARCHAR2(500),
@@ -96,7 +108,7 @@ CREATE TABLE TAGS_LABELS (
 
 CREATE TABLE ATTACHMENTS (
   id NUMBER(11),
-  user_id NUMBER(9),
+  user_id VARCHAR2(255),
   label_id NUMBER(10),
   file_path VARCHAR2(250),
   name VARCHAR2(50),
