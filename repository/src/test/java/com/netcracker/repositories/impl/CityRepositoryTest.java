@@ -20,9 +20,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * -Duser.region=us
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class CityRepositoryTest {
+
+    /*
 
     @Autowired
     CityRepositoryImpl cityRepository;
@@ -79,4 +81,5 @@ public class CityRepositoryTest {
 
     }
 
+    */
 }

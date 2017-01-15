@@ -16,9 +16,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * -Duser.region=us
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class LabelRepositoryTest {
+
+    /*
 
     @Autowired
     LabelRepositoryImpl labelRepository;
@@ -62,5 +64,6 @@ public class LabelRepositoryTest {
     public void deleteNonExistingLabelThrowsException(){
 
     }
+    */
 
 }

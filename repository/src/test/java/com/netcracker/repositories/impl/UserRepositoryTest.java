@@ -3,7 +3,6 @@ package com.netcracker.repositories.impl;
 import com.netcracker.entities.User;
 import com.netcracker.exception.DuplicateEntityException;
 import com.netcracker.exception.NoSuchEntityException;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +21,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * -Duser.region=us
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class UserRepositoryTest {
+
+    /*
 
     @Autowired
     UserRepositoryImpl userRepository;
@@ -83,5 +84,7 @@ public class UserRepositoryTest {
     public void deleteNonExistingUserThrowsException() {
 
     }
+
+    */
 
 }

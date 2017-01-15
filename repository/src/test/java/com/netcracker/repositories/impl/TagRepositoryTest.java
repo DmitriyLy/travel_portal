@@ -20,9 +20,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * -Duser.region=us
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class TagRepositoryTest {
+
+    /*
 
     @Autowired
     TagRepositoryImpl tagRepository;
@@ -77,5 +79,7 @@ public class TagRepositoryTest {
     public void deleteNonExistingTagThrowsException(){
 
     }
+
+    */
 
 }
