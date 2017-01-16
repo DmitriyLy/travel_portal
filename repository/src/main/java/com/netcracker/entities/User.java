@@ -1,28 +1,62 @@
 package com.netcracker.entities;
 
-/**
- * Entity represent's USERS table from TRAVEL_PORTAL database.
- *
- * @see com.netcracker.repositories.impl.UserRepositoryImpl
- */
-public class User {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.social.security.SocialUserDetails;
 
-    private long id;
+import java.util.Collection;
+
+/**
+ * Created by blaze159 on 13.01.17.
+ */
+public class User implements SocialUserDetails {
+
+    public static final String ROLE_USER = "ROLE_USER";
+
+    private String id;
+    private String email;
+    private String userName;
+
     private String firstName;
     private String lastName;
-    private String socNetUserId;
-    private long socialNetworkId;
-    private int status;
+    private String role;
 
     public User() {
+
     }
 
-    public long getId() {
+    public User(String id, String email, String userName,
+                String firstName, String lastName, String role) {
+        this.id = id;
+        this.email = email;
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -37,55 +71,55 @@ public class User {
         return lastName;
     }
 
-    public void setLastName(String secondName) {
-        this.lastName = secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getSocNetUserId() {
-        return socNetUserId;
+    public String getRole() {
+        return role;
     }
 
-    public void setSocNetUserId(String socNetUserId) {
-        this.socNetUserId = socNetUserId;
-    }
-
-    public long getSocialNetworkId() {
-        return socialNetworkId;
-    }
-
-    public void setSocialNetworkId(long socialNetworkId) {
-        this.socialNetworkId = socialNetworkId;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        return id == user.id;
+    public String getUserId() {
+        return this.getId();
     }
 
     @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
+    public String getUsername() {
+        return this.getUserName();
     }
 
     @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + lastName + '\'' +
-                '}';
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return AuthorityUtils.createAuthorityList(this.role);
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

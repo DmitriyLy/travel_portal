@@ -30,8 +30,8 @@ import java.util.List;
 @RequestMapping("/labels/{labelId}/comments")
 public class CommentController {
 
-    @Autowired
-    CommentService commentService;
+    /*@Autowired
+    CommentService commentService;*/
 
     /**
      * The method provides all comments under specified label.

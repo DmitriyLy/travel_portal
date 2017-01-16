@@ -49,21 +49,7 @@ public interface QueriesRepository {
     String GET_COUNT_OF_CATEGORIES = "SELECT count(*) FROM CATEGORIES";
     String GET_NEW_ID_CATEGORY = "SELECT CATEGORIES_SEQ.NEXTVAL FROM DUAL";
 
-    String INSERT_SOCIAL_NETWORK = "INSERT INTO SOCIAL_NETWORKS(id,name) values(?,?)";
-    String UPDATE_SOCIAL_NETWORK = "UPDATE SOCIAL_NETWORKS SET name=? WHERE id=?";
-    String DELETE_SOCIAL_NETWORK = "DELETE FROM SOCIAL_NETWORKS WHERE id=?";
-    String GET_SOCIAL_NETWORK_BY_ID = "SELECT * FROM SOCIAL_NETWORKS WHERE id=?";
-    String GET_COUNT_OF_NETWORKS = "SELECT count(*) FROM SOCIAL_NETWORKS";
-    String GET_NEW_ID_SOCIAL_NETWORKS = "SELECT SOCIAL_NETWORKS_SEQ.NEXTVAL FROM DUAL";
-
-    String INSERT_USER = "INSERT INTO USERS(id,first_name,last_name,soc_net_user_id,soc_net_id,status) values(?,?,?,?,?,?)";
-    String UPDATE_USER = "UPDATE USERS SET first_name=?, last_name=?, soc_net_user_id=?, soc_net_id=?, status=? WHERE id=?";
-    String DELETE_USER = "DELETE FROM USERS WHERE id=?";
-    String GET_USER_BY_ID = "SELECT * FROM USERS WHERE id=?";
-    String GET_COUNT_OF_USERS = "SELECT count(*) FROM USERS";
-    String GET_NEW_ID_USERS = "SELECT USERS_SEQ.NEXTVAL FROM DUAL";
-
-    String INSERT_MAP_PROVIDER = "INSERT INTO MAP_PROVIDERS(id,name,coord_sys_name) values(?,?,?)";
+    String INSERT_MAP_PROVIDER = "INSERT INTO MAP_PROVIDERS(name,coord_sys_name) values(?,?)";
     String UPDATE_MAP_PROVIDER = "UPDATE MAP_PROVIDERS SET name=?, coord_sys_name=? WHERE id=?";
     String DELETE_MAP_PROVIDER = "DELETE FROM MAP_PROVIDERS WHERE id=?";
     String GET_MAP_PROVIDER_BY_ID = "SELECT * FROM MAP_PROVIDERS WHERE id=?";

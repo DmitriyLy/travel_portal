@@ -12,7 +12,7 @@ connect TRAVEL_PORTAL/TRAVEL_PORTAL
 @insert_countries.sql
 @insert_states.sql
 @insert_cities.sql
-@insert_soc_net.sql
+--@insert_soc_net.sql
 @insert_categories.sql
 @insert_tags.sql
 @insert_users.sql
@@ -28,6 +28,6 @@ disconnect
 connect TRAVEL_PORTAL/TRAVEL_PORTAL
 --@create_get_pk_trigger_procedure.sql
 --@create_pk_triggers.sql
-@create_stored_functions.sql
+--@create_stored_functions.sql
 exit;
 /

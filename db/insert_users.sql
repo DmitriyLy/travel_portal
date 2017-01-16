@@ -1,33 +1,61 @@
 DECLARE
-  soc_net_id USERS.SOC_NET_ID%TYPE;
+  c_userid USERS.ID%TYPE;
+  c_user_name USERS.user_name%TYPE;
+  c_providerid USERCONNECTION.providerid%TYPE;
+  c_provideruserid USERCONNECTION.provideruserid%TYPE;
+  c_accesstoken USERCONNECTION.accesstoken%TYPE;
 BEGIN
-
-  SELECT
-    ID
-  INTO soc_net_id
-  FROM
-    SOCIAL_NETWORKS
-  WHERE
-    NAME = 'facebook.com';
-    
-  INSERT INTO USERS VALUES(USERS_SEQ.NEXTVAL, 'Ivan', 'Ivanov', 'ii123', soc_net_id, NULL);
-  INSERT INTO USERS VALUES(USERS_SEQ.NEXTVAL, 'Petr', 'Petrov', 'pp456', soc_net_id, NULL);
-  INSERT INTO USERS VALUES(USERS_SEQ.NEXTVAL, 'Sidor', 'Sidorov', 'ss456', soc_net_id, NULL);
+  
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Ivan', 'Ivanov');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+  
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Petr', 'Petrov');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
+  
+  c_userid := DBMS_RANDOM.STRING('A', 100);
+  c_user_name := DBMS_RANDOM.STRING('A', 100);
+  c_providerid := DBMS_RANDOM.STRING('A', 100);
+  c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+  c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  
+  INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'Sidor', 'Sidorov');
+  INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
   
   FOR i IN 1..10 LOOP
-    INSERT INTO USERS VALUES(USERS_SEQ.NEXTVAL, 'User_facebook' || i, 'User_facebook' || i, 'uuF123' || ((i + 1) * 12), soc_net_id, NULL);
+    
+    c_userid := DBMS_RANDOM.STRING('A', 100);
+    c_user_name := DBMS_RANDOM.STRING('A', 100);
+    c_providerid := DBMS_RANDOM.STRING('A', 100);
+    c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+    c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+    
+    INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'User_facebook' || i, 'User_facebook' || i);
+    INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
   END LOOP;
   
-  SELECT
-    ID
-  INTO soc_net_id
-  FROM
-    SOCIAL_NETWORKS
-  WHERE
-    NAME = 'g+';
     
   FOR i IN 1..200 LOOP
-    INSERT INTO USERS VALUES(USERS_SEQ.NEXTVAL, 'User_g_plus' || i, 'User_g_plus' || i, 'uuGplus123' || ((i + 1) * 12), soc_net_id, NULL);
+    
+    c_userid := DBMS_RANDOM.STRING('A', 100);
+    c_user_name := DBMS_RANDOM.STRING('A', 100);
+    c_providerid := DBMS_RANDOM.STRING('A', 100);
+    c_provideruserid := DBMS_RANDOM.STRING('A', 100);
+    c_accesstoken := DBMS_RANDOM.STRING('A', 100);
+  
+    INSERT INTO USERS(id, user_name, first_name, last_name) VALUES(c_userid, c_user_name, 'User_g_plus' || i, 'User_g_plus' || i);
+    INSERT INTO USERCONNECTION(userid, providerid, provideruserid, accesstoken) VALUES(c_userid, c_providerid, c_provideruserid, c_accesstoken);
   END LOOP;   
     
 END;
