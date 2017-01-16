@@ -1,4 +1,4 @@
-package com.netcracker.securityConfig;
+package com.netcracker.entities;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;

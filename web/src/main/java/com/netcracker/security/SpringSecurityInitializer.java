@@ -1,4 +1,4 @@
-package com.netcracker.securityConfig;
+package com.netcracker.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

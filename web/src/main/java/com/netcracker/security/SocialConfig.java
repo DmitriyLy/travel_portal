@@ -1,5 +1,7 @@
-package com.netcracker.securityConfig;
+package com.netcracker.security;
 
+import com.netcracker.repositories.impl.UserDAO;
+import com.netcracker.services.impl.ConnectionSignUpImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -73,7 +75,7 @@ public class SocialConfig implements SocialConfigurer {
 
                 Encryptors.noOpText());
 
-        ConnectionSignUp connectionSignUp = new MyConnectionSignUp(userDAO);
+        ConnectionSignUp connectionSignUp = new ConnectionSignUpImpl(userDAO);
         usersConnectionRepository.setConnectionSignUp(connectionSignUp);
 
         return usersConnectionRepository;

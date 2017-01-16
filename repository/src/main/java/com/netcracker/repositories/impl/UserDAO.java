@@ -1,6 +1,7 @@
-package com.netcracker.securityConfig;
+package com.netcracker.repositories.impl;
 
 
+import com.netcracker.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;

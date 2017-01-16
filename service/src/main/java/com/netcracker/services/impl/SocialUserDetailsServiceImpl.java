@@ -1,5 +1,6 @@
-package com.netcracker.securityConfig;
+package com.netcracker.services.impl;
 
+import com.netcracker.repositories.impl.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
  * Created by blaze159 on 13.01.17.
  */
 @Service
-public class MySocialUserDetailsService implements SocialUserDetailsService {
+public class SocialUserDetailsServiceImpl implements SocialUserDetailsService {
 
     @Autowired
     private UserDAO userDAO;

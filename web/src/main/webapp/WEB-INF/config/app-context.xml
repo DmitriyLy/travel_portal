@@ -10,6 +10,6 @@
 
     <import resource="service-context.xml"/>
 
-    <context:component-scan base-package="com.netcracker.securityConfig" />
+    <context:component-scan base-package="com.netcracker.security" />
 
 </beans>
