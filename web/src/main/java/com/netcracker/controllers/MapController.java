@@ -3,7 +3,6 @@ package com.netcracker.controllers;
 import com.netcracker.dto.LabelDtoShortInfo;
 import com.netcracker.dto.SearchDtoEllipse;
 import com.netcracker.dto.SearchDtoRectangle;
-import com.netcracker.services.impl.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

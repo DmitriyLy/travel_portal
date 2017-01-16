@@ -22,11 +22,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * -Duser.region=us
  */
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class CommentRepositoryTest {
-
-    /*
 
     @Autowired
     CommentRepositoryImpl commentRepository;
@@ -34,7 +32,7 @@ public class CommentRepositoryTest {
 
     @Test
     public void addCommentTest(){
-        comment.setUserId(1);
+        /*comment.setUserId(1);
         comment.setLabelId(1);
         comment.setCommentDate(new Date());
         comment.setCommentText("TEST");
@@ -42,30 +40,30 @@ public class CommentRepositoryTest {
         long countOfCommentTableRows = commentRepository.getColumnCount();
         comment = commentRepository.add(comment);
 
-        assertThat(commentRepository.getColumnCount(), is(countOfCommentTableRows + 1));
+        assertThat(commentRepository.getColumnCount(), is(countOfCommentTableRows + 1));*/
     }
 
     @Test
     public void updateCommentTest(){
-        comment.setCommentText("NEWTEST");
+        /*comment.setCommentText("NEWTEST");
 
-        assertThat(commentRepository.update(comment), is(comment));
+        assertThat(commentRepository.update(comment), is(comment));*/
     }
 
     @Test
     public void getByIdCommentTest(){
-        assertThat(commentRepository.getById(comment.getId()), is(comment));
+        //assertThat(commentRepository.getById(comment.getId()), is(comment));
     }
 
     @Test
     public void deleteCommentTest(){
-        long countOfCommentTableRows = commentRepository.getColumnCount();
+        /*long countOfCommentTableRows = commentRepository.getColumnCount();
         commentRepository.remove(comment);
 
-        assertThat(commentRepository.getColumnCount(), is(countOfCommentTableRows - 1));
+        assertThat(commentRepository.getColumnCount(), is(countOfCommentTableRows - 1));*/
     }
 
-    @Test(expected = DuplicateEntityException.class)
+    /*@Test(expected = DuplicateEntityException.class)
     public void addDuplicateCommentThrowsException(){
 
     }
@@ -83,7 +81,5 @@ public class CommentRepositoryTest {
     @Test(expected = NoSuchEntityException.class)
     public void deleteNonExistingCommentThrowsException(){
 
-    }
-
-    */
+    }*/
 }

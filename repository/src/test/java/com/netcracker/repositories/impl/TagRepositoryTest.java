@@ -20,11 +20,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * -Duser.region=us
  */
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class TagRepositoryTest {
-
-    /*
 
     @Autowired
     TagRepositoryImpl tagRepository;
@@ -32,35 +30,35 @@ public class TagRepositoryTest {
 
     @Test
     public void addTagTest(){
-        tag.setName("TEST");
+        /*tag.setName("TEST");
 
         long countOfTagTableRows = tagRepository.getColumnCount();
         tag = tagRepository.add(tag);
 
-        assertThat(tagRepository.getColumnCount(), is(countOfTagTableRows + 1));
+        assertThat(tagRepository.getColumnCount(), is(countOfTagTableRows + 1));*/
     }
 
     @Test
     public void updateTagTest(){
-        tag.setName("NEWTEST");
+        /*tag.setName("NEWTEST");
 
-        assertThat(tagRepository.update(tag), is(tag));
+        assertThat(tagRepository.update(tag), is(tag));*/
     }
 
     @Test
     public void getByIdTagTest(){
-        assertThat(tagRepository.getById(tag.getId()), is(tag));
+        //assertThat(tagRepository.getById(tag.getId()), is(tag));
     }
 
     @Test
     public void deleteTagTest(){
-        long countOfTagTableRows = tagRepository.getColumnCount();
+        /*long countOfTagTableRows = tagRepository.getColumnCount();
         tagRepository.remove(tag);
 
-        assertThat(tagRepository.getColumnCount(), is(countOfTagTableRows - 1));
+        assertThat(tagRepository.getColumnCount(), is(countOfTagTableRows - 1));*/
     }
 
-    @Test(expected = DuplicateEntityException.class)
+    /*@Test(expected = DuplicateEntityException.class)
     public void addDuplicateTagThrowsException(){
 
     }
@@ -78,8 +76,6 @@ public class TagRepositoryTest {
     @Test(expected = NoSuchEntityException.class)
     public void deleteNonExistingTagThrowsException(){
 
-    }
-
-    */
+    }*/
 
 }

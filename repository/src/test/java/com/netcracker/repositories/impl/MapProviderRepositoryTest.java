@@ -20,47 +20,47 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * -Duser.region=us
  */
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class MapProviderRepositoryTest {
 
-    /*
+
     @Autowired
     MapProviderRepositoryImpl mapProviderRepository;
     MapProvider provider = new MapProvider();
 
     @Test
     public void addMapProviderTest(){
-        provider.setName("TEST");
+        /*provider.setName("TEST");
         provider.setCoordSysName("TEST");
 
         long countOfMapProviderTableRows = mapProviderRepository.getColumnCount();
         provider = mapProviderRepository.add(provider);
 
-        assertThat(mapProviderRepository.getColumnCount(), is(countOfMapProviderTableRows + 1));
+        assertThat(mapProviderRepository.getColumnCount(), is(countOfMapProviderTableRows + 1));*/
     }
 
     @Test
     public void updateMapProviderTest(){
-        provider.setName("NEWTEST");
+       /* provider.setName("NEWTEST");
 
-        assertThat(mapProviderRepository.update(provider), is(provider));
+        assertThat(mapProviderRepository.update(provider), is(provider));*/
     }
 
     @Test
     public void getByIdMapProviderTest(){
-        assertThat(mapProviderRepository.getById(provider.getId()), is(provider));
+        //assertThat(mapProviderRepository.getById(provider.getId()), is(provider));
     }
 
     @Test
     public void deleteMapProviderTest(){
-        long countOfMapProviderTableRows = mapProviderRepository.getColumnCount();
+        /*long countOfMapProviderTableRows = mapProviderRepository.getColumnCount();
         mapProviderRepository.remove(provider);
 
-        assertThat(mapProviderRepository.getColumnCount(), is(countOfMapProviderTableRows - 1));
+        assertThat(mapProviderRepository.getColumnCount(), is(countOfMapProviderTableRows - 1));*/
     }
 
-    @Test(expected = DuplicateEntityException.class)
+    /*@Test(expected = DuplicateEntityException.class)
     public void addDuplicateMapProviderThrowsException(){
 
     }
@@ -78,8 +78,6 @@ public class MapProviderRepositoryTest {
     @Test(expected = NoSuchEntityException.class)
     public void deleteNonExistingMapProviderThrowsException(){
 
-    }
-
-    */
+    }*/
 
 }

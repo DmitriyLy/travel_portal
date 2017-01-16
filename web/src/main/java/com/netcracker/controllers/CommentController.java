@@ -3,7 +3,6 @@ package com.netcracker.controllers;
 import com.netcracker.dto.CommentDtoInfo;
 import com.netcracker.dto.CommentDtoNew;
 import com.netcracker.dto.CommentDtoUpdate;
-import com.netcracker.services.impl.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

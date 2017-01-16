@@ -16,11 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * -Duser.region=us
  */
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class LabelRepositoryTest {
 
-    /*
 
     @Autowired
     LabelRepositoryImpl labelRepository;
@@ -45,7 +44,7 @@ public class LabelRepositoryTest {
 
     }
 
-    @Test(expected = DuplicateEntityException.class)
+    /*@Test(expected = DuplicateEntityException.class)
     public void addDuplicateLabelThrowsException(){
 
     }
@@ -63,7 +62,6 @@ public class LabelRepositoryTest {
     @Test(expected = NoSuchEntityException.class)
     public void deleteNonExistingLabelThrowsException(){
 
-    }
-    */
+    }*/
 
 }

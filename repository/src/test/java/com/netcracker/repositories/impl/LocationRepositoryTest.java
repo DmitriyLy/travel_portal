@@ -20,48 +20,47 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * -Duser.region=us
  */
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class LocationRepositoryTest {
 
-    /*
     @Autowired
     LocationRepositoryImpl locationRepository;
     Location location = new Location();
 
     @Test
     public void addLocationTest(){
-        location.setCityId(1);
+       /* location.setCityId(1);
         location.setStreet("TEST");
         location.setBuilding("TEST");
 
         long countOfLocationTableRows = locationRepository.getColumnCount();
         location = locationRepository.add(location);
 
-        assertThat(locationRepository.getColumnCount(), is(countOfLocationTableRows + 1));
+        assertThat(locationRepository.getColumnCount(), is(countOfLocationTableRows + 1));*/
     }
 
     @Test
     public void updateLocationTest(){
-        location.setStreet("NEWTEST");
+        /*location.setStreet("NEWTEST");
 
-        assertThat(locationRepository.update(location), is(location));
+        assertThat(locationRepository.update(location), is(location));*/
     }
 
     @Test
     public void getByIdLocationTest(){
-        assertThat(locationRepository.getById(location.getId()), is(location));
+        //assertThat(locationRepository.getById(location.getId()), is(location));
     }
 
     @Test
     public void deleteLocationTest(){
-        long countOfLocationTableRows = locationRepository.getColumnCount();
+        /*long countOfLocationTableRows = locationRepository.getColumnCount();
         locationRepository.remove(location);
 
-        assertThat(locationRepository.getColumnCount(), is(countOfLocationTableRows - 1));
+        assertThat(locationRepository.getColumnCount(), is(countOfLocationTableRows - 1));*/
     }
 
-    @Test(expected = DuplicateEntityException.class)
+    /*@Test(expected = DuplicateEntityException.class)
     public void addDuplicateLocationThrowsException(){
 
     }
@@ -79,7 +78,5 @@ public class LocationRepositoryTest {
     @Test(expected = NoSuchEntityException.class)
     public void deleteNonExistingLocationThrowsException(){
 
-    }
-    */
-
+    }*/
 }

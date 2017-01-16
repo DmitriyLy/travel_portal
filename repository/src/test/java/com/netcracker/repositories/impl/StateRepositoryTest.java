@@ -20,11 +20,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * -Duser.region=us
  */
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class StateRepositoryTest {
-
-    /*
 
     @Autowired
     StateRepositoryImpl stateRepository;
@@ -32,36 +30,36 @@ public class StateRepositoryTest {
 
     @Test
     public void addStateTest(){
-        state.setName("TEST");
+        /*state.setName("TEST");
         state.setCountryId(1);
 
         long countOfStateTableRows = stateRepository.getColumnCount();
         state = stateRepository.add(state);
 
-        assertThat(stateRepository.getColumnCount(), is(countOfStateTableRows + 1));
+        assertThat(stateRepository.getColumnCount(), is(countOfStateTableRows + 1));*/
     }
 
     @Test
     public void updateStateTest(){
-        state.setName("NEWTEST");
+        /*state.setName("NEWTEST");
 
-        assertThat(stateRepository.update(state), is(state));
+        assertThat(stateRepository.update(state), is(state));*/
     }
 
     @Test
     public void getByIdStateTest(){
-        assertThat(stateRepository.getById(state.getId()), is(state));
+        //assertThat(stateRepository.getById(state.getId()), is(state));
     }
 
     @Test
     public void deleteStateTest(){
-        long countOfStateTableRows = stateRepository.getColumnCount();
+        /*long countOfStateTableRows = stateRepository.getColumnCount();
         stateRepository.remove(state);
 
-        assertThat(stateRepository.getColumnCount(), is(countOfStateTableRows - 1));
+        assertThat(stateRepository.getColumnCount(), is(countOfStateTableRows - 1));*/
     }
 
-    @Test(expected = DuplicateEntityException.class)
+    /*@Test(expected = DuplicateEntityException.class)
     public void addDuplicateStateThrowsException(){
 
     }
@@ -79,8 +77,6 @@ public class StateRepositoryTest {
     @Test(expected = NoSuchEntityException.class)
     public void deleteNonExistingStateThrowsException(){
 
-    }
-
-    */
+    }*/
 
 }

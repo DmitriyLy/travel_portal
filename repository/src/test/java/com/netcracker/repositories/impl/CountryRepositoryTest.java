@@ -20,11 +20,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * -Duser.region=us
  */
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath:/data-context.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/data-context.xml"})
 public class CountryRepositoryTest {
-
-    /*
 
     @Autowired
     CountryRepositoryImpl countryRepository;
@@ -32,35 +30,35 @@ public class CountryRepositoryTest {
 
     @Test
     public void addCountryTest(){
-        country.setName("TEST");
+        /*country.setName("TEST");
 
         long countOfCountryTableRows = countryRepository.getColumnCount();
         country = countryRepository.add(country);
 
-        assertThat(countryRepository.getColumnCount(), is(countOfCountryTableRows + 1));
+        assertThat(countryRepository.getColumnCount(), is(countOfCountryTableRows + 1));*/
     }
 
     @Test
     public void updateCountryTest(){
-        country.setName("NEWTEST");
+        /*country.setName("NEWTEST");
 
-        assertThat(countryRepository.update(country), is(country));
+        assertThat(countryRepository.update(country), is(country));*/
     }
 
     @Test
     public void getByIdCountryTest(){
-        assertThat(countryRepository.getById(country.getId()), is(country));
+        //assertThat(countryRepository.getById(country.getId()), is(country));
     }
 
     @Test
     public void deleteCountryTest(){
-        long countOfCountryTableRows = countryRepository.getColumnCount();
+        /*long countOfCountryTableRows = countryRepository.getColumnCount();
         countryRepository.remove(country);
 
-        assertThat(countryRepository.getColumnCount(), is(countOfCountryTableRows - 1));
+        assertThat(countryRepository.getColumnCount(), is(countOfCountryTableRows - 1));*/
     }
 
-    @Test(expected = DuplicateEntityException.class)
+    /*@Test(expected = DuplicateEntityException.class)
     public void addDuplicateCountryThrowsException(){
 
     }
@@ -78,7 +76,5 @@ public class CountryRepositoryTest {
     @Test(expected = NoSuchEntityException.class)
     public void deleteNonExistingCountryThrowsException(){
 
-    }
-    */
-
+    }*/
 }
