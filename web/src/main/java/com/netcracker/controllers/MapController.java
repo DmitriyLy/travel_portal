@@ -3,8 +3,7 @@ package com.netcracker.controllers;
 import com.netcracker.dto.LabelDtoShortInfo;
 import com.netcracker.dto.SearchDtoEllipse;
 import com.netcracker.dto.SearchDtoRectangle;
-import com.netcracker.services.impl.LabelService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +17,8 @@ import java.util.List;
  * @author Oveian Egor
  * @author Kozhuchar Alexander
  */
-@RestController
+@Controller
 public class MapController {
-
-    /*@Autowired
-    LabelService labelService;*/
 
     /**
      * Method returns start page to client.
@@ -31,7 +27,7 @@ public class MapController {
      *
      * @return index.jsp
      */
-   /* @GetMapping(value = "/")
+    /*@GetMapping(value = "/")
     public String getMap() {
         return "index";
     }*/
@@ -60,6 +56,7 @@ public class MapController {
      *      the scale of the displayed geographical area.
      */
     @PostMapping("/labels/search/by/area/rectangle")
+    @ResponseBody
     public List<LabelDtoShortInfo> getLabelsByRectangle(@RequestBody SearchDtoRectangle rectangle) {
         return null;
     }
@@ -81,6 +78,7 @@ public class MapController {
      *      FR12 - The system should allow you to sort the list (FR 10) rated / creation date labels.
      */
     @PostMapping("/labels/search/by/area/ellipse")
+    @ResponseBody
     public List<LabelDtoShortInfo> getLabelsByEllipse(@RequestBody SearchDtoEllipse ellipse) {
         return null;
     }
@@ -92,6 +90,7 @@ public class MapController {
      * @return id.
      */
     @GetMapping("/reserveLabelId")
+    @ResponseBody
     public long reserveLabelId() {
         return 0;
     }
