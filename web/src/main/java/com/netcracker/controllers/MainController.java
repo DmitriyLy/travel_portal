@@ -1,8 +1,7 @@
 package com.netcracker.controllers;
 
-import com.netcracker.securityConfig.MyUserAccount;
+import com.netcracker.securityConfig.User;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +17,7 @@ public class MainController {
     @RequestMapping(value = { "/" }, method = RequestMethod.GET)
     public String homePage(Model model) {
         try {
-            MyUserAccount user = (MyUserAccount)SecurityContextHolder.getContext().getAuthentication()
+            User user = (User)SecurityContextHolder.getContext().getAuthentication()
                     .getPrincipal();
             if (user != null) {
                 System.out.println(user.getLastName());

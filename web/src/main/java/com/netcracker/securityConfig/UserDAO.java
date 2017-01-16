@@ -18,14 +18,14 @@ import java.util.UUID;
  */
 @Repository
 @Transactional
-public class MyUserAccountDAO extends JdbcDaoSupport {
+public class UserDAO extends JdbcDaoSupport {
 
     @Autowired
-    public MyUserAccountDAO(DataSource dataSource) {
+    public UserDAO(DataSource dataSource) {
         this.setDataSource(dataSource);
     }
 
-    private final RowMapper<MyUserAccount> mapper = (rs, rowNum) -> {
+    private final RowMapper<User> mapper = (rs, rowNum) -> {
         String id = rs.getString("id");
 
         String email = rs.getString("email");
@@ -34,63 +34,63 @@ public class MyUserAccountDAO extends JdbcDaoSupport {
         String lastName = rs.getString("last_name");
         String role = rs.getString("role");
 
-        return new MyUserAccount(id, email, userName,
+        return new User(id, email, userName,
                 firstName, lastName, role);
     };
 
-    public MyUserAccount findById(String id) {
+    public User findById(String id) {
         String sql = "Select id,email,user_name, first_name,last_name,"
                 + " role"
-                + " from User_Accounts u "
+                + " from USERS u "
                 + " where id = ? ";
         Object[] params = new Object[]{id};
         try {
-            MyUserAccount userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+            User userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
             return userInfo;
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
 
-    public MyUserAccount findByEmail(String email) {
+    public User findByEmail(String email) {
         String sql = "Select id, email,user_name,first_name,last_name,"
                 + " role"
-                + " from User_Accounts u "
+                + " from USERS u "
                 + " where email = ? ";
         Object[] params = new Object[]{email};
         try {
-            MyUserAccount userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+            User userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
             return userInfo;
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
 
-    public MyUserAccount findByUserName(String userName) {
+    public User findByUserName(String userName) {
         String sql = "Select id, email,user_name,first_name,last_name,"
                 + " role"
-                + " from User_Accounts u "
+                + " from USERS u "
                 + " where user_name = ? ";
         Object[] params = new Object[]{userName};
         try {
-            MyUserAccount userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+            User userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
             return userInfo;
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
     }
 
-    public MyUserAccount createUserAccount(Connection<?> connection) {
+    public User createUserAccount(Connection<?> connection) {
 
         UserProfile userProfile = connection.fetchUserProfile();
 
         String email = userProfile.getEmail();
-        MyUserAccount account = this.findByEmail(email);
+        User account = this.findByEmail(email);
         if (account != null) {
             return account;
         }
 
-        String sql = "Insert into User_Accounts "
+        String sql = "Insert into USERS "
                 + " (id, email,user_name,first_name,last_name,role) "
                 + " values (?,?,?,?,?,?) ";
 
@@ -103,12 +103,12 @@ public class MyUserAccountDAO extends JdbcDaoSupport {
         String userName = this.findAvailableUserName(userName_prefix);
 
         this.getJdbcTemplate().update(sql, id, email, userName,
-                userProfile.getFirstName(), userProfile.getLastName(), MyUserAccount.ROLE_USER);
+                userProfile.getFirstName(), userProfile.getLastName(), User.ROLE_USER);
         return findById(id);
     }
 
     private String findAvailableUserName(String userName_prefix) {
-        MyUserAccount account = this.findByUserName(userName_prefix);
+        User account = this.findByUserName(userName_prefix);
         if (account == null) {
             return userName_prefix;
         }

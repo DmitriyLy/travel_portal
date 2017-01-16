@@ -8,15 +8,15 @@ import org.springframework.social.connect.ConnectionSignUp;
  */
 public class MyConnectionSignUp implements ConnectionSignUp {
 
-    private MyUserAccountDAO myUserAccountDAO;
+    private UserDAO userDAO;
 
-    public MyConnectionSignUp(MyUserAccountDAO myUserAccountDAO) {
-        this.myUserAccountDAO = myUserAccountDAO;
+    public MyConnectionSignUp(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     @Override
     public String execute(Connection<?> connection) {
-        MyUserAccount account = myUserAccountDAO.createUserAccount(connection);
+        User account = userDAO.createUserAccount(connection);
         return account.getId();
     }
 }

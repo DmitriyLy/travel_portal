@@ -36,16 +36,6 @@ public interface QueriesRepository {
     String DELETE_CATEGORY = "DELETE FROM CATEGORIES WHERE id=?";
     String GET_CATEGORY_BY_ID = "SELECT * FROM CATEGORIES WHERE id=?";
 
-    String INSERT_SOCIAL_NETWORK = "INSERT INTO SOCIAL_NETWORKS(name) values(?)";
-    String UPDATE_SOCIAL_NETWORK = "UPDATE SOCIAL_NETWORKS SET name=? WHERE id=?";
-    String DELETE_SOCIAL_NETWORK = "DELETE FROM SOCIAL_NETWORKS WHERE id=?";
-    String GET_SOCIAL_NETWORK_BY_ID = "SELECT * FROM SOCIAL_NETWORKS WHERE id=?";
-
-    String INSERT_USER = "INSERT INTO USERS(first_name,last_name,soc_net_user_id,soc_net_id,status) values(?,?,?,?,?)";
-    String UPDATE_USER = "UPDATE USERS SET first_name=?, last_name=?, soc_net_user_id=?, soc_net_id=?, status=? WHERE id=?";
-    String DELETE_USER = "DELETE FROM USERS WHERE id=?";
-    String GET_USER_BY_ID = "SELECT * FROM USERS WHERE id=?";
-
     String INSERT_MAP_PROVIDER = "INSERT INTO MAP_PROVIDERS(name,coord_sys_name) values(?,?)";
     String UPDATE_MAP_PROVIDER = "UPDATE MAP_PROVIDERS SET name=?, coord_sys_name=? WHERE id=?";
     String DELETE_MAP_PROVIDER = "DELETE FROM MAP_PROVIDERS WHERE id=?";

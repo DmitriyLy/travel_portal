@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
 public class MySocialUserDetailsService implements SocialUserDetailsService {
 
     @Autowired
-    private MyUserAccountDAO myUserAccountDAO;
+    private UserDAO userDAO;
 
     @Override
     public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException, DataAccessException {
-        return myUserAccountDAO.findById(userId);
+        return userDAO.findById(userId);
     }
 
 }

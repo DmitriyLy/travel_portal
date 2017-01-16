@@ -10,18 +10,15 @@ import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.impl.LabelCategoriesSpecification;
 import com.netcracker.specifications.impl.LabelTagsSpecification;
 import com.netcracker.specifications.impl.LabelsOnAreaSpecification;
-import com.netcracker.specifications.impl.UserBookmarksSpecification;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by dima_2 on 11.12.2016.
@@ -63,12 +60,6 @@ public class LabelService implements IService<Label> {
 
         Specification specification = new LabelsOnAreaSpecification(minLatitude, maxLatitude, minLongitude,
                                                                                                 maxLongitude);
-        return labelRepository.query(specification);
-    }
-
-    public List<Label> getUserBookmarks(long userId) {
-
-        Specification specification = new UserBookmarksSpecification(userId);
         return labelRepository.query(specification);
     }
 

@@ -3,7 +3,6 @@ package com.netcracker.services.impl;
 import com.netcracker.entities.Comment;
 import com.netcracker.repositories.impl.CommentRepositoryImpl;
 import com.netcracker.services.IService;
-import com.netcracker.specifications.impl.CommentsByUserSpecification;
 import com.netcracker.specifications.impl.CommentsOnLabelSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,10 +37,6 @@ public class CommentService implements IService<Comment> {
 
     public List<Comment> getCommentsByLabelId(long labelId) {
         return commentRepository.query(new CommentsOnLabelSpecification(labelId));
-    }
-
-    public List<Comment> getCommentsByUserId(long userId) {
-        return commentRepository.query(new CommentsByUserSpecification(userId));
     }
 
     public Comment getById(long commntId) {

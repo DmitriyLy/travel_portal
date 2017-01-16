@@ -35,7 +35,7 @@ public class SocialConfig implements SocialConfigurer {
     private DataSource dataSource;
 
     @Autowired
-    private MyUserAccountDAO myUserAccountDAO;
+    private UserDAO userDAO;
 
     @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
@@ -73,7 +73,7 @@ public class SocialConfig implements SocialConfigurer {
 
                 Encryptors.noOpText());
 
-        ConnectionSignUp connectionSignUp = new MyConnectionSignUp(myUserAccountDAO);
+        ConnectionSignUp connectionSignUp = new MyConnectionSignUp(userDAO);
         usersConnectionRepository.setConnectionSignUp(connectionSignUp);
 
         return usersConnectionRepository;

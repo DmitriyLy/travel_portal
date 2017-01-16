@@ -9,7 +9,7 @@ import java.util.Collection;
 /**
  * Created by blaze159 on 13.01.17.
  */
-public class MyUserAccount implements SocialUserDetails {
+public class User implements SocialUserDetails {
 
     public static final String ROLE_USER = "ROLE_USER";
 
@@ -21,12 +21,12 @@ public class MyUserAccount implements SocialUserDetails {
     private String lastName;
     private String role;
 
-    public MyUserAccount() {
+    public User() {
 
     }
 
-    public MyUserAccount(String id, String email, String userName,
-                         String firstName, String lastName, String role) {
+    public User(String id, String email, String userName,
+                String firstName, String lastName, String role) {
         this.id = id;
         this.email = email;
         this.userName = userName;
