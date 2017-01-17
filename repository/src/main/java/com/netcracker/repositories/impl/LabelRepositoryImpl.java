@@ -2,7 +2,7 @@ package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Label;
 import com.netcracker.queries.QueriesRepository;
-import com.netcracker.repositories.IRepository;
+import com.netcracker.repositories.LabelRepository;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -18,7 +18,7 @@ import java.util.List;
  * @author Egor Oveian
  */
 @Repository
-public class LabelRepositoryImpl implements IRepository<Label> {
+public class LabelRepositoryImpl implements LabelRepository {
 
     private final static Logger LOGGER = LogManager.getLogger(LabelRepositoryImpl.class.getName());
 
@@ -42,7 +42,8 @@ public class LabelRepositoryImpl implements IRepository<Label> {
     @Override
     public Label add(Label item) {
         String query = QueriesRepository.INSERT_LABEL;
-        item.setId(getNewLabelId());
+        if (item.getId() == 0)
+            item.setId(getNewLabelId());
 
         int out = jdbcTemplate.update(query,
                 item.getId(),
@@ -120,7 +121,8 @@ public class LabelRepositoryImpl implements IRepository<Label> {
     /**
      * @return long value - id of last row in LABELS table.
      */
-    private long getNewLabelId(){
+    @Override
+    public long getNewLabelId() {
         String query = QueriesRepository.GET_NEW_ID_LABELS;
         return jdbcTemplate.queryForObject(query, Long.class);
     }

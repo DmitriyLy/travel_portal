@@ -16,6 +16,6 @@ public class LabelCategoriesSpecification implements SqlSpecification {
 
     @Override
     public String toSqlQuery() {
-        return String.format(QueriesSpecification.LABEL_CATEGORIES, labelId);
+        return String.format(QueriesSpecification.CATEGORIES_BY_LABEL_ID, labelId);
     }
 }

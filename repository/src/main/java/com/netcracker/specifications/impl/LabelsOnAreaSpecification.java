@@ -22,7 +22,7 @@ public class LabelsOnAreaSpecification implements SqlSpecification {
 
     @Override
     public String toSqlQuery() {
-        return String.format(QueriesSpecification.LABELS_ON_AREA, minLatitude, maxLatitude,
+        return String.format(QueriesSpecification.LABELS_BY_RECTANGLE, minLatitude, maxLatitude,
                 minLongitude, maxLongitude);
     }
 }
