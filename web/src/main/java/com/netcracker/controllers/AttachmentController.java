@@ -2,8 +2,15 @@ package com.netcracker.controllers;
 
 import com.netcracker.dto.AttachmentDtoInfo;
 import com.netcracker.dto.AttachmentDtoNew;
+import com.netcracker.entities.Attachment;
+import com.netcracker.repositories.impl.AttachmentRepositoryImpl;
+import com.netcracker.services.impl.AttachmentServiceImpl;
+import com.netcracker.specifications.SqlSpecification;
+import com.netcracker.specifications.impl.AttachmentsInLabelSpecification;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +32,9 @@ import java.util.List;
 @RequestMapping("/labels/{labelId}/attachments")
 public class AttachmentController {
 
+    @Autowired
+    private AttachmentServiceImpl attachmentService;
+
     /**
      * Method of attachments extraction, depending on which label id came from client.
      *
@@ -38,7 +48,7 @@ public class AttachmentController {
      */
     @GetMapping
     public List<AttachmentDtoInfo> getAttachmentsByLabel(@PathVariable(name = "labelId") Long labelId) {
-        return null;
+        return attachmentService.getAttachmentsByLabel(labelId);
     }
 
     /**
