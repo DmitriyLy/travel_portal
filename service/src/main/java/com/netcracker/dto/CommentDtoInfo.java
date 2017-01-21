@@ -43,4 +43,14 @@ public class CommentDtoInfo {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
+    @Override
+    public String toString() {
+        return "CommentDtoInfo{" +
+                "id=" + id +
+                ", owner=" + owner +
+                ", text='" + text + '\'' +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }

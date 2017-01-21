@@ -7,7 +7,7 @@ package com.netcracker.entities;
  */
 public class State {
     private long id;
-    private int countryId;
+    private long countryId;
     private String name;
 
     public State() {
@@ -21,11 +21,11 @@ public class State {
         this.id = id;
     }
 
-    public int getCountryId() {
+    public long getCountryId() {
         return countryId;
     }
 
-    public void setCountryId(int countryId) {
+    public void setCountryId(long countryId) {
         this.countryId = countryId;
     }
 
@@ -52,7 +52,7 @@ public class State {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + countryId;
+        result = 31 * result + (int) countryId;
         result = 31 * result + name.hashCode();
         return result;
     }

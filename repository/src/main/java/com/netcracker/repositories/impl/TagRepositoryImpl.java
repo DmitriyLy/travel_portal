@@ -1,8 +1,9 @@
 package com.netcracker.repositories.impl;
 
+import com.netcracker.entities.Label;
 import com.netcracker.entities.Tag;
 import com.netcracker.queries.QueriesRepository;
-import com.netcracker.repositories.IRepository;
+import com.netcracker.repositories.TagRepository;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class TagRepositoryImpl implements IRepository<Tag> {
+public class TagRepositoryImpl implements TagRepository {
 
     private final static Logger LOGGER = LogManager.getLogger(TagRepositoryImpl.class.getName());
 
@@ -99,5 +100,27 @@ public class TagRepositoryImpl implements IRepository<Tag> {
     private long getNewTagId(){
         String query = QueriesRepository.GET_NEW_ID_TAGS;
         return jdbcTemplate.queryForObject(query, Long.class);
+    }
+
+    @Override
+    public void bindLabelAndTag(Label label, Tag tag) {
+        String query = QueriesRepository.INSERT_TAGS_LABELS;
+        int out = jdbcTemplate.update(query, tag.getId(), label.getId());
+
+        if (out == 0) {
+            LOGGER.warn("Cannot bind tag " + tag.toString() +
+                    " to label " + label.toString());
+        }
+    }
+
+    @Override
+    public void unbindLabelAndTag(Label label, Tag tag) {
+        String query = QueriesRepository.DELETE_TAGS_LABELS;
+        int out = jdbcTemplate.update(query, tag.getId(), label.getId());
+
+        if (out == 0) {
+            LOGGER.warn("Cannot unbind tag " + tag.toString() +
+                    " from label " + label.toString());
+        }
     }
 }

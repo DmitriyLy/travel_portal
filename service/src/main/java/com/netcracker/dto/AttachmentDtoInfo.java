@@ -32,4 +32,13 @@ public class AttachmentDtoInfo {
     public void setLarge(String large) {
         this.large = large;
     }
+
+    @Override
+    public String toString() {
+        return "AttachmentDtoInfo{" +
+                "id=" + id +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", large='" + large + '\'' +
+                '}';
+    }
 }

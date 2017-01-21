@@ -43,4 +43,14 @@ public class LabelDtoMapInfo {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
+    @Override
+    public String toString() {
+        return "LabelDtoMapInfo{" +
+                "id=" + id +
+                ", coordinates=" + coordinates +
+                ", rating=" + rating +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }

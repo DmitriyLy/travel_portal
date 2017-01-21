@@ -28,7 +28,7 @@ public class LabelRepositoryImpl implements LabelRepository {
     private RowMapper<Label> mapper = (rs, rowNum) -> {
         Label label = new Label();
         label.setId(rs.getLong("id"));
-        label.setUserId(rs.getLong("user_id"));
+        label.setUserId(rs.getString("user_id"));
         label.setLocationId(rs.getLong("location_id"));
         label.setOwnerComment(rs.getString("owner_comment"));
         label.setRating(rs.getInt("rating"));

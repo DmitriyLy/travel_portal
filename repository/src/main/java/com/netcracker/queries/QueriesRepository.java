@@ -71,15 +71,21 @@ public interface QueriesRepository {
     String GET_NEW_ID_ATTACHMENT = "SELECT ATTACHMENTS_SEQ.NEXTVAL FROM DUAL";
 
     String INSERT_LABEL = "INSERT INTO LABELS" +
-            "(id,user_id,location_id,owner_comment,rating,coordinate_lat,coordinate_long,set_date,map_provider_id) " +
+            "(id,user_id,location_id,owner_comment,rating,coordinate_lat,coordinate_long,creation_date,map_provider_id) " +
             "values(?,?,?,?,?,?,?,?,?)";
     String UPDATE_LABEL = "UPDATE LABELS SET " +
             "user_id=?, location_id=?, owner_comment=?, rating=?, coordinate_lat=?, coordinate_long=?, " +
-            "set_date=?, map_provider_id=? WHERE id=?";
+            "creation_date=?, map_provider_id=? WHERE id=?";
     String DELETE_LABEL = "DELETE FROM LABELS WHERE id=?";
     String GET_LABEL_BY_ID = "SELECT * FROM LABELS WHERE id=?";
     String GET_COUNT_OF_LABELS = "SELECT count(*) FROM LABELS";
     String GET_NEW_ID_LABELS = "SELECT LABELS_SEQ.NEXTVAL FROM DUAL";
+
+    String INSERT_TAGS_LABELS = "INSERT INTO TAGS_LABELS(tag_id,label_id) VALUES(?,?)";
+    String DELETE_TAGS_LABELS = "DELETE FROM TAGS_LABELS WHERE tag_id=? and label_id=?";
+
+    String INSERT_CATEGORIES_LABELS = "INSERT INTO CATEGORIES_LABELS(category_id,label_id) VALUES(?,?)";
+    String DELETE_CATEGORIES_LABELS = "DELETE FROM CATEGORIES_LABELS WHERE category_id=? and label_id=?";
 
     String INSERT_CONFIGURATION = "INSERT INTO CONFIGURATION(conf_key,conf_value) values(?,?)";
     String UPDATE_CONFIGURATION = "UPDATE CONFIGURATION SET conf_value=? WHERE conf_key=?";

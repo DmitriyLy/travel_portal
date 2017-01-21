@@ -5,6 +5,7 @@ import com.netcracker.dto.LabelDtoNew;
 import com.netcracker.dto.LabelDtoShortInfo;
 import com.netcracker.dto.LabelDtoUpdate;
 import com.netcracker.entities.Label;
+import com.netcracker.entities.Tag;
 
 import java.util.List;
 
@@ -16,9 +17,9 @@ public interface LabelService {
 
     long getNewLabelId();
 
-    Label add(LabelDtoNew labelDto);
+    Label add(String userId, LabelDtoNew labelDto);
     Label getById(long id);
-    Label update(LabelDtoUpdate labelDto);
+    Label update(long labelId, LabelDtoUpdate labelDto);
     void delete(Label label);
 
 /*    List<Label> getLabelsAll();

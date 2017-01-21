@@ -82,4 +82,18 @@ public class LabelDtoNew {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
+
+    @Override
+    public String toString() {
+        return "LabelDtoNew{" +
+                "id=" + id +
+                ", coordinates=" + coordinates +
+                ", address=" + address +
+                ", review='" + review + '\'' +
+                ", rating=" + rating +
+                ", tags=" + tags +
+                ", categories=" + categories +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 }

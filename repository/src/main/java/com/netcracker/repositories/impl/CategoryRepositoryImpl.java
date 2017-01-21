@@ -1,8 +1,9 @@
 package com.netcracker.repositories.impl;
 
 import com.netcracker.entities.Category;
+import com.netcracker.entities.Label;
 import com.netcracker.queries.QueriesRepository;
-import com.netcracker.repositories.IRepository;
+import com.netcracker.repositories.CategoryRepository;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import org.apache.log4j.LogManager;
@@ -19,7 +20,7 @@ import java.util.List;
  * @author Dmitriy Lysai
  */
 @Repository
-public class CategoryRepositoryImpl implements IRepository<Category> {
+public class CategoryRepositoryImpl implements CategoryRepository {
 
     private final static Logger LOGGER = LogManager.getLogger(CategoryRepositoryImpl.class.getName());
 
@@ -103,5 +104,27 @@ public class CategoryRepositoryImpl implements IRepository<Category> {
     private long getNewCategoryId(){
         String query = QueriesRepository.GET_NEW_ID_CATEGORY;
         return jdbcTemplate.queryForObject(query, Long.class);
+    }
+
+    @Override
+    public void bindLabelAndCategory(Label label, Category category) {
+        String query = QueriesRepository.INSERT_CATEGORIES_LABELS;
+        int out = jdbcTemplate.update(query, category.getId(), label.getId());
+
+        if (out == 0) {
+            LOGGER.warn("Cannot bind category " + category.toString() +
+                    " to label " + label.toString());
+        }
+    }
+
+    @Override
+    public void unbindLabelAndCategory(Label label, Category category) {
+        String query = QueriesRepository.DELETE_CATEGORIES_LABELS;
+        int out = jdbcTemplate.update(query, category.getId(), label.getId());
+
+        if (out == 0) {
+            LOGGER.warn("Cannot unbind category " + category.toString() +
+                    " to label " + label.toString());
+        }
     }
 }

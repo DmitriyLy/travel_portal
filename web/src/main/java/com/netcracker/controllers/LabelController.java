@@ -1,6 +1,12 @@
 package com.netcracker.controllers;
 
 import com.netcracker.dto.*;
+import com.netcracker.entities.Label;
+import com.netcracker.entities.User;
+import com.netcracker.services.Converter;
+import com.netcracker.services.LabelService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,6 +24,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/labels")
 public class LabelController {
+
+    @Autowired
+    private LabelService labelService;
+    @Autowired
+    private Converter converter;
 
     /**
      * Method of adding a label.
@@ -37,6 +48,17 @@ public class LabelController {
      */
     @PutMapping
     public LabelDtoShortInfo addLabel(@RequestBody LabelDtoNew labelToAdd) {
+        //no validation or error handling yet
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        if (user != null) {
+            String loggedUserId = user.getId();
+
+            Label label = labelService.add(loggedUserId, labelToAdd);
+            return converter.convertLabelToDtoShortInfo(label);
+        }
+
         return null;
     }
 
@@ -80,7 +102,24 @@ public class LabelController {
      * @return {@link LabelDtoFullInfo} - object, containing full information about label.
      */
     @PatchMapping("/{labelId}")
-    public LabelDtoFullInfo updateLabel(@RequestBody LabelDtoUpdate labelUpdate) {
+    public LabelDtoFullInfo updateLabel(@PathVariable(name = "labelId") Long labelId,
+                                        @RequestBody LabelDtoUpdate labelUpdate) {
+        //no validation or error handling yet
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        if (user != null) {
+            Label label = labelService.getById(labelId);
+            String labelsOwnerId = label.getUserId();
+
+            if (labelsOwnerId.equals(user.getId())) {
+                label = labelService.update(labelId, labelUpdate);
+                return converter.convertLabelToDtoFullInfo(label);
+            } else {
+                //throw smth
+            }
+        }
+
         return null;
     }
 

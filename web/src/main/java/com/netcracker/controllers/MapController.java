@@ -82,16 +82,4 @@ public class MapController {
     public List<LabelDtoShortInfo> getLabelsByEllipse(@RequestBody SearchDtoEllipse ellipse) {
         return null;
     }
-
-
-    /**
-     * Method returns id, reserved for new label
-     *
-     * @return id.
-     */
-    @GetMapping("/reserveLabelId")
-    @ResponseBody
-    public long reserveLabelId() {
-        return 0;
-    }
 }

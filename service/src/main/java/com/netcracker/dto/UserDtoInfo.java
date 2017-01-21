@@ -5,31 +5,30 @@ package com.netcracker.dto;
  */
 public class UserDtoInfo {
 
-    private long id;
-    private String firstName;
-    private String lastName;
+    private String id;
+    private String userName;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    @Override
+    public String toString() {
+        return "UserDtoInfo{" +
+                "id='" + id + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
     }
 }

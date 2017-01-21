@@ -18,7 +18,7 @@ public class LabelDtoFullInfo {
     private List<String> tags = new ArrayList<>();
     private Date creationDate;
     private int commentCount;
-    private List<AttachmentDtoInfo> attachments;
+    private List<AttachmentDtoInfo> attachments = new ArrayList<>();
     private String review;
 
     public long getId() {
@@ -107,5 +107,22 @@ public class LabelDtoFullInfo {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    @Override
+    public String toString() {
+        return "LabelDtoFullInfo{" +
+                "id=" + id +
+                ", owner=" + owner +
+                ", coordinates=" + coordinates +
+                ", address=" + address +
+                ", rating=" + rating +
+                ", categories=" + categories +
+                ", tags=" + tags +
+                ", creationDate=" + creationDate +
+                ", commentCount=" + commentCount +
+                ", attachments=" + attachments +
+                ", review='" + review + '\'' +
+                '}';
     }
 }

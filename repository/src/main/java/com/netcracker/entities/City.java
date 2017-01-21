@@ -7,13 +7,13 @@ package com.netcracker.entities;
  */
 public class City {
     private long id;
-    private int stateId;
+    private long stateId;
     private String name;
 
     public City() {
     }
 
-    public City(long id, String name, int stateId) {
+    public City(long id, String name, long stateId) {
         this.id = id;
         this.stateId = stateId;
         this.name = name;
@@ -27,11 +27,11 @@ public class City {
         this.id = id;
     }
 
-    public int getStateId() {
+    public long getStateId() {
         return stateId;
     }
 
-    public void setStateId(int stateId) {
+    public void setStateId(long stateId) {
         this.stateId = stateId;
     }
 

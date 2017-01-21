@@ -96,4 +96,20 @@ public class LabelDtoShortInfo {
     public void setAttachmentCount(int attachmentCount) {
         this.attachmentCount = attachmentCount;
     }
+
+    @Override
+    public String toString() {
+        return "LabelDtoShortInfo{" +
+                "id=" + id +
+                ", owner=" + owner +
+                ", coordinates=" + coordinates +
+                ", address=" + address +
+                ", rating=" + rating +
+                ", categories=" + categories +
+                ", tags=" + tags +
+                ", creationDate=" + creationDate +
+                ", commentCount=" + commentCount +
+                ", attachmentCount=" + attachmentCount +
+                '}';
+    }
 }
