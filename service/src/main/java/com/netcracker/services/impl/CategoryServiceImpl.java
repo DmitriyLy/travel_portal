@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -113,5 +114,14 @@ public class CategoryServiceImpl implements CategoryService {
         else {
             //log it
         }
+    }
+
+    @Override
+    public List<String> extractCategoriesNames(List<Category> categories) {
+        List<String> categoriesNames = new ArrayList<>(categories.size());
+        for (Category category : categories)
+            if (category != null)
+                categoriesNames.add(category.getName());
+        return categoriesNames;
     }
 }

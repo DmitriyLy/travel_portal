@@ -23,4 +23,6 @@ public interface CategoryService {
     void bindLabelAndCategory(Label label, Category category);
     void unbindLabelAndCategory(Label label, Category category);
 
+    List<String> extractCategoriesNames(List<Category> categories);
+
 }

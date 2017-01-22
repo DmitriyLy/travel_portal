@@ -1,6 +1,7 @@
 package com.netcracker.services;
 
 import com.netcracker.dto.*;
+import com.netcracker.entities.Comment;
 import com.netcracker.entities.Label;
 import com.netcracker.entities.Location;
 import com.netcracker.entities.User;
@@ -18,7 +19,7 @@ public interface Converter {
 
     AddressDto convertLocationToAddressDto(Location location);
     UserDtoInfo convertUserToUserDtoInfo(User user);
-    List<String> convertLabelTagsToNamesArray(long labelId);
-    List<String> convertLabelCategoriesToNamesArray(long labelId);
+
+    CommentDtoInfo convertCommentToDtoInfo(Comment comment);
 
 }

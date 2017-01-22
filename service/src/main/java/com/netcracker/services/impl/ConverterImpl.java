@@ -52,10 +52,14 @@ public class ConverterImpl implements Converter {
         labelDto.setReview(label.getOwnerComment());
         labelDto.setCreationDate(label.getCreationDate());
 
-        labelDto.setTags(convertLabelTagsToNamesArray(label.getId()));
-        labelDto.setCategories(convertLabelCategoriesToNamesArray(label.getId()));
         labelDto.setCommentCount(commentService.getCommentCountByLabel(label.getId()));
         labelDto.setAttachments(attachmentService.getAttachmentsByLabel(label.getId()));
+
+        List<Tag> labelTags = tagService.getTagsByLabel(label.getId());
+        labelDto.setTags(tagService.extractTagNames(labelTags));
+
+        List<Category> labelCategories = categoryService.getCategoriesByLabel(label.getId());
+        labelDto.setCategories(categoryService.extractCategoriesNames(labelCategories));
 
         User user = userDAO.findById(label.getUserId());
         labelDto.setOwner(convertUserToUserDtoInfo(user));
@@ -84,10 +88,14 @@ public class ConverterImpl implements Converter {
         labelDto.setRating(label.getRating());
         labelDto.setCreationDate(label.getCreationDate());
 
-        labelDto.setTags(convertLabelTagsToNamesArray(label.getId()));
-        labelDto.setCategories(convertLabelCategoriesToNamesArray(label.getId()));
         labelDto.setCommentCount(commentService.getCommentCountByLabel(label.getId()));
         labelDto.setAttachmentCount(attachmentService.getAttachmentCountByLabel(label.getId()));
+
+        List<Tag> labelTags = tagService.getTagsByLabel(label.getId());
+        labelDto.setTags(tagService.extractTagNames(labelTags));
+
+        List<Category> labelCategories = categoryService.getCategoriesByLabel(label.getId());
+        labelDto.setCategories(categoryService.extractCategoriesNames(labelCategories));
 
         User user = userDAO.findById(label.getUserId());
         labelDto.setOwner(convertUserToUserDtoInfo(user));
@@ -167,20 +175,16 @@ public class ConverterImpl implements Converter {
     }
 
     @Override
-    public List<String> convertLabelTagsToNamesArray(long labelId) {
-        List<Tag> tags = tagService.getTagsByLabel(labelId);
-        List<String> tagNames = new ArrayList<>(tags.size());
-        for (Tag tag : tags)
-            tagNames.add(tag.getName());
-        return tagNames;
-    }
+    public CommentDtoInfo convertCommentToDtoInfo(Comment comment) {
+        if (comment == null)
+            return null;
 
-    @Override
-    public List<String> convertLabelCategoriesToNamesArray(long labelId) {
-        List<Category> categories = categoryService.getCategoriesByLabel(labelId);
-        List<String> categoryNames = new ArrayList<>(categories.size());
-        for (Category category : categories)
-            categoryNames.add(category.getName());
-        return categoryNames;
+        CommentDtoInfo commentDto = new CommentDtoInfo();
+        commentDto.setId(comment.getId());
+        User user = userDAO.findById(comment.getUserId());
+        commentDto.setOwner(convertUserToUserDtoInfo(user));
+        commentDto.setText(comment.getCommentText());
+        commentDto.setCreationDate(comment.getCommentDate());
+        return commentDto;
     }
 }

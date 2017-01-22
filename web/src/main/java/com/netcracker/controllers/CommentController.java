@@ -3,8 +3,15 @@ package com.netcracker.controllers;
 import com.netcracker.dto.CommentDtoInfo;
 import com.netcracker.dto.CommentDtoNew;
 import com.netcracker.dto.CommentDtoUpdate;
+import com.netcracker.entities.Comment;
+import com.netcracker.entities.User;
+import com.netcracker.services.CommentService;
+import com.netcracker.services.Converter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,6 +35,11 @@ import java.util.List;
 @RequestMapping("/labels/{labelId}/comments")
 public class CommentController {
 
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private Converter converter;
+
 
     /**
      * The method provides all comments under specified label.
@@ -40,7 +52,12 @@ public class CommentController {
      */
     @GetMapping
     public List<CommentDtoInfo> getCommentsByLabel(@PathVariable(name = "labelId") Long labelId) {
-        return null;
+        List<Comment> comments = commentService.getCommentsByLabel(labelId);
+        List<CommentDtoInfo> commentDtos = new ArrayList<>(comments.size());
+        for (Comment comment : comments)
+            if (comment != null)
+                commentDtos.add(converter.convertCommentToDtoInfo(comment));
+        return commentDtos;
     };
 
     /**
@@ -56,9 +73,18 @@ public class CommentController {
      * @param commentToAdd {@link CommentDtoNew} - object that contains information about comment to be added.
      * @return {@link CommentDtoInfo} - object, containing information about existing comment.
      */
-    @PutMapping()
+    @PutMapping
     public CommentDtoInfo addComment(@PathVariable(name = "labelId") Long labelId,
-                           @RequestBody CommentDtoNew commentToAdd) {
+                                     @RequestBody CommentDtoNew commentToAdd) {
+        //no validation or error handling yet
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        if(user != null)
+            return commentService.addComment(labelId, user.getUserId(),commentToAdd);
+        else {
+            //throw smth
+        }
         return null;
     };
 
@@ -78,6 +104,19 @@ public class CommentController {
     public CommentDtoInfo editComment(@PathVariable(name = "labelId") Long labelId,
                                       @PathVariable(name = "commentId") Long commentId,
                                       @RequestBody CommentDtoUpdate commentUpdate) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        if (user != null) {
+            Comment comment = commentService.getById(commentId);
+            String commentOwnerId = comment.getUserId();
+
+            if (commentOwnerId.equals(user.getId())) {
+                return commentService.editComment(commentId, commentUpdate);
+            } else {
+                //throw smth
+            }
+        }
         return null;
     };
 
@@ -93,7 +132,19 @@ public class CommentController {
     @DeleteMapping(value = "/{commentId}")
     public void deleteComment(@PathVariable(name = "labelId") Long labelId,
                               @PathVariable(name = "commentId") Long commentId) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
 
+        if (user != null) {
+            Comment comment = commentService.getById(commentId);
+            String commentOwnerId = comment.getUserId();
+
+            if (commentOwnerId.equals(user.getId())) {
+                commentService.deleteComment(comment);
+            } else {
+                //throw smth
+            }
+        }
     };
 
 }

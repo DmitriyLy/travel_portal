@@ -24,4 +24,6 @@ public interface TagService {
     void manageTags(Label label, List<String> updatedTags);
     void bindLabelAndTag(Label label, Tag tag);
     void unbindLabelAndTag(Label label, Tag tag);
+
+    List<String> extractTagNames(List<Tag> tags);
 }

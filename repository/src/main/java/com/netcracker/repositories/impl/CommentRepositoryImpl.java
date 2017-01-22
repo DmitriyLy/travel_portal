@@ -24,7 +24,7 @@ public class CommentRepositoryImpl implements IRepository<Comment> {
     private RowMapper<Comment> mapper = (rs, rowNum) -> {
         Comment comment = new Comment();
         comment.setId(rs.getLong("id"));
-        comment.setUserId(rs.getLong("user_id"));
+        comment.setUserId(rs.getString("user_id"));
         comment.setLabelId(rs.getLong("label_id"));
         comment.setCommentDate(rs.getDate("comment_date"));
         comment.setCommentText(rs.getString("comment_text"));

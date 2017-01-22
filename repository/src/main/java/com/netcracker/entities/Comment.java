@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Comment {
     private long id;
-    private long userId;
+    private String userId;
     private long labelId;
     private Date commentDate;
     private String commentText;
@@ -33,11 +33,11 @@ public class Comment {
         this.labelId = labelId;
     }
 
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -75,7 +75,7 @@ public class Comment {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (userId ^ (userId >>> 32));
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
         result = 31 * result + (int) (labelId ^ (labelId >>> 32));
         result = 31 * result + (commentDate != null ? commentDate.hashCode() : 0);
         result = 31 * result + (commentText != null ? commentText.hashCode() : 0);
