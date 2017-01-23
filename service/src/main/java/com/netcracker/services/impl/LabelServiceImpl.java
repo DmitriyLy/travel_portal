@@ -3,14 +3,21 @@ package com.netcracker.services.impl;
 import com.netcracker.dto.*;
 import com.netcracker.entities.Label;
 import com.netcracker.entities.Location;
+import com.netcracker.entities.User;
 import com.netcracker.repositories.impl.LabelRepositoryImpl;
 import com.netcracker.services.CategoryService;
 import com.netcracker.services.LabelService;
 import com.netcracker.services.LocationService;
 import com.netcracker.services.TagService;
+import com.netcracker.specifications.SqlSpecification;
+import com.netcracker.specifications.impl.CountBookmarkEntriesForUserAndLabelRENAME;
+import com.netcracker.specifications.impl.LabelsBookmarkedByUser;
+import com.netcracker.specifications.impl.LabelsByUser;
+import com.netcracker.specifications.impl.LabelsCommentedByUser;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +38,8 @@ public class LabelServiceImpl implements LabelService {
     private TagService tagService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
 
     @Override
@@ -71,8 +80,9 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     @Transactional
-    public Label update(long labelId, LabelDtoUpdate labelDto) {
-        Label label = getById(labelId);
+    public Label update(Label label, LabelDtoUpdate labelDto) {
+        if(label == null)
+            return null;
 
         label.setRating(labelDto.getRating());
         label.setOwnerComment(labelDto.getReview());
@@ -87,11 +97,45 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public void delete(Label label) {
-
+        labelRepository.remove(label);
     }
 
+    @Override
+    public List<Label> getLabelsByUser(String userId) {
+        return labelRepository.query(new LabelsByUser(userId));
+    }
 
+    @Override
+    public List<Label> getLabelsCommentedByUser(String userId) {
+        return labelRepository.query(new LabelsCommentedByUser(userId));
+    }
 
+    @Override
+    public List<Label> getLabelsBookmarkedByUser(String userId) {
+        return labelRepository.query(new LabelsBookmarkedByUser(userId));
+    }
 
+    @Override
+    public void addLabelToBookmarks(String userId, long labelId) {
+        labelRepository.addLabelToBookmarks(userId, labelId);
+    }
 
+    @Override
+    public void deleteLabelFromBookmarks(String userId, long labelId) {
+        labelRepository.deleteLabelFromBookmarks(userId, labelId);
+    }
+
+    @Override
+    public boolean isBookmarked(String userId, long labelId) {
+        SqlSpecification specification = new CountBookmarkEntriesForUserAndLabelRENAME(userId,labelId);
+        int count = jdbcTemplate.queryForObject(specification.toSqlQuery(), Integer.class);
+        if (count == 0)
+            return false;
+        else if (count == 1)
+            return true;
+        else {
+            //throw smth
+        }
+        return false;
+    }
 }

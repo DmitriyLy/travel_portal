@@ -81,6 +81,9 @@ public interface QueriesRepository {
     String GET_COUNT_OF_LABELS = "SELECT count(*) FROM LABELS";
     String GET_NEW_ID_LABELS = "SELECT LABELS_SEQ.NEXTVAL FROM DUAL";
 
+    String INSERT_BOOKMARKS = "INSERT INTO BOOKMARKS(user_id,label_id) VALUES(?,?)";
+    String DELETE_BOOKMARKS = "DELETE FROM BOOKMARKS WHERE user_id=? AND label_id=?";
+
     String INSERT_TAGS_LABELS = "INSERT INTO TAGS_LABELS(tag_id,label_id) VALUES(?,?)";
     String DELETE_TAGS_LABELS = "DELETE FROM TAGS_LABELS WHERE tag_id=? and label_id=?";
 

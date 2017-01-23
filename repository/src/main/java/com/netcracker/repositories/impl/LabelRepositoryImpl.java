@@ -126,4 +126,16 @@ public class LabelRepositoryImpl implements LabelRepository {
         String query = QueriesRepository.GET_NEW_ID_LABELS;
         return jdbcTemplate.queryForObject(query, Long.class);
     }
+
+    @Override
+    public void addLabelToBookmarks(String userId, long labelId) {
+        String query = QueriesRepository.INSERT_BOOKMARKS;
+        jdbcTemplate.update(query, userId, labelId);
+    }
+
+    @Override
+    public void deleteLabelFromBookmarks(String userId, long labelId) {
+        String query = QueriesRepository.DELETE_BOOKMARKS;
+        jdbcTemplate.update(query, userId, labelId);
+    }
 }

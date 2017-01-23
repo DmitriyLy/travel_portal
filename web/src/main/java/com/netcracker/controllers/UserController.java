@@ -1,8 +1,15 @@
 package com.netcracker.controllers;
 
 import com.netcracker.dto.LabelDtoShortInfo;
+import com.netcracker.entities.Label;
+import com.netcracker.entities.User;
+import com.netcracker.services.Converter;
+import com.netcracker.services.LabelService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +25,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    @Autowired
+    private LabelService labelService;
+    @Autowired
+    private Converter converter;
 
     /**
      * Method of getting labels added by current user.
@@ -31,6 +42,17 @@ public class UserController {
      */
     @GetMapping("/me/labels/added")
     public List<LabelDtoShortInfo> getLabelsAddedByCurrentUser() {
+        //no validation or error handling yet
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        if (user != null) {
+            List<Label> userLabels = labelService.getLabelsByUser(user.getUserId());
+            List<LabelDtoShortInfo> labelShortDto = new ArrayList<>(userLabels.size());
+            for (Label label : userLabels)
+                labelShortDto.add(converter.convertLabelToDtoShortInfo(label));
+            return labelShortDto;
+        }
         return null;
     }
 
@@ -46,6 +68,18 @@ public class UserController {
      */
     @GetMapping("/me/labels/commented")
     public List<LabelDtoShortInfo> getLabelsCommentedByCurrentUser() {
+        //no validation or error handling yet
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        if (user != null) {
+            List<Label> commentedLabels = labelService.getLabelsCommentedByUser(user.getUserId());
+            List<LabelDtoShortInfo> labelShortDto = new ArrayList<>(commentedLabels.size());
+            for (Label label : commentedLabels)
+                labelShortDto.add(converter.convertLabelToDtoShortInfo(label));
+            return labelShortDto;
+        }
+
         return null;
     }
 
@@ -61,6 +95,17 @@ public class UserController {
      */
     @GetMapping("/me/labels/bookmarked")
     public List<LabelDtoShortInfo> getLabelsBookmarkedByCurrentUser() {
+        //no validation or error handling yet
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        if (user != null) {
+            List<Label> bookmarkedLabels = labelService.getLabelsBookmarkedByUser(user.getUserId());
+            List<LabelDtoShortInfo> labelShortDto = new ArrayList<>(bookmarkedLabels.size());
+            for (Label label : bookmarkedLabels)
+                labelShortDto.add(converter.convertLabelToDtoShortInfo(label));
+            return labelShortDto;
+        }
         return null;
     }
 
@@ -76,6 +121,20 @@ public class UserController {
      */
     @PutMapping("/me/labels/bookmarked/{labelId}")
     public Integer addLabelToBookmarks(@PathVariable(name = "labelId") Long labelId) {
+        //no validation or error handling yet
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        if (user != null) {
+            String userId = user.getId();
+            boolean b = labelService.isBookmarked(userId, labelId);
+            if (b)
+                return 0;
+            else {
+                labelService.addLabelToBookmarks(user.getUserId(), labelId);
+                return 1;
+            }
+        }
         return 0;
     }
 
@@ -90,6 +149,18 @@ public class UserController {
      */
     @DeleteMapping("/me/labels/bookmarked/{labelId}")
     public Integer deleteLabelFromBookmarks(@PathVariable(name = "labelId") Long labelId) {
+        //no validation or error handling yet
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        if (user != null) {
+            if (labelService.isBookmarked(user.getUserId(), labelId)) {
+                labelService.deleteLabelFromBookmarks(user.getUserId(), labelId);
+                return 1;
+            } else
+                return 0;
+        }
+
         return 0;
     }
 }

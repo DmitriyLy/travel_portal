@@ -113,7 +113,7 @@ public class LabelController {
             String labelsOwnerId = label.getUserId();
 
             if (labelsOwnerId.equals(user.getId())) {
-                label = labelService.update(labelId, labelUpdate);
+                label = labelService.update(label, labelUpdate);
                 return converter.convertLabelToDtoFullInfo(label);
             } else {
                 //throw smth
