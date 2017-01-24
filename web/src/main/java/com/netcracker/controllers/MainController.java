@@ -1,7 +1,10 @@
 package com.netcracker.controllers;
 
 import com.netcracker.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +25,7 @@ public class MainController {
             if (user != null) {
                 System.out.println(user.getLastName());
                 System.out.println(user.isEnabled());
-
-                model.addAttribute("userDetails", user);
+                        model.addAttribute("userDetails", user);
             }
         } catch (Exception e) {
         }

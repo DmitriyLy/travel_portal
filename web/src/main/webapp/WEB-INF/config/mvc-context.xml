@@ -7,6 +7,8 @@
 
     <mvc:annotation-driven/>
 
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+
     <context:component-scan base-package="com.netcracker.controllers"/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>

@@ -1,16 +1,16 @@
 package com.netcracker.controllers;
 
 import com.netcracker.dto.AttachmentDtoInfo;
-import com.netcracker.dto.AttachmentDtoNew;
-import com.netcracker.entities.Attachment;
-import com.netcracker.repositories.impl.AttachmentRepositoryImpl;
 import com.netcracker.services.impl.AttachmentServiceImpl;
-import com.netcracker.specifications.SqlSpecification;
-import com.netcracker.specifications.impl.AttachmentsInLabelSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -58,12 +58,23 @@ public class AttachmentController {
      * FR57 - The system should provide the authorized user the ability to attach files to their label.
      * FR59 - The system should provide adding file attachments from the user file system.
      *
-     * @param attachmentToAdd{@link AttachmentDtoNew} - object that contains information about attachment to be added.
+     * @param attach - object that contains bytes of attachment.
      * @return {@link AttachmentDtoInfo} - object, that contains information about created attachment.
      */
-    @PutMapping
-    public AttachmentDtoInfo addAttachment(@PathVariable(name = "labelId") Long labelId,
-                                           @RequestBody AttachmentDtoNew attachmentToAdd) {
+    @PostMapping("/add")
+    public AttachmentDtoInfo addAttachment(HttpServletRequest request, @PathVariable(name = "labelId") Long labelId, @RequestParam("attach")MultipartFile attach) throws IOException {
+        String uploadRootPath = request.getServletContext().getRealPath("resources/upload");
+        System.out.println("uploadRootPath=" + uploadRootPath);
+
+        File uploadRootDir = new File(uploadRootPath);
+        if (!uploadRootDir.exists()) {
+            uploadRootDir.mkdirs();
+        }
+        File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + attach.getOriginalFilename());
+
+        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+        stream.write(attach.getBytes());
+        stream.close();
         return null;
     }
 

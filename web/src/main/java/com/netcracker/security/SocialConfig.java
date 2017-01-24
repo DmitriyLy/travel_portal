@@ -19,6 +19,7 @@ import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
 import org.springframework.social.connect.web.ConnectController;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
 import org.springframework.social.security.AuthenticationNameUserIdSource;
@@ -86,6 +87,5 @@ public class SocialConfig implements SocialConfigurer {
                                                ConnectionRepository connectionRepository) {
         return new ConnectController(connectionFactoryLocator, connectionRepository);
     }
-
 
 }
