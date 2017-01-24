@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="_menu.jsp"/>
 
-<h2>Home Page</h2>
+<h2>Misha cool!!</h2>
 
 <spring:url value="/labels/1/attachments/add" var="uploadUrl"/>
 <form method="POST" enctype="multipart/form-data" action="${uploadUrl}">
