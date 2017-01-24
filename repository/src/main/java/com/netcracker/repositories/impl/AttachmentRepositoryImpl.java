@@ -28,11 +28,9 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
     private RowMapper<Attachment> mapper = (rs, rowNum) -> {
         Attachment attachment = new Attachment();
         attachment.setId(rs.getLong("id"));
-        attachment.setUserId(rs.getLong("user_id"));
+        attachment.setUserId(rs.getString("user_id"));
         attachment.setLabelId(rs.getLong("label_id"));
-        attachment.setFilePath(rs.getString("file_path"));
         attachment.setName(rs.getString("name"));
-        attachment.setExtension(rs.getString("extension"));
         return attachment;
     };
 
@@ -45,9 +43,7 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
                 item.getId(),
                 item.getUserId(),
                 item.getLabelId(),
-                item.getFilePath(),
-                item.getName(),
-                item.getExtension()
+                item.getName()
         );
 
         if (out == 0) {
@@ -63,9 +59,7 @@ public class AttachmentRepositoryImpl implements IRepository<Attachment> {
         int out = jdbcTemplate.update(query,
                 item.getUserId(),
                 item.getLabelId(),
-                item.getFilePath(),
                 item.getName(),
-                item.getExtension(),
                 item.getId()
         );
 

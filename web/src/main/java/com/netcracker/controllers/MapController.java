@@ -27,10 +27,10 @@ public class MapController {
      *
      * @return index.jsp
      */
-    /*@GetMapping(value = "/")
+    @GetMapping(value = "/")
     public String getMap() {
         return "index";
-    }*/
+    }
 
     /**
      * Method returns short label's info to client. It is required for setting labels on map.

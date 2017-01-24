@@ -196,8 +196,7 @@ public class ConverterImpl implements Converter {
 
         AttachmentDtoInfo attachmentDtoInfo = new AttachmentDtoInfo();
         attachmentDtoInfo.setId(attachment.getId());
-        attachmentDtoInfo.setLarge(attachment.getFilePath() + "\\" + attachment.getName() + "." + attachment.getExtension());
-        //attachmentDtoInfo.setThumbnail();
+        attachmentDtoInfo.setName(attachment.getName());
         return attachmentDtoInfo;
     }
 }

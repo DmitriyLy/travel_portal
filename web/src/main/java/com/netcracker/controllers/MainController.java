@@ -17,7 +17,7 @@ import org.springframework.web.context.request.WebRequest;
 @Controller
 public class MainController {
 
-    @RequestMapping(value = { "/" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/main" }, method = RequestMethod.GET)
     public String homePage(Model model) {
         try {
             User user = (User)SecurityContextHolder.getContext().getAuthentication()

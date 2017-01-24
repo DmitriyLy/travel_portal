@@ -31,6 +31,15 @@ public class AttachmentServiceImpl implements AttachmentService {
     private Converter converter;
 
 
+    @Override
+    public AttachmentDtoInfo addAttachment(long labelId, String userId, String name) {
+        Attachment attachment = new Attachment();
+        attachment.setLabelId(labelId);
+        attachment.setUserId(userId);
+        attachment.setName(name);
+        attachment = repository.add(attachment);
+        return converter.convertAttachmentToDtoInfo(attachment);
+    }
 
     @Override
     public List<AttachmentDtoInfo> getAttachmentsByLabel(Long labelId) {

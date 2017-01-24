@@ -63,8 +63,8 @@ public interface QueriesRepository {
     String GET_COUNT_OF_COMMENTS = "SELECT count(*) FROM COMMENTS";
     String GET_NEW_ID_COMMENT = "SELECT COMMENTS_SEQ.NEXTVAL FROM DUAL";
 
-    String INSERT_ATTACHMENT = "INSERT INTO ATTACHMENTS(id,user_id,label_id,file_path,name,extension) values(?,?,?,?,?,?)";
-    String UPDATE_ATTACHMENT = "UPDATE ATTACHMENTS SET user_id=?, label_id=?, file_path=?, name=?, extension=? WHERE id=?";
+    String INSERT_ATTACHMENT = "INSERT INTO ATTACHMENTS(id,user_id,label_id,name) values(?,?,?,?)";
+    String UPDATE_ATTACHMENT = "UPDATE ATTACHMENTS SET user_id=?, label_id=?, name=? WHERE id=?";
     String DELETE_ATTACHMENT = "DELETE FROM ATTACHMENTS WHERE id=?";
     String GET_ATTACHMENT_BY_ID = "SELECT * FROM ATTACHMENTS WHERE id=?";
     String GET_COUNT_OF_ATTACHMENTS = "SELECT count(*) FROM ATTACHMENTS";

@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface AttachmentService {
 
+    AttachmentDtoInfo addAttachment(long labelId, String userId, String name);
     List<AttachmentDtoInfo> getAttachmentsByLabel(Long labelId);
     int getAttachmentCountByLabel(long labelId);
 }

@@ -1,8 +1,10 @@
 package com.netcracker.controllers;
 
 import com.netcracker.dto.AttachmentDtoInfo;
+import com.netcracker.entities.User;
 import com.netcracker.services.impl.AttachmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,8 +65,10 @@ public class AttachmentController {
      */
     @PostMapping("/add")
     public AttachmentDtoInfo addAttachment(HttpServletRequest request, @PathVariable(name = "labelId") Long labelId, @RequestParam("attach")MultipartFile attach) throws IOException {
-        String uploadRootPath = request.getServletContext().getRealPath("resources/upload");
-        System.out.println("uploadRootPath=" + uploadRootPath);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        String uploadRootPath = request.getServletContext().getRealPath("resources/upload/"+labelId);
 
         File uploadRootDir = new File(uploadRootPath);
         if (!uploadRootDir.exists()) {

@@ -58,7 +58,7 @@ public class CommentController {
             if (comment != null)
                 commentDtos.add(converter.convertCommentToDtoInfo(comment));
         return commentDtos;
-    };
+    }
 
     /**
      * The method adds a comment to the mark left by the authorized user.
@@ -86,7 +86,7 @@ public class CommentController {
             //throw smth
         }
         return null;
-    };
+    }
 
     /**
      * Method of updating comment.
@@ -118,7 +118,7 @@ public class CommentController {
             }
         }
         return null;
-    };
+    }
 
     /**
      * The controller is used to remove an authorized user comments.
@@ -145,6 +145,6 @@ public class CommentController {
                 //throw smth
             }
         }
-    };
+    }
 
 }
