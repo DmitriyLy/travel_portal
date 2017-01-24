@@ -187,4 +187,17 @@ public class ConverterImpl implements Converter {
         commentDto.setCreationDate(comment.getCommentDate());
         return commentDto;
     }
+
+    @Override
+    public AttachmentDtoInfo convertAttachmentToDtoInfo(Attachment attachment) {
+        if (attachment == null) {
+            return null;
+        }
+
+        AttachmentDtoInfo attachmentDtoInfo = new AttachmentDtoInfo();
+        attachmentDtoInfo.setId(attachment.getId());
+        attachmentDtoInfo.setLarge(attachment.getFilePath() + "\\" + attachment.getName() + "." + attachment.getExtension());
+        //attachmentDtoInfo.setThumbnail();
+        return attachmentDtoInfo;
+    }
 }

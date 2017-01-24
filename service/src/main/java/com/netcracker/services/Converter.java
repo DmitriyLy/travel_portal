@@ -1,10 +1,7 @@
 package com.netcracker.services;
 
 import com.netcracker.dto.*;
-import com.netcracker.entities.Comment;
-import com.netcracker.entities.Label;
-import com.netcracker.entities.Location;
-import com.netcracker.entities.User;
+import com.netcracker.entities.*;
 
 import java.util.List;
 
@@ -22,4 +19,5 @@ public interface Converter {
 
     CommentDtoInfo convertCommentToDtoInfo(Comment comment);
 
+    AttachmentDtoInfo convertAttachmentToDtoInfo(Attachment attachment);
 }

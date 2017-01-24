@@ -4,6 +4,7 @@ import com.netcracker.dto.AttachmentDtoInfo;
 import com.netcracker.entities.Attachment;
 import com.netcracker.repositories.impl.AttachmentRepositoryImpl;
 import com.netcracker.services.AttachmentService;
+import com.netcracker.services.Converter;
 import com.netcracker.specifications.SqlSpecification;
 import com.netcracker.specifications.impl.AttachmentsCountByLabel;
 import com.netcracker.specifications.impl.AttachmentsInLabelSpecification;
@@ -26,6 +27,8 @@ public class AttachmentServiceImpl implements AttachmentService {
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private AttachmentRepositoryImpl repository;
+    @Autowired
+    private Converter converter;
 
 
     @Override
@@ -39,7 +42,9 @@ public class AttachmentServiceImpl implements AttachmentService {
         List<Attachment> queryResult = repository.query(specification);
 
         for (Attachment item : queryResult) {
-
+            if (item != null) {
+                list.add(converter.convertAttachmentToDtoInfo(item));
+            }
         }
 
         return list;
