@@ -82,7 +82,8 @@ public class LabelController {
      */
     @GetMapping("/{labelId}")
     public LabelDtoFullInfo getLabelById(@PathVariable(name = "labelId") Long labelId) {
-        return null;
+        Label label = labelService.getById(labelId);
+        return converter.convertLabelToDtoFullInfo(label);
     }
 
     /**
