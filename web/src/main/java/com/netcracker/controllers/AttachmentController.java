@@ -6,6 +6,7 @@ import com.netcracker.services.impl.AttachmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.ContextLoader;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,21 +65,19 @@ public class AttachmentController {
      * @return {@link AttachmentDtoInfo} - object, that contains information about created attachment.
      */
     @PostMapping("/add")
-    public AttachmentDtoInfo addAttachment(HttpServletRequest request, @PathVariable(name = "labelId") Long labelId, @RequestParam("attach")MultipartFile attach) throws IOException {
+    public AttachmentDtoInfo addAttachment(@PathVariable(name = "labelId") Long labelId, @RequestParam("attach")MultipartFile attach) throws IOException {
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
 
-        String uploadRootPath = request.getServletContext().getRealPath("resources/upload/"+labelId);
+        String uploadRootPath = ContextLoader.getCurrentWebApplicationContext()
+                .getServletContext().getRealPath("resources/upload/"+labelId);
 
         File uploadRootDir = new File(uploadRootPath);
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
         }
         File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + attach.getOriginalFilename());
-
-        BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-        stream.write(attach.getBytes());
-        stream.close();
+        attach.transferTo(serverFile);
         return null;
     }
 
