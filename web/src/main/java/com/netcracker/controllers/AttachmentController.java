@@ -1,7 +1,9 @@
 package com.netcracker.controllers;
 
 import com.netcracker.dto.AttachmentDtoInfo;
+import com.netcracker.entities.Attachment;
 import com.netcracker.entities.User;
+import com.netcracker.services.Converter;
 import com.netcracker.services.impl.AttachmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +17,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The controller, whose methods provide ways of interacting with
@@ -37,6 +40,8 @@ public class AttachmentController {
 
     @Autowired
     private AttachmentServiceImpl attachmentService;
+    @Autowired
+    private Converter converter;
 
     /**
      * Method of attachments extraction, depending on which label id came from client.
@@ -51,7 +56,9 @@ public class AttachmentController {
      */
     @GetMapping
     public List<AttachmentDtoInfo> getAttachmentsByLabel(@PathVariable(name = "labelId") Long labelId) {
-        return attachmentService.getAttachmentsByLabel(labelId);
+        return attachmentService.getAttachmentsByLabel(labelId)
+                .stream().map(a -> converter.convertAttachmentToDtoInfo(a))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -78,7 +85,8 @@ public class AttachmentController {
         }
         File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + attach.getOriginalFilename());
         attach.transferTo(serverFile);
-        return null;
+        Attachment dbRecord = attachmentService.addAttachment(labelId,user.getUserId(),attach.getOriginalFilename());
+        return converter.convertAttachmentToDtoInfo(dbRecord);
     }
 
     /**
