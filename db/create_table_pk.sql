@@ -110,9 +110,9 @@ CREATE TABLE ATTACHMENTS (
   id NUMBER(11),
   user_id VARCHAR2(255),
   label_id NUMBER(10),
-  file_path VARCHAR2(250),
-  name VARCHAR2(50),
-  extension VARCHAR2(5),
+  --file_path VARCHAR2(250),
+  name VARCHAR2(250),
+  --extension VARCHAR2(5),
   CONSTRAINT pk_attachements PRIMARY KEY (id)
 );
 
