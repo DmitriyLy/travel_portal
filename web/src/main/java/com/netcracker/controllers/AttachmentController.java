@@ -76,8 +76,7 @@ public class AttachmentController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
 
-        String uploadRootPath = ContextLoader.getCurrentWebApplicationContext()
-                .getServletContext().getRealPath("resources/upload/"+labelId);
+        String uploadRootPath = "/var/www/resources/upload/"+labelId;
 
         File uploadRootDir = new File(uploadRootPath);
         if (!uploadRootDir.exists()) {
