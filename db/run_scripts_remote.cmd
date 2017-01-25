@@ -1,0 +1,1 @@
+sqlplus TRAVEL_PORTAL/TRAVEL_PORTAL@nctravelportal.ddns.net

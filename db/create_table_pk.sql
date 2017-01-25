@@ -90,7 +90,7 @@ CREATE TABLE COMMENTS (
   user_id VARCHAR2(255),
   label_id NUMBER(10),
   comment_date DATE,
-  comment_text NVARCHAR2(500),
+  comment_text NVARCHAR2(1000),
   CONSTRAINT pk_comments PRIMARY KEY (id)
 );
 

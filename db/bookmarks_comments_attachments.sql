@@ -1,6 +1,7 @@
+--
 INSERT ALL  
   INTO BOOKMARKS VALUES(user_id, label_id)
-  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('2.11.2016', 'DD.MM.YYYY'), 'Неплохо.')
+  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('2.11.2016', 'DD.MM.YYYY'), 'Not bad.')
   INTO ATTACHMENTS VALUES(ATTACHMENTS_SEQ.NEXTVAL, user_id, label_id, 'test1.png')
   SELECT
     USERS.ID AS user_id,
@@ -12,7 +13,7 @@ INSERT ALL
     
 INSERT ALL  
   INTO BOOKMARKS VALUES(user_id, label_id)
-  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('3.11.2016', 'DD.MM.YYYY'), 'Красивый вид')
+  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('3.11.2016', 'DD.MM.YYYY'), 'Beautiful view')
   INTO ATTACHMENTS VALUES(ATTACHMENTS_SEQ.NEXTVAL, user_id, label_id,'test2.jpg')
   SELECT
     USERS.ID AS user_id,
@@ -24,7 +25,7 @@ INSERT ALL
     
 INSERT ALL  
   INTO BOOKMARKS VALUES(user_id, label_id)
-  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('4.11.2016', 'DD.MM.YYYY'), 'Долго.')
+  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('4.11.2016', 'DD.MM.YYYY'), 'Long.')
   INTO ATTACHMENTS VALUES(ATTACHMENTS_SEQ.NEXTVAL, user_id, label_id, 'test3.jpg')
   SELECT
     USERS.ID AS user_id,
@@ -36,7 +37,7 @@ INSERT ALL
     
 INSERT ALL  
   INTO BOOKMARKS VALUES(user_id, label_id)
-  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('5.11.2016', 'DD.MM.YYYY'), 'Целый день по ней бегал')
+  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('5.11.2016', 'DD.MM.YYYY'), 'The whole day ran on it')
   INTO ATTACHMENTS VALUES(ATTACHMENTS_SEQ.NEXTVAL, user_id, label_id, 'test4.jpg')
   SELECT
     USERS.ID AS user_id,
@@ -48,7 +49,7 @@ INSERT ALL
     
 INSERT ALL  
   INTO BOOKMARKS VALUES(user_id, label_id)
-  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('6.11.2016', 'DD.MM.YYYY'), 'Когда следующая игра?')
+  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('6.11.2016', 'DD.MM.YYYY'), 'When is the next game?')
   INTO ATTACHMENTS VALUES(ATTACHMENTS_SEQ.NEXTVAL, user_id, label_id, 'test5.jpg')
   SELECT
     USERS.ID AS user_id,
@@ -60,7 +61,7 @@ INSERT ALL
     
 INSERT ALL  
   INTO BOOKMARKS VALUES(user_id, label_id)
-  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('7.11.2016', 'DD.MM.YYYY'), 'Неплохой стадион')
+  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('7.11.2016', 'DD.MM.YYYY'), 'Nice stadium')
   INTO ATTACHMENTS VALUES(ATTACHMENTS_SEQ.NEXTVAL, user_id, label_id, 'test6.bmp')
   SELECT
     USERS.ID AS user_id,
@@ -72,8 +73,8 @@ INSERT ALL
     
 INSERT ALL  
   INTO BOOKMARKS VALUES(user_id, label_id)
-  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('8.11.2016', 'DD.MM.YYYY'), 'Были на представлении очередной раз....:-)
-Все понравилось, программа новая интересная!!!Супер!!!')
+  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('8.11.2016', 'DD.MM.YYYY'), 'We were at the presentation again .... :-)
+I liked everything, a new interesting program !!! Super !!!')
   INTO ATTACHMENTS VALUES(ATTACHMENTS_SEQ.NEXTVAL, user_id, label_id,'test7.bmp')
   SELECT
     USERS.ID AS user_id,
@@ -85,7 +86,7 @@ INSERT ALL
     
 INSERT ALL  
   INTO BOOKMARKS VALUES(user_id, label_id)
-  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('9.11.2016', 'DD.MM.YYYY'), 'Доброго дня, кажіть якщо дитині 3 роки, вона безкоштовно чи теж потрібно платити')
+  INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('9.11.2016', 'DD.MM.YYYY'), 'Welcome tell if a child 3 years is free if made to pay')
   INTO ATTACHMENTS VALUES(ATTACHMENTS_SEQ.NEXTVAL, user_id, label_id,'test8.bmp')
   SELECT
     USERS.ID AS user_id,
@@ -98,9 +99,9 @@ INSERT ALL
 INSERT ALL  
   INTO BOOKMARKS VALUES(user_id, label_id)
   INTO COMMENTS VALUES(COMMENTS_SEQ.NEXTVAL, user_id, label_id, TO_DATE('10.11.2016', 'DD.MM.YYYY'), 
-  'Здравствуйте) вчера посетили Дельфинарий нам очень понравилось) дельфины очень классные, а еще нам очень понравилось то что у вас есть кафе где мы очень сытно покушали, 
-  а то позавтракать не успели так спешили к вам на шоу) еще советую всем это кафе проводит акцию скупись на сумму 100грн и получи билет в террариум, вообще мы и в террариум 
-  сходили бесплатно) спасибо большое')
+  'Р—Hello) yesterday posetyly us Delfynaryy Very ponravylos) delfynС‹ Very Klassnyj and we Very ponravylos else is there something you have cafes where Г¬Г» Very sС‹tno pokushaly,
+В В  if not pozavtrakat uspely speshyly way for you to show) everybody else sovetuyu This cafe conduct skupys shares in the amount of 100 UAH Receive a ticket terrarium, We in general and in the terrarium
+В В  went free) thanks Bolshoi')
   INTO ATTACHMENTS VALUES(ATTACHMENTS_SEQ.NEXTVAL, user_id, label_id, 'test9.bmp')
   SELECT
     USERS.ID AS user_id,
