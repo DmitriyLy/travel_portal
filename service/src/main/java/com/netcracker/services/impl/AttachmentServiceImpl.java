@@ -27,24 +27,22 @@ public class AttachmentServiceImpl implements AttachmentService {
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private AttachmentRepositoryImpl repository;
-    @Autowired
-    private Converter converter;
+
 
 
     @Override
-    public AttachmentDtoInfo addAttachment(long labelId, String userId, String name) {
+    public Attachment addAttachment(long labelId, String userId, String name) {
         Attachment attachment = new Attachment();
         attachment.setLabelId(labelId);
         attachment.setUserId(userId);
         attachment.setName(name);
-        attachment = repository.add(attachment);
-        return converter.convertAttachmentToDtoInfo(attachment);
+        return repository.add(attachment);
     }
 
     @Override
-    public List<AttachmentDtoInfo> getAttachmentsByLabel(Long labelId) {
+    public List<Attachment> getAttachmentsByLabel(Long labelId) {
 
-        ArrayList<AttachmentDtoInfo> list = new ArrayList<>();
+        ArrayList<Attachment> list = new ArrayList<>();
 
         SqlSpecification specification = new AttachmentsInLabelSpecification(labelId);
 
@@ -53,7 +51,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 
         for (Attachment item : queryResult) {
             if (item != null) {
-                list.add(converter.convertAttachmentToDtoInfo(item));
+                list.add(item);
             }
         }
 

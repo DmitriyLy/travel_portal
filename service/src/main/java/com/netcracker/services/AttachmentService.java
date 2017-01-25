@@ -1,6 +1,7 @@
 package com.netcracker.services;
 
 import com.netcracker.dto.AttachmentDtoInfo;
+import com.netcracker.entities.Attachment;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface AttachmentService {
 
-    AttachmentDtoInfo addAttachment(long labelId, String userId, String name);
-    List<AttachmentDtoInfo> getAttachmentsByLabel(Long labelId);
+    Attachment addAttachment(long labelId, String userId, String name);
+    List<Attachment> getAttachmentsByLabel(Long labelId);
     int getAttachmentCountByLabel(long labelId);
 }

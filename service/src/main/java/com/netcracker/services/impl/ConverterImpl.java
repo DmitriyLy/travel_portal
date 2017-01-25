@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author logariett.
@@ -53,7 +54,10 @@ public class ConverterImpl implements Converter {
         labelDto.setCreationDate(label.getCreationDate());
 
         labelDto.setCommentCount(commentService.getCommentCountByLabel(label.getId()));
-        labelDto.setAttachments(attachmentService.getAttachmentsByLabel(label.getId()));
+        List<AttachmentDtoInfo> attachDtos = attachmentService.getAttachmentsByLabel(label.getId())
+                .stream().map(a -> convertAttachmentToDtoInfo(a))
+                .collect(Collectors.toList());
+        labelDto.setAttachments(attachDtos);
 
         List<Tag> labelTags = tagService.getTagsByLabel(label.getId());
         labelDto.setTags(tagService.extractTagNames(labelTags));
