@@ -14,7 +14,7 @@ AppController.instantiateMap('map', {
 
 // Modules init
 // 1. Material Design Module Init
-$.material.init();
+// $.material.init();
 // 2. MMenu module init and map resizing fix
 MMenuEventController.init();
 // 3. Floating action buttons events

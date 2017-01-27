@@ -8,7 +8,7 @@ define(["require", "exports", "./Controllers/AppController", "./Controllers/DayN
     });
     // Modules init
     // 1. Material Design Module Init
-    $.material.init();
+    // $.material.init();
     // 2. MMenu module init and map resizing fix
     MMenuEventController_1.MMenuEventController.init();
     // 3. Floating action buttons events
