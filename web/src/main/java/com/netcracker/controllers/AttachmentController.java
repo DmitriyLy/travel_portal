@@ -8,13 +8,8 @@ import com.netcracker.services.impl.AttachmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.ContextLoader;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +20,7 @@ import java.util.stream.Collectors;
  * this controller is not the method getComment (), as the comments
  * received getFullLabelInfo perform () method of the class
  * {@link com.netcracker.controllers.LabelController}.
- *
+ * <p>
  * This controller is responsible for:
  * UC17 - Adding attachments; +
  * UC18 - Deleting attachments; +
@@ -45,11 +40,11 @@ public class AttachmentController {
 
     /**
      * Method of attachments extraction, depending on which label id came from client.
-     *
+     * <p>
      * Described in:
      * FR14 - The system should provide the ability to view attachments;
      * FR15 - The system should provide display of attachments in accordance
-     *      with the order they are added to the label
+     * with the order they are added to the label
      *
      * @param labelId
      * @return list of {@link AttachmentDtoInfo} - objects, that contain information about existing attachments.
@@ -63,7 +58,7 @@ public class AttachmentController {
 
     /**
      * Method of adding attachment to current label
-     *
+     * <p>
      * Described in:
      * FR57 - The system should provide the authorized user the ability to attach files to their label.
      * FR59 - The system should provide adding file attachments from the user file system.
@@ -72,25 +67,17 @@ public class AttachmentController {
      * @return {@link AttachmentDtoInfo} - object, that contains information about created attachment.
      */
     @PostMapping("/add")
-    public AttachmentDtoInfo addAttachment(@PathVariable(name = "labelId") Long labelId, @RequestParam("attach")MultipartFile attach) throws IOException {
+    public AttachmentDtoInfo addAttachment(@PathVariable(name = "labelId") Long labelId, @RequestParam("attach") MultipartFile attach) throws IOException {
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-
-        String uploadRootPath = "/var/www/resources/upload/"+labelId;
-
-        File uploadRootDir = new File(uploadRootPath);
-        if (!uploadRootDir.exists()) {
-            uploadRootDir.mkdirs();
-        }
-        File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + attach.getOriginalFilename());
-        attach.transferTo(serverFile);
-        Attachment dbRecord = attachmentService.addAttachment(labelId,user.getUserId(),attach.getOriginalFilename());
+        String attachmentName = attachmentService.saveAttachment(labelId, attach);
+        Attachment dbRecord = attachmentService.addAttachment(labelId, user.getUserId(), attachmentName);
         return converter.convertAttachmentToDtoInfo(dbRecord);
     }
 
     /**
      * Method of attachment extraction by its id
-     *
+     * <p>
      * Described in:
      * nowhere
      *
@@ -106,7 +93,7 @@ public class AttachmentController {
 
     /**
      * Method of deleting attachment from specified label.
-     *
+     * <p>
      * Described in:
      * FR61 - The system should provide the authorized user to remove attached file from their label.
      *

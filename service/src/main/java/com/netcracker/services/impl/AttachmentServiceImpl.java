@@ -13,6 +13,13 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +44,44 @@ public class AttachmentServiceImpl implements AttachmentService {
         attachment.setUserId(userId);
         attachment.setName(name);
         return repository.add(attachment);
+    }
+
+    @Override
+    public String saveAttachment(Long labelId, MultipartFile attach) throws IOException {
+        String uploadRootPath = "/var/www/resources/upload/" + labelId;
+        File uploadRootDir = new File(uploadRootPath);
+        if (!uploadRootDir.exists()) {
+            uploadRootDir.mkdirs();
+        }
+        StringBuilder filePath = new StringBuilder();
+        StringBuilder fileName = new StringBuilder();
+        fileName.append(attach.getOriginalFilename())
+                .replace(fileName.lastIndexOf(".")+1,fileName.length(),"jpg");
+        filePath.append(uploadRootDir.getAbsolutePath())
+                .append(File.separator)
+                .append(fileName);
+
+        File serverFile = new File(filePath.toString());
+        BufferedImage originalImage = ImageIO.read(attach.getInputStream());
+        ImageIO.write(originalImage, "jpg", serverFile);
+
+        doCompression(filePath, originalImage);
+        return fileName.toString();
+    }
+
+    private void doCompression(StringBuilder fileName, BufferedImage originalImage) throws IOException {
+        int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+
+        BufferedImage resizedImage = new BufferedImage(40, 40, type);
+        Graphics2D g = resizedImage.createGraphics();
+        g.drawImage(originalImage, 0, 0, 40, 40, null);
+        g.dispose();
+
+        StringBuilder compFilePath = new StringBuilder(fileName);
+        compFilePath.insert(compFilePath.lastIndexOf("."),"_40x40");
+        File compressedFile = new File(compFilePath.toString());
+
+        ImageIO.write(resizedImage, "jpg", compressedFile);
     }
 
     @Override
