@@ -15,8 +15,8 @@
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/bootstrap/bootstrap-theme.min.css"/>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/font-awesome/font-awesome.min.css"/>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mmenu/jquery.mmenu.all.css"/>
-        <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/material-design/bootstrap-material-design.css">
-        <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/material-design/ripples.min.css">
+        <%--<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/material-design/bootstrap-material-design.css">--%>
+        <%--<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/material-design/ripples.min.css">--%>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css"/>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/dark-style.css"/>
     </head>
