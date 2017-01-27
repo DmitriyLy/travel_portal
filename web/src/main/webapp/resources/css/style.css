@@ -23,13 +23,10 @@ body > .mm-menu + .mm-page.mm-slideout {
     height: 100%;
 }
 
-#header-menu{
+
+
+#header-menu {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e8e8e8+0,c1c1c1+100  */
-    /*background: #e8e8e8;
-    background: -moz-linear-gradient(top,  #e8e8e8 0%, #c1c1c1 100%);
-    background: -webkit-linear-gradient(top,  #e8e8e8 0%,#c1c1c1 100%);
-    background: linear-gradient(to bottom,  #e8e8e8 0%,#c1c1c1 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e8e8e8', endColorstr='#c1c1c1',GradientType=0 );*/
     margin-bottom: 0;
     border: 0;
     line-height: 50px;
@@ -52,6 +49,26 @@ body > .mm-menu + .mm-page.mm-slideout {
     top: 5px;
     font-weight: bold;
 }
+#header-menu #dn-mode-button {
+    background-color: #ff5722;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 20px;
+    position: relative;
+    top: 4px;
+    text-align: center;
+    width:40px;
+    height: 40px;
+    line-height: 40px;
+}
 #open-sidebar-menu {
     display: block;
     -webkit-box-sizing: border-box;
@@ -61,18 +78,16 @@ body > .mm-menu + .mm-page.mm-slideout {
     padding: 5px 15px 0;
     line-height: 50px;
 }
-
 .container-navbar-padding {
     padding-top:50px;
 }
-
 #actions-container {
     position: fixed;
     right: 20px;
     bottom: 20px;
     height: 56px;
 }
-#actions-container .btn-fab{
+#actions-container .btn-fab {
     background-color: #ff5722;
     color: rgba(255,255,255, 0.84);
     -webkit-transition: all 250ms;
@@ -81,11 +96,10 @@ body > .mm-menu + .mm-page.mm-slideout {
     -o-transition: all 250ms;
     transition: all 250ms;
 }
-#actions-container .btn-fab:hover, #actions-container .btn-fab:focus{
+#actions-container .btn-fab:hover, #actions-container .btn-fab:focus {
     background-color: #e15321;
     color: rgba(255,255,255, 1);
 }
-
 #actions-container #subactions-container, #actions-container #subactions-container > li{
     margin: 0;
     padding: 0;
@@ -113,6 +127,8 @@ body > .mm-menu + .mm-page.mm-slideout {
     opacity: 1;
     visibility: visible;
 }
+
+/* WINDOWS */
 #windows-container {
     position: absolute;
     bottom: 20px;
@@ -120,6 +136,8 @@ body > .mm-menu + .mm-page.mm-slideout {
     left:20px;
 }
 #windows-container > .window {
+    position: relative;
+    z-index: 1;
     float:left;
     width: 300px;
     -webkit-box-sizing: border-box;
@@ -138,5 +156,135 @@ body > .mm-menu + .mm-page.mm-slideout {
 }
 #windows-container .window > h2 {
     margin-top:0;
+}
+#windows-container .window > .content {
+    position: absolute;
+    top: 53px;
+    left: 0;
+    width: 300px;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#windows-container .window > h2 > .close-window-button {
+    display: inline-block;
+    font: normal normal normal 18px/1 FontAwesome;
+    margin-right: 10px;
+    position: relative;
+    top: -8px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    -webkit-transition: all 250ms;
+    -moz-transition: all 250ms;
+    -ms-transition: all 250ms;
+    -o-transition: all 250ms;
+    transition: all 250ms;
+    background-color: white;
+    color:inherit;
+}
+#windows-container .window > h2 > .close-window-button:hover {
+    background-color: rgb(255, 87, 34);
+    color: white;
+}
+#windows-container .window > h2 > .close-window-button:before {
+    content: "\f053";
+    position: relative;
+    top: 5px;
+}
+#windows-container .window:nth-child(1) > h2 > .close-window-button:before {
+    content: "\f00d";
+    top: 3px;
+}
+/* /WINDOWS */
+/* MARKERS */
+#windows-container .window .marker .row{
+    margin-bottom: 10px;
+}
+#windows-container .window .marker  .owner {
+    white-space: nowrap; /* Отменяем перенос текста */
+    overflow: hidden; /* Обрезаем содержимое */
+}
+#windows-container .window .marker .owner::after {
+    content: ''; /* Выводим элемент */
+    position: absolute; /* Абсолютное позиционирование */
+    right: 0; top: 0; /* Положение элемента */
+    width: 40px; /* Ширина градиента*/
+    height: 100%; /* Высота родителя */
+    /* Градиент */
+    background: -moz-linear-gradient(left, rgba(255,255,255, 0.2), #fff 100%);
+    background: -webkit-linear-gradient(left, rgba(255,255,255, 0.2), #fff 100%);
+    background: -o-linear-gradient(left, rgba(255,255,255, 0.2), #fff 100%);
+    background: -ms-linear-gradient(left, rgba(255,255,255, 0.2), #fff 100%);
+    background: linear-gradient(to right, rgba(255,255,255, 0.2), #fff 100%);
+}
+#windows-container .window .marker  .date, #windows-container .window .marker  .address{
+    color: lightgray;
+    font-size: 0.8em;
+}
+#windows-container .window .marker .rating .rate-0,
+#windows-container .window .marker .rating .rate-1,
+#windows-container .window .marker .rating .rate-2,
+#windows-container .window .marker .rating .rate-3,
+#windows-container .window .marker .rating .rate-4,
+#windows-container .window .marker .rating .rate-5 {
+    font: normal normal normal 14px/1 FontAwesome;
+}
+#windows-container .window .marker .rating .rate-0:before {
+    content: "\f006\f006\f006\f006\f006";
+}
+#windows-container .window .marker .rating .rate-1:before {
+    content: "\f005\f006\f006\f006\f006";
+}
+#windows-container .window .marker .rating .rate-2:before {
+    content: "\f005\f005\f006\f006\f006";
+}
+#windows-container .window .marker .rating .rate-3:before {
+    content: "\f005\f005\f005\f006\f006";
+}
+#windows-container .window .marker .rating .rate-4:before {
+    content: "\f005\f005\f005\f005\f006";
+}
+#windows-container .window .marker .rating .rate-5:before {
+    content: "\f005\f005\f005\f005\f005";
+}
+/* /MARKERS */
+/* COMMENTS */
+#windows-container .window .comments {
 
+}
+#windows-container .window .comments .comment{
+    margin-bottom: 10px;
+}
+#windows-container .window .comments .owner {
+    white-space: nowrap; /* Отменяем перенос текста */
+    overflow: hidden; /* Обрезаем содержимое */
+}
+#windows-container .window .comments .owner::after {
+    content: ''; /* Выводим элемент */
+    position: absolute; /* Абсолютное позиционирование */
+    right: 0; top: 0; /* Положение элемента */
+    width: 40px; /* Ширина градиента*/
+    height: 100%; /* Высота родителя */
+    /* Градиент */
+    background: -moz-linear-gradient(left, rgba(255,255,255, 0.2), #fff 100%);
+    background: -webkit-linear-gradient(left, rgba(255,255,255, 0.2), #fff 100%);
+    background: -o-linear-gradient(left, rgba(255,255,255, 0.2), #fff 100%);
+    background: -ms-linear-gradient(left, rgba(255,255,255, 0.2), #fff 100%);
+    background: linear-gradient(to right, rgba(255,255,255, 0.2), #fff 100%);
+}
+#windows-container .window .comments .date{
+    color: lightgray;
+    font-size: 0.8em;
+}
+/* /COMMENTS */
+div.hr {
+    height: 1px;
+    width: 100%;
+    background: rgb(169, 169, 169);
+    background: rgba(211, 211, 211, .5);
+    clear: both;
 }
