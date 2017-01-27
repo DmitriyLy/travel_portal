@@ -1,6 +1,7 @@
 import {MapController} from "./MapController";
 import {WindowView} from "../Views/WindowView";
 import {View} from "../Views/View";
+import {ActionBinder} from "../Helpers/ActionBinder";
 declare var google,jQuery,$:any;
 
 
@@ -11,13 +12,12 @@ export class WindowController {
     childrenWindows : WindowController[] = [];
     mapController : MapController;
     parentWindow : WindowController;
-    windowContainer : any;
-    windowView : WindowView;
+    windowContainer : JQueryStatic|Object;
 
     /***
      * Creates window.
      */
-    constructor(mapController : MapController, windowView : View, title : string, content : string|View, parentWindow : WindowController = null) {
+    constructor(mapController : MapController, title : string, content : string|View, parentWindow : WindowController = null) {
         this.title = title;
         this.content = content;
         this.mapController = mapController;
@@ -30,8 +30,9 @@ export class WindowController {
                 mapController.mainWindow.closeWindow();
             mapController.mainWindow = this;
         }
-        this.windowView = windowView;
+
         this.windowContainer = this.showWindow();
+        ActionBinder.bindActions(this.windowContainer);
         return this;
     }
 
@@ -39,24 +40,10 @@ export class WindowController {
      * Shows window.
      */
     showWindow() {
-        if(this.windowView == null)
-            return "";
-
-        return $(this.windowView.render({
+        return $(new WindowView({
             "title": this.title,
             "content": this.content instanceof View ? this.content.render() : this.content
-        })).data('model',this).appendTo($('#windows-container'));
-
-        // WindowView.render({
-        //     "title":this.title,
-        //     "content":MarkerView.render({
-        //         "user":"User",
-        //         "date":"13.10.1995",
-        //         "rate":"5",
-        //         "content":"Lorem ipsum text",
-        //         "comments":"None"
-        //     })
-        // })
+        }).render()).data('model',this).appendTo($('#windows-container'));
     }
 
     /***

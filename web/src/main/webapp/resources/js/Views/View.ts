@@ -1,15 +1,16 @@
 export class View {
     template : string;
-    params : string[];
+    params : Object;
 
-    constructor(template) {
+    constructor(template,params) {
         this.template = template;
+        this.params = params;
     }
 
     /***
      * Renders template
      */
-    render(params) {
-        return replaceTemplateVars(this.template, params);
+    render() {
+        return replaceTemplateVars(this.template, this.params);
     }
 }

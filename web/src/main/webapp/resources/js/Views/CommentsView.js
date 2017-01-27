@@ -5,15 +5,14 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 define(["require", "exports", "./View"], function (require, exports, View_1) {
     "use strict";
-    var WindowView = (function (_super) {
-        __extends(WindowView, _super);
-        function WindowView(params) {
-            _super.call(this, '<div class="window">' +
-                '<h2><div class="close-window-button"></div>$title$</h2>' +
-                '<div class="content col-xs-12">$content$</div>' +
+    var CommentsView = (function (_super) {
+        __extends(CommentsView, _super);
+        function CommentsView(params) {
+            _super.call(this, '<div class="comments">' +
+                '<div class="comments-list row">$comments$</div>' +
                 '</div>', params);
         }
-        return WindowView;
+        return CommentsView;
     }(View_1.View));
-    exports.WindowView = WindowView;
+    exports.CommentsView = CommentsView;
 });

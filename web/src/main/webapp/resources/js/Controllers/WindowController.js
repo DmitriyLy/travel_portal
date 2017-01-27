@@ -1,10 +1,10 @@
-define(["require", "exports", "../Views/View"], function (require, exports, View_1) {
+define(["require", "exports", "../Views/WindowView", "../Views/View", "../Helpers/ActionBinder"], function (require, exports, WindowView_1, View_1, ActionBinder_1) {
     "use strict";
     var WindowController = (function () {
         /***
          * Creates window.
          */
-        function WindowController(mapController, windowView, title, content, parentWindow) {
+        function WindowController(mapController, title, content, parentWindow) {
             if (parentWindow === void 0) { parentWindow = null; }
             this.childrenWindows = [];
             this.title = title;
@@ -20,30 +20,18 @@ define(["require", "exports", "../Views/View"], function (require, exports, View
                     mapController.mainWindow.closeWindow();
                 mapController.mainWindow = this;
             }
-            this.windowView = windowView;
             this.windowContainer = this.showWindow();
+            ActionBinder_1.ActionBinder.bindActions(this.windowContainer);
             return this;
         }
         /***
          * Shows window.
          */
         WindowController.prototype.showWindow = function () {
-            if (this.windowView == null)
-                return "";
-            return $(this.windowView.render({
+            return $(new WindowView_1.WindowView({
                 "title": this.title,
                 "content": this.content instanceof View_1.View ? this.content.render() : this.content
-            })).data('model', this).appendTo($('#windows-container'));
-            // WindowView.render({
-            //     "title":this.title,
-            //     "content":MarkerView.render({
-            //         "user":"User",
-            //         "date":"13.10.1995",
-            //         "rate":"5",
-            //         "content":"Lorem ipsum text",
-            //         "comments":"None"
-            //     })
-            // })
+            }).render()).data('model', this).appendTo($('#windows-container'));
         };
         /***
          * Closes window.
