@@ -48,7 +48,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public String saveAttachment(Long labelId, MultipartFile attach) throws IOException {
-        String uploadRootPath = "/var/www/resources/upload/" + labelId;
+        String uploadRootPath = "/var/www/resources/uploaded-images/" + labelId;
         File uploadRootDir = new File(uploadRootPath);
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
