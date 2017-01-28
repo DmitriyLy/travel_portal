@@ -1,3 +1,4 @@
+import {StringHelper} from "../Helpers/ReplaceTemplateVars";
 export class View {
     template : string;
     params : Object;
@@ -11,6 +12,6 @@ export class View {
      * Renders template
      */
     render() {
-        return replaceTemplateVars(this.template, this.params);
+        return StringHelper.replaceTemplateVars(this.template, this.params);
     }
 }

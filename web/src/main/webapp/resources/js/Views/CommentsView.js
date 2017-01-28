@@ -9,6 +9,7 @@ define(["require", "exports", "./View"], function (require, exports, View_1) {
         __extends(CommentsView, _super);
         function CommentsView(params) {
             _super.call(this, '<div class="comments">' +
+                '<div class="comments-form row">$form$</div>' +
                 '<div class="comments-list row">$comments$</div>' +
                 '</div>', params);
         }

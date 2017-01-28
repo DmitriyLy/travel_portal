@@ -1,4 +1,4 @@
-define(["require", "exports"], function (require, exports) {
+define(["require", "exports", "../Helpers/WindowDrawer"], function (require, exports, WindowDrawer_1) {
     "use strict";
     var MapController = (function () {
         /***
@@ -7,6 +7,9 @@ define(["require", "exports"], function (require, exports) {
         function MapController(DOMEntityID, mapOptions) {
             var mapElement = document.getElementById(DOMEntityID);
             this.map = new google.maps.Map(mapElement, mapOptions);
+            this.mapClusterer = new MarkerClusterer(this.map, [], {
+                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+            });
             this.mode = 0; // 0 - drag, 1 - putMarker, 2 - viewMarker, 3 - removeMarker
             return this;
         }
@@ -34,11 +37,36 @@ define(["require", "exports"], function (require, exports) {
          * Puts marker on map.
          */
         MapController.prototype.putMarker = function (options) {
-            return new google.maps.Marker({
+            var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(options.latitude, options.longtitude),
-                map: this.map,
                 title: options.title
             });
+            marker.addListener('click', function (e) {
+                WindowDrawer_1.WindowDrawer.drawMarkerWindow(options.marker_id);
+            });
+            this.mapClusterer.addMarker(marker);
+            this.mapClusterer.redraw();
+            return marker;
+        };
+        /***
+         * Puts markers on map.
+         */
+        MapController.prototype.putMarkers = function (options) {
+            var _this = this;
+            options.map(function (itm) {
+                // TODO: REMOVE ON PRODUCTION
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(itm.latitude, itm.longtitude),
+                    title: itm.title
+                });
+                marker.addListener('click', function (e) {
+                    WindowDrawer_1.WindowDrawer.drawMarkerWindow(itm.marker_id);
+                });
+                _this.mapClusterer.addMarker(marker);
+                return marker;
+            });
+            this.mapClusterer.redraw();
+            return options;
         };
         /***
          * Deletes marker from map.

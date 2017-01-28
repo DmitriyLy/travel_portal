@@ -251,12 +251,21 @@ body > .mm-menu + .mm-page.mm-slideout {
 #windows-container .window .marker .rating .rate-5:before {
     content: "\f005\f005\f005\f005\f005";
 }
+#windows-container .window .marker .attachments img {
+    width:40px;
+    height: 40px;
+}
 /* /MARKERS */
 /* COMMENTS */
-#windows-container .window .comments {
-
+#windows-container .window .comments .comments-form {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed lightgray;
 }
-#windows-container .window .comments .comment{
+#windows-container .window .comments .comments-form a {
+    color: rgb(255, 87, 34);
+}
+#windows-container .window .comments .comment {
     margin-bottom: 10px;
 }
 #windows-container .window .comments .owner {

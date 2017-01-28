@@ -1,4 +1,4 @@
-define(["require", "exports"], function (require, exports) {
+define(["require", "exports", "../Helpers/ReplaceTemplateVars"], function (require, exports, ReplaceTemplateVars_1) {
     "use strict";
     var View = (function () {
         function View(template, params) {
@@ -9,7 +9,7 @@ define(["require", "exports"], function (require, exports) {
          * Renders template
          */
         View.prototype.render = function () {
-            return replaceTemplateVars(this.template, this.params);
+            return ReplaceTemplateVars_1.StringHelper.replaceTemplateVars(this.template, this.params);
         };
         return View;
     }());

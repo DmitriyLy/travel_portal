@@ -4,6 +4,7 @@ declare var google,$:JQueryStatic|any;
 export class AppController {
     static theme : string = "light";
     static instances : MapController[] = [];
+    static user : any;
     static instantiateMap(containerId:string,options:any) {
         if(options.zoom == null)
             options.zoom = 11;

@@ -15,6 +15,8 @@
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/bootstrap/bootstrap-theme.min.css"/>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/font-awesome/font-awesome.min.css"/>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mmenu/jquery.mmenu.all.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/featherlight/featherlight.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/featherlight/featherlight.gallery.css"/>
         <%--<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/material-design/bootstrap-material-design.css">--%>
         <%--<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/material-design/ripples.min.css">--%>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css"/>
@@ -27,6 +29,10 @@
                 <div class="pull-left title">
                     <img src="${contextPath}/resources/images/logo.png" alt="logo image" class="logo-image">
                     <span>Travel Portal</span>
+                </div>
+                <div class="pull-right">
+                    <span id="dn-mode-button"><i class="fa fa-moon-o" aria-hidden="true"></i></span>
+                    <span>Name: ${pageContext.request.userPrincipal.name}</span>
                 </div>
             </div>
         </div>
@@ -74,7 +80,10 @@
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/material-design/ripples.min.js"></script>-->
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/mmenu/jquery.mmenu.all.min.js"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/heredoc/heredoc.js"></script>
-        <script type="text/javascript" src="${contextPath}/resources/js/Helpers/ReplaceTemplateVars.js"></script>
+        <script type="text/javascript" src="/js/ThirdPartyLibraries/featherlight/featherlight.js"></script>
+        <script type="text/javascript" src="/js/ThirdPartyLibraries/featherlight/featherlight.gallery.js"></script>
+        <%--<script type="text/javascript" src="${contextPath}/resources/js/Helpers/ReplaceTemplateVars.js"></script>--%>
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=${googleMapsAPIKey}"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/requirejs/require.js" data-main="${contextPath}/resources/js/init.js"></script>
     </body>

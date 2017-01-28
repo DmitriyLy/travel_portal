@@ -1,8 +1,12 @@
 import {WindowController} from "./WindowController";
+import {WindowDrawer} from "../Helpers/WindowDrawer";
+import {AppController} from "./AppController";
 declare var google:any;
+declare var MarkerClusterer:any;
 export class MapController {
     map: any;
     mainWindow: WindowController;
+    mapClusterer: any;
     mode: any;
     /***
      * Creates map.
@@ -10,6 +14,10 @@ export class MapController {
     constructor(DOMEntityID, mapOptions) {
         var mapElement = document.getElementById(DOMEntityID);
         this.map = new google.maps.Map(mapElement, mapOptions);
+        this.mapClusterer = new MarkerClusterer(
+            this.map,[],{
+                imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+            });
         this.mode = 0; // 0 - drag, 1 - putMarker, 2 - viewMarker, 3 - removeMarker
         return this;
     }
@@ -39,11 +47,38 @@ export class MapController {
      * Puts marker on map.
      */
     putMarker(options) {
-        return new google.maps.Marker({
+        var marker = new google.maps.Marker({
             position: new google.maps.LatLng(options.latitude, options.longtitude),
-            map: this.map,
             title: options.title
         });
+        marker.addListener('click', function(e) {
+            WindowDrawer.drawMarkerWindow(options.marker_id);
+        });
+        this.mapClusterer.addMarker(marker);
+        this.mapClusterer.redraw();
+        return marker;
+    }
+    /***
+     * Puts markers on map.
+     */
+    putMarkers(options) {
+        options.map((itm)=>{
+
+
+
+            // TODO: REMOVE ON PRODUCTION
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(itm.latitude, itm.longtitude),
+                title: itm.title
+            });
+            marker.addListener('click', function(e) {
+                WindowDrawer.drawMarkerWindow(itm.marker_id);
+            });
+            this.mapClusterer.addMarker(marker);
+            return marker;
+        });
+        this.mapClusterer.redraw();
+        return options;
     }
 
     /***
