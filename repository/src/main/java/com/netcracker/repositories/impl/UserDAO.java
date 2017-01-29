@@ -85,8 +85,7 @@ public class UserDAO extends JdbcDaoSupport {
 
         UserProfile userProfile = connection.fetchUserProfile();
 
-        String email = userProfile.getEmail();
-        User account = this.findByEmail(email);
+        User account = this.findById(userProfile.getId());
         if (account != null) {
             return account;
         }
@@ -98,29 +97,11 @@ public class UserDAO extends JdbcDaoSupport {
         // Random string with 36 characters.
         String id = UUID.randomUUID().toString();
 
-        String userName_prefix = userProfile.getFirstName().trim().toLowerCase()
-                + "_" + userProfile.getLastName().trim().toLowerCase();
+        String userName = userProfile.getFirstName().trim()
+                + " " + userProfile.getLastName().trim();
 
-        String userName = this.findAvailableUserName(userName_prefix);
-
-        this.getJdbcTemplate().update(sql, id, email, userName,
+        this.getJdbcTemplate().update(sql, id, userProfile.getEmail(), userName,
                 userProfile.getFirstName(), userProfile.getLastName(), User.ROLE_USER);
         return findById(id);
     }
-
-    private String findAvailableUserName(String userName_prefix) {
-        User account = this.findByUserName(userName_prefix);
-        if (account == null) {
-            return userName_prefix;
-        }
-        int i = 0;
-        while (true) {
-            String userName = userName_prefix + "_" + i++;
-            account = this.findByUserName(userName);
-            if (account == null) {
-                return userName;
-            }
-        }
-    }
-
 }
