@@ -10,10 +10,7 @@ import com.netcracker.services.LabelService;
 import com.netcracker.services.LocationService;
 import com.netcracker.services.TagService;
 import com.netcracker.specifications.SqlSpecification;
-import com.netcracker.specifications.impl.CountBookmarkEntriesForUserAndLabelRENAME;
-import com.netcracker.specifications.impl.LabelsBookmarkedByUser;
-import com.netcracker.specifications.impl.LabelsByUser;
-import com.netcracker.specifications.impl.LabelsCommentedByUser;
+import com.netcracker.specifications.impl.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,6 +111,15 @@ public class LabelServiceImpl implements LabelService {
     public List<Label> getLabelsBookmarkedByUser(String userId) {
         return labelRepository.query(new LabelsBookmarkedByUser(userId));
     }
+
+    @Override
+    public List<Label> getLabelsByRectangle(SearchDtoRectangle rec) {
+        return labelRepository.query(new LabelsOnAreaSpecification(rec.getBottomRight().getLatitude(),
+                                                                   rec.getTopLeft().getLatitude(),
+                                                                   rec.getBottomRight().getLongitude(),
+                                                                   rec.getTopLeft().getLongitude()));
+    }
+
 
     @Override
     public void addLabelToBookmarks(String userId, long labelId) {

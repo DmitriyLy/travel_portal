@@ -1,9 +1,6 @@
 package com.netcracker.services;
 
-import com.netcracker.dto.LabelDtoFullInfo;
-import com.netcracker.dto.LabelDtoNew;
-import com.netcracker.dto.LabelDtoShortInfo;
-import com.netcracker.dto.LabelDtoUpdate;
+import com.netcracker.dto.*;
 import com.netcracker.entities.Label;
 import com.netcracker.entities.Tag;
 import com.netcracker.entities.User;
@@ -26,12 +23,12 @@ public interface LabelService {
     List<Label> getLabelsByUser(String userId);
     List<Label> getLabelsCommentedByUser(String userId);
     List<Label> getLabelsBookmarkedByUser(String userId);
+    List<Label> getLabelsByRectangle(SearchDtoRectangle rec);
 
     void addLabelToBookmarks(String userId, long labelId);
     void deleteLabelFromBookmarks(String userId, long labelId);
 
 /*    List<Label> getLabelsAll();
-    List<Label> getLabelsByRectangle();
     List<Label> getLabelsByEllipse();
     List<Label> getLabelsByTag();
     List<Label> getLabelsBySearchRequest();*/
