@@ -74,13 +74,13 @@ public class CommentController {
      */
     @PostMapping
     public CommentDtoInfo addComment(@PathVariable(name = "labelId") Long labelId,
-                                     @RequestParam("text") CommentDtoNew commentDtoNew) {
+                                     @RequestParam("text") String text) {
         //no validation or error handling yet
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
 
         if(user != null)
-            return commentService.addComment(labelId, user.getUserId(),commentDtoNew);
+            return commentService.addComment(labelId, user.getUserId(),text);
         else {
             //throw smth
         }
