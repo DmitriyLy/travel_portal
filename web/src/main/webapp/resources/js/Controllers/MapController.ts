@@ -64,8 +64,6 @@ export class MapController {
     putMarkers(options) {
         options.map((itm)=>{
 
-
-
             // TODO: REMOVE ON PRODUCTION
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(itm.latitude, itm.longtitude),

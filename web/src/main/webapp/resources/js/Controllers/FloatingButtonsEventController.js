@@ -1,4 +1,4 @@
-define(["require", "exports", "./AppController", "./WindowController", "../Views/MarkerView"], function (require, exports, AppController_1, WindowController_1, MarkerView_1) {
+define(["require", "exports", "./AppController"], function (require, exports, AppController_1) {
     "use strict";
     var FloatingButtonsEventController = (function () {
         function FloatingButtonsEventController() {
@@ -42,25 +42,6 @@ define(["require", "exports", "./AppController", "./WindowController", "../Views
             });
         };
         FloatingButtonsEventController.testMap = function () {
-            $.get('http://nctravelportal.ddns.net/labels/3', function (MarkerData) {
-                new WindowController_1.WindowController(AppController_1.AppController.instances[0], 'О Метке', new MarkerView_1.MarkerView({
-                    "marker_id": MarkerData.id,
-                    "owner_id": MarkerData.owner.id,
-                    "owner_name": MarkerData.owner.userName,
-                    "creationDate": MarkerData.creationDate,
-                    "address": MarkerData.address.country + ", " +
-                        MarkerData.address.state + ". " +
-                        MarkerData.address.city + ". " +
-                        MarkerData.address.street + ", " +
-                        MarkerData.address.building,
-                    "rating": MarkerData.rating,
-                    "review": MarkerData.review,
-                    "categories": MarkerData.categories.map(function (itm) { return "<button class='btn btn-success'>" + itm + "</button>"; }).join(' '),
-                    "tags": MarkerData.tags.map(function (itm) { return "<button class='btn btn-primary'>" + itm + "</button>"; }).join(' '),
-                    "attachments": MarkerData.attachments.map(function (itm) { return "<a href='" + itm.name + "'><img src='" + itm.name + "'/></a>"; }).join(''),
-                    "commentCount": MarkerData.commentCount
-                }));
-            });
             // setTimeout(function () {
             //     var markers = [];
             //     setTimeout(function () {
