@@ -101,11 +101,10 @@ public class CommentController {
     @PatchMapping("/{commentId}")
     public CommentDtoInfo editComment(@PathVariable(name = "labelId") Long labelId,
                                       @PathVariable(name = "commentId") Long commentId,
-                                      @RequestParam("text") String text) {
+                                      @RequestBody CommentDtoUpdate commentUpdate) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-        CommentDtoUpdate commentUpdate = new CommentDtoUpdate();
-        commentUpdate.setText(text);
+
         if (user != null) {
             Comment comment = commentService.getById(commentId);
             String commentOwnerId = comment.getUserId();
