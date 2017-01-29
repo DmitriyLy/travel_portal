@@ -6,6 +6,7 @@ import com.netcracker.repositories.impl.AttachmentRepositoryImpl;
 import com.netcracker.services.AttachmentService;
 import com.netcracker.services.Converter;
 import com.netcracker.specifications.SqlSpecification;
+import com.netcracker.specifications.impl.AttachmentByNameAndLabelId;
 import com.netcracker.specifications.impl.AttachmentsCountByLabel;
 import com.netcracker.specifications.impl.AttachmentsInLabelSpecification;
 import org.apache.log4j.LogManager;
@@ -67,6 +68,16 @@ public class AttachmentServiceImpl implements AttachmentService {
 
         doCompression(filePath, originalImage);
         return fileName.toString();
+    }
+
+    @Override
+    public Attachment getAttachmentByLabelAndName(Long labelId, String name) {
+        SqlSpecification specification = new AttachmentByNameAndLabelId(name,labelId);
+        List<Attachment> queryResult = repository.query(specification);
+        if(queryResult.size()==0) {
+            return null;
+        }
+        return queryResult.get(0);
     }
 
     private void doCompression(StringBuilder fileName, BufferedImage originalImage) throws IOException {
