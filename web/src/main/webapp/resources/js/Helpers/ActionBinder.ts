@@ -32,7 +32,6 @@ export class ActionBinder {
             var $button = $(event.currentTarget),
                 window : WindowController = $button.parents('.window').data('model');
 
-            console.log($(window.windowContainer).find('.marker'));
             // TODO: fix this
             if($(window.windowContainer).find('.comments').length > 0) {
                 this.pushState(location.hash.replace(/-comments/g,''));
@@ -43,14 +42,33 @@ export class ActionBinder {
             window.closeWindow();
         });
 
-        $(container).find('.attachments a').featherlightGallery({
-            gallery: {
-                fadeIn: 300,
-                fadeOut: 300
-            },
-            openSpeed:    300,
-            closeSpeed:   300
+        $(container).find('#send-comment').click((event)=>{
+            var $button = $(event.currentTarget),
+                window : WindowController = $button.parents('.window').data('model'),
+                markerId : number = $button.data('marker-id'),
+                $messageArea = $button.parents('.window').find('#comment-area');
+            $.ajax({
+                type: "PUT",
+                url: 'http://nctravelportal.ddns.net/labels/'+markerId+'/comments',
+                data: {
+                    'text':$messageArea.text()
+                },
+                success: (data)=>{
+                    console.log(data);
+                }
+            });
         });
+
+        if($(container).find('.attachments a').length>0) {
+            $(container).find('.attachments a').featherlightGallery({
+                gallery: {
+                    fadeIn: 300,
+                    fadeOut: 300
+                },
+                openSpeed: 300,
+                closeSpeed: 300
+            });
+        }
     }
 
     static pushState(state:string) {

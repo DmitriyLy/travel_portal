@@ -47,26 +47,7 @@ export class FloatingButtonsEventController {
     }
 
     static testMap() {
-        $.get('http://nctravelportal.ddns.net/labels/3',(MarkerData:any)=>{
-            new WindowController(AppController.instances[0], 'О Метке', new MarkerView({
-                "marker_id":MarkerData.id,
-                "owner_id":MarkerData.owner.id,
-                "owner_name":MarkerData.owner.userName,
-                "creationDate":MarkerData.creationDate,
-                "address":
-                    MarkerData.address.country + ", " +
-                    MarkerData.address.state + ". " +
-                    MarkerData.address.city + ". " +
-                    MarkerData.address.street + ", " +
-                    MarkerData.address.building,
-                "rating":MarkerData.rating,
-                "review":MarkerData.review,
-                "categories":MarkerData.categories.map((itm)=>{ return "<button class='btn btn-success'>"+itm+"</button>"; }).join(' '),
-                "tags":MarkerData.tags.map((itm)=>{ return "<button class='btn btn-primary'>"+itm+"</button>"; }).join(' '),
-                "attachments":MarkerData.attachments.map((itm)=>{ return "<a href='"+itm.name+"'><img src='"+itm.name+"'/></a>"; }).join(''),
-                "commentCount":MarkerData.commentCount
-            }));
-        });
+
         // setTimeout(function () {
         //     var markers = [];
         //     setTimeout(function () {
