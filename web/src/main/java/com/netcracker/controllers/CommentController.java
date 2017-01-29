@@ -70,24 +70,22 @@ public class CommentController {
      *      FR45 - The system must provide a link to the comment tag (review) to leave it to authorized users.
      *
      * @param labelId - id of the label that is to be commented.
-     * @param commentToAdd {@link CommentDtoNew} - object that contains information about comment to be added.
      * @return {@link CommentDtoInfo} - object, containing information about existing comment.
      */
     @PostMapping
     public CommentDtoInfo addComment(@PathVariable(name = "labelId") Long labelId,
-                                     @RequestBody CommentDtoNew commentToAdd) {
+                                     @RequestParam("text") String text) {
 
         System.out.println("-----------------------------------------------");
         System.out.println(labelId);
-        System.out.println(commentToAdd);
-        System.out.println(commentToAdd.getText());
+        System.out.println(text);
         System.out.println("-----------------------------------------------");
         //no validation or error handling yet
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
 
         if(user != null)
-            return commentService.addComment(labelId, user.getUserId(),commentToAdd);
+            return commentService.addComment(labelId, user.getUserId(),text);
         else {
             //throw smth
         }

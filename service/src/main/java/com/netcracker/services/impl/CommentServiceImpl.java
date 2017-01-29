@@ -36,11 +36,11 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public CommentDtoInfo addComment(long labelId, String userId, CommentDtoNew commentDto) {
+    public CommentDtoInfo addComment(long labelId, String userId, String text) {
         Comment comment = new Comment();
         comment.setLabelId(labelId);
         comment.setUserId(userId);
-        comment.setCommentText(commentDto.getText());
+        comment.setCommentText(text);
         comment.setCommentDate(new Date(new java.util.Date().getTime()));
         comment = commentRepository.add(comment);
         return converter.convertCommentToDtoInfo(comment);

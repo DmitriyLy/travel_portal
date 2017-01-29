@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface CommentService {
 
-    CommentDtoInfo addComment(long labelId, String userId, CommentDtoNew commentDto);
+    CommentDtoInfo addComment(long labelId, String userId, String text);
     CommentDtoInfo editComment(long commentId, CommentDtoUpdate commentDto);
 
     Comment getById(long commentId);
