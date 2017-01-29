@@ -119,7 +119,7 @@ public class UserController {
      * @param labelId
      * @return status of adding to favorites
      */
-    @PutMapping("/me/labels/bookmarked/{labelId}")
+    @PostMapping("/me/labels/bookmarked/{labelId}")
     public Integer addLabelToBookmarks(@PathVariable(name = "labelId") Long labelId) {
         //no validation or error handling yet
         User user = (User) SecurityContextHolder.getContext().getAuthentication()

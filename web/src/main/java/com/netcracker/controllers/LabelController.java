@@ -46,7 +46,7 @@ public class LabelController {
      * @return {@link LabelDtoShortInfo} - object, containing short information about label
      * that also allows filtering.
      */
-    @PutMapping
+    @PostMapping
     public LabelDtoShortInfo addLabel(@RequestBody LabelDtoNew labelToAdd) {
         //no validation or error handling yet
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
