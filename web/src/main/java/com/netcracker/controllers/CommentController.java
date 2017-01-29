@@ -76,6 +76,12 @@ public class CommentController {
     @PostMapping
     public CommentDtoInfo addComment(@PathVariable(name = "labelId") Long labelId,
                                      @RequestBody CommentDtoNew commentToAdd) {
+
+        System.out.println("-----------------------------------------------");
+        System.out.println(labelId);
+        System.out.println(commentToAdd);
+        System.out.println(commentToAdd.getText());
+        System.out.println("-----------------------------------------------");
         //no validation or error handling yet
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
