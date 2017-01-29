@@ -16,6 +16,8 @@ public interface AttachmentService {
 
     String saveAttachment(Long labelId, MultipartFile attach) throws IOException;
 
+    Attachment getAttachmentByLabelAndName(Long labelId,String name);
+
     List<Attachment> getAttachmentsByLabel(Long labelId);
 
     int getAttachmentCountByLabel(long labelId);
