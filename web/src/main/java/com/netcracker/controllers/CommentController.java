@@ -73,7 +73,7 @@ public class CommentController {
      * @param commentToAdd {@link CommentDtoNew} - object that contains information about comment to be added.
      * @return {@link CommentDtoInfo} - object, containing information about existing comment.
      */
-    @PutMapping
+    @PostMapping
     public CommentDtoInfo addComment(@PathVariable(name = "labelId") Long labelId,
                                      @RequestBody CommentDtoNew commentToAdd) {
         //no validation or error handling yet
