@@ -22,10 +22,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/userInfo").access("hasRole('ROLE_USER')");
 
-        http.authorizeRequests().and().formLogin()
-                .loginProcessingUrl("/j_spring_security_check")
-                .loginPage("/")
-                .failureUrl("/login?error=true");
 
         http.authorizeRequests().and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
 

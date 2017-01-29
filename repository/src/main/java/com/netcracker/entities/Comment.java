@@ -1,6 +1,6 @@
 package com.netcracker.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Entity represent's COMMENTS table from TRAVEL_PORTAL database.

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -40,7 +41,7 @@ public class CommentServiceImpl implements CommentService {
         comment.setLabelId(labelId);
         comment.setUserId(userId);
         comment.setCommentText(commentDto.getText());
-        comment.setCommentDate(commentDto.getCreationDate());
+        comment.setCommentDate(new Date(new java.util.Date().getTime()));
         comment = commentRepository.add(comment);
         return converter.convertCommentToDtoInfo(comment);
     }
