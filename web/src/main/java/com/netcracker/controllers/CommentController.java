@@ -75,11 +75,6 @@ public class CommentController {
     @PostMapping
     public CommentDtoInfo addComment(@PathVariable(name = "labelId") Long labelId,
                                      @RequestParam("text") String text) {
-
-        System.out.println("-----------------------------------------------");
-        System.out.println(labelId);
-        System.out.println(text);
-        System.out.println("-----------------------------------------------");
         //no validation or error handling yet
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
@@ -101,16 +96,16 @@ public class CommentController {
      *
      * @param labelId - id of label, to which relates comment that is to be updated.
      * @param commentId - id of comment to update.
-     * @param commentUpdate {@link CommentDtoUpdate} - object that contains information about comment update.
      * @return {@link CommentDtoInfo} - object, containing information about existing comment.
      */
     @PatchMapping("/{commentId}")
     public CommentDtoInfo editComment(@PathVariable(name = "labelId") Long labelId,
                                       @PathVariable(name = "commentId") Long commentId,
-                                      @RequestBody CommentDtoUpdate commentUpdate) {
+                                      @RequestParam("text") String text) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
-
+        CommentDtoUpdate commentUpdate = new CommentDtoUpdate();
+        commentUpdate.setText(text);
         if (user != null) {
             Comment comment = commentService.getById(commentId);
             String commentOwnerId = comment.getUserId();
