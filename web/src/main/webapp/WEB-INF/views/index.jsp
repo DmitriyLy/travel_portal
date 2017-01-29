@@ -1,7 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <c:set var="googleMapsAPIKey" value="AIzaSyAB7I9khA0R1g7Ug_lOq4-AD1zkvIdFHQI"/>
 
@@ -71,7 +71,12 @@
         <!-- SCRIPTS MUST BE AFTER THAT LINE -->
         <script type="text/javascript">
             var GOOGLE_MAP_API_KEY  = "${googleMapsAPIKey}",
-                RESOURCES_DIR       = "${contextPath}";
+                RESOURCES_DIR       = "${contextPath}",
+                IS_AUTHENTICATED    = FALSE;
+
+            <security:authorize access="isAuthenticated()">
+                IS_AUTHENTICATED = TRUE;
+            </security:authorize>
         </script>
         <!-- GLOBAL VARS MUST BE BEFORE THAT LINE -->
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery/jquery.min.js"></script>
