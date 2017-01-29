@@ -52,7 +52,10 @@ public class AttachmentController {
     @GetMapping
     public List<AttachmentDtoInfo> getAttachmentsByLabel(@PathVariable(name = "labelId") Long labelId) {
         return attachmentService.getAttachmentsByLabel(labelId)
-                .stream().map(a -> converter.convertAttachmentToDtoInfo(a))
+                .stream().map(a -> {
+                    AttachmentDtoInfo attachmentDtoInfo = converter.convertAttachmentToDtoInfo(a);
+                    attachmentDtoInfo.setName(attachmentDtoInfo.getName() + "_40x40");
+                    return attachmentDtoInfo;})
                 .collect(Collectors.toList());
     }
 
