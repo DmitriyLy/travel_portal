@@ -66,7 +66,7 @@ public class AttachmentController {
      * @param attach - object that contains bytes of attachment.
      * @return {@link AttachmentDtoInfo} - object, that contains information about created attachment.
      */
-    @PostMapping("/add")
+    @PostMapping
     public AttachmentDtoInfo addAttachment(@PathVariable(name = "labelId") Long labelId, @RequestParam("attach") MultipartFile attach) throws IOException {
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();

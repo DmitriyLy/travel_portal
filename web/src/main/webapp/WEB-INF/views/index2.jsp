@@ -13,7 +13,7 @@
 
 <h2>Misha cool!!</h2>
 
-<spring:url value="/labels/1/attachments/add" var="uploadUrl"/>
+<spring:url value="/labels/1/attachments" var="uploadUrl"/>
 <form method="POST" enctype="multipart/form-data" action="${uploadUrl}">
     File to upload: <input type="file" name="attach"><br />
     <input type="submit" value="Upload"> Press here to upload the file!
