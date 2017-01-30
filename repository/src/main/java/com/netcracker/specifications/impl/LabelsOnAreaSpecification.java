@@ -14,10 +14,10 @@ public class LabelsOnAreaSpecification implements SqlSpecification {
     private double maxLongitude;
 
     public LabelsOnAreaSpecification(double minLatitude, double maxLatitude, double minLongitude, double maxLongitude) {
-        this.minLatitude = minLatitude;
-        this.maxLatitude = maxLatitude;
-        this.minLongitude = minLongitude;
-        this.maxLongitude = maxLongitude;
+        this.minLatitude = Math.min(minLatitude, maxLatitude);
+        this.maxLatitude = Math.max(minLatitude, maxLatitude);
+        this.minLongitude = Math.min(minLongitude,maxLongitude);
+        this.maxLongitude = Math.max(minLongitude,maxLongitude);
     }
 
     @Override
