@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 /**
  * Controller for label
  * and related information extraction.
@@ -52,6 +54,9 @@ public class LabelController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
 
+        if (labelToAdd.getCreationDate() == null) {
+            labelToAdd.setCreationDate(new Date());
+        }
         if (user != null) {
             String loggedUserId = user.getId();
 
