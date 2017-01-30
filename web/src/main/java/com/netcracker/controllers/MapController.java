@@ -1,5 +1,6 @@
 package com.netcracker.controllers;
 
+import com.netcracker.dto.LabelDtoMapInfo;
 import com.netcracker.dto.LabelDtoShortInfo;
 import com.netcracker.dto.SearchDtoEllipse;
 import com.netcracker.dto.SearchDtoRectangle;
@@ -66,7 +67,7 @@ public class MapController {
      */
     @PostMapping("/labels/search/by/area/rectangle")
     @ResponseBody
-    public List<LabelDtoShortInfo> getLabelsByRectangle(@RequestBody SearchDtoRectangle rectangle) {
+    public List<LabelDtoMapInfo> getLabelsByRectangle(@RequestBody SearchDtoRectangle rectangle) {
         return labelService.getLabelsByRectangle(rectangle)
                 .stream().map(a -> converter.convertLabelToDtoMapInfo(a))
                 .collect(Collectors.toList());
