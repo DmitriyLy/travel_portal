@@ -54,7 +54,8 @@ public class AttachmentController {
         return attachmentService.getAttachmentsByLabel(labelId)
                 .stream().map(a -> {
                     AttachmentDtoInfo attachmentDtoInfo = converter.convertAttachmentToDtoInfo(a);
-                    attachmentDtoInfo.setName(attachmentDtoInfo.getName() + "_40x40");
+                    String name = attachmentDtoInfo.getName();
+                    attachmentDtoInfo.setName(name.substring(0,name.lastIndexOf('.')) + "_40x40" + name.substring(name.lastIndexOf('.')));
                     return attachmentDtoInfo;})
                 .collect(Collectors.toList());
     }
