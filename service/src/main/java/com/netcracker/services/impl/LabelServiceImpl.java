@@ -114,10 +114,9 @@ public class LabelServiceImpl implements LabelService {
 
     @Override
     public List<Label> getLabelsByRectangle(SearchDtoRectangle rec) {
-        return labelRepository.query(new LabelsOnAreaSpecification(rec.getBottomLeft().getLatitude(),
-                                                                   rec.getTopRight().getLatitude(),
-                                                                   rec.getTopRight().getLongitude(),
-                                                                   rec.getBottomLeft().getLongitude()));
+        return labelRepository.query(new LabelsOnAreaSpecification(
+                Math.min(rec.getBottomLeft().getLatitude(), rec.getTopRight().getLatitude()), Math.max(rec.getBottomLeft().getLatitude(), rec.getTopRight().getLatitude()),
+                Math.min(rec.getTopRight().getLongitude(),rec.getBottomLeft().getLongitude()), Math.max(rec.getTopRight().getLongitude(),rec.getBottomLeft().getLongitude())));
     }
 
 
