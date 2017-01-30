@@ -68,7 +68,7 @@ public class MapController {
     @ResponseBody
     public List<LabelDtoShortInfo> getLabelsByRectangle(@RequestBody SearchDtoRectangle rectangle) {
         return labelService.getLabelsByRectangle(rectangle)
-                .stream().map(a -> converter.convertLabelToDtoShortInfo(a))
+                .stream().map(a -> converter.convertLabelToDtoMapInfo(a))
                 .collect(Collectors.toList());
     }
 
