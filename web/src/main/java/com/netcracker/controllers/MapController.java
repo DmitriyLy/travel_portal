@@ -64,7 +64,7 @@ public class MapController {
      * FR8 - The system should hide the label coming out of the visible area or when you change
      * the scale of the displayed geographical area.
      */
-    @GetMapping("/labels/search/by/area/rectangle")
+    @PostMapping("/labels/search/by/area/rectangle")
     @ResponseBody
     public List<LabelDtoShortInfo> getLabelsByRectangle(@RequestBody SearchDtoRectangle rectangle) {
         return labelService.getLabelsByRectangle(rectangle)
