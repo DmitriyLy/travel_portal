@@ -87,6 +87,7 @@
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/heredoc/heredoc.js"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/featherlight/featherlight.js"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/featherlight/featherlight.gallery.js"></script>
+        <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.ajaxfileupload/jquery.ajaxfileupload.js"></script>
         <%--<script type="text/javascript" src="${contextPath}/resources/js/Helpers/ReplaceTemplateVars.js"></script>--%>
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=${googleMapsAPIKey}"></script>
