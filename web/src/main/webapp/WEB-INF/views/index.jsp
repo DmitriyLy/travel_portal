@@ -31,8 +31,13 @@
                     <span>Travel Portal</span>
                 </div>
                 <div class="pull-right">
+                    <security:authorize access="isAuthenticated()">
+                        <span>Здравствуйте, ${pageContext.request.userPrincipal.name}.</span>
+                    </security:authorize>
+                    <security:authorize access="!isAuthenticated()">
+                        <span>Войти: <a href="/auth/google">G+</a> / <a href="/auth/facebook">G+</a>.</span>
+                    </security:authorize>
                     <span id="dn-mode-button"><i class="fa fa-moon-o" aria-hidden="true"></i></span>
-                    <span>Name: ${pageContext.request.userPrincipal.name}</span>
                 </div>
             </div>
         </div>

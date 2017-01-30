@@ -255,6 +255,28 @@ body > .mm-menu + .mm-page.mm-slideout {
     width:40px;
     height: 40px;
 }
+/* ADD MARKERS */
+#windows-container .window .marker .review textarea,
+#windows-container .window .marker .tags input,
+#windows-container .window .marker .categories input,
+#windows-container .window .marker .address select {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#windows-container .window .marker #add-attachment {
+    height: 41px;
+    line-height: 41px;
+    cursor: pointer;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    background: #e7f6f8;
+    color:darkgray;
+}
 /* /MARKERS */
 /* COMMENTS */
 #windows-container .window .comments .comments-form {
@@ -288,6 +310,14 @@ body > .mm-menu + .mm-page.mm-slideout {
 #windows-container .window .comments .date{
     color: lightgray;
     font-size: 0.8em;
+}
+#windows-container .window .comments #comment-area {
+    width:100%;
+    max-width: 100%;
+    min-width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 /* /COMMENTS */
 div.hr {
