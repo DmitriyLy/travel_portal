@@ -1,10 +1,8 @@
 package com.netcracker.services.impl;
 
-import com.netcracker.dto.AttachmentDtoInfo;
 import com.netcracker.entities.Attachment;
 import com.netcracker.repositories.impl.AttachmentRepositoryImpl;
 import com.netcracker.services.AttachmentService;
-import com.netcracker.services.Converter;
 import com.netcracker.specifications.SqlSpecification;
 import com.netcracker.specifications.impl.AttachmentByNameAndLabelId;
 import com.netcracker.specifications.impl.AttachmentsCountByLabel;
@@ -13,6 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,6 +35,8 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Autowired
     private AttachmentRepositoryImpl repository;
 
+    @Autowired
+    private PasswordEncoder encoder;
 
 
     @Override
@@ -49,15 +50,17 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public String saveAttachment(Long labelId, MultipartFile attach) throws IOException {
-        String uploadRootPath = "/var/www/resources/uploaded-images/" + labelId;
+        String uploadRootPath = "/var/www/resources/uploaded-images/";
         File uploadRootDir = new File(uploadRootPath);
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
         }
         StringBuilder filePath = new StringBuilder();
         StringBuilder fileName = new StringBuilder();
-        fileName.append(attach.getOriginalFilename())
-                .replace(fileName.lastIndexOf(".")+1,fileName.length(),"jpg");
+        fileName.append(encoder.encode(attach.getOriginalFilename())
+                .replace("/", "")
+                .replace(".", ""))
+                .append(".jpg");
         filePath.append(uploadRootDir.getAbsolutePath())
                 .append(File.separator)
                 .append(fileName);
@@ -72,9 +75,9 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public Attachment getAttachmentByLabelAndName(Long labelId, String name) {
-        SqlSpecification specification = new AttachmentByNameAndLabelId(name,labelId);
+        SqlSpecification specification = new AttachmentByNameAndLabelId(name, labelId);
         List<Attachment> queryResult = repository.query(specification);
-        if(queryResult.size()==0) {
+        if (queryResult.size() == 0) {
             return null;
         }
         return queryResult.get(0);
@@ -89,7 +92,7 @@ public class AttachmentServiceImpl implements AttachmentService {
         g.dispose();
 
         StringBuilder compFilePath = new StringBuilder(fileName);
-        compFilePath.insert(compFilePath.lastIndexOf("."),"_40x40");
+        compFilePath.insert(compFilePath.lastIndexOf("."), "_40x40");
         File compressedFile = new File(compFilePath.toString());
 
         ImageIO.write(resizedImage, "jpg", compressedFile);
