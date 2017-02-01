@@ -124,7 +124,7 @@ public class ConverterImpl implements Converter {
 
         labelDto.setId(label.getId());
         labelDto.setRating(label.getRating());
-        labelDto.setCreationDate(labelDto.getCreationDate());
+        labelDto.setCreationDate(label.getCreationDate());
 
         CoordinatesDto coordinatesDto = new CoordinatesDto();
         coordinatesDto.setLatitude(label.getCoordLat());
