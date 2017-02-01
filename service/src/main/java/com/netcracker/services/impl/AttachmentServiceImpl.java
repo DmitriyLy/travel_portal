@@ -119,4 +119,15 @@ public class AttachmentServiceImpl implements AttachmentService {
         SqlSpecification specification = new AttachmentsCountByLabel(labelId);
         return jdbcTemplate.queryForObject(specification.toSqlQuery(), Integer.class);
     }
+
+    @Override
+    public void deleteAttachment(Attachment attachment) {
+        repository.remove(attachment);
+    }
+
+    @Override
+    public Attachment getAttachmentById(Long id) {
+        return repository.getById(id);
+    }
+
 }

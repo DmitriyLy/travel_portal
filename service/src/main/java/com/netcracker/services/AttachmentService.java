@@ -21,4 +21,8 @@ public interface AttachmentService {
     List<Attachment> getAttachmentsByLabel(Long labelId);
 
     int getAttachmentCountByLabel(long labelId);
+
+    void deleteAttachment(Attachment attachment);
+
+    Attachment getAttachmentById(Long id);
 }

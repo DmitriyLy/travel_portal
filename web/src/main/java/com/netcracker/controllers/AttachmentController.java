@@ -105,11 +105,22 @@ public class AttachmentController {
      * FR61 - The system should provide the authorized user to remove attached file from their label.
      *
      * @param attachmentId
-     * @return status of deleting attachment from database
+     * @return status of deleting attachment from database //should be edit
      */
     @DeleteMapping("/{attachmentId}")
-    public Integer deleteAttachment(@PathVariable(name = "labelId") Long labelId,
-                                    @PathVariable(name = "attachmentId") Long attachmentId) {
-        return 0;
+    public void deleteAttachment(@PathVariable(name = "attachmentId") Long attachmentId) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+
+        if (user != null) {
+            Attachment attachment = attachmentService.getAttachmentById(attachmentId);
+            String attachmentOwnerId = attachment.getUserId();
+
+            if (attachmentOwnerId.equals(user.getId())) {
+                attachmentService.deleteAttachment(attachment);
+            } else {
+                //throw smthng
+            }
+        }
     }
 }
