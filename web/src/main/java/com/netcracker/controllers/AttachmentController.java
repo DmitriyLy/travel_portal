@@ -88,13 +88,11 @@ public class AttachmentController {
      * Described in:
      * nowhere
      *
-     * @param labelId
      * @param attachmentId
      * @return {@link AttachmentDtoInfo} - object, that contains information about existing attachment.
      */
     @GetMapping("/{attachmentId}")
-    public AttachmentDtoInfo getAttachment(@PathVariable(name = "labelId") Long labelId,
-                                           @PathVariable(name = "attachmentId") Long attachmentId) {
+    public AttachmentDtoInfo getAttachment(@PathVariable(name = "attachmentId") Long attachmentId) {
 
         Attachment recordFromDB = attachmentService.getAttachmentById(attachmentId);
         return converter.convertAttachmentToDtoInfo(recordFromDB);
