@@ -95,7 +95,9 @@ public class AttachmentController {
     @GetMapping("/{attachmentId}")
     public AttachmentDtoInfo getAttachment(@PathVariable(name = "labelId") Long labelId,
                                            @PathVariable(name = "attachmentId") Long attachmentId) {
-        return null;
+
+        Attachment recordFromDB = attachmentService.getAttachmentById(attachmentId);
+        return converter.convertAttachmentToDtoInfo(recordFromDB);
     }
 
     /**
