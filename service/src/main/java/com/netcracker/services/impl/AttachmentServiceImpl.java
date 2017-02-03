@@ -58,8 +58,7 @@ public class AttachmentServiceImpl implements AttachmentService {
         StringBuilder filePath = new StringBuilder();
         StringBuilder fileName = new StringBuilder();
         fileName.append(encoder.encode(attach.getOriginalFilename())
-                .replace("/", "")
-                .replace(".", ""))
+                .replaceAll("[^0-9a-zA-Z]+",""))
                 .append(".jpg");
         filePath.append(uploadRootDir.getAbsolutePath())
                 .append(File.separator)
