@@ -1,5 +1,6 @@
 package com.netcracker.services.impl;
 
+import com.google.common.hash.Hashing;
 import com.netcracker.entities.Attachment;
 import com.netcracker.repositories.impl.AttachmentRepositoryImpl;
 import com.netcracker.services.AttachmentService;
@@ -20,6 +21,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,9 +38,6 @@ public class AttachmentServiceImpl implements AttachmentService {
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private AttachmentRepositoryImpl repository;
-
-    @Autowired
-    private PasswordEncoder encoder;
 
 
     @Override
@@ -59,9 +58,12 @@ public class AttachmentServiceImpl implements AttachmentService {
         }
         StringBuilder filePath = new StringBuilder();
         StringBuilder fileName = new StringBuilder();
-        fileName.append(encoder.encode(LocalDateTime.now().toString())
-                .replaceAll("[^0-9a-zA-Z]+", "")
-                .substring(4, 14))
+        String message = attach.getOriginalFilename() + LocalDateTime.now();
+
+        fileName.append(Hashing.sha256()
+                .hashString(message, StandardCharsets.UTF_8)
+                .toString()
+                .substring(0, 10))
                 .append(".jpg");
 
         filePath.append(uploadRootDir.getAbsolutePath())
@@ -78,9 +80,9 @@ public class AttachmentServiceImpl implements AttachmentService {
     }
 
     private void setPermissions(File file) {
-        file.setExecutable(true,false);
-        file.setReadable(true,false);
-        file.setWritable(true,false);
+        file.setExecutable(true, false);
+        file.setReadable(true, false);
+        file.setWritable(true, false);
     }
 
     @Override
