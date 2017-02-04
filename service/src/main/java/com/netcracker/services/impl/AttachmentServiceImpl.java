@@ -20,7 +20,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -57,9 +59,11 @@ public class AttachmentServiceImpl implements AttachmentService {
         }
         StringBuilder filePath = new StringBuilder();
         StringBuilder fileName = new StringBuilder();
-        fileName.append(encoder.encode(attach.getOriginalFilename())
-                .replaceAll("[^0-9a-zA-Z]+",""))
+        fileName.append(encoder.encode(LocalDateTime.now().toString())
+                .replaceAll("[^0-9a-zA-Z]+", "")
+                .substring(4, 14))
                 .append(".jpg");
+
         filePath.append(uploadRootDir.getAbsolutePath())
                 .append(File.separator)
                 .append(fileName);
@@ -67,9 +71,16 @@ public class AttachmentServiceImpl implements AttachmentService {
         File serverFile = new File(filePath.toString());
         BufferedImage originalImage = ImageIO.read(attach.getInputStream());
         ImageIO.write(originalImage, "jpg", serverFile);
+        setPermissions(serverFile);
 
         doCompression(filePath, originalImage);
         return fileName.toString();
+    }
+
+    private void setPermissions(File file) {
+        file.setExecutable(true,false);
+        file.setReadable(true,false);
+        file.setWritable(true,false);
     }
 
     @Override
@@ -93,8 +104,8 @@ public class AttachmentServiceImpl implements AttachmentService {
         StringBuilder compFilePath = new StringBuilder(fileName);
         compFilePath.insert(compFilePath.lastIndexOf("."), "_40x40");
         File compressedFile = new File(compFilePath.toString());
-
         ImageIO.write(resizedImage, "jpg", compressedFile);
+        setPermissions(compressedFile);
     }
 
     @Override
