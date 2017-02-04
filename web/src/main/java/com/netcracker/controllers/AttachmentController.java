@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -121,6 +122,7 @@ public class AttachmentController {
             } else {
                 //throw smthng
             }
+            attachmentService.removeAttachment(attachment);
         }
     }
 }

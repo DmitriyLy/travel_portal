@@ -25,4 +25,6 @@ public interface AttachmentService {
     void deleteAttachment(Attachment attachment);
 
     Attachment getAttachmentById(Long id);
+
+    void removeAttachment(Attachment attachment);
 }

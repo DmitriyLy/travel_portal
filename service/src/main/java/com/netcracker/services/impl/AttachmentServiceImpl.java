@@ -34,6 +34,7 @@ import java.util.List;
 public class AttachmentServiceImpl implements AttachmentService {
     private final static Logger LOGGER = LogManager.getLogger(AttachmentServiceImpl.class.getName());
 
+    private static final String ROOT_PATH = "/var/www/resources/uploaded-images/";
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
@@ -51,8 +52,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public String saveAttachment(Long labelId, MultipartFile attach) throws IOException {
-        String uploadRootPath = "/var/www/resources/uploaded-images/";
-        File uploadRootDir = new File(uploadRootPath);
+        File uploadRootDir = new File(ROOT_PATH);
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
         }
@@ -143,6 +143,14 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Override
     public Attachment getAttachmentById(Long id) {
         return repository.getById(id);
+    }
+
+    @Override
+    public void removeAttachment(Attachment attachment) {
+        File attachmentFile = new File(ROOT_PATH+attachment.getName());
+        attachmentFile.delete();
+        File compressFile = new File(ROOT_PATH+attachment.getName().replace(".","_40x40."));
+        compressFile.delete();
     }
 
 }
