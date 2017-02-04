@@ -27,6 +27,13 @@ public interface QueriesSpecification {
     String LABELS_COMMENTED_BY_USER = "SELECT * FROM LABELS WHERE ID IN " +
             "(SELECT LABEL_ID FROM COMMENTS WHERE USER_ID = '%s')";
 
+    String LABELS_BY_TAG =
+            "SELECT l.id id, l.user_id user_id, l.location_id location_id, l.owner_comment owner_comment," +
+                    "l.rating rating, l.coordinate_lat coordinate_lat, l.coordinate_long coordinate_long, " +
+                    "l.creation_date creation_date, l.map_provider_id map_provider_id" +
+            "FROM LABELS l, TAGS t, TAGS_LABELS tl " +
+            "WHERE t.name = '%s' AND t.id = tl.tag_id AND tl.label_id = l.id";
+
     String ATTACHMENTS_BY_LABEL_ID = "SELECT * FROM ATTACHMENTS WHERE LABEL_ID = %1$d";
     String ATTACHMENT_BY_NAME_AND_LABEL_ID = "SELECT * FROM ATTACHMENTS " +
             "WHERE LABEL_ID = %1$d AND NAME = '%2$s'";

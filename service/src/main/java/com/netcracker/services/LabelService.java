@@ -24,13 +24,13 @@ public interface LabelService {
     List<Label> getLabelsCommentedByUser(String userId);
     List<Label> getLabelsBookmarkedByUser(String userId);
     List<Label> getLabelsByRectangle(SearchDtoRectangle rec);
+    List<Label> getLabelsByTag(String tagName);
 
     void addLabelToBookmarks(String userId, long labelId);
     void deleteLabelFromBookmarks(String userId, long labelId);
 
 /*    List<Label> getLabelsAll();
     List<Label> getLabelsByEllipse();
-    List<Label> getLabelsByTag();
     List<Label> getLabelsBySearchRequest();*/
 
     boolean isBookmarked(String userId, long labelId);

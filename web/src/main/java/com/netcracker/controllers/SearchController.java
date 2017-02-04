@@ -3,8 +3,13 @@ package com.netcracker.controllers;
 import com.netcracker.dto.LabelDtoShortInfo;
 import com.netcracker.dto.SearchDtoParameters;
 import com.netcracker.dto.SearchDtoTag;
+import com.netcracker.entities.Label;
+import com.netcracker.services.Converter;
+import com.netcracker.services.LabelService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +26,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/search/by")
 public class SearchController {
+
+    @Autowired
+    private LabelService labelService;
+    @Autowired
+    private Converter converter;
 
     /**
      * Method of search by any of the following parameters:
@@ -59,6 +69,13 @@ public class SearchController {
      */
     @GetMapping("/parameters/tag")
     public List<LabelDtoShortInfo> searchByTag(@RequestBody SearchDtoTag request) {
-        return null;
+        List<Label> labels = labelService.getLabelsByTag(request.getTagName());
+        List<LabelDtoShortInfo> labelsDto = new ArrayList<>(labels.size());
+        for (Label label : labels) {
+            if (label != null) {
+                labelsDto.add(converter.convertLabelToDtoShortInfo(label));
+            }
+        }
+        return labelsDto;
     }
 }

@@ -103,6 +103,11 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
+    public List<Label> getLabelsByTag(String tagName) {
+        return labelRepository.query(new LabelsByTagSpecification(tagName));
+    }
+
+    @Override
     public List<Label> getLabelsCommentedByUser(String userId) {
         return labelRepository.query(new LabelsCommentedByUser(userId));
     }
