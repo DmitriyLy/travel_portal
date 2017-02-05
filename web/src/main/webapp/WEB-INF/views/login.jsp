@@ -10,10 +10,10 @@
 
 <h2>Social Login</h2>
 
-<a href="${pageContext.request.contextPath}/auth/facebook">Face
+<a href="${pageContext.request.contextPath}/signFacebook?fallback_url=marker-3">Face
     Book</a>
 <br />
-<a href="${pageContext.request.contextPath}/auth/google">Google</a>
+<a href="${pageContext.request.contextPath}/signGoogle?fallback_url=marker-5">Google</a>
 <br />
 
 </body>
