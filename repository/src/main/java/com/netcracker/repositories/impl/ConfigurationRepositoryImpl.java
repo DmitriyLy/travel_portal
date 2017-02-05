@@ -27,8 +27,8 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     private RowMapper<Configuration> mapper = (rs, rowNum) -> {
         Configuration configuration = new Configuration();
-        configuration.setConfigKey(rs.getString("configKey"));
-        configuration.setConfigValue(rs.getString("configValue"));
+        configuration.setConfigKey(rs.getString("CONF_KEY"));
+        configuration.setConfigValue(rs.getString("CONF_VALUE"));
         return configuration;
     };
 

@@ -6,5 +6,6 @@ package com.netcracker.services;
 public interface ConfigurationService {
 
     String getOptionValueByKey(String key);
+    String getUploadedImageDir();
 
 }

@@ -36,4 +36,9 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
         return list.get(0).getConfigValue();
     }
+
+    @Override
+    public String getUploadedImageDir() {
+        return getOptionValueByKey("uploaded_images_dir");
+    }
 }

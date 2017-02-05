@@ -41,14 +41,21 @@ public class ConfigurationServiceImplTest {
     }
 
     @Test
-    public void getPictureDirectory() throws Exception {
-
+    public void getValueUploadedImageDir() throws Exception {
         try {
-            System.out.println(service.getOptionValueByKey("picture_directory"));
+            System.out.println(service.getOptionValueByKey("uploaded_images_dir"));
         } catch (ConfigurationOptionNotFoundException e) {
             System.out.println("Option is not set.");
         }
+    }
 
+    @Test
+    public void testGetUploadedImageDir() throws Exception {
+        try {
+            System.out.println(service.getUploadedImageDir());
+        } catch (ConfigurationOptionNotFoundException e) {
+            System.out.println("Option is not set.");
+        }
     }
 
 
