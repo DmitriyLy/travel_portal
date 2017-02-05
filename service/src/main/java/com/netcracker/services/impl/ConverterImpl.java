@@ -201,6 +201,7 @@ public class ConverterImpl implements Converter {
         AttachmentDtoInfo attachmentDtoInfo = new AttachmentDtoInfo();
         attachmentDtoInfo.setId(attachment.getId());
         attachmentDtoInfo.setName(attachment.getName());
+        attachmentDtoInfo.setNightstand(attachment.getName().replace(".","_40x40."));
         return attachmentDtoInfo;
     }
 }
