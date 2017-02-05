@@ -79,8 +79,9 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     @Override
     public Configuration getById(long id) {
-        String query = QueriesRepository.GET_CONFIGURATION_BY_ID;
-        return jdbcTemplate.queryForObject(query, new Object[]{id}, mapper);
+        /*String query = QueriesRepository.GET_CONFIGURATION_BY_ID;
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, mapper);*/
+        return null;
     }
 
     @Override
@@ -93,6 +94,11 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
     public List<Configuration> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
         return jdbcTemplate.query(sqlSpecification.toSqlQuery(), mapper);
+    }
+
+    public List<Configuration> getOptionByKey(String key) {
+        String query = QueriesRepository.GET_CONFIGURATION_BY_ID;
+        return jdbcTemplate.query(query, new Object[]{key}, mapper);
     }
 
     /**

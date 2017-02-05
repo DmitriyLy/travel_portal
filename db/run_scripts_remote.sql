@@ -5,6 +5,7 @@
 @add_references_fk.sql
 @add_data_constraints.sql
 @create_indexes.sql
+@insert_configuration.sql
 @insert_countries.sql
 @insert_states.sql
 @insert_cities.sql
