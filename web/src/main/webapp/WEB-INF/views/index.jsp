@@ -79,10 +79,13 @@
         <script type="text/javascript">
             var GOOGLE_MAP_API_KEY  = "${googleMapsAPIKey}",
                 RESOURCES_DIR       = "${contextPath}",
-                IS_AUTHENTICATED    = false;
+                IS_AUTHENTICATED    = false,
+                USER_ID = "";
 
             <security:authorize access="isAuthenticated()">
+                <security:authentication var="user" property="principal" />
                 IS_AUTHENTICATED = true;
+                USER_ID = "${user.id}";
             </security:authorize>
         </script>
         <!-- GLOBAL VARS MUST BE BEFORE THAT LINE -->
