@@ -85,11 +85,6 @@ public class UserDAO extends JdbcDaoSupport {
 
         UserProfile userProfile = connection.fetchUserProfile();
 
-        User account = this.findById(userProfile.getId());
-        if (account != null) {
-            return account;
-        }
-
         String sql = "Insert into USERS "
                 + " (id, email,user_name,first_name,last_name,role) "
                 + " values (?,?,?,?,?,?) ";
