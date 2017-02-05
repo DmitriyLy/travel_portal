@@ -40,7 +40,7 @@ public class MapController {
      */
     @GetMapping(value = "/")
     public String getMap(HttpSession session) {
-        session.invalidate();
+        session.removeAttribute("fallback_url");
         return "index";
     }
 
