@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,7 +39,8 @@ public class MapController {
      * @return index.jsp
      */
     @GetMapping(value = "/")
-    public String getMap() {
+    public String getMap(HttpSession session) {
+        session.removeAttribute("fallback_url");
         return "index";
     }
 
