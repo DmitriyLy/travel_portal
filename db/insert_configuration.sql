@@ -1,0 +1,1 @@
+INSERT INTO CONFIGURATION VALUES('picture_directory', '/var/www/resources/uploaded-images/');
