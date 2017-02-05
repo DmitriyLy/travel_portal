@@ -28,6 +28,7 @@ public class SignController {
     @RequestMapping(value = { "/postSignIn" }, method = RequestMethod.GET)
     public String postSignIn(HttpSession session) {
         String sesParam = (String)session.getAttribute("fallback_url");
+        if(sesParam==null) return "redirect:/";
         return "redirect:/#"+sesParam;
     }
 }
