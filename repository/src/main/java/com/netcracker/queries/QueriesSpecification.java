@@ -34,6 +34,22 @@ public interface QueriesSpecification {
             "FROM LABELS l, TAGS t, TAGS_LABELS tl " +
             "WHERE t.name = '%s' AND t.id = tl.tag_id AND tl.label_id = l.id";
 
+    String LABELS_BY_TAGS = "SELECT * FROM LABELS WHERE ID IN " +
+            "(SELECT LABEL_ID FROM TAGS_LABELS WHERE TAG_ID IN (%s))";
+    String LABELS_BY_CATEGORIES = "SELECT * FROM LABELS WHERE ID IN " +
+            "(SELECT LABEL_ID FROM CATEGORIES_LABELS WHERE CATEGORY_ID IN (%s))";
+    String LABELS_BY_RATINGS = "SELECT * FROM LABELS WHERE RATING IN (%s)";
+
+    String FILTER_LABELS_BY_TAGS = "SELECT * FROM LABELS WHERE ID IN " +
+            "(SELECT LABEL_ID FROM TAGS_LABELS WHERE " +
+            "LABEL_ID IN (%2$s) AND TAG_ID IN (%1$s))";
+    String FILTER_LABELS_BY_CATEGORIES = "SELECT * FROM LABELS WHERE ID IN " +
+            "(SELECT LABEL_ID FROM CATEGORIES_LABELS WHERE " +
+            "LABEL_ID IN (%2$s) AND CATEGORY_ID IN (%1$s))";
+    String FILTER_LABELS_BY_RATINGS = "SELECT * FROM LABELS WHERE " +
+            "ID IN (%2$s) AND RATING IN (%1$s)";
+
+
     String ATTACHMENTS_BY_LABEL_ID = "SELECT * FROM ATTACHMENTS WHERE LABEL_ID = %1$d";
     String ATTACHMENT_BY_NAME_AND_LABEL_ID = "SELECT * FROM ATTACHMENTS " +
             "WHERE LABEL_ID = %1$d AND NAME = '%2$s'";

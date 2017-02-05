@@ -24,9 +24,8 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/search/by")
+@RequestMapping("/labels/search/by")
 public class SearchController {
-
     @Autowired
     private LabelService labelService;
     @Autowired
@@ -54,7 +53,7 @@ public class SearchController {
      */
     @PostMapping("/parameters")
     public List<LabelDtoShortInfo> searchByFullRequest(@RequestBody SearchDtoParameters request) {
-        return null;
+        return converter.convertLabelToDtoShortInfo(labelService.getLabelsBySearchRequest(request));
     }
 
     /**
@@ -69,13 +68,6 @@ public class SearchController {
      */
     @GetMapping("/parameters/tag")
     public List<LabelDtoShortInfo> searchByTag(@RequestBody SearchDtoTag request) {
-        List<Label> labels = labelService.getLabelsByTag(request.getTagName());
-        List<LabelDtoShortInfo> labelsDto = new ArrayList<>(labels.size());
-        for (Label label : labels) {
-            if (label != null) {
-                labelsDto.add(converter.convertLabelToDtoShortInfo(label));
-            }
-        }
-        return labelsDto;
+        return converter.convertLabelToDtoShortInfo(labelService.getLabelsByTag(request.getTagName()));
     }
 }

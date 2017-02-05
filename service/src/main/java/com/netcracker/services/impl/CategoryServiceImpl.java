@@ -69,6 +69,18 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Category> getByName(List<String> categoryNames) {
+        List<Category> categories = new ArrayList<>(categoryNames.size());
+        Category category;
+        for(String categoryName : categoryNames) {
+            category = getByName(categoryName);
+            if (category != null)
+                categories.add(category);
+        }
+        return categories.size() > 0 ? categories : null;
+    }
+
+    @Override
     public void manageCategories(Label label, List<String> updatedCategories) {
         if (label == null) {
             //throw smth

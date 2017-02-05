@@ -116,6 +116,19 @@ public class ConverterImpl implements Converter {
     }
 
     @Override
+    public List<LabelDtoShortInfo> convertLabelToDtoShortInfo(List<Label> labels) {
+        if(labels == null)
+            return null;
+
+        List<LabelDtoShortInfo> labelsDto = new ArrayList<>(labels.size());
+        labels.stream()
+                .filter(label -> label != null)
+                .forEach(label -> labelsDto.add(convertLabelToDtoShortInfo(label)));
+
+        return labelsDto;
+    }
+
+    @Override
     public LabelDtoMapInfo convertLabelToDtoMapInfo(Label label) {
         if (label == null)
             return null;

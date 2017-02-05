@@ -12,6 +12,7 @@ public interface Converter {
 
     LabelDtoFullInfo convertLabelToDtoFullInfo(Label label);
     LabelDtoShortInfo convertLabelToDtoShortInfo(Label label);
+    List<LabelDtoShortInfo> convertLabelToDtoShortInfo(List<Label> labels);
     LabelDtoMapInfo convertLabelToDtoMapInfo(Label label);
 
     AddressDto convertLocationToAddressDto(Location location);

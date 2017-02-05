@@ -9,9 +9,9 @@ import java.util.List;
 public class SearchDtoParameters {
 
     private AddressDto address;
-    private int rating;
-    private List<String> categories = new ArrayList<>();
-    private List<String> tags = new ArrayList<>();
+    private List<Integer> rating;
+    private List<String> categories;
+    private List<String> tags;
 
     public AddressDto getAddress() {
         return address;
@@ -21,11 +21,11 @@ public class SearchDtoParameters {
         this.address = address;
     }
 
-    public int getRating() {
+    public List<Integer> getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(List<Integer> rating) {
         this.rating = rating;
     }
 

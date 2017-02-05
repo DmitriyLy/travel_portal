@@ -15,6 +15,7 @@ public interface CategoryService {
 
     Category getById(long id);
     Category getByName(String categoryName);
+    List<Category> getByName(List<String> categoryName);
     List<Category> getCategoriesByLabel(long labelId);
     List<Category> getAll();
 

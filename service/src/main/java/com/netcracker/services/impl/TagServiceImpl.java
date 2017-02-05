@@ -69,6 +69,18 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public List<Tag> getByName(List<String> tagNames) {
+        List<Tag> tags = new ArrayList<>(tagNames.size());
+        Tag tag;
+        for(String tagName : tagNames) {
+            tag = getByName(tagName);
+            if (tag != null)
+                tags.add(tag);
+        }
+        return tags.size() > 0 ? tags : null;
+    }
+
+    @Override
     public List<Tag> getTagsByLabel(long labelId) {
         return tagRepository.query(new LabelTagsSpecification(labelId));
     }
