@@ -97,6 +97,8 @@
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.ajaxfileupload/jquery.ajaxfileupload.js"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.toast/jquery.toast.min.js"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/chosen.jquery/chosen.jquery.min.js"></script>
+        <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.validate/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.validate/additional-methods.min.js"></script>
         <%--<script type="text/javascript" src="${contextPath}/resources/js/Helpers/ReplaceTemplateVars.js"></script>--%>
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=${googleMapsAPIKey}"></script>
