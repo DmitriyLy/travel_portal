@@ -18,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/featherlight/featherlight.css"/>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/featherlight/featherlight.gallery.css"/>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/jquery.toast/jquery.toast.min.css"/>
+        <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/chosen/chosen.min.css"/>
         <%--<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/material-design/bootstrap-material-design.css">--%>
         <%--<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/material-design/ripples.min.css">--%>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css"/>
@@ -95,6 +96,7 @@
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/featherlight/featherlight.gallery.js"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.ajaxfileupload/jquery.ajaxfileupload.js"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.toast/jquery.toast.min.js"></script>
+        <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/chosen.jquery/chosen.jquery.min.js"></script>
         <%--<script type="text/javascript" src="${contextPath}/resources/js/Helpers/ReplaceTemplateVars.js"></script>--%>
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=${googleMapsAPIKey}"></script>
