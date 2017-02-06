@@ -49,7 +49,7 @@ public class LabelController {
      * that also allows filtering.
      */
     @PostMapping
-    public LabelDtoShortInfo addLabel(@RequestBody LabelDtoNew labelToAdd) {
+    public LabelDtoFullInfo addLabel(@RequestBody LabelDtoNew labelToAdd) {
         //no validation or error handling yet
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
@@ -61,7 +61,7 @@ public class LabelController {
             String loggedUserId = user.getId();
 
             Label label = labelService.add(loggedUserId, labelToAdd);
-            return converter.convertLabelToDtoShortInfo(label);
+            return converter.convertLabelToDtoFullInfo(label);
         }
 
         return null;
