@@ -7,6 +7,7 @@ import com.netcracker.services.CategoryService;
 import com.netcracker.services.LabelService;
 import com.netcracker.services.LocationService;
 import com.netcracker.services.TagService;
+import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import com.netcracker.specifications.impl.*;
 import org.apache.log4j.LogManager;
@@ -170,6 +171,19 @@ public class LabelServiceImpl implements LabelService {
         }
 
         /* quick fix */
+        return labels;
+    }
+
+    @Override
+    public List<Label> getLabelsByAddressParts(List<String> addressParts) {
+
+        List<Label> labels = new ArrayList<>();
+
+        if (addressParts.size() > 0) {
+            Specification specification =  new LabelsByAddressPartsSpecification(addressParts);
+            labels = labelRepository.query(specification);
+        }
+
         return labels;
     }
 
