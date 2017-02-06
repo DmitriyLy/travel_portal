@@ -107,6 +107,6 @@ public class LabelServiceTest {
         List<String> addressParts = new ArrayList<>();
         addressParts.add("Pivdenna Rd");
 
-        //System.out.println(labelService.getLabelsByAddressParts(addressParts));
+        ////System.out.println(labelService.getLabelsByAddressParts(addressParts));
     }
 }
