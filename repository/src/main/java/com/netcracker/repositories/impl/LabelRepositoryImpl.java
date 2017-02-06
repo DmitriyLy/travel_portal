@@ -100,8 +100,7 @@ public class LabelRepositoryImpl implements LabelRepository {
 
         return item;
     }
-
-    @Transactional
+    
     @Override
     public void hardRemove(Label item) {
         int out1 = jdbcTemplate.update(QueriesRepository.DELETE_TAGS_LABELS_BY_LABEL, item.getId());
