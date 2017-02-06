@@ -34,6 +34,7 @@
                 </div>
                 <div class="pull-right">
                     <span id="dn-mode-button" class="header-button"><i class="fa fa-moon-o" aria-hidden="true"></i></span>
+                    <span id="show-search" class="header-button"><i class="fa fa-search" aria-hidden="true"></i></span>
                     <security:authorize access="isAuthenticated()">
                         <span id="show-my-markers" class="header-button"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
                         <span id="show-my-comments" class="header-button"><i class="fa fa-commenting" aria-hidden="true"></i></span>
