@@ -26,6 +26,7 @@ public interface LabelService {
     List<Label> getLabelsByRectangle(SearchDtoRectangle rec);
     List<Label> getLabelsByTag(String tagName);
     List<Label> getLabelsBySearchRequest(SearchDtoParameters request);
+    List<Label> getLabelsByAddressParts(List<String> addressParts);
 
 /*    List<Label> getLabelsByTags(List<String> tagNames);
     List<Label> getLabelsByCategories(List<String> categoryNames);

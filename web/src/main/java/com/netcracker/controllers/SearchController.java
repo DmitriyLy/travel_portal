@@ -1,8 +1,6 @@
 package com.netcracker.controllers;
 
-import com.netcracker.dto.LabelDtoShortInfo;
-import com.netcracker.dto.SearchDtoParameters;
-import com.netcracker.dto.SearchDtoTag;
+import com.netcracker.dto.*;
 import com.netcracker.entities.Label;
 import com.netcracker.services.Converter;
 import com.netcracker.services.LabelService;
@@ -69,5 +67,14 @@ public class SearchController {
     @GetMapping("/parameters/tag")
     public List<LabelDtoShortInfo> searchByTag(@RequestBody SearchDtoTag request) {
         return converter.convertLabelToDtoShortInfo(labelService.getLabelsByTag(request.getTagName()));
+    }
+
+    /**
+     * Search by address parts
+     *
+     */
+    @PostMapping("/parameters/addressparts")
+    public List<LabelDtoShortInfo> searchByAddressParts(@RequestBody AddressPartsDto request) {
+        return converter.convertLabelToDtoShortInfo(labelService.getLabelsByAddressParts(request.getPhrases()));
     }
 }
