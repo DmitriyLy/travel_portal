@@ -13,20 +13,24 @@ import java.util.List;
  */
 public class LabelFilterByTags implements SqlSpecification {
 
-    private String tagIds;
+//    private String tagIds;
     private String labelIds;
+    private List<Long> tagIds;
 
     public LabelFilterByTags(List<Tag> tags, List<Label> labels) {
-        this.tagIds = SpecificationUtils.extractIdsAsString(tags);
+//        this.tagIds = SpecificationUtils.extractIdsAsString(tags);
         this.labelIds = SpecificationUtils.extractIdsAsString(labels);
+        this.tagIds = SpecificationUtils.extractIds(tags);
     }
 
     @Override
     public String toSqlQuery() {
-        return String.format(
+        return SpecificationUtils.constructQueryLabelGetterByTagsOrCategories("tag", tagIds, labelIds);
+
+/*        return String.format(
                 QueriesSpecification.FILTER_LABELS_BY_TAGS,
                 tagIds,
                 labelIds
-        );
+        );*/
     }
 }
