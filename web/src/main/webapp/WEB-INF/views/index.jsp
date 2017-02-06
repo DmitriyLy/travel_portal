@@ -33,13 +33,16 @@
                     <span>Travel Portal</span>
                 </div>
                 <div class="pull-right">
+                    <span id="dn-mode-button" class="header-button"><i class="fa fa-moon-o" aria-hidden="true"></i></span>
                     <security:authorize access="isAuthenticated()">
-                        <span>Здравствуйте, ${pageContext.request.userPrincipal.name}.</span>
+                        <span id="show-my-markers" class="header-button"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                        <span id="show-my-comments" class="header-button"><i class="fa fa-commenting" aria-hidden="true"></i></span>
+                        <a class="header-button" href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     </security:authorize>
                     <security:authorize access="!isAuthenticated()">
-                        <span>Войти: <a href="/auth/google">G+</a> / <a href="/auth/facebook">G+</a>.</span>
+                        <a class="header-button" href="${pageContext.request.contextPath}/signGoogle?fallback_url=" data-base-href="${pageContext.request.contextPath}/signGoogle?fallback_url="><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                        <a class="header-button" href="${pageContext.request.contextPath}/signFacebook?fallback_url=" data-base-href="${pageContext.request.contextPath}/signFacebook?fallback_url="><i class="fa fa-facebook" aria-hidden="true"></i></a>
                     </security:authorize>
-                    <span id="dn-mode-button"><i class="fa fa-moon-o" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>
