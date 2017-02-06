@@ -127,16 +127,24 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public List<Label> getLabelsBySearchRequest(SearchDtoParameters request) {
+    public List<Label> getLabelsBySearchRequest(SearchDtoWithAddressParts request) {
         if (request == null)
             return null;
 
         List<Label> labels = new ArrayList<>();
         boolean dbCallWasMade = false;
 
-        /* insert address search hear */
+        AddressPartsDto address = request.getAddress();
+        List<String> entityNames;
+        if (address != null) {
+            entityNames = address.getPhrases();
+            if (!isListNullOrEmptyOrOnlyNulls(entityNames)) {
+                labels = getLabelsByAddressParts(entityNames);
+                dbCallWasMade = true;
+            }
+        }
 
-        List<String> entityNames = request.getTags();
+        entityNames = request.getTags();
         if (!isListNullOrEmptyOrOnlyNulls(entityNames))
             if (dbCallWasMade) {
                 if (isListNullOrEmptyOrOnlyNulls(labels))
@@ -175,19 +183,6 @@ public class LabelServiceImpl implements LabelService {
     }
 
     @Override
-    public List<Label> getLabelsByAddressParts(List<String> addressParts) {
-
-        List<Label> labels = new ArrayList<>();
-
-        if (addressParts.size() > 0) {
-            Specification specification =  new LabelsByAddressPartsSpecification(addressParts);
-            labels = labelRepository.query(specification);
-        }
-
-        return labels;
-    }
-
-    @Override
     public void addLabelToBookmarks(String userId, long labelId) {
         labelRepository.addLabelToBookmarks(userId, labelId);
     }
@@ -212,6 +207,18 @@ public class LabelServiceImpl implements LabelService {
     }
 
     /************************************************/
+    private List<Label> getLabelsByAddressParts(List<String> addressParts) {
+
+        List<Label> labels = new ArrayList<>();
+
+        if (addressParts.size() > 0) {
+            Specification specification =  new LabelsByAddressPartsSpecification(addressParts);
+            labels = labelRepository.query(specification);
+        }
+
+        return labels;
+    }
+
     private List<Label> getLabelsByTags(List<String> tagNames) {
 /*        if(isListNullOrEmptyOrOnlyNulls(tagNames))
             return null;*/

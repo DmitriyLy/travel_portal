@@ -50,7 +50,7 @@ public class SearchController {
      *      short information required for filtrating and searching labels on selected area.
      */
     @PostMapping("/parameters")
-    public List<LabelDtoShortInfo> searchByFullRequest(@RequestBody SearchDtoParameters request) {
+    public List<LabelDtoShortInfo> searchByFullRequest(@RequestBody SearchDtoWithAddressParts request) {
         return converter.convertLabelToDtoShortInfo(labelService.getLabelsBySearchRequest(request));
     }
 
@@ -69,12 +69,12 @@ public class SearchController {
         return converter.convertLabelToDtoShortInfo(labelService.getLabelsByTag(request.getTagName()));
     }
 
-    /**
+/*    *//**
      * Search by address parts
      *
-     */
+     *//*
     @PostMapping("/parameters/addressparts")
     public List<LabelDtoShortInfo> searchByAddressParts(@RequestBody AddressPartsDto request) {
         return converter.convertLabelToDtoShortInfo(labelService.getLabelsByAddressParts(request.getPhrases()));
-    }
+    }*/
 }
