@@ -40,8 +40,8 @@
                         <a class="header-button" href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     </security:authorize>
                     <security:authorize access="!isAuthenticated()">
-                        <a class="header-button" href="${pageContext.request.contextPath}/signGoogle" data-base-href="${pageContext.request.contextPath}/signGoogle"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                        <a class="header-button" href="${pageContext.request.contextPath}/signFacebook" data-base-href="${pageContext.request.contextPath}/signFacebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a class="header-button" href="${pageContext.request.contextPath}/signGoogle?fallback_url=" data-base-href="${pageContext.request.contextPath}/signGoogle?fallback_url="><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                        <a class="header-button" href="${pageContext.request.contextPath}/signFacebook?fallback_url=" data-base-href="${pageContext.request.contextPath}/signFacebook?fallback_url="><i class="fa fa-facebook" aria-hidden="true"></i></a>
                     </security:authorize>
                 </div>
             </div>
