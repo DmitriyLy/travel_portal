@@ -3,10 +3,7 @@ package com.netcracker.services.impl;
 import com.netcracker.dto.*;
 import com.netcracker.entities.*;
 import com.netcracker.repositories.impl.LabelRepositoryImpl;
-import com.netcracker.services.CategoryService;
-import com.netcracker.services.LabelService;
-import com.netcracker.services.LocationService;
-import com.netcracker.services.TagService;
+import com.netcracker.services.*;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
 import com.netcracker.specifications.impl.*;
@@ -29,6 +26,9 @@ public class LabelServiceImpl implements LabelService {
     private final static Logger LOGGER = LogManager.getLogger(LabelServiceImpl.class.getName());
 
     @Autowired
+    private AttachmentService attachmentService;
+
+    @Autowired
     private LabelRepositoryImpl labelRepository;
     @Autowired
     private LocationService locationService;
@@ -38,6 +38,7 @@ public class LabelServiceImpl implements LabelService {
     private CategoryService categoryService;
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
 
 
     @Override
@@ -93,9 +94,14 @@ public class LabelServiceImpl implements LabelService {
         return label;
     }
 
+    @Transactional
     @Override
     public void delete(Label label) {
-        labelRepository.remove(label);
+        List<Attachment> attachments = attachmentService.getAttachmentsByLabel(label.getId());
+        for (Attachment attachment : attachments) {
+            attachmentService.removeAttachment(attachment);
+        }
+        labelRepository.hardRemove(label);
     }
 
     @Override

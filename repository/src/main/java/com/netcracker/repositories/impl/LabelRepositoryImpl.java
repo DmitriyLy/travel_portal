@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -98,6 +99,20 @@ public class LabelRepositoryImpl implements LabelRepository {
         }
 
         return item;
+    }
+
+    @Transactional
+    @Override
+    public void hardRemove(Label item) {
+        int out1 = jdbcTemplate.update(QueriesRepository.DELETE_TAGS_LABELS_BY_LABEL, item.getId());
+        int out2 = jdbcTemplate.update(QueriesRepository.DELETE_CATEGORIES_LABELS_BY_LABEL, item.getId());
+        int out3 = jdbcTemplate.update(QueriesRepository.DELETE_COMMENTS_BY_LABEL, item.getId());
+        int out4 = jdbcTemplate.update(QueriesRepository.DELETE_ATTACHMENTS_BY_LABEL, item.getId());
+        int out5 = jdbcTemplate.update(QueriesRepository.DELETE_LABEL, item.getId());
+
+        if (out1 == 0 || out2 == 0 || out3 == 0 || out4 == 0 || out5 == 0 ) {
+            LOGGER.warn("Cannot delete " + item.toString());
+        }
     }
 
     @Override
