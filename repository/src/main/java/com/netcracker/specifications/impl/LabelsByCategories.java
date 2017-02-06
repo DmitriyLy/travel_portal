@@ -12,17 +12,21 @@ import java.util.List;
  */
 public class LabelsByCategories implements SqlSpecification {
 
-    private String categoryIds;
+//    private String categoryIds;
+    private List<Long> categoryIds;
 
     public LabelsByCategories(List<Category> categories) {
-        this.categoryIds = SpecificationUtils.extractIdsAsString(categories);
+//        this.categoryIds = SpecificationUtils.extractIdsAsString(categories);
+        this.categoryIds = SpecificationUtils.extractIds(categories);
     }
 
     @Override
     public String toSqlQuery() {
-        return String.format(
+        return SpecificationUtils.constructQueryLabelGetterByTagsOrCategories("category", categoryIds, null);
+
+/*        return String.format(
                 QueriesSpecification.LABELS_BY_CATEGORIES,
                 categoryIds
-        );
+        );*/
     }
 }
