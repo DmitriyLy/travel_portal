@@ -9,6 +9,7 @@
 <html>
     <head>
         <title>Travel Portal</title>
+        <meta content="width=device-width,initial-scale=1" name="viewport">
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/bootstrap/bootstrap.min.css"/>
