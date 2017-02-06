@@ -105,9 +105,8 @@ public class LabelServiceTest {
     public void testGetLabelsByAddressParts() throws Exception {
 
         List<String> addressParts = new ArrayList<>();
-        addressParts.add("d");
-        addressParts.add("a");
+        addressParts.add("Pivdenna Rd");
 
-        //System.out.println(labelService.getLabelsByAddressParts(addressParts));
+        System.out.println(labelService.getLabelsByAddressParts(addressParts));
     }
 }

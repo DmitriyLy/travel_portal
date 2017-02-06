@@ -30,14 +30,14 @@ public class LabelsByAddressPartsSpecification implements SqlSpecification {
         String finalQuery = null;
 
         String queryPart = "SELECT * FROM LABELS WHERE LOCATION_ID IN (SELECT ID FROM LOCATIONS WHERE #COND_PART#)";
-        String conditionPart = "STREET LIKE '%#PART#%'";
+        String conditionPart = "LOWER(STREET) LIKE '%#PART#%'";
         StringBuilder conditionResult = new StringBuilder();
 
         for (String item : addressParts) {
             if (conditionResult.length() != 0) {
                 conditionResult.append(" AND ");
             }
-            conditionResult.append(conditionPart.replace("#PART#", item));
+            conditionResult.append(conditionPart.replace("#PART#", item.toLowerCase()));
         }
 
         if (conditionResult.length() != 0) {
