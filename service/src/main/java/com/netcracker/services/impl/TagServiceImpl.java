@@ -5,10 +5,7 @@ import com.netcracker.entities.Tag;
 import com.netcracker.repositories.impl.TagRepositoryImpl;
 import com.netcracker.services.TagService;
 import com.netcracker.specifications.SqlSpecification;
-import com.netcracker.specifications.impl.LabelTagsSpecification;
-import com.netcracker.specifications.impl.TagByName;
-import com.netcracker.specifications.impl.TagsAll;
-import com.netcracker.specifications.impl.TagsUsageCount;
+import com.netcracker.specifications.impl.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,5 +159,10 @@ public class TagServiceImpl implements TagService {
             if(tag != null)
                 tagNames.add(tag.getName());
         return tagNames;
+    }
+
+    @Override
+    public List<Tag> getPopularTags() {
+        return tagRepository.query(new PopularTags());
     }
 }

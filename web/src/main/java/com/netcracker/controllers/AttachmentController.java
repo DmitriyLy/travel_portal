@@ -71,10 +71,9 @@ public class AttachmentController {
     public AttachmentDtoInfo addAttachment(@PathVariable(name = "labelId") Long labelId, @RequestParam("attach") MultipartFile attach) throws IOException {
         String attachName = attach.getOriginalFilename();
         String extension = attachName.substring(attachName.lastIndexOf(".")+1);
-        if((!extension.equals("jpg"))
-            && (!extension.equals("jpeg"))
-            && (!extension.equals("bmp"))
-            && (!extension.equals("png")))
+        if((!extension.equalsIgnoreCase("jpg"))
+            && (!extension.equalsIgnoreCase("jpeg"))
+            && (!extension.equalsIgnoreCase("png")))
         {
             return null;
         }
