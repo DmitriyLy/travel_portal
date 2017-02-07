@@ -22,10 +22,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/", "/logout").permitAll();
 
-        //http.authorizeRequests().antMatchers("/users/**", "/postSignIn")
-         //       .access("hasRole('ROLE_USER')");
-
-
         http.authorizeRequests().and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
         http.apply(new SpringSocialConfigurer().postLoginUrl("/postSignIn"));
