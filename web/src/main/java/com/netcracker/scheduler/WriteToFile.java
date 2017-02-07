@@ -27,7 +27,7 @@ public class WriteToFile {
 
     private String filename; // "/var/www/resources/tags.json";
 
-    @Scheduled(cron = "*/5 * * * * *")
+    @Scheduled(cron = "0 */30 * * * *")
     public void savePopularTags() {
         FileWriter fileWriter = null;
         try {
