@@ -22,9 +22,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/", "/logout").permitAll();
 
-        http.authorizeRequests().antMatchers("/labels/**", "/users/**", "/postSignIn",
+       /* http.authorizeRequests().antMatchers("/labels*//**", "/users*//**", "/postSignIn",
                 "/tags", "/categories")
-                .access("hasRole('ROLE_USER')");
+                .access("hasRole('ROLE_USER')");*/
 
 
         http.authorizeRequests().and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
