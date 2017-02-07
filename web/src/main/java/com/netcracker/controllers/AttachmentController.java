@@ -69,13 +69,19 @@ public class AttachmentController {
      */
     @PostMapping
     public AttachmentDtoInfo addAttachment(@PathVariable(name = "labelId") Long labelId, @RequestParam("attach") MultipartFile attach) throws IOException {
+        String attachName = attach.getOriginalFilename();
+        String extension = attachName.substring(attachName.lastIndexOf(".")+1);
+        if((!extension.equals("jpg"))
+            && (!extension.equals("jpeg"))
+            && (!extension.equals("bmp"))
+            && (!extension.equals("png")))
+        {
+            return null;
+        }
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         String attachmentName = attachmentService.saveAttachment(labelId, attach);
-        Attachment recordFromDB = attachmentService.getAttachmentByLabelAndName(labelId,attachmentName);
-        if(recordFromDB==null){
-            recordFromDB = attachmentService.addAttachment(labelId, user.getUserId(), attachmentName);
-        }
+        Attachment recordFromDB = attachmentService.addAttachment(labelId, user.getUserId(), attachmentName);
         return converter.convertAttachmentToDtoInfo(recordFromDB);
     }
 
