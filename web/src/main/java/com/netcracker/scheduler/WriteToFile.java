@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.List;
 
@@ -30,9 +29,11 @@ public class WriteToFile {
     @Scheduled(cron = "0 0 */2 * * *")
     public void savePopularTags() {
         initFileName();
-        FileWriter fileWriter = null;
+        File file = new File(filename);
+        setAllPermissions(file);
+
         try {
-            fileWriter = new FileWriter(filename);
+            FileWriter fileWriter = new FileWriter(file);
             List<Tag> tags = tagService.getPopularTags();
 
             fileWriter.write("[");
@@ -52,6 +53,12 @@ public class WriteToFile {
         } catch (IOException e) {
             LOGGER.warn("Could not create or read file = " + filename);
         }
+    }
+
+    private void setAllPermissions(File file) {
+        file.setReadable(true, false);
+        file.setWritable(true, false);
+        file.setExecutable(true, false);
     }
 
     private void initFileName() {
