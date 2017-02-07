@@ -59,6 +59,9 @@ public interface QueriesSpecification {
     String TAGS_BY_LABEL_ID = "SELECT * FROM TAGS WHERE ID IN " +
             "(SELECT TAG_ID FROM TAGS_LABELS WHERE LABEL_ID = %1$d)";
 
+    String ATTACHMENTS_COUNT_BY_LABEL_ID = "SELECT COUNT(*) FROM ATTACHMENTS WHERE LABEL_ID = %1$d";
+    String COMMENTS_COUNT_BY_LABEL_ID = "SELECT COUNT(*) FROM COMMENTS WHERE LABEL_ID = %1$d";
+
     String GET_POPULAR_TAGS =
             "WITH TAB_TAG_COUNT AS (" +
                     "SELECT TAG_ID, 1 AS TAG_COUNT" +
