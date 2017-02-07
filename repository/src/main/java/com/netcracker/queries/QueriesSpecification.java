@@ -73,7 +73,7 @@ public interface QueriesSpecification {
                     "SELECT TAG_ID, TAG_COUNT" +
                     "FROM TAB_TAG_COUNT_SUM" +
                     "ORDER BY TAG_COUNT DESC)" +
-                    "SELECT TAGS.ID AS ID, TAGS.NAME AS TAG_NAME" +
+                    "SELECT TAGS.ID as ID, TAGS.NAME AS NAME" +
                     "FROM TAB_TAG_COUNT_SUM_SORTED, TAGS" +
                     "WHERE ROWNUM <= 30 " +
                     "AND TAGS.ID = TAB_TAG_COUNT_SUM_SORTED.TAG_ID";

@@ -31,7 +31,7 @@ public class WriteToFile {
     public void savePopularTags() {
         FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriter(filename, true);
+            fileWriter = new FileWriter(filename);
             List<Tag> tags = tagService.getPopularTags();
 
             fileWriter.write("[");
