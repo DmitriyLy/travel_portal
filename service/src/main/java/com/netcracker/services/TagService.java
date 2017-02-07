@@ -27,4 +27,6 @@ public interface TagService {
     void unbindLabelAndTag(Label label, Tag tag);
 
     List<String> extractTagNames(List<Tag> tags);
+
+    List<Tag> getPopularTags();
 }

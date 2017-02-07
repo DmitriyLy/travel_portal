@@ -59,8 +59,21 @@ public interface QueriesSpecification {
     String TAGS_BY_LABEL_ID = "SELECT * FROM TAGS WHERE ID IN " +
             "(SELECT TAG_ID FROM TAGS_LABELS WHERE LABEL_ID = %1$d)";
 
-    String ATTACHMENTS_COUNT_BY_LABEL_ID = "SELECT COUNT(*) FROM ATTACHMENTS WHERE LABEL_ID = %1$d";
-    String COMMENTS_COUNT_BY_LABEL_ID = "SELECT COUNT(*) FROM COMMENTS WHERE LABEL_ID = %1$d";
+    String GET_POPULAR_TAGS =
+            "WITH TAB_TAG_COUNT AS (" +
+                    "SELECT TAG_ID, 1 AS TAG_COUNT" +
+                    "FROM TAGS_LABELS)," +
+                    "TAB_TAG_COUNT_SUM AS (" +
+                    "SELECT TAG_ID, SUM(TAG_COUNT) AS TAG_COUNT" +
+                    "FROM TAB_TAG_COUNT GROUP BY TAG_ID )," +
+                    "TAB_TAG_COUNT_SUM_SORTED AS (" +
+                    "SELECT TAG_ID, TAG_COUNT" +
+                    "FROM TAB_TAG_COUNT_SUM" +
+                    "ORDER BY TAG_COUNT DESC)" +
+                    "SELECT TAGS.ID AS ID, TAGS.NAME AS TAG_NAME" +
+                    "FROM TAB_TAG_COUNT_SUM_SORTED, TAGS" +
+                    "WHERE ROWNUM <= 30 " +
+                    "AND TAGS.ID = TAB_TAG_COUNT_SUM_SORTED.TAG_ID";
 
     String TAGS_ALL = "SELECT * FROM TAGS";
     String TAG_BY_NAME = "SELECT * FROM TAGS WHERE NAME = '%s'";
