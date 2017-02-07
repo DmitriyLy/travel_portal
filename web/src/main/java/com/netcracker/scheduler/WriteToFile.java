@@ -29,6 +29,7 @@ public class WriteToFile {
 
     @Scheduled(cron = "0 */5 * * * *")
     public void savePopularTags() {
+        initFileName();
         FileWriter fileWriter = null;
         try {
             fileWriter = new FileWriter(filename);
@@ -53,8 +54,7 @@ public class WriteToFile {
         }
     }
 
-    @PostConstruct
-    private void initFieName() {
+    private void initFileName() {
         filename = configurationService.getOptionValueByKey("tags");
     }
 }
