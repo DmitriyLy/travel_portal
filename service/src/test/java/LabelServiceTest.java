@@ -94,11 +94,11 @@ public class LabelServiceTest {
 
     @Test
     public void testConverterForLabels() {
-        Label label = labelService.getById(324);
+       /* Label label = labelService.getById(324);
         System.out.println("-------------");
         System.out.println(converter.convertLabelToDtoFullInfo(label));
         System.out.println("-------------");
-        System.out.println(converter.convertLabelToDtoShortInfo(label));
+        System.out.println(converter.convertLabelToDtoShortInfo(label));*/
     }
 
     @Test
