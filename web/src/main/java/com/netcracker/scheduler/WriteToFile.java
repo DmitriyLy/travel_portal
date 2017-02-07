@@ -1,4 +1,4 @@
-package com.netcracker.scheduler.schedule;
+package com.netcracker.scheduler;
 
 import com.netcracker.entities.Tag;
 import com.netcracker.services.TagService;

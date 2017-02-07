@@ -1,6 +1,7 @@
-package com.netcracker.scheduler.config;
+package com.netcracker.scheduler;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -9,5 +10,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @EnableScheduling
+@ImportResource("classpath:app-context.xml")
 public class SchedulerConfig {
 }
