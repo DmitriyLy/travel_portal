@@ -13,4 +13,6 @@ public interface LabelRepository extends IRepository<Label> {
 
     void addLabelToBookmarks(String userId, long labelId);
     void deleteLabelFromBookmarks(String userId, long labelId);
+
+    void hardRemove(Label label);
 }

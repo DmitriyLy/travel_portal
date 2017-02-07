@@ -25,6 +25,19 @@ public interface LabelService {
     List<Label> getLabelsBookmarkedByUser(String userId);
     List<Label> getLabelsByRectangle(SearchDtoRectangle rec);
     List<Label> getLabelsByTag(String tagName);
+    List<Label> getLabelsBySearchRequest(SearchDtoWithAddressParts request);
+
+
+/*    List<Label> getLabelsByTags(List<String> tagNames);
+    List<Label> getLabelsByCategories(List<String> categoryNames);
+    List<Label> getLabelsByRatings(int[] ratings);
+    List<Label> getLabelsByAddress(AddressDto addressDto);
+    List<Label> getLabelsByAddressParts(List<String> addressParts);
+
+    List<Label> filterLabelsByTags(List<String> tagNames, List<Label> labels);
+    List<Label> filterLabelsByCategories(List<String> categoryNames, List<Label> labels);
+    List<Label> filterLabelsByRatings(int[] ratings, List<Label> labels);
+    List<Label> filterLabelsByAddress(AddressDto addressDto, List<Label> labels);*/
 
     void addLabelToBookmarks(String userId, long labelId);
     void deleteLabelFromBookmarks(String userId, long labelId);

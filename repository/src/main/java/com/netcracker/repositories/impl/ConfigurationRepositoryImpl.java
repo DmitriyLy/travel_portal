@@ -27,8 +27,8 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     private RowMapper<Configuration> mapper = (rs, rowNum) -> {
         Configuration configuration = new Configuration();
-        configuration.setConfigKey(rs.getString("configKey"));
-        configuration.setConfigValue(rs.getString("configValue"));
+        configuration.setConfigKey(rs.getString("CONF_KEY"));
+        configuration.setConfigValue(rs.getString("CONF_VALUE"));
         return configuration;
     };
 
@@ -79,8 +79,9 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
 
     @Override
     public Configuration getById(long id) {
-        String query = QueriesRepository.GET_CONFIGURATION_BY_ID;
-        return jdbcTemplate.queryForObject(query, new Object[]{id}, mapper);
+        /*String query = QueriesRepository.GET_CONFIGURATION_BY_ID;
+        return jdbcTemplate.queryForObject(query, new Object[]{id}, mapper);*/
+        return null;
     }
 
     @Override
@@ -93,6 +94,11 @@ public class ConfigurationRepositoryImpl implements IRepository<Configuration> {
     public List<Configuration> query(Specification specification) {
         SqlSpecification sqlSpecification = (SqlSpecification) specification;
         return jdbcTemplate.query(sqlSpecification.toSqlQuery(), mapper);
+    }
+
+    public List<Configuration> getOptionByKey(String key) {
+        String query = QueriesRepository.GET_CONFIGURATION_BY_ID;
+        return jdbcTemplate.query(query, new Object[]{key}, mapper);
     }
 
     /**

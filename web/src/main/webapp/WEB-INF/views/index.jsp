@@ -9,6 +9,7 @@
 <html>
     <head>
         <title>Travel Portal</title>
+        <meta content="width=device-width,initial-scale=1" name="viewport">
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/bootstrap/bootstrap.min.css"/>
@@ -17,6 +18,8 @@
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/mmenu/jquery.mmenu.all.css"/>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/featherlight/featherlight.css"/>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/featherlight/featherlight.gallery.css"/>
+        <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/jquery.toast/jquery.toast.min.css"/>
+        <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/chosen/chosen.min.css"/>
         <%--<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/material-design/bootstrap-material-design.css">--%>
         <%--<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/material-design/ripples.min.css">--%>
         <link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/style.css"/>
@@ -31,13 +34,17 @@
                     <span>Travel Portal</span>
                 </div>
                 <div class="pull-right">
+                    <span id="dn-mode-button" class="header-button"><i class="fa fa-moon-o" aria-hidden="true"></i></span>
+                    <span id="show-search" class="header-button"><i class="fa fa-search" aria-hidden="true"></i></span>
                     <security:authorize access="isAuthenticated()">
-                        <span>Здравствуйте, ${pageContext.request.userPrincipal.name}.</span>
+                        <span id="show-my-markers" class="header-button"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                        <span id="show-my-comments" class="header-button"><i class="fa fa-commenting" aria-hidden="true"></i></span>
+                        <a class="header-button" href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
                     </security:authorize>
                     <security:authorize access="!isAuthenticated()">
-                        <span>Войти: <a href="/auth/google">G+</a> / <a href="/auth/facebook">G+</a>.</span>
+                        <a class="header-button" href="${pageContext.request.contextPath}/signGoogle?fallback_url=" data-base-href="${pageContext.request.contextPath}/signGoogle?fallback_url="><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                        <a class="header-button" href="${pageContext.request.contextPath}/signFacebook?fallback_url=" data-base-href="${pageContext.request.contextPath}/signFacebook?fallback_url="><i class="fa fa-facebook" aria-hidden="true"></i></a>
                     </security:authorize>
-                    <span id="dn-mode-button"><i class="fa fa-moon-o" aria-hidden="true"></i></span>
                 </div>
             </div>
         </div>
@@ -77,10 +84,13 @@
         <script type="text/javascript">
             var GOOGLE_MAP_API_KEY  = "${googleMapsAPIKey}",
                 RESOURCES_DIR       = "${contextPath}",
-                IS_AUTHENTICATED    = false;
+                IS_AUTHENTICATED    = false,
+                USER_ID = "";
 
             <security:authorize access="isAuthenticated()">
+                <security:authentication var="user" property="principal" />
                 IS_AUTHENTICATED = true;
+                USER_ID = "${user.id}";
             </security:authorize>
         </script>
         <!-- GLOBAL VARS MUST BE BEFORE THAT LINE -->
@@ -93,6 +103,10 @@
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/featherlight/featherlight.js"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/featherlight/featherlight.gallery.js"></script>
         <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.ajaxfileupload/jquery.ajaxfileupload.js"></script>
+        <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.toast/jquery.toast.min.js"></script>
+        <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/chosen.jquery/chosen.jquery.min.js"></script>
+        <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.validate/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="${contextPath}/resources/js/ThirdPartyLibraries/jquery.validate/additional-methods.min.js"></script>
         <%--<script type="text/javascript" src="${contextPath}/resources/js/Helpers/ReplaceTemplateVars.js"></script>--%>
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=${googleMapsAPIKey}"></script>

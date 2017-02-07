@@ -100,4 +100,13 @@ public class LabelServiceTest {
         System.out.println("-------------");
         System.out.println(converter.convertLabelToDtoShortInfo(label));
     }
+
+    @Test
+    public void testGetLabelsByAddressParts() throws Exception {
+
+        List<String> addressParts = new ArrayList<>();
+        addressParts.add("Pivdenna Rd");
+
+        ////System.out.println(labelService.getLabelsByAddressParts(addressParts));
+    }
 }

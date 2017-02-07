@@ -116,6 +116,19 @@ public class ConverterImpl implements Converter {
     }
 
     @Override
+    public List<LabelDtoShortInfo> convertLabelToDtoShortInfo(List<Label> labels) {
+        if(labels == null)
+            return null;
+
+        List<LabelDtoShortInfo> labelsDto = new ArrayList<>(labels.size());
+        labels.stream()
+                .filter(label -> label != null)
+                .forEach(label -> labelsDto.add(convertLabelToDtoShortInfo(label)));
+
+        return labelsDto;
+    }
+
+    @Override
     public LabelDtoMapInfo convertLabelToDtoMapInfo(Label label) {
         if (label == null)
             return null;
@@ -201,6 +214,7 @@ public class ConverterImpl implements Converter {
         AttachmentDtoInfo attachmentDtoInfo = new AttachmentDtoInfo();
         attachmentDtoInfo.setId(attachment.getId());
         attachmentDtoInfo.setName(attachment.getName());
+        attachmentDtoInfo.setNightstand(attachment.getName().replace(".","_40x40."));
         return attachmentDtoInfo;
     }
 }

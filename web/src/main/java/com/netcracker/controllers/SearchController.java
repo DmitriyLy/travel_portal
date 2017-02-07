@@ -1,8 +1,6 @@
 package com.netcracker.controllers;
 
-import com.netcracker.dto.LabelDtoShortInfo;
-import com.netcracker.dto.SearchDtoParameters;
-import com.netcracker.dto.SearchDtoTag;
+import com.netcracker.dto.*;
 import com.netcracker.entities.Label;
 import com.netcracker.services.Converter;
 import com.netcracker.services.LabelService;
@@ -24,9 +22,8 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/search/by")
+@RequestMapping("/labels/search/by")
 public class SearchController {
-
     @Autowired
     private LabelService labelService;
     @Autowired
@@ -53,8 +50,8 @@ public class SearchController {
      *      short information required for filtrating and searching labels on selected area.
      */
     @PostMapping("/parameters")
-    public List<LabelDtoShortInfo> searchByFullRequest(@RequestBody SearchDtoParameters request) {
-        return null;
+    public List<LabelDtoShortInfo> searchByFullRequest(@RequestBody SearchDtoWithAddressParts request) {
+        return converter.convertLabelToDtoShortInfo(labelService.getLabelsBySearchRequest(request));
     }
 
     /**
@@ -69,13 +66,15 @@ public class SearchController {
      */
     @GetMapping("/parameters/tag")
     public List<LabelDtoShortInfo> searchByTag(@RequestBody SearchDtoTag request) {
-        List<Label> labels = labelService.getLabelsByTag(request.getTagName());
-        List<LabelDtoShortInfo> labelsDto = new ArrayList<>(labels.size());
-        for (Label label : labels) {
-            if (label != null) {
-                labelsDto.add(converter.convertLabelToDtoShortInfo(label));
-            }
-        }
-        return labelsDto;
+        return converter.convertLabelToDtoShortInfo(labelService.getLabelsByTag(request.getTagName()));
     }
+
+/*    *//**
+     * Search by address parts
+     *
+     *//*
+    @PostMapping("/parameters/addressparts")
+    public List<LabelDtoShortInfo> searchByAddressParts(@RequestBody AddressPartsDto request) {
+        return converter.convertLabelToDtoShortInfo(labelService.getLabelsByAddressParts(request.getPhrases()));
+    }*/
 }

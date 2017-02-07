@@ -1,23 +1,22 @@
 package com.netcracker.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author logariett on 12.01.2017.
+ * @author logariett.
  */
-public class SearchDtoParameters {
+public class SearchDtoWithAddressParts {
 
-    private AddressDto address;
+    private AddressPartsDto address;
     private List<Integer> rating;
     private List<String> categories;
     private List<String> tags;
 
-    public AddressDto getAddress() {
+    public AddressPartsDto getAddress() {
         return address;
     }
 
-    public void setAddress(AddressDto address) {
+    public void setAddress(AddressPartsDto address) {
         this.address = address;
     }
 

@@ -53,11 +53,7 @@ public class AttachmentController {
     @GetMapping
     public List<AttachmentDtoInfo> getAttachmentsByLabel(@PathVariable(name = "labelId") Long labelId) {
         return attachmentService.getAttachmentsByLabel(labelId)
-                .stream().map(a -> {
-                    AttachmentDtoInfo attachmentDtoInfo = converter.convertAttachmentToDtoInfo(a);
-                    String name = attachmentDtoInfo.getName();
-                    attachmentDtoInfo.setName(name.substring(0,name.lastIndexOf('.')) + "_40x40" + name.substring(name.lastIndexOf('.')));
-                    return attachmentDtoInfo;})
+                .stream().map(a -> converter.convertAttachmentToDtoInfo(a))
                 .collect(Collectors.toList());
     }
 
@@ -91,13 +87,12 @@ public class AttachmentController {
      *
      * @param attachmentId
      * @return {@link AttachmentDtoInfo} - object, that contains information about existing attachment.
-     */
     @GetMapping("/{attachmentId}")
     public AttachmentDtoInfo getAttachment(@PathVariable(name = "attachmentId") Long attachmentId) {
 
         Attachment recordFromDB = attachmentService.getAttachmentById(attachmentId);
         return converter.convertAttachmentToDtoInfo(recordFromDB);
-    }
+    }*/
 
     /**
      * Method of deleting attachment from specified label.

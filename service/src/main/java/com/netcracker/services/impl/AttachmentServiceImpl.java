@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -34,12 +35,14 @@ import java.util.List;
 public class AttachmentServiceImpl implements AttachmentService {
     private final static Logger LOGGER = LogManager.getLogger(AttachmentServiceImpl.class.getName());
 
-    private static final String ROOT_PATH = "/var/www/resources/uploaded-images/";
+    //private static final String ROOT_PATH = "/var/www/resources/uploaded-images/";
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private AttachmentRepositoryImpl repository;
-
+    @Autowired
+    private ConfigurationServiceImpl configurationService;
+    private String uploadedImageDir;
 
     @Override
     public Attachment addAttachment(long labelId, String userId, String name) {
@@ -52,7 +55,8 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public String saveAttachment(Long labelId, MultipartFile attach) throws IOException {
-        File uploadRootDir = new File(ROOT_PATH);
+        //File uploadRootDir = new File(ROOT_PATH);
+        File uploadRootDir = new File(uploadedImageDir);
         if (!uploadRootDir.exists()) {
             uploadRootDir.mkdirs();
         }
@@ -147,10 +151,17 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Override
     public void removeAttachment(Attachment attachment) {
-        File attachmentFile = new File(ROOT_PATH+attachment.getName());
+        //File attachmentFile = new File(ROOT_PATH+attachment.getName());
+        File attachmentFile = new File(uploadedImageDir + attachment.getName());
         attachmentFile.delete();
-        File compressFile = new File(ROOT_PATH+attachment.getName().replace(".","_40x40."));
+        //File compressFile = new File(ROOT_PATH+attachment.getName().replace(".","_40x40."));
+        File compressFile = new File(uploadedImageDir + attachment.getName().replace(".","_40x40."));
         compressFile.delete();
+    }
+
+    @PostConstruct
+    private void initUploadedImageDir() {
+        uploadedImageDir = configurationService.getUploadedImageDir();
     }
 
 }

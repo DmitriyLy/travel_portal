@@ -15,6 +15,7 @@ public interface TagService {
 
     Tag getById(long id);
     Tag getByName(String tagName);
+    List<Tag> getByName(List<String> tagNames);
     List<Tag> getTagsByLabel(long labelId);
     List<Tag> getAll();
 
