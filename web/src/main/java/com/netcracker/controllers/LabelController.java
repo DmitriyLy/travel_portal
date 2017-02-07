@@ -5,6 +5,7 @@ import com.netcracker.entities.Label;
 import com.netcracker.entities.User;
 import com.netcracker.services.Converter;
 import com.netcracker.services.LabelService;
+import com.netcracker.utils.ControllerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -51,8 +52,7 @@ public class LabelController {
     @PostMapping
     public LabelDtoFullInfo addLabel(@RequestBody LabelDtoNew labelToAdd) {
         //no validation or error handling yet
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if (labelToAdd.getCreationDate() == null) {
             labelToAdd.setCreationDate(new Date());
@@ -111,8 +111,7 @@ public class LabelController {
     public LabelDtoFullInfo updateLabel(@PathVariable(name = "labelId") Long labelId,
                                         @RequestBody LabelDtoUpdate labelUpdate) {
         //no validation or error handling yet
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if (user != null) {
             Label label = labelService.getById(labelId);
@@ -131,8 +130,7 @@ public class LabelController {
 
     @DeleteMapping("/{labelId}")
     public void deleteLabel(@PathVariable(name = "labelId") Long labelId) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if (user != null) {
             Label label = labelService.getById(labelId);

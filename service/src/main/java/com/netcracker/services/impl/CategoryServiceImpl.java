@@ -83,7 +83,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void manageCategories(Label label, List<String> updatedCategories) {
         if (label == null) {
-            throw new RuntimeException("label is null");
+            throw new RuntimeException("the label is null");
         }
 
         List<Category> labelCategories = getCategoriesByLabel(label.getId());

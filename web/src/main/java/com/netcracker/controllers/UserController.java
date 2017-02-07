@@ -5,6 +5,7 @@ import com.netcracker.entities.Label;
 import com.netcracker.entities.User;
 import com.netcracker.services.Converter;
 import com.netcracker.services.LabelService;
+import com.netcracker.utils.ControllerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +44,7 @@ public class UserController {
     @GetMapping("/me/labels/added")
     public List<LabelDtoShortInfo> getLabelsAddedByCurrentUser() {
         //no validation or error handling yet
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if (user != null) {
             List<Label> userLabels = labelService.getLabelsByUser(user.getUserId());
@@ -69,8 +69,7 @@ public class UserController {
     @GetMapping("/me/labels/commented")
     public List<LabelDtoShortInfo> getLabelsCommentedByCurrentUser() {
         //no validation or error handling yet
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if (user != null) {
             List<Label> commentedLabels = labelService.getLabelsCommentedByUser(user.getUserId());
@@ -96,8 +95,7 @@ public class UserController {
     @GetMapping("/me/labels/bookmarked")
     public List<LabelDtoShortInfo> getLabelsBookmarkedByCurrentUser() {
         //no validation or error handling yet
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if (user != null) {
             List<Label> bookmarkedLabels = labelService.getLabelsBookmarkedByUser(user.getUserId());
@@ -122,8 +120,7 @@ public class UserController {
     @PostMapping("/me/labels/bookmarked/{labelId}")
     public Integer addLabelToBookmarks(@PathVariable(name = "labelId") Long labelId) {
         //no validation or error handling yet
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if (user != null) {
             String userId = user.getId();
@@ -150,8 +147,7 @@ public class UserController {
     @DeleteMapping("/me/labels/bookmarked/{labelId}")
     public Integer deleteLabelFromBookmarks(@PathVariable(name = "labelId") Long labelId) {
         //no validation or error handling yet
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if (user != null) {
             if (labelService.isBookmarked(user.getUserId(), labelId)) {
