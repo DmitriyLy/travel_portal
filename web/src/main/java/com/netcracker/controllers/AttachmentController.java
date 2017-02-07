@@ -72,10 +72,7 @@ public class AttachmentController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         String attachmentName = attachmentService.saveAttachment(labelId, attach);
-        Attachment recordFromDB = attachmentService.getAttachmentByLabelAndName(labelId,attachmentName);
-        if(recordFromDB==null){
-            recordFromDB = attachmentService.addAttachment(labelId, user.getUserId(), attachmentName);
-        }
+        Attachment recordFromDB = attachmentService.addAttachment(labelId, user.getUserId(), attachmentName);
         return converter.convertAttachmentToDtoInfo(recordFromDB);
     }
 
