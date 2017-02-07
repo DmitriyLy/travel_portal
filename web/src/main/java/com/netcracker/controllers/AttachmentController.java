@@ -69,12 +69,12 @@ public class AttachmentController {
      */
     @PostMapping
     public AttachmentDtoInfo addAttachment(@PathVariable(name = "labelId") Long labelId, @RequestParam("attach") MultipartFile attach) throws IOException {
-        /*String attachName = attach.getOriginalFilename();
+        String attachName = attach.getOriginalFilename();
         String extension = attachName.substring(attachName.lastIndexOf(".")+1);
-        if((!extension.equals("jpg")) || (!extension.equals("jpeg")) || (!extension.equals("bmp")))
+        if((!extension.equals("jpg")) && (!extension.equals("jpeg")) && (!extension.equals("bmp")))
         {
             return null;
-        }*/
+        }
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         String attachmentName = attachmentService.saveAttachment(labelId, attach);
