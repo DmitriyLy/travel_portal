@@ -1,5 +1,6 @@
 package com.netcracker.services.impl;
 
+import com.netcracker.entities.Tag;
 import com.netcracker.services.TagService;
 import org.junit.After;
 import org.junit.Before;
@@ -8,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -42,6 +45,7 @@ public class TagServiceImplTest {
 
     @Test
     public void getPopularTags() throws Exception {
+        //List<Tag> list = tagService.getPopularTags();
         //System.out.println(tagService.getPopularTags());
     }
 
