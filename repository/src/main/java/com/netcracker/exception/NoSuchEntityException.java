@@ -5,5 +5,7 @@ package com.netcracker.exception;
  */
 
 public class NoSuchEntityException extends RuntimeException {
-
+    public NoSuchEntityException (){
+        super();
+    }
 }

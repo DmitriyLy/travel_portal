@@ -5,5 +5,7 @@ package com.netcracker.exception;
  */
 
 public class DuplicateEntityException extends RuntimeException {
-
+    public DuplicateEntityException() {
+        super();
+    }
 }
