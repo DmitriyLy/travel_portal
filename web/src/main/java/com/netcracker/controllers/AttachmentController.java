@@ -80,21 +80,6 @@ public class AttachmentController {
     }
 
     /**
-     * Method of attachment extraction by its id
-     * <p>
-     * Described in:
-     * nowhere
-     *
-     * @param attachmentId
-     * @return {@link AttachmentDtoInfo} - object, that contains information about existing attachment.
-    @GetMapping("/{attachmentId}")
-    public AttachmentDtoInfo getAttachment(@PathVariable(name = "attachmentId") Long attachmentId) {
-
-        Attachment recordFromDB = attachmentService.getAttachmentById(attachmentId);
-        return converter.convertAttachmentToDtoInfo(recordFromDB);
-    }*/
-
-    /**
      * Method of deleting attachment from specified label.
      * <p>
      * Described in:

@@ -20,9 +20,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.headers().frameOptions().disable();
 
-        http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
+        http.authorizeRequests().antMatchers("/", "/logout").permitAll();
 
-        http.authorizeRequests().antMatchers("/userInfo").access("hasRole('ROLE_USER')");
+        http.authorizeRequests().antMatchers("/labels/**", "/users/**", "/postSignIn",
+                "/tags", "/categories")
+                .access("hasRole('ROLE_USER')");
 
 
         http.authorizeRequests().and().logout().logoutUrl("/logout").logoutSuccessUrl("/");
