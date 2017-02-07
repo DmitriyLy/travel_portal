@@ -25,9 +25,9 @@ public class WriteToFile {
 
     private final static Logger LOGGER = LogManager.getLogger(WriteToFile.class.getName());
 
-    private String filename; // "/var/www/resources/tags.json";
+    private String filename;
 
-    @Scheduled(cron = "0 */5 * * * *")
+    @Scheduled(cron = "0 0 */2 * * *")
     public void savePopularTags() {
         initFileName();
         FileWriter fileWriter = null;
