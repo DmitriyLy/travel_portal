@@ -39,8 +39,8 @@ public class CityServiceImpl implements CityService {
     public City getOrAdd(AddressDto address) {
         State state = stateService.getOrAdd(address);
 
-        List<City> city= cityRepository.query(new CityByNameAndStateId(address.getCity(), state.getId()));
-        if (city.size() == 0)
+        List<City> city = cityRepository.query(new CityByNameAndStateId(address.getCity(), state.getId()));
+        if (city.isEmpty())
             return add(address.getCity(), state.getId());
         else if (city.size() == 1) {
             return city.get(0);

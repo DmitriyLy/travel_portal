@@ -55,7 +55,7 @@ public class LocationServiceImpl implements LocationService {
                         address.getStreet(),
                         address.getBuilding())
         );
-        if (location.size() == 0)
+        if (location.isEmpty())
             return add(address.getBuilding(), address.getStreet(), city.getId());
         else if (location.size() == 1) {
             return location.get(0);

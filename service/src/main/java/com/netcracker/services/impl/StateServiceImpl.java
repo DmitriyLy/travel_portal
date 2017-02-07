@@ -40,7 +40,7 @@ public class StateServiceImpl implements StateService {
         Country country = countryService.getOrAdd(address);
 
         List<State> state = stateRepository.query(new StateByNameAndCountryId(address.getState(), country.getId()));
-        if (state.size() == 0)
+        if (state.isEmpty())
             return add(address.getState(), country.getId());
         else if (state.size() == 1) {
             return state.get(0);

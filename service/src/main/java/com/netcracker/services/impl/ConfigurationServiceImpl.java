@@ -28,7 +28,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
         List<Configuration> list = repository.getOptionByKey(key);
 
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             ConfigurationOptionNotFoundException exception = new ConfigurationOptionNotFoundException("Key: " + key);
             LOGGER.warn("Option with specified key not found." , exception);
             throw exception;

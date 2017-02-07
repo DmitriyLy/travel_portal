@@ -221,7 +221,7 @@ public class LabelServiceImpl implements LabelService {
 
         List<Label> labels = new ArrayList<>();
 
-        if (addressParts.size() > 0) {
+        if (!addressParts.isEmpty()) {
             Specification specification =  new LabelsByAddressPartsSpecification(addressParts);
             labels = labelRepository.query(specification);
         }
@@ -307,7 +307,7 @@ public class LabelServiceImpl implements LabelService {
             return true;
         else {
             list.removeIf(Objects::isNull);
-            if (list.size() == 0)
+            if (list.isEmpty())
                 return true;
         }
 
