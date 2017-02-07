@@ -27,7 +27,7 @@ public class WriteToFile {
 
     private String filename; // "/var/www/resources/tags.json";
 
-    @Scheduled(cron = "0 */30 * * * *")
+    @Scheduled(cron = "0 */5 * * * *")
     public void savePopularTags() {
         FileWriter fileWriter = null;
         try {
@@ -44,6 +44,9 @@ public class WriteToFile {
             }
 
             fileWriter.write("]");
+
+            fileWriter.flush();
+            fileWriter.close();
 
         } catch (IOException e) {
             LOGGER.warn("Could not create or read file = " + filename);
