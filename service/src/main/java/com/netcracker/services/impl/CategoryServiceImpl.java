@@ -57,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
     public Category getByName(String categoryName) {
         List<Category> categories = categoryRepository.query(new CategoryByName(categoryName));
 
-        if (categories.size() == 0)
+        if (categories.isEmpty())
             return null;
         else if(categories.size() == 1)
             return categories.get(0);
@@ -77,33 +77,29 @@ public class CategoryServiceImpl implements CategoryService {
             if (category != null)
                 categories.add(category);
         }
-        return categories.size() > 0 ? categories : null;
+        return !categories.isEmpty() ? categories : null;
     }
 
     @Override
     public void manageCategories(Label label, List<String> updatedCategories) {
         if (label == null) {
-            //throw smth
-            return;
+            throw new RuntimeException("the label is null");
         }
 
         List<Category> labelCategories = getCategoriesByLabel(label.getId());
 
-        if (labelCategories.size() == 0) {
+        if (labelCategories.isEmpty()) {
             for (String categoryName : updatedCategories)
                 addCategoryByNameToLabel(label, categoryName);
 
-        } else if (updatedCategories == null || updatedCategories.size() == 0) {
+        } else if (updatedCategories == null || updatedCategories.isEmpty()) {
             for (Category category : labelCategories)
                 unbindLabelAndCategory(label, category);
 
         } else {
             for (Category category : labelCategories)
-                if (updatedCategories.contains(category.getName()))
-                    updatedCategories.remove(category.getName());
-                else
+                if (!updatedCategories.remove(category.getName()))
                     unbindLabelAndCategory(label,category);
-
             for (String categoryName : updatedCategories)
                 addCategoryByNameToLabel(label,categoryName);
         }
@@ -124,7 +120,7 @@ public class CategoryServiceImpl implements CategoryService {
         if(category != null)
             bindLabelAndCategory(label,category);
         else {
-            //log it
+            LOGGER.warn("Could not add to label category " + categoryName);
         }
     }
 

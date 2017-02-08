@@ -5,34 +5,16 @@ package com.netcracker.entities;
  *
  * @see com.netcracker.repositories.impl.MapProviderRepositoryImpl
  */
-public class MapProvider {
-    private long id;
-    private String name;
+public class MapProvider extends AbstractEntity{
     private String coordSysName;
 
     public MapProvider() {
     }
 
     public MapProvider(long id, String name, String coordSysName) {
-        this.id = id;
-        this.name = name;
+        this.setId(id);
+        this.setName(name);
         this.coordSysName = coordSysName;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getCoordSysName() {
@@ -48,24 +30,19 @@ public class MapProvider {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
+        long id = this.getId();
+        String name = this.getName();
         MapProvider that = (MapProvider) o;
 
-        if (id != that.id) return false;
-        return name.equals(that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        return result;
+        if (id != that.getId()) return false;
+        return name.equals(that.getName());
     }
 
     @Override
     public String toString() {
         return "MapProvider{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "id=" + this.getId() +
+                ", name='" + this.getName() + '\'' +
                 '}';
     }
 }

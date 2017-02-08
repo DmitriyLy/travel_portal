@@ -5,32 +5,14 @@ package com.netcracker.entities;
  *
  * @see com.netcracker.repositories.impl.CountryRepositoryImpl
  */
-public class Country {
-    private long id;
-    private String name;
+public class Country extends AbstractEntity {
 
     public Country() {
     }
 
     public Country(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+        this.setId(id);
+        this.setName(name);
     }
 
     @Override
@@ -38,18 +20,19 @@ public class Country {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
+        long id = this.getId();
+        String name = this.getName();
         Country country = (Country) o;
 
-        return id == country.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
+        if (id != country.getId()) return false;
+        return name.equals(country.getName());
     }
 
     @Override
     public String toString() {
-        return "{id = " + id + ", name = " + name + "}";
+        return "Country{" +
+                "id=" + this.getId() +
+                ", name='" + this.getName() + '\'' +
+                '}';
     }
 }

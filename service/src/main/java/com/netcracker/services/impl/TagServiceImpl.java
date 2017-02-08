@@ -5,10 +5,7 @@ import com.netcracker.entities.Tag;
 import com.netcracker.repositories.impl.TagRepositoryImpl;
 import com.netcracker.services.TagService;
 import com.netcracker.specifications.SqlSpecification;
-import com.netcracker.specifications.impl.LabelTagsSpecification;
-import com.netcracker.specifications.impl.TagByName;
-import com.netcracker.specifications.impl.TagsAll;
-import com.netcracker.specifications.impl.TagsUsageCount;
+import com.netcracker.specifications.impl.*;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +54,7 @@ public class TagServiceImpl implements TagService {
     public Tag getByName(String tagName) {
         List<Tag> tags = tagRepository.query(new TagByName(tagName));
 
-        if (tags.size() == 0)
+        if (tags.isEmpty())
             return null;
         else if (tags.size() == 1)
             return tags.get(0);
@@ -77,7 +74,7 @@ public class TagServiceImpl implements TagService {
             if (tag != null)
                 tags.add(tag);
         }
-        return tags.size() > 0 ? tags : null;
+        return !tags.isEmpty() ? tags : null;
     }
 
     @Override
@@ -107,18 +104,17 @@ public class TagServiceImpl implements TagService {
 
     public void manageTags(Label label, List<String> updatedTags) {
         if (label == null) {
-            //throw smth
-            return;
+            throw new RuntimeException("the label is null");
         }
 
         List<Tag> labelTags = getTagsByLabel(label.getId());
 
-        if (labelTags.size() == 0) {
+        if (labelTags.isEmpty()) {
             for (String tagName : updatedTags) {
                 addTagByNameToLabel(label, tagName);
             }
 
-        } else if (updatedTags == null || updatedTags.size() == 0) {
+        } else if (updatedTags == null || updatedTags.isEmpty()) {
             for (Tag tag : labelTags) {
                 unbindLabelAndTag(label, tag);
                 deleteTagIfUnused(tag);
@@ -126,13 +122,10 @@ public class TagServiceImpl implements TagService {
 
         } else {
             for (Tag tag : labelTags)
-                if(updatedTags.contains(tag.getName())) {
-                    updatedTags.remove(tag.getName());
-                } else {
+                if(!updatedTags.remove(tag.getName())) {
                     unbindLabelAndTag(label, tag);
                     deleteTagIfUnused(tag);
-                }
-
+            }
             for (String tagName : updatedTags) {
                 addTagByNameToLabel(label, tagName);
             }
@@ -166,5 +159,10 @@ public class TagServiceImpl implements TagService {
             if(tag != null)
                 tagNames.add(tag.getName());
         return tagNames;
+    }
+
+    @Override
+    public List<Tag> getPopularTags() {
+        return tagRepository.query(new PopularTags());
     }
 }

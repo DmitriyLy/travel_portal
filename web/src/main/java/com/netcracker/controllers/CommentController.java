@@ -7,6 +7,7 @@ import com.netcracker.entities.Comment;
 import com.netcracker.entities.User;
 import com.netcracker.services.CommentService;
 import com.netcracker.services.Converter;
+import com.netcracker.utils.ControllerUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -76,8 +77,7 @@ public class CommentController {
     public CommentDtoInfo addComment(@PathVariable(name = "labelId") Long labelId,
                                      @RequestBody CommentDtoNew commentDtoNew) {
         //no validation or error handling yet
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if(user != null)
             return commentService.addComment(labelId, user.getUserId(),commentDtoNew);
@@ -102,8 +102,7 @@ public class CommentController {
     public CommentDtoInfo editComment(@PathVariable(name = "labelId") Long labelId,
                                       @PathVariable(name = "commentId") Long commentId,
                                       @RequestBody CommentDtoUpdate commentUpdate) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if (user != null) {
             Comment comment = commentService.getById(commentId);
@@ -130,8 +129,7 @@ public class CommentController {
     @DeleteMapping(value = "/{commentId}")
     public void deleteComment(@PathVariable(name = "labelId") Long labelId,
                               @PathVariable(name = "commentId") Long commentId) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
+        User user = ControllerUtils.getUserFromContext();
 
         if (user != null) {
             Comment comment = commentService.getById(commentId);

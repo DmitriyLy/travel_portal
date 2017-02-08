@@ -5,27 +5,9 @@ package com.netcracker.entities;
  *
  * @see com.netcracker.repositories.impl.CategoryRepositoryImpl
  */
-public class Category {
-    private long id;
-    private String name;
+public class Category extends AbstractEntity{
 
     public Category() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -33,24 +15,19 @@ public class Category {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
+        long id = this.getId();
+        String name =  this.getName();
         Category category = (Category) o;
 
-        if (id != category.id) return false;
-        return name != null ? name.equals(category.name) : category.name == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        if (id != category.getId()) return false;
+        return name != null ? name.equals(category.getName()) : category.getName() == null;
     }
 
     @Override
     public String toString() {
         return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "id=" + this.getId() +
+                ", name='" + this.getName() + '\'' +
                 '}';
     }
 }

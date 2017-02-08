@@ -76,26 +76,4 @@ public class MapController {
                 .stream().map(a -> converter.convertLabelToDtoMapInfo(a))
                 .collect(Collectors.toList());
     }
-
-    /**
-     * Method returns short label's info to client. It is required for filtering and searching.
-     *
-     * @param ellipse {@link SearchDtoEllipse} - object contains the coordinates of a point
-     *                and lengths of two axises. The coordinates of the point are defined by the user,
-     *                which indicates a random location on the map. This point will be the center of the ellipse.
-     *                The labels that will be located inside the ellipse will be transferred to the client.
-     * @return List of {@link LabelDtoShortInfo} - list with objects that contains
-     * short information required for filtrating and searching labels on selected area.
-     * <p>
-     * Method covers the following functional requirements:
-     * FR10 - The system should create a list containing the summary and the hyperlink
-     * to view the information on the label.
-     * FR11 - The system should display the list (FR 10) in the top of the map window.
-     * FR12 - The system should allow you to sort the list (FR 10) rated / creation date labels.
-     */
-    @PostMapping("/labels/search/by/area/ellipse")
-    @ResponseBody
-    public List<LabelDtoShortInfo> getLabelsByEllipse(@RequestBody SearchDtoEllipse ellipse) {
-        return null;
-    }
 }

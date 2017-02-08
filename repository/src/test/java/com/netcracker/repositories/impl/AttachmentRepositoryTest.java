@@ -1,46 +1,69 @@
 package com.netcracker.repositories.impl;
 
-import com.netcracker.exception.DuplicateEntityException;
-import com.netcracker.exception.NoSuchEntityException;
+import com.netcracker.utils.CleanInsertTestExecutionListener;
+import com.netcracker.utils.DataSetLocation;
+import com.netcracker.entities.Attachment;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  *  Test for {@link com.netcracker.repositories.impl.AttachmentRepositoryImpl}
- *
- *  Add a VM Options before start test:
- * -Duser.language=en
- * -Duser.region=us
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/data-context.xml"})
+@TestExecutionListeners({DependencyInjectionTestExecutionListener.class, CleanInsertTestExecutionListener.class})
+@DataSetLocation("classpath:/attachment-dataset.xml")
 public class AttachmentRepositoryTest {
 
     @Autowired
-    AttachmentRepositoryImpl attachmentRepository;
+    AttachmentRepositoryImpl repository;
 
     @Test
-    public void addAttachmentTest(){
+    public void add_newAttachment() {
+        /*Attachment expected = repository.add(new Attachment("4", 4, "attach4"));
 
+        assertThat(expected, is(repository.getById(4)));*/
     }
 
     @Test
-    public void updateAttachmentTest(){
+    public void update_firstAttachment() {
+       /* Attachment expected = new Attachment("10", 10, "attach10");
+        expected.setId(1);
+        repository.update(expected);
 
+        assertThat(expected, is(repository.getById(1)));*/
     }
 
     @Test
-    public void getByIdAttachmentTest(){
+    public void getById_firstAttachment() {
+       /* Attachment expected = new Attachment("1", 1, "attach1");
+        expected.setId(1);
 
+        assertThat(expected, is(repository.getById(1)));*/
     }
 
     @Test
-    public void deleteAttachmentTest(){
+    public void remove_firstAttachment() {
+        /*Attachment attachment = new Attachment("1", 1, "attach1");
+        attachment.setId(1);
+        repository.remove(attachment);
 
+        assertThat(1L, is(repository.getColumnCount()));*/
+    }
+
+    @Test
+    public void getColumnCount_twoAttachments() {
+       /* long expected = repository.getColumnCount();
+
+        assertThat(expected, is(2L));*/
     }
 
     /*@Test(expected = DuplicateEntityException.class)
@@ -62,5 +85,4 @@ public class AttachmentRepositoryTest {
     public void deleteNonExistingAttachmentThrowsException(){
 
     }*/
-
 }

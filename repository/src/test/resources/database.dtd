@@ -1,0 +1,9 @@
+<!DOCTYPE dataset [
+        <!ELEMENT dataset (attachments*)>
+        <!ELEMENT attachments (#PCDATA)>
+        <!ATTLIST attachments
+                id CDATA #REQUIRED
+                label_id CDATA #IMPLIED
+                name CDATA #IMPLIED
+                user_id CDATA #IMPLIED>
+        ]>

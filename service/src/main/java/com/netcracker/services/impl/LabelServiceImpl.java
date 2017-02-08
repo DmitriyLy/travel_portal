@@ -3,6 +3,10 @@ package com.netcracker.services.impl;
 import com.netcracker.dto.*;
 import com.netcracker.entities.*;
 import com.netcracker.repositories.impl.LabelRepositoryImpl;
+import com.netcracker.services.CategoryService;
+import com.netcracker.services.LabelService;
+import com.netcracker.services.LocationService;
+import com.netcracker.services.TagService;
 import com.netcracker.services.*;
 import com.netcracker.specifications.Specification;
 import com.netcracker.specifications.SqlSpecification;
@@ -217,7 +221,7 @@ public class LabelServiceImpl implements LabelService {
 
         List<Label> labels = new ArrayList<>();
 
-        if (addressParts.size() > 0) {
+        if (!addressParts.isEmpty()) {
             Specification specification =  new LabelsByAddressPartsSpecification(addressParts);
             labels = labelRepository.query(specification);
         }
@@ -303,7 +307,7 @@ public class LabelServiceImpl implements LabelService {
             return true;
         else {
             list.removeIf(Objects::isNull);
-            if (list.size() == 0)
+            if (list.isEmpty())
                 return true;
         }
 

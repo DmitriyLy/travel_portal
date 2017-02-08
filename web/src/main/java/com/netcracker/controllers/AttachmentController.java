@@ -69,30 +69,20 @@ public class AttachmentController {
      */
     @PostMapping
     public AttachmentDtoInfo addAttachment(@PathVariable(name = "labelId") Long labelId, @RequestParam("attach") MultipartFile attach) throws IOException {
+        String attachName = attach.getOriginalFilename();
+        String extension = attachName.substring(attachName.lastIndexOf(".")+1);
+        if((!extension.equalsIgnoreCase("jpg"))
+            && (!extension.equalsIgnoreCase("jpeg"))
+            && (!extension.equalsIgnoreCase("png")))
+        {
+            return null;
+        }
         User user = (User) SecurityContextHolder.getContext().getAuthentication()
                 .getPrincipal();
         String attachmentName = attachmentService.saveAttachment(labelId, attach);
-        Attachment recordFromDB = attachmentService.getAttachmentByLabelAndName(labelId,attachmentName);
-        if(recordFromDB==null){
-            recordFromDB = attachmentService.addAttachment(labelId, user.getUserId(), attachmentName);
-        }
+        Attachment recordFromDB = attachmentService.addAttachment(labelId, user.getUserId(), attachmentName);
         return converter.convertAttachmentToDtoInfo(recordFromDB);
     }
-
-    /**
-     * Method of attachment extraction by its id
-     * <p>
-     * Described in:
-     * nowhere
-     *
-     * @param attachmentId
-     * @return {@link AttachmentDtoInfo} - object, that contains information about existing attachment.
-    @GetMapping("/{attachmentId}")
-    public AttachmentDtoInfo getAttachment(@PathVariable(name = "attachmentId") Long attachmentId) {
-
-        Attachment recordFromDB = attachmentService.getAttachmentById(attachmentId);
-        return converter.convertAttachmentToDtoInfo(recordFromDB);
-    }*/
 
     /**
      * Method of deleting attachment from specified label.

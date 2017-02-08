@@ -5,20 +5,10 @@ package com.netcracker.entities;
  *
  * @see com.netcracker.repositories.impl.StateRepositoryImpl
  */
-public class State {
-    private long id;
+public class State extends AbstractEntity {
     private long countryId;
-    private String name;
 
     public State() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public long getCountryId() {
@@ -29,28 +19,24 @@ public class State {
         this.countryId = countryId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
+        long id = this.getId();
+        String name = this.getName();
         State state = (State) o;
 
-        if (id != state.id) return false;
+        if (id != state.getId()) return false;
         if (countryId != state.countryId) return false;
-        return name.equals(state.name);
+        return name.equals(state.getName());
     }
 
     @Override
     public int hashCode() {
+        long id = this.getId();
+        String name = this.getName();
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (int) countryId;
         result = 31 * result + name.hashCode();
@@ -60,9 +46,9 @@ public class State {
     @Override
     public String toString() {
         return "State{" +
-                "id=" + id +
+                "id=" + this.getId() +
                 ", countryId=" + countryId +
-                ", name='" + name + '\'' +
+                ", name='" + this.getName() + '\'' +
                 '}';
     }
 }

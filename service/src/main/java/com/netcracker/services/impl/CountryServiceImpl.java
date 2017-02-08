@@ -40,7 +40,7 @@ public class CountryServiceImpl implements CountryService {
     public Country getOrAdd(AddressDto address) {
         List<Country> country = countryRepository.query(new CountryByName(address.getCountry()));
 
-        if (country.size() == 0)
+        if (country.isEmpty())
             return add(address.getCountry());
         else if (country.size() == 1) {
             return country.get(0);

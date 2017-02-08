@@ -93,7 +93,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     public Attachment getAttachmentByLabelAndName(Long labelId, String name) {
         SqlSpecification specification = new AttachmentByNameAndLabelId(name, labelId);
         List<Attachment> queryResult = repository.query(specification);
-        if (queryResult.size() == 0) {
+        if (queryResult.isEmpty()) {
             return null;
         }
         return queryResult.get(0);
