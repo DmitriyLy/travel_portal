@@ -69,15 +69,18 @@
         <!-- APP LIKE MENU -->
         <nav id="menu">
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About us</a>
-                    <ul>
-                        <li><a href="/about/history">History</a></li>
-                        <li><a href="/about/team">The team</a></li>
-                        <li><a href="/about/address">Our address</a></li>
-                    </ul>
-                </li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a data-click-id="dn-mode-button" href="#">Ночной Режим</a></li>
+                <li><a data-click-id="show-search" href="#">Поиск</a></li>
+                <security:authorize access="isAuthenticated()">
+                    <li><a data-click-id="show-my-bookmarked-markers" href="#">Избранные метки</a></li>
+                    <li><a data-click-id="show-my-markers" href="#">Мои Метки</a></li>
+                    <li><a data-click-id="show-my-comments" href="#">Мои Комментарии</a></li>
+                    <li><a href="${pageContext.request.contextPath}/logout">Выйти</a></li>
+                </security:authorize>
+                <security:authorize access="!isAuthenticated()">
+                    <li><a href="${pageContext.request.contextPath}/signGoogle?fallback_url=" data-base-href="${pageContext.request.contextPath}/signGoogle?fallback_url=">Войти (Google аккаунт)</a></li>
+                    <li><a href="${pageContext.request.contextPath}/signFacebook?fallback_url=" data-base-href="${pageContext.request.contextPath}/signFacebook?fallback_url=">Войти (Facebook аккаунт)</a></li>
+                </security:authorize>
             </ul>
         </nav>
 
