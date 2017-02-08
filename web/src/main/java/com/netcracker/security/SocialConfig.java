@@ -44,8 +44,8 @@ public class SocialConfig implements SocialConfigurer {
     public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
 
         // Facebook
-        FacebookConnectionFactory ffactory = new FacebookConnectionFactory(//
-                env.getProperty("facebook.app.id"), //
+        FacebookConnectionFactory ffactory = new FacebookConnectionFactory(
+                env.getProperty("facebook.app.id"),
                 env.getProperty("facebook.app.secret"));
 
 
@@ -54,8 +54,8 @@ public class SocialConfig implements SocialConfigurer {
         cfConfig.addConnectionFactory(ffactory);
 
         // Google
-        GoogleConnectionFactory gfactory = new GoogleConnectionFactory(//
-                env.getProperty("google.client.id"), //
+        GoogleConnectionFactory gfactory = new GoogleConnectionFactory(
+                env.getProperty("google.client.id"),
                 env.getProperty("google.client.secret"));
 
         gfactory.setScope(env.getProperty("google.scope"));

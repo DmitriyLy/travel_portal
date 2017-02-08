@@ -53,34 +53,6 @@ public class UserDAO extends JdbcDaoSupport {
         }
     }
 
-    public User findByEmail(String email) {
-        String sql = "Select id, email,user_name,first_name,last_name,"
-                + " role"
-                + " from USERS u "
-                + " where email = ? ";
-        Object[] params = new Object[]{email};
-        try {
-            User userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
-            return userInfo;
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
-    }
-
-    public User findByUserName(String userName) {
-        String sql = "Select id, email,user_name,first_name,last_name,"
-                + " role"
-                + " from USERS u "
-                + " where user_name = ? ";
-        Object[] params = new Object[]{userName};
-        try {
-            User userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
-            return userInfo;
-        } catch (EmptyResultDataAccessException e) {
-            return null;
-        }
-    }
-
     public User createUserAccount(Connection<?> connection) {
 
         UserProfile userProfile = connection.fetchUserProfile();
