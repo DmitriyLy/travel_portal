@@ -8,8 +8,8 @@ define(["require", "exports", "./View"], function (require, exports, View_1) {
     var CommentsFormView = (function (_super) {
         __extends(CommentsFormView, _super);
         function CommentsFormView(params) {
-            return _super.call(this, '<div class="col-xs-12 text-left">Оставьте коментарий:</div>' +
-                '<div class="col-xs-12 text-center"><textarea id="comment-area"></textarea></div>' +
+            return _super.call(this, '<div class="col-xs-12">Оставьте коментарий:</div>' +
+                '<div class="col-xs-12"><form id="CommentsForm"><textarea id="comment-area" name="comment-area"></textarea></form></div>' +
                 '<div class="col-xs-12 text-right"><button class="btn btn-default" id="send-comment" data-marker-id="$marker_id$">Написать</button></div>', params) || this;
         }
         return CommentsFormView;

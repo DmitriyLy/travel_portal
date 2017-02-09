@@ -8,7 +8,7 @@ define(["require", "exports", "./View"], function (require, exports, View_1) {
     var AttachmentsViewHolder = (function (_super) {
         __extends(AttachmentsViewHolder, _super);
         function AttachmentsViewHolder(params) {
-            return _super.call(this, '<a href="/resources/uploaded-images/$full$" class="col-xs-3"><img class="img-responsive" src="/resources/uploaded-images/$thumb$"/></a>', params) || this;
+            return _super.call(this, '<a href="/resources/uploaded-images/$full$" class="col-xs-3" data-id="$id$"><img class="img-responsive" src="/resources/uploaded-images/$thumb$"/></a>', params) || this;
         }
         return AttachmentsViewHolder;
     }(View_1.View));

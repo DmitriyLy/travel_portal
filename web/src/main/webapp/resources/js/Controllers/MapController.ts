@@ -1,7 +1,9 @@
 import {WindowController} from "./WindowController";
 import {WindowDrawer} from "../Helpers/WindowDrawer";
 import {AppController} from "./AppController";
+import {MarkersService} from "../Services/MarkersService";
 declare var google:any;
+declare var jQuery,$:any;
 declare var MarkerClusterer:any;
 export class MapController {
     map: any;
@@ -22,6 +24,14 @@ export class MapController {
 
         this.addDragEndCallback((mapController:MapController,e)=>{
             mapController.reloadMarkers();
+        });
+        this.addZoomChangedCallback((mapController:MapController,e)=>{
+            mapController.reloadMarkers();
+        });
+
+        var _this = this;
+        google.maps.event.addDomListener(window, 'load', function () {
+            _this.reloadMarkers();
         });
         return this;
     }
@@ -50,7 +60,19 @@ export class MapController {
         });
     }
 
+    addBoundsChangedCallback(func:Function){
+        var mapController = this;
+        this.map.addListener('bounds_changed', function(e) {
+            func(mapController,e);
+        });
+    }
 
+    addZoomChangedCallback(func:Function){
+        var mapController = this;
+        this.map.addListener('zoom_changed', function(e) {
+            func(mapController,e);
+        });
+    }
 
     /***
      * Reloads Markers when map moved to another location.
@@ -63,27 +85,43 @@ export class MapController {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: 'http://nctravelportal.ddns.net/labels/search/by/area/rectangle',
+            url: '/labels/search/by/area/rectangle',
             data: JSON.stringify({
-                'topRight':{
-                    'latitude':    ne_pos.lat(),
-                    'longtitude':  ne_pos.lng()
+                'topRight': {
+                    'latitude': ne_pos.lat(),
+                    'longitude': ne_pos.lng()
                 },
-                'bottomLeft':{
-                    'latitude':    sw_pos.lat(),
-                    'longtitude':  sw_pos.lng()
+                'bottomLeft': {
+                    'latitude': sw_pos.lat(),
+                    'longitude': sw_pos.lng()
                 }
             }),
             dataType: 'json',
             success: (MarkerData) => {
-                console.log(MarkerData);
-                this.resetMarkers(MarkerData);
+                this.resetMarkers(MarkerData.map((itm) => {
+                    return {
+                        'latitude': itm.coordinates.latitude,
+                        'longitude': itm.coordinates.longitude,
+                        'title': 'Метка #' + itm.id,
+                        'marker_id': itm.id
+                    };
+                }));
             },
-            error: (error) => { console.log(error);alert("Произошла ошибка, пожалуйста, попробуйте позже."); }
+            error: (error) => {
+                console.log(error);
+                $.toast({
+                    hideAfter: 5000,
+                    heading: 'Произошла ошибка',
+                    icon: 'error',
+                    text: 'Произошла ошибка №'+error.status+'.<br>Более подробную информацию можно получить в консоли.<br>Просим прощения, за предоставленные неудобства.',
+                    position: {
+                        top: 75,
+                        right: 20,
+                    },
+                    stack: 5
+                });
+            }
         });
-
-        console.log("TopRight  :"+ne_pos.lat()+";"+ne_pos.lng());
-        console.log("LeftBottom:"+sw_pos.lat()+";"+sw_pos.lng());
     }
 
     /***
@@ -91,11 +129,19 @@ export class MapController {
      */
     putMarker(options) {
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(options.latitude, options.longtitude),
+            position: new google.maps.LatLng(options.latitude, options.longitude),
             title: options.title
         });
+        var __this = this;
+
         marker.addListener('click', function(e) {
-            WindowDrawer.drawMarkerWindow(options.marker_id);
+            MarkersService.getMarker(options.marker_id,[(MarkerData)=>{
+                WindowDrawer.drawMarkerWindow(MarkerData);
+            },(MarkerData)=>{
+                __this.map.setZoom(18);
+                __this.map.setCenter(new google.maps.LatLng(MarkerData.coordinates.latitude, MarkerData.coordinates.longitude));
+                __this.reloadMarkers();
+            }]);
         });
         this.mapClusterer.addMarker(marker);
         this.mapClusterer.redraw();
@@ -106,13 +152,19 @@ export class MapController {
      */
     putMarkers(options) {
         options.map((itm)=>{
-            // TODO: REMOVE ON PRODUCTION
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(itm.latitude, itm.longtitude),
+                position: new google.maps.LatLng(itm.latitude, itm.longitude),
                 title: itm.title
             });
+            var __this = this;
             marker.addListener('click', function(e) {
-                WindowDrawer.drawMarkerWindow(itm.marker_id);
+                MarkersService.getMarker(itm.marker_id,[(MarkerData)=>{
+                    WindowDrawer.drawMarkerWindow(MarkerData);
+                },(MarkerData)=>{
+                    __this.map.setZoom(18);
+                    __this.map.setCenter(new google.maps.LatLng(MarkerData.coordinates.latitude, MarkerData.coordinates.longitude));
+                    __this.reloadMarkers();
+                }]);
             });
             this.mapClusterer.addMarker(marker);
             return marker;
@@ -122,7 +174,11 @@ export class MapController {
     }
 
     resetMarkers(options) {
-        this.mapClusterer.getMarkers().map((itm)=>{this.mapClusterer.removeMarker(itm);});
+        while(true) {
+            var markers = this.mapClusterer.getMarkers();
+            if(markers.length<=0) break;
+            markers.map((itm)=>{this.mapClusterer.removeMarker(itm);})
+        }
         this.putMarkers(options);
     }
 

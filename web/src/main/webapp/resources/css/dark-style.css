@@ -13,3 +13,12 @@ body.dark #windows-container > .window {
     color: #fff;
     background: #3b3b3b;
 }
+body.dark #windows-container .window > h2 > .close-window-button{
+    background: rgb(75, 75, 75);
+}
+body.dark #windows-container .window > h2 > .close-window-button:hover {
+    background-color: rgb(255, 87, 34);
+}
+body.dark #windows-container .window .marker .owner::after, body.dark #windows-container .window .comments .owner::after {
+    display:none;
+}

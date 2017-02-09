@@ -2,6 +2,9 @@ import {MapController} from "./MapController";
 import {WindowView} from "../Views/WindowView";
 import {View} from "../Views/View";
 import {ActionBinder} from "../Helpers/ActionBinder";
+import {WindowDrawer} from "../Helpers/WindowDrawer";
+import {AttachmentsViewHolder} from "../Views/AttachmentsViewHolder";
+import {CommentsViewHolder} from "../Views/CommentsViewHolder";
 declare var google,jQuery,$:any;
 
 
@@ -13,6 +16,7 @@ export class WindowController {
     mapController : MapController;
     parentWindow : WindowController;
     windowContainer : JQueryStatic|any;
+    static afterCreateCallbacks : Function[] = [];
 
     /***
      * Creates window.
@@ -32,7 +36,7 @@ export class WindowController {
         }
 
         this.windowContainer = this.showWindow();
-        ActionBinder.bindActions(this.windowContainer);
+        this.afterCreate();
         return this;
     }
 
@@ -63,5 +67,17 @@ export class WindowController {
                 childrenWindow.closeWindow();
             });
         }
+    }
+
+    static bindAfterCreate(callback:Function) {
+        if (typeof callback !== "function")
+            return;
+        WindowController.afterCreateCallbacks.push(callback);
+    }
+
+    afterCreate(){
+        WindowController.afterCreateCallbacks.forEach((callback,i,arr)=>{
+            callback(this);
+        });
     }
 }

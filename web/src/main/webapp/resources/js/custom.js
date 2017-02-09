@@ -92,27 +92,27 @@ if(jQuery==="undefined"){
                     setTimeout(function () {
                         markers.push(MapSingletone.putMarker({
                             latitude:40.6700,
-                            longtitude:-73.9400
+                            longitude:-73.9400
                         }));
                         setTimeout(function () {
                             markers.push(MapSingletone.putMarker({
                                 latitude:40.7700,
-                                longtitude:-73.9400
+                                longitude:-73.9400
                             }));
                             setTimeout(function () {
                                 markers.push(MapSingletone.putMarker({
                                     latitude:40.5700,
-                                    longtitude:-73.9400
+                                    longitude:-73.9400
                                 }));
                                 setTimeout(function () {
                                     markers.push(MapSingletone.putMarker({
                                         latitude:40.6700,
-                                        longtitude:-73.8400
+                                        longitude:-73.8400
                                     }));
                                     setTimeout(function () {
                                         markers.push(MapSingletone.putMarker({
                                             latitude:40.6700,
-                                            longtitude:-74.0400
+                                            longitude:-74.0400
                                         }));
                                     },400);
                                 },400);

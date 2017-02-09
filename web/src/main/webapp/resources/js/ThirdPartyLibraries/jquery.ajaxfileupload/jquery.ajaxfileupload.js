@@ -1,116 +1,175 @@
-/**
- * AJAX File Upload
- * http://github.com/davgothic/AjaxFileUpload
- * 
- * Copyright (c) 2010-2013 David Hancock (http://davidhancock.co)
- *
- * Thanks to Steven Barnett for his generous contributions
- *
- * Licensed under the MIT license ( http://www.opensource.org/licenses/MIT )
+/*
+ // jQuery Ajax File Uploader
+ //
+ // @author: Jordan Feldstein <jfeldstein.com>
+ //
+ //  - Ajaxifies an individual <input type="file">
+ //  - Files are sandboxed. Doesn't matter how many, or where they are, on the page.
+ //  - Allows for extra parameters to be included with the file
+ //  - onStart callback can cancel the upload by returning false
  */
 
-;(function($) {
-	$.fn.AjaxFileUpload = function(options) {
-		
-		var defaults = {
-			action:     "upload.php",
-			onChange:   function(filename) {},
-			onSubmit:   function(filename) {},
-			onComplete: function(filename, response) {}
-		},
-		settings = $.extend({}, defaults, options),
-		randomId = (function() {
-			var id = 0;
-			return function () {
-				return "_AjaxFileUpload" + id++;
-			};
-		})();
-		
-		return this.each(function() {
-			var $this = $(this);
-			if ($this.is("input") && $this.attr("type") === "file") {
-				$this.bind("change", onChange);
-			}
-		});
-		
-		function onChange(e) {
-			var $element = $(e.target),
-				id       = $element.attr('id'),
-				$clone   = $element.removeAttr('id').clone().attr('id', id).AjaxFileUpload(options),
-				filename = $element.val().replace(/.*(\/|\\)/, ""),
-				iframe   = createIframe(),
-				form     = createForm(iframe);
 
-			// We append a clone since the original input will be destroyed
-			$clone.insertBefore($element);
+(function($) {
+    $.fn.ajaxfileupload = function(options) {
+        var settings = {
+            params: {},
+            action: '',
+            onStart: function() { },
+            onComplete: function(response) { },
+            onCancel: function() { },
+            validate_extensions : true,
+            valid_extensions : ['gif','png','jpg','jpeg'],
+            submit_button : null,
+            auto_upload : false
+        };
 
-			settings.onChange.call($clone[0], filename);
+        var uploading_file = false;
 
-			iframe.bind("load", {element: $clone, form: form, filename: filename}, onComplete);
-			
-			form.append($element).bind("submit", {element: $clone, iframe: iframe, filename: filename}, onSubmit).submit();
-		}
-		
-		function onSubmit(e) {
-			var data = settings.onSubmit.call(e.data.element, e.data.filename);
+        if ( options ) {
+            $.extend( settings, options );
+        }
 
-			// If false cancel the submission
-			if (data === false) {
-				// Remove the temporary form and iframe
-				$(e.target).remove();
-				e.data.iframe.remove();
-				return false;
-			} else {
-				// Else, append additional inputs
-				for (var variable in data) {
-					$("<input />")
-						.attr("type", "hidden")
-						.attr("name", variable)
-						.val(data[variable])
-						.appendTo(e.target);
-				}
-			}
-		}
-		
-		function onComplete (e) {
-			var $iframe  = $(e.target),
-				doc      = ($iframe[0].contentWindow || $iframe[0].contentDocument).document,
-				response = doc.body.innerHTML;
 
-			if (response) {
-				response = $.parseJSON(response);
-			} else {
-				response = {};
-			}
+        // 'this' is a jQuery collection of one or more (hopefully)
+        //  file elements, but doesn't check for this yet
+        return this.each(function() {
+            var upload_file = function () {
+                // console.log("Not initialized");
+            };
+            var $element = $(this);
 
-			settings.onComplete.call(e.data.element, e.data.filename, response);
-			
-			// Remove the temporary form and iframe
-			e.data.form.remove();
-			$iframe.remove();
-		}
+            // Skip elements that are already setup. May replace this
+            //  with uninit() later, to allow updating that settings
+            if($element.data('ajaxUploader-setup') === true) return;
 
-		function createIframe() {
-			var id = randomId();
+            $element.change(function()
+            {
+                // since a new image was selected, reset the marker
+                uploading_file = false;
 
-			// The iframe must be appended as a string otherwise IE7 will pop up the response in a new window
-			// http://stackoverflow.com/a/6222471/268669
-			$("body")
-				.append('<iframe src="javascript:false;" name="' + id + '" id="' + id + '" style="display: none;"></iframe>');
+                // only update the file from here if we haven't assigned a submit button
+                if (settings.submit_button == null && !settings.auto_upload) {
+                    upload_file();
+                } else if (settings.auto_upload) {
+                    if (!uploading_file) {
+                        upload_file();
+                    }
+                }
 
-			return $('#' + id);
-		}
-		
-		function createForm(iframe) {
-			return $("<form />")
-				.attr({
-					method: "post",
-					action: settings.action,
-					enctype: "multipart/form-data",
-					target: iframe[0].name
-				})
-				.hide()
-				.appendTo("body");
-		}
-	};
-})(jQuery);
+                // console.log("uploading");
+
+
+            });
+
+            if (settings.submit_button == null && !settings.auto_upload) {
+                // do nothing
+            } else if (settings.auto_upload) {
+                if (!uploading_file) {
+                    upload_file();
+                }
+            } else {
+                settings.submit_button.click(function(e)
+                {
+                    // Prevent non-AJAXy submit
+                    e.preventDefault();
+
+                    // only attempt to upload file if we're not uploading
+                    if (!uploading_file)
+                    {
+                        upload_file();
+                    }
+                });
+            }
+
+            upload_file = function()
+            {
+                if($element.val() == '') return settings.onCancel.apply($element, [settings.params]);
+                // make sure extension is valid
+                var ext = $element.val().split('.').pop().toLowerCase();
+                if(true === settings.validate_extensions && $.inArray(ext, settings.valid_extensions) == -1)
+                {
+                    // Pass back to the user
+                    settings.onComplete.apply($element, [{status: false, message: 'The select file type is invalid. File must be ' + settings.valid_extensions.join(', ') + '.'}, settings.params]);
+                } else
+                {
+                    uploading_file = true;
+
+                    // Creates the form, extra inputs and iframe used to
+                    //  submit / upload the file
+                    wrapElement($element);
+
+                    // Call user-supplied (or default) onStart(), setting
+                    //  it's this context to the file DOM element
+                    var ret = settings.onStart.apply($element, [settings.params]);
+                    // console.log('upload_file()'+ret);
+                    // let onStart have the option to cancel the upload
+                    if(ret !== false)
+                    {
+                        $element.parent('form').submit(function(e) { e.stopPropagation(); }).submit();
+                    } else {
+                        uploading_file = false;
+                    }
+                }
+            };
+
+            // Mark this element as setup
+            $element.data('ajaxUploader-setup', true);
+
+            /*
+             // Internal handler that tries to parse the response
+             //  and clean up after ourselves.
+             */
+            var handleResponse = function(loadedFrame, element) {
+                var response, responseStr = $(loadedFrame).contents().text();
+                try {
+                    //response = $.parseJSON($.trim(responseStr));
+                    response = JSON.parse(responseStr);
+                } catch(e) {
+                    response = responseStr;
+                }
+
+                // Tear-down the wrapper form
+                element.siblings().remove();
+                element.unwrap();
+
+                uploading_file = false;
+
+                // Pass back to the user
+                settings.onComplete.apply(element, [response, settings.params]);
+            };
+
+            /*
+             // Wraps element in a <form> tag, and inserts hidden inputs for each
+             //  key:value pair in settings.params so they can be sent along with
+             //  the upload. Then, creates an iframe that the whole thing is
+             //  uploaded through.
+             */
+            wrapElement = function(element) {
+                // Create an iframe to submit through, using a semi-unique ID
+                var frame_id = 'ajaxUploader-iframe-' + Math.round(new Date().getTime() / 1000)
+                $('body').after('<iframe width="0" height="0" style="display:none;" name="'+frame_id+'" id="'+frame_id+'"/>');
+                $('#'+frame_id).get(0).onload = function() {
+                    handleResponse(this, element);
+                };
+
+                // Wrap it in a form
+                element.wrap(function() {
+                    return '<form action="' + settings.action + '" method="POST" enctype="multipart/form-data" target="'+frame_id+'" />'
+                })
+                // Insert <input type='hidden'>'s for each param
+                    .before(function() {
+                        var key, html = '';
+                        for(key in settings.params) {
+                            var paramVal = settings.params[key];
+                            if (typeof paramVal === 'function') {
+                                paramVal = paramVal();
+                            }
+                            html += '<input type="hidden" name="' + key + '" value="' + paramVal + '" />';
+                        }
+                        return html;
+                    });
+            }
+        });
+    }
+})( jQuery )

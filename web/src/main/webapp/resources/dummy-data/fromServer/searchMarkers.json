@@ -5,17 +5,17 @@
       "markerId": 100500,
       "name": "Temp1",
       "latitude":0,
-      "longtitude":0
+      "longitude":0
     }, {
       "markerId": 100600,
       "name": "Temp2",
       "latitude":0,
-      "longtitude":0
+      "longitude":0
     }, {
       "markerId": 100700,
       "name": "Temp3",
       "latitude":0,
-      "longtitude":0
+      "longitude":0
     }
   ]
 }

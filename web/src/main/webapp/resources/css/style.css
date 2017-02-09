@@ -5,7 +5,12 @@
     background: lightblue;
     display: block;
 }
-
+#map.inactive {
+    pointer-events: none;
+}
+*, *:focus, *:hover {
+    outline: none!important;
+}
 html, body {
     height: 100%;
 }
@@ -49,26 +54,6 @@ body > .mm-menu + .mm-page.mm-slideout {
     top: 5px;
     font-weight: bold;
 }
-#header-menu #dn-mode-button {
-    background-color: #ff5722;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
-    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
-    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
-    display: inline-block;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    font-size: 20px;
-    position: relative;
-    top: 4px;
-    text-align: center;
-    width:40px;
-    height: 40px;
-    line-height: 40px;
-}
 #open-sidebar-menu {
     display: block;
     -webkit-box-sizing: border-box;
@@ -95,6 +80,10 @@ body > .mm-menu + .mm-page.mm-slideout {
     -ms-transition: all 250ms;
     -o-transition: all 250ms;
     transition: all 250ms;
+    border-radius: 50%;
+    height: 50px;
+    line-height: 50px;
+    width: 50px;
 }
 #actions-container .btn-fab:hover, #actions-container .btn-fab:focus {
     background-color: #e15321;
@@ -127,7 +116,45 @@ body > .mm-menu + .mm-page.mm-slideout {
     opacity: 1;
     visibility: visible;
 }
-
+#actions-container #subactions-container .btn-fab {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    padding: 6px;
+    text-align: center;
+}
+.header-button{
+    background-color: #ff5722;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 20px;
+    position: relative;
+    top: 4px;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    color: rgba(255,255,255, 0.84);
+    cursor: pointer;
+    -webkit-transition: all 250ms;
+    -moz-transition: all 250ms;
+    -ms-transition: all 250ms;
+    -o-transition: all 250ms;
+    transition: all 250ms;
+}
+.header-button:hover,.header-button:focus {
+    color: #fff;
+    background-color: #e15321;
+    color: rgba(255,255,255, 1);
+}
 /* WINDOWS */
 #windows-container {
     position: absolute;
@@ -139,12 +166,12 @@ body > .mm-menu + .mm-page.mm-slideout {
     position: relative;
     z-index: 1;
     float:left;
-    width: 300px;
+    width: 400px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding:10px 15px;
-    margin-right: -250px;
+    margin-right: -350px;
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
@@ -156,12 +183,15 @@ body > .mm-menu + .mm-page.mm-slideout {
 }
 #windows-container .window > h2 {
     margin-top:0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #windows-container .window > .content {
     position: absolute;
     top: 53px;
     left: 0;
-    width: 300px;
+    width: 400px;
     bottom: 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -255,17 +285,61 @@ body > .mm-menu + .mm-page.mm-slideout {
     width:40px;
     height: 40px;
 }
+#windows-container .window .marker .tags button,
+#windows-container .window .marker .categories button {
+    padding: 2px 6px;
+    margin-bottom: 5px;
+}
+#windows-container .window .marker .add-remove-bookmarks-button:not(*.added) .in-bookmarks {
+    display: none;
+}
+#windows-container .window .marker .add-remove-bookmarks-button.added .not-in-bookmarks {
+    display: none;
+}
 /* ADD MARKERS */
+#windows-container .window .marker h4 {
+    margin-bottom: 0;
+}
 #windows-container .window .marker .review textarea,
 #windows-container .window .marker .tags input,
+#windows-container .window .marker .categories > .chosen-container,
 #windows-container .window .marker .categories input,
 #windows-container .window .marker .address select {
     max-width: 100%;
     min-width: 100%;
     width: 100%;
+
+    max-width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+    width: calc(100% - 20px);
+
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+#windows-container .window .marker .attachment-container > * {
+    margin-bottom: 15px;
+}
+#windows-container .window .marker .attachment-container > a:after {
+    position: absolute;
+    opacity: 0;
+    -webkit-transition: all 250ms;
+    -moz-transition: all 250ms;
+    -ms-transition: all 250ms;
+    -o-transition: all 250ms;
+    transition: all 250ms;
+    top: 0;
+    left: 15px;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    right: 15px;
+    content: "\f00d";
+    font: normal normal normal 14px/1 FontAwesome;
+    color: rgba(255,255,255,0.85);
+    line-height: 40px;
+}
+#windows-container .window .marker .attachment-container > a:hover:after {
+    opacity: 1;
 }
 #windows-container .window .marker #add-attachment {
     height: 41px;
@@ -276,8 +350,77 @@ body > .mm-menu + .mm-page.mm-slideout {
     border-radius:3px;
     background: #e7f6f8;
     color:darkgray;
+    position: relative;
+}
+#windows-container .window .marker #attachment-file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor:pointer;
+    width: 100%;
+    opacity: 0.001;
+    height: 100%;
+}
+#windows-container .window .marker .marker-item .remove-marker{
+    margin-left:5px;
+    padding: 0;
+    line-height: 17px;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    top: -2px;
+}
+#windows-container .marker .hoverable-item {
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-transition: all 250ms;
+    -moz-transition: all 250ms;
+    -ms-transition: all 250ms;
+    -o-transition: all 250ms;
+    transition: all 250ms;
+    cursor: pointer;
+}
+#windows-container .marker .hoverable-item:hover {
+    color: #fff;
+    background-color: #ff5722;
+}
+#windows-container .marker .hoverable-item .owner::after {
+    display: none;
+}
+#windows-container .marker .hoverable-item > .row{
+    margin-bottom: 0;
 }
 /* /MARKERS */
+/* SEARCH */
+#windows-container .search .nav+.tab-content {
+    padding-top: 10px;
+}
+#windows-container .search .tags input,
+#windows-container .search .categories > .chosen-container,
+#windows-container .search .categories select,
+#windows-container .search .address input {
+    max-width: 100%;
+    min-width: 100%;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#windows-container .search .tags button {
+    padding: 2px 6px;
+    margin-bottom: 5px;
+}
+#windows-container .search .row{
+    margin-bottom: 10px;
+}
+#windows-container .search h4 {
+    margin-bottom: 0;
+}
+/* /SEARCH */
 /* COMMENTS */
 #windows-container .window .comments .comments-form {
     margin-bottom: 10px;
@@ -311,10 +454,22 @@ body > .mm-menu + .mm-page.mm-slideout {
     color: lightgray;
     font-size: 0.8em;
 }
+#windows-container .window .comments .date .remove-comment{
+    margin-left:5px;
+    padding: 0;
+    line-height: 17px;
+    width: 18px;
+    height: 18px;
+    position: relative;
+    top: -2px;
+}
 #windows-container .window .comments #comment-area {
     width:100%;
     max-width: 100%;
     min-width: 100%;
+    max-width: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+    width: calc(100% - 20px);
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -326,4 +481,58 @@ div.hr {
     background: rgb(169, 169, 169);
     background: rgba(211, 211, 211, .5);
     clear: both;
+}
+
+em.error {
+    color:red;
+}
+
+@media screen and (max-width: 600px) {
+    #header-menu > .container > .pull-right {
+        display: none;
+    }
+    #open-sidebar-menu {
+        display:block!important;
+    }
+    #header-menu .title {
+        float: right!important;
+        /*width: 100%;*/
+        /*text-align: center;*/
+    }
+    #windows-container .window {
+        position: fixed;
+        top: 55px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        -webkit-border-radius:0;
+        -moz-border-radius:0;
+        border-radius:0;
+    }
+    #windows-container .window > .content {
+        width: 100%;
+    }
+    #actions-container #subactions-container {
+        opacity: 1;
+        visibility: visible;
+    }
+    #addMarkerButton {
+        /*opacity: 0;*/
+        /*visibility: collapse;*/
+    }
+    #addMarkerButton .material-icons:after {
+        background-color: #ff5722;
+        content: "add_location";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 50px;
+        line-height: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+    #addMarkerButton:hover .material-icons:after {
+        background-color: #e15321;
+    }
 }

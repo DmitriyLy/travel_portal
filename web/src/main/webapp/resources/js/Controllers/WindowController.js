@@ -1,4 +1,4 @@
-define(["require", "exports", "../Views/WindowView", "../Views/View", "../Helpers/ActionBinder"], function (require, exports, WindowView_1, View_1, ActionBinder_1) {
+define(["require", "exports", "../Views/WindowView", "../Views/View"], function (require, exports, WindowView_1, View_1) {
     "use strict";
     var WindowController = (function () {
         /***
@@ -21,7 +21,7 @@ define(["require", "exports", "../Views/WindowView", "../Views/View", "../Helper
                 mapController.mainWindow = this;
             }
             this.windowContainer = this.showWindow();
-            ActionBinder_1.ActionBinder.bindActions(this.windowContainer);
+            this.afterCreate();
             return this;
         }
         /***
@@ -50,7 +50,19 @@ define(["require", "exports", "../Views/WindowView", "../Views/View", "../Helper
                 });
             }
         };
+        WindowController.bindAfterCreate = function (callback) {
+            if (typeof callback !== "function")
+                return;
+            WindowController.afterCreateCallbacks.push(callback);
+        };
+        WindowController.prototype.afterCreate = function () {
+            var _this = this;
+            WindowController.afterCreateCallbacks.forEach(function (callback, i, arr) {
+                callback(_this);
+            });
+        };
         return WindowController;
     }());
+    WindowController.afterCreateCallbacks = [];
     exports.WindowController = WindowController;
 });

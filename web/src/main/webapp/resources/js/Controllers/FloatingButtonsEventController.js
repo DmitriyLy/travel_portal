@@ -24,7 +24,37 @@ define(["require", "exports", "./AppController"], function (require, exports, Ap
                 _this.fabMouseHoverCallback($this, 'std-icon');
             });
             $('#addMarkerButton').click(function () {
-                AppController_1.AppController.instances[0].setMode(1); // add marker
+                if (IS_AUTHENTICATED) {
+                    if (!$('#map').hasClass('inactive')) {
+                        AppController_1.AppController.instances[0].setMode(1); // add marker
+                    }
+                    else {
+                        $.toast({
+                            heading: 'Ошибка',
+                            icon: 'error',
+                            hideAfter: false,
+                            text: 'Перед создание мновой метки сохраните текущую или закройте окно создания.',
+                            position: {
+                                top: 75,
+                                right: 20,
+                            },
+                            stack: 5
+                        });
+                    }
+                }
+                else {
+                    $.toast({
+                        heading: 'Войдите на ресурс',
+                        icon: 'info',
+                        hideAfter: false,
+                        text: 'Перед тем как устанавливать метки,<br>войдите на ресурс при момощи социальных сетей.<br><a class="header-button" href="/signGoogle?fallback_url=' + location.hash.substr(1) + '" data-base-href="/signGoogle?fallback_url="><i class="fa fa-google-plus" aria-hidden="true"></i></a> <a class="header-button" href="/signFacebook?fallback_url=' + location.hash.substr(1) + '" ><i class="fa fa-facebook" aria-hidden="true"></i></a>',
+                        position: {
+                            top: 75,
+                            right: 20,
+                        },
+                        stack: 5
+                    });
+                }
             });
             $('#zoom-in-button').click(function () {
                 var zoom = AppController_1.AppController.instances[0].map.getZoom() + 1;
@@ -45,27 +75,27 @@ define(["require", "exports", "./AppController"], function (require, exports, Ap
             //     setTimeout(function () {
             //         markers.push(AppController.instances[0].putMarker({
             //             latitude:40.6700,
-            //             longtitude:-73.9400
+            //             longitude:-73.9400
             //         }));
             //         setTimeout(function () {
             //             markers.push(AppController.instances[0].putMarker({
             //                 latitude:40.7700,
-            //                 longtitude:-73.9400
+            //                 longitude:-73.9400
             //             }));
             //             setTimeout(function () {
             //                 markers.push(AppController.instances[0].putMarker({
             //                     latitude:40.5700,
-            //                     longtitude:-73.9400
+            //                     longitude:-73.9400
             //                 }));
             //                 setTimeout(function () {
             //                     markers.push(AppController.instances[0].putMarker({
             //                         latitude:40.6700,
-            //                         longtitude:-73.8400
+            //                         longitude:-73.8400
             //                     }));
             //                     setTimeout(function () {
             //                         markers.push(AppController.instances[0].putMarker({
             //                             latitude:40.6700,
-            //                             longtitude:-74.0400
+            //                             longitude:-74.0400
             //                         }));
             //                     },400);
             //                 },400);

@@ -9,16 +9,27 @@ define(["require", "exports", "./View"], function (require, exports, View_1) {
         __extends(CreateMarkerView, _super);
         function CreateMarkerView(params) {
             return _super.call(this, '<div class="marker">' +
+                '<form id="CreateMarker">' +
+                '<input type="hidden" name="marker_id" value="$marker_id$">' +
+                '<input type="hidden" name="latitude" value="$latitude$">' +
+                '<input type="hidden" name="longitude" value="$longitude$">' +
+                '<input type="hidden" name="op_type" value="$op_type$">' +
                 '<div class="row">' +
-                '<div class="owner col-xs-12 col-md-7 pull-left" title="$owner_name$">Вы</div>' +
-                '<div class="date col-xs-12 col-md-5 pull-right text-right">Сейчас</div>' +
+                '<div class="owner col-xs-12 col-md-7 pull-left" title="$owner_name$">$owner_name$</div>' +
+                '<div class="date col-xs-12 col-md-5 pull-right text-right">$creation_date$</div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="col-xs-12"><h4>Адрес:</h4></div>' +
                 '</div>' +
                 '<div class="row">' +
                 '<div class="address col-xs-12"><select>$address$</select></div>' +
                 '</div>' +
                 '<div class="row">' +
-                '<div class="rating col-xs-12">Рейтинг: <span class="rate">' +
-                '<label><input type="checkbox" name="rating" value="0" checked/> 0</label> ' +
+                '<div class="col-xs-12"><h4>Рейтинг:</h4></div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="rating col-xs-12"><span class="rate">' +
+                '<label><input type="checkbox" name="rating" value="0"/> 0</label> ' +
                 '<label><input type="checkbox" name="rating" value="1"/> 1</label> ' +
                 '<label><input type="checkbox" name="rating" value="2"/> 2</label> ' +
                 '<label><input type="checkbox" name="rating" value="3"/> 3</label> ' +
@@ -27,20 +38,30 @@ define(["require", "exports", "./View"], function (require, exports, View_1) {
                 '</span></div>' +
                 '</div>' +
                 '<div class="row">' +
-                '<div class="review col-xs-12"><textarea></textarea></div>' +
+                '<div class="col-xs-12"><h4>Ревью:</h4></div>' +
                 '</div>' +
                 '<div class="row">' +
-                '<div class="col-xs-12"><div class="row"><div class="col-xs-12">Категории:</div></div></div>' +
-                '<div class="categories col-xs-12"><div class="row"><div class="col-xs-12"><input type="text" /></div></div></div>' +
+                '<div class="review col-xs-12"><textarea name="review">$review$</textarea></div>' +
                 '</div>' +
                 '<div class="row">' +
-                '<div class="col-xs-12"><div class="row"><div class="col-xs-12">Теги:</div></div></div>' +
-                '<div class="tags col-xs-12"><div class="row"><div class="col-xs-12"><input type="text" /></div></div></div>' +
+                '<div class="col-xs-12"><h4>Категории:</h4></div>' +
                 '</div>' +
                 '<div class="row">' +
-                '<div class="col-xs-12"><div class="row"><div class="col-xs-12">Изображения:</div></div></div>' +
-                '<div class="attachments col-xs-12"><div class="row text-center attachment-container"><div class="col-xs-3"><div id="add-attachment"><i class="fa fa-plus fa-2" aria-hidden="true"></i></div></div></div></div>' +
+                '<div class="categories col-xs-12"><select id="categories-container" multiple>$available_categories$</select><input type="hidden" name="categories" value="$selected_categories$" /></div>' +
                 '</div>' +
+                '<div class="row">' +
+                '<div class="col-xs-12"><h4>Теги:</h4></div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="tags col-xs-12"><input type="text" name="tags" value="$selected_tags$"/><em id="review-info" class="info help-block">Теги разделяются запятыми.</em></div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="col-xs-12"><h4>Изображения:</h4></div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="attachments col-xs-12"><div class="row text-center attachment-container"><div class="col-xs-3"><div id="add-attachment"><i class="fa fa-plus fa-2" aria-hidden="true"></i><input type="file" name="attach" id="attachment-file-input"></div></div></div>$attachment_notice$</div>' +
+                '</div>' +
+                '</form>' +
                 '<div class="row">' +
                 '<div class="col-xs-12"><button class="btn btn-default pull-right" id="insert-marker">Сохранить Метку</button></div>' +
                 '</div>' +

@@ -1,4 +1,4 @@
-define(["require", "exports", "../Helpers/WindowDrawer"], function (require, exports, WindowDrawer_1) {
+define(["require", "exports", "../Helpers/WindowDrawer", "../Services/MarkersService"], function (require, exports, WindowDrawer_1, MarkersService_1) {
     "use strict";
     var MapController = (function () {
         /***
@@ -13,6 +13,13 @@ define(["require", "exports", "../Helpers/WindowDrawer"], function (require, exp
             this.mode = 0; // 0 - drag, 1 - putMarker, 2 - viewMarker, 3 - removeMarker
             this.addDragEndCallback(function (mapController, e) {
                 mapController.reloadMarkers();
+            });
+            this.addZoomChangedCallback(function (mapController, e) {
+                mapController.reloadMarkers();
+            });
+            var _this = this;
+            google.maps.event.addDomListener(window, 'load', function () {
+                _this.reloadMarkers();
             });
             return this;
         }
@@ -38,6 +45,18 @@ define(["require", "exports", "../Helpers/WindowDrawer"], function (require, exp
                 func(mapController, e);
             });
         };
+        MapController.prototype.addBoundsChangedCallback = function (func) {
+            var mapController = this;
+            this.map.addListener('bounds_changed', function (e) {
+                func(mapController, e);
+            });
+        };
+        MapController.prototype.addZoomChangedCallback = function (func) {
+            var mapController = this;
+            this.map.addListener('zoom_changed', function (e) {
+                func(mapController, e);
+            });
+        };
         /***
          * Reloads Markers when map moved to another location.
          */
@@ -49,37 +68,61 @@ define(["require", "exports", "../Helpers/WindowDrawer"], function (require, exp
             $.ajax({
                 type: "POST",
                 contentType: "application/json",
-                url: 'http://nctravelportal.ddns.net/labels/search/by/area/rectangle',
+                url: '/labels/search/by/area/rectangle',
                 data: JSON.stringify({
                     'topRight': {
                         'latitude': ne_pos.lat(),
-                        'longtitude': ne_pos.lng()
+                        'longitude': ne_pos.lng()
                     },
                     'bottomLeft': {
                         'latitude': sw_pos.lat(),
-                        'longtitude': sw_pos.lng()
+                        'longitude': sw_pos.lng()
                     }
                 }),
                 dataType: 'json',
                 success: function (MarkerData) {
-                    console.log(MarkerData);
-                    _this.resetMarkers(MarkerData);
+                    _this.resetMarkers(MarkerData.map(function (itm) {
+                        return {
+                            'latitude': itm.coordinates.latitude,
+                            'longitude': itm.coordinates.longitude,
+                            'title': 'Метка #' + itm.id,
+                            'marker_id': itm.id
+                        };
+                    }));
                 },
-                error: function (error) { console.log(error); alert("Произошла ошибка, пожалуйста, попробуйте позже."); }
+                error: function (error) {
+                    console.log(error);
+                    $.toast({
+                        hideAfter: 5000,
+                        heading: 'Произошла ошибка',
+                        icon: 'error',
+                        text: 'Произошла ошибка №' + error.status + '.<br>Более подробную информацию можно получить в консоли.<br>Просим прощения, за предоставленные неудобства.',
+                        position: {
+                            top: 75,
+                            right: 20,
+                        },
+                        stack: 5
+                    });
+                }
             });
-            console.log("TopRight  :" + ne_pos.lat() + ";" + ne_pos.lng());
-            console.log("LeftBottom:" + sw_pos.lat() + ";" + sw_pos.lng());
         };
         /***
          * Puts marker on map.
          */
         MapController.prototype.putMarker = function (options) {
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(options.latitude, options.longtitude),
+                position: new google.maps.LatLng(options.latitude, options.longitude),
                 title: options.title
             });
+            var __this = this;
             marker.addListener('click', function (e) {
-                WindowDrawer_1.WindowDrawer.drawMarkerWindow(options.marker_id);
+                MarkersService_1.MarkersService.getMarker(options.marker_id, [function (MarkerData) {
+                        WindowDrawer_1.WindowDrawer.drawMarkerWindow(MarkerData);
+                    }, function (MarkerData) {
+                        __this.map.setZoom(18);
+                        __this.map.setCenter(new google.maps.LatLng(MarkerData.coordinates.latitude, MarkerData.coordinates.longitude));
+                        __this.reloadMarkers();
+                    }]);
             });
             this.mapClusterer.addMarker(marker);
             this.mapClusterer.redraw();
@@ -91,13 +134,19 @@ define(["require", "exports", "../Helpers/WindowDrawer"], function (require, exp
         MapController.prototype.putMarkers = function (options) {
             var _this = this;
             options.map(function (itm) {
-                // TODO: REMOVE ON PRODUCTION
                 var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(itm.latitude, itm.longtitude),
+                    position: new google.maps.LatLng(itm.latitude, itm.longitude),
                     title: itm.title
                 });
+                var __this = _this;
                 marker.addListener('click', function (e) {
-                    WindowDrawer_1.WindowDrawer.drawMarkerWindow(itm.marker_id);
+                    MarkersService_1.MarkersService.getMarker(itm.marker_id, [function (MarkerData) {
+                            WindowDrawer_1.WindowDrawer.drawMarkerWindow(MarkerData);
+                        }, function (MarkerData) {
+                            __this.map.setZoom(18);
+                            __this.map.setCenter(new google.maps.LatLng(MarkerData.coordinates.latitude, MarkerData.coordinates.longitude));
+                            __this.reloadMarkers();
+                        }]);
                 });
                 _this.mapClusterer.addMarker(marker);
                 return marker;
@@ -107,7 +156,12 @@ define(["require", "exports", "../Helpers/WindowDrawer"], function (require, exp
         };
         MapController.prototype.resetMarkers = function (options) {
             var _this = this;
-            this.mapClusterer.getMarkers().map(function (itm) { _this.mapClusterer.removeMarker(itm); });
+            while (true) {
+                var markers = this.mapClusterer.getMarkers();
+                if (markers.length <= 0)
+                    break;
+                markers.map(function (itm) { _this.mapClusterer.removeMarker(itm); });
+            }
             this.putMarkers(options);
         };
         /***
